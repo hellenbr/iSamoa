@@ -26,12 +26,14 @@ The following prerequisites are necessary in order to install and run sam(oa)²:
 ### ASAGI installation
 *****
 1. Clone the repo and submodules
+
     cd workspace
     git clone https://github.com/TUM-I5/ASAGI.git asagi
     cd asagi
     git submodule update --init --recursive
 
 2. Compilation
+
     2.1 Install dependency NetCDF library
     
         sudo apt-get install libnetcdf-dev
