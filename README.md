@@ -33,14 +33,17 @@ The following prerequisites are necessary in order to install and run sam(oa)²:
 
 2. Compilation
     2.1 Install dependency NetCDF library
+    
         sudo apt-get install libnetcdf-dev
 
     2.2 Build (make the build folder inside asagi dir)
+    
         mkdir build
         cd build
         cmake -DCMAKE_INSTALL_PREFIX=$HOME/install/asagi ../
 
     2.3 Install
+    
         make install -j4
 *****
 
