@@ -52,7 +52,7 @@ echo ""
 output_dir=$base_dir"output/tohoku_"$compiler"_"$flux_solver"_d"$max_depth
 mkdir -p $output_dir
 
-command='bin/'$exe' -sections 1 -lbsplit -threads 1 -courant 0.95 -tout 20.0 -dmin 0 -dmax '$max_depth' -tmax 10.8e3 -fdispl '$fdispl' -fbath '$fbath' -xmloutput '$vtk' -stestpoints "545735.266126 62716.4740303,935356.566012 -817289.628677,1058466.21575 765077.767857" -output_dir '$output_dir
+command='bin/'$exe' -sections 1 -lbsplit -threads 1 -courant 0.95 -tout 120.0 -dmin 0 -dmax '$max_depth' -tmax 10.8e3 -fdispl '$fdispl' -fbath '$fbath' -xmloutput '$vtk' -stestpoints "545735.266126 62716.4740303,935356.566012 -817289.628677,1058466.21575 765077.767857" -output_dir '$output_dir
 
 echo $command > $output_dir"/tohoku_"$compiler"_"$flux_solver"_d"$max_depth".log"
 $command | tee -a $output_dir"/tohoku_"$compiler"_"$flux_solver"_d"$max_depth".log"
