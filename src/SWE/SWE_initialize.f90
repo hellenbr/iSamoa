@@ -123,7 +123,7 @@
             real (kind = GRID_SR), intent(in)		:: t
             real (kind = GRID_SR)					:: bathymetry
 
-            real (kind = GRID_SR)   :: x, x1(2), x2(2), x3(2)
+            real (kind = GRID_SR)   :: x(2), x1(2), x2(2), x3(2)
             integer                 :: ddepth, data_depth
 
 #           if defined(_ADAPT_INTEGRATE)
@@ -234,7 +234,7 @@
 			type(t_swe_init_dofs_traversal), intent(inout)		        :: traversal
 			type(t_grid), intent(inout)							    :: grid
 
-            call reduce(traversal%i_refinements_issued, traversal%children%i_refinements_issued, MPI_SUM, .true.)
+            call reduce(traversal%i_refinements_issued, traversal%sections%i_refinements_issued, MPI_SUM, .true.)
             call reduce(grid%r_dt_new, grid%sections%elements_alloc%r_dt_new, MPI_MIN, .true.)
 
             grid%r_dt = cfg%courant_number * grid%r_dt_new
@@ -330,7 +330,9 @@
 				max_wave_speed = 0.0_GRID_SR
 			end where
 
-			section%r_dt_new = min(section%r_dt_new, element%cell%geometry%get_volume() / (sum(element%cell%geometry%get_edge_sizes()) * maxval(max_wave_speed)))
+            !This will cause a division by zero if the wave speeds are 0.
+            !Bue to the min operator, the error will not affect the time step.
+            section%r_dt_new = min(section%r_dt_new, element%cell%geometry%get_volume() / (sum(element%cell%geometry%get_edge_sizes()) * maxval(max_wave_speed)))
 		end subroutine
 
 		function get_initial_dof_state_at_element(section, element) result(Q)

@@ -535,7 +535,7 @@
 
  			double precision, save          :: t_phase = huge(1.0d0)
 
-            integer, parameter  :: reduction_ops(1) = [MPI_SUM]
+            integer, parameter  :: reduction_ops(3) = [MPI_MIN, MPI_MAX, MPI_SUM]
             integer             :: i
             type(t_grid_info)   :: grid_info
 
@@ -573,9 +573,9 @@
                             _log_write(0, '(" Adaptions: ", T34, A)') trim(darcy%adaption%stats%to_string())
                             _log_write(0, '(" Pressure Solver: ", T34, A)') trim(darcy%pressure_solver%stats%to_string())
                             _log_write(0, '(" Grid: ", T34, A)') trim(grid%stats%to_string())
-                            _log_write(0, '(" Element throughput: ", T34, F12.4, " M/s")') 1.0d-6 * dble(grid%stats%i_traversed_cells) / t_phase
-                            _log_write(0, '(" Memory throughput: ", T34, F12.4, " GB/s")') dble(grid%stats%i_traversed_memory) / ((1024 * 1024 * 1024) * t_phase)
-                            _log_write(0, '(" Asagi time:", T34, F12.4, " s")') grid%stats%r_asagi_time
+                            _log_write(0, '(" Element throughput: ", T34, F12.4, " M/s")') 1.0d-6 * dble(grid%stats%get_counter(traversed_cells)) / t_phase
+                            _log_write(0, '(" Memory throughput: ", T34, F12.4, " GB/s")') dble(grid%stats%get_counter(traversed_memory)) / ((1024 * 1024 * 1024) * t_phase)
+                            _log_write(0, '(" Asagi time:", T34, F12.4, " s")') grid%stats%get_time(asagi_time)
                             _log_write(0, '(" Phase time:", T34, F12.4, " s")') t_phase
                             _log_write(0, '()')
 

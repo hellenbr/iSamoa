@@ -76,10 +76,10 @@
 #           if defined(_PERM_MEAN_ARITHMETIC)
                 p_trans = p
 #           elif defined(_PERM_MEAN_HARMONIC)
-                !this will cause an intended floating point overflow if p = 0. Backtranformation will return the value 0.
+                !p = 0 is accepted and will return +infinity. This may trigger a division by zero error. Backtransformation will return the value 0.
                 p_trans = 1.0_SR / p
 #           elif defined(_PERM_MEAN_GEOMETRIC)
-                !this will cause an intended floating point overflow if p = 0. Backtranformation will return the value 0.
+                !p = 0 is accepted and will return -infinity. This may trigger a floating point error. Backtransformation will return the value 0.
                 p_trans = log(p)
 #           endif
 		end function
@@ -92,8 +92,10 @@
 #           if defined(_PERM_MEAN_ARITHMETIC)
                 p = p_trans
 #           elif defined(_PERM_MEAN_HARMONIC)
+                !p_trans = +infinity is accepted and will return 0. This may trigger a floating point error.
                 p = 1.0_SR / p_trans
 #           elif defined(_PERM_MEAN_GEOMETRIC)
+                !p_trans = -infinity is accepted and will return 0. This may trigger a floating point error.
                 p = exp(p_trans)
 #           endif
 		end function
@@ -378,7 +380,7 @@
  			type(t_darcy_init_saturation_traversal), intent(inout)      :: traversal
  			type(t_grid), intent(inout)							        :: grid
 
-			call reduce(traversal%i_refinements_issued, traversal%children%i_refinements_issued, MPI_SUM, .true.)
+			call reduce(traversal%i_refinements_issued, traversal%sections%i_refinements_issued, MPI_SUM, .true.)
 		end subroutine
 
 		subroutine pre_traversal_op(traversal, section)

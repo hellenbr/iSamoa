@@ -338,7 +338,19 @@
 		<Unit filename="src/geoclaw/riemannsolvers_qp.f" />
 		<Unit filename="src/geoclaw/riemannsolvers_sp.f" />
 		<Extensions>
-			<code_completion />
+			<code_completion>
+				<search_path add="src" />
+				<search_path add="src/Conformity" />
+				<search_path add="src/Darcy" />
+				<search_path add="src/Flash" />
+				<search_path add="src/Generic" />
+				<search_path add="src/Heat_Equation" />
+				<search_path add="src/SWE" />
+				<search_path add="src/Solver" />
+				<search_path add="src/Samoa" />
+				<search_path add="src/Tests" />
+				<search_path add="src/geoclaw" />
+			</code_completion>
 			<envvars set="default" />
 			<debugger>
 				<remote_debugging>

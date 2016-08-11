@@ -1,8 +1,10 @@
-Samoa
-=====
+[![Logo](https://raw.githubusercontent.com/meistero/Samoa/master/logo_small.png)]( https://raw.githubusercontent.com/meistero/Samoa/master/logo.png)
 
-sam(oa)² - SFCs and Adaptive Meshes for Oceanic And Other Applications.
-Website: [sam(oa)²](https://github.com/meistero/Samoa)
+sam(oa)² 
+=======
+
+Space-Filling Curves and Adaptive Meshes for Oceanic And Other Applications. <br>
+Github repository: [https://github.com/meistero/Samoa](https://github.com/meistero/Samoa)
 
 ## Contents
 
@@ -22,32 +24,6 @@ The following prerequisites are necessary in order to install and run sam(oa)²:
 * gfortran 4.7 or higher OR Intel Fortran Compiler 13.0 or higher
 * (Optional) [ASAGI](https://github.com/tum-i5/ASAGI) v0.5.0 or higher for external geodata
 * (Optional) Netcdf data files for ASAGI: For porous media flow, download the SPE10 data files from [SPE10](http://www.spe.org/web/csp/datasets/set02.htm#download). A script is included in the data directory that converts them to netcdf files. For the tsunami scenario the netcdf files can be generated from our [Tsunami repository](https://github.com/TUM-I5/tsunami)
-
-### ASAGI installation
-*****
-1. Clone the repo and submodules
-
-        cd workspace
-        git clone https://github.com/TUM-I5/ASAGI.git asagi
-        cd asagi
-        git submodule update --init --recursive
-
-2. Compilation
-
-    2.1 Install dependency NetCDF library
-    
-        sudo apt-get install libnetcdf-dev
-
-    2.2 Build (make the build folder inside asagi dir)
-    
-        mkdir build
-        cd build
-        cmake -DCMAKE_INSTALL_PREFIX=$HOME/install/asagi ../
-
-    2.3 Install
-    
-        make install -j4
-*****
 
 ## Installation
 
@@ -126,6 +102,7 @@ Executables will be created in the directory samoa_dir/bin and should be run fro
 
 For execution parameters refer to the online help by calling the executable with '-h' or '--help'.
 
-##Build Status
+## Build Status
 
 [![Build Status](https://travis-ci.org/meistero/Samoa.svg)](https://travis-ci.org/meistero/Samoa)
+

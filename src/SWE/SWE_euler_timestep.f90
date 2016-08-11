@@ -114,7 +114,7 @@
 
 			grid%r_time = grid%r_time + grid%r_dt
 
-            call reduce(traversal%i_refinements_issued, traversal%children%i_refinements_issued, MPI_SUM, .true.)
+            call reduce(traversal%i_refinements_issued, traversal%sections%i_refinements_issued, MPI_SUM, .true.)
             call reduce(grid%r_dt_new, grid%sections%elements_alloc%r_dt_new, MPI_MIN, .true.)
 
             grid%r_dt_new = cfg%courant_number * grid%r_dt_new
@@ -343,7 +343,9 @@
 				i_refinement = -1
 			endif
 
-			r_dt_new = min(r_dt_new, volume / dot_product(edge_lengths, fluxes%max_wave_speed))
+            !This will cause a division by zero if the wave speeds are 0.
+            !Bue to the min operator, the error will not affect the time step.
+            r_dt_new = min(r_dt_new, volume / dot_product(edge_lengths, fluxes%max_wave_speed))
 
             do i = 1, _SWE_CELL_SIZE
                 dQ(i)%t_dof_state = dQ(i)%t_dof_state * (-r_dt / volume)
