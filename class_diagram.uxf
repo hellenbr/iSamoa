@@ -1,0 +1,847 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<diagram program="umlet" version="14.2">
+  <zoom_level>8</zoom_level>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>368</x>
+      <y>176</y>
+      <w>216</w>
+      <h>152</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt; fine_triangle &gt;&gt;
+module::SFC_data_types
+--
+i_entity_types : int
+i_depth : int
+refinement : int
+i_plotter_type : int
+i_turtle_type : int
+i_color_edge_color : int
+--
+Responsibilities
+-- Generic scenario data structure</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>136</x>
+      <y>320</y>
+      <w>24</w>
+      <h>120</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;130.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>32</x>
+      <y>424</y>
+      <w>216</w>
+      <h>208</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt; t_global_data &gt;&gt;
+module::SFC_data_types
+--
+start_distance: int,dim(-1:0)
+min_distance: int,dim(-1:0)
+end_distance: int,dim(-1:0)
+start_dest_stack: int,dim(-1:0)
+end_dest_stack: int,dim(-1:0)
+min_dest_stack: int,dim(-1:0)
+max_dest_stack: int,dim(-1:0)
+dest_cells : int
+last_dest_cells : int
+l_conform : bool
+--
+Responsibilities
+-- Stack &amp; stream data types</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>32</x>
+      <y>176</y>
+      <w>216</w>
+      <h>152</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt; num_global_data &gt;&gt;
+module::???
+--
+???
+--
+Responsibilities
+-- ???</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>360</x>
+      <y>376</y>
+      <w>224</w>
+      <h>104</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt; t_cell_stream_data &gt;&gt;
+module::SFC_data_types
+--
+data_pers : type(num_cell_data_pers)
+--
+Responsibilities
+-- Cell stream data</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>464</x>
+      <y>320</y>
+      <w>24</w>
+      <h>72</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;70.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>360</x>
+      <y>528</y>
+      <w>224</w>
+      <h>104</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt; t_cell_local_data &gt;&gt;
+module::SFC_data_types
+--
+data_temp : type(num_edge_data_temp)
+--
+Responsibilities
+-- Cell local data</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLNote</id>
+    <coordinates>
+      <x>408</x>
+      <y>128</y>
+      <w>112</w>
+      <h>32</h>
+    </coordinates>
+    <panel_attributes>bg=blue
+Cell data storage</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLNote</id>
+    <coordinates>
+      <x>776</x>
+      <y>120</y>
+      <w>112</w>
+      <h>32</h>
+    </coordinates>
+    <panel_attributes>bg=yellow
+Edge data storage</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>736</x>
+      <y>168</y>
+      <w>200</w>
+      <h>112</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt; t_edge_geometry &gt;&gt;
+module::SFC_data_types
+--
+refine : bool
+coarsen : bool
+remove : bool
+--
+Responsibilities
+-- Edge geometry data structrue</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>720</x>
+      <y>328</y>
+      <w>240</w>
+      <h>88</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt; t_crossed_edge_stream_data &gt;&gt;
+module::SFC_data_types
+--
+data_pers : type(num_edge_data_pers)
+--
+Responsibilities
+-- Crossed edge stream data</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>832</x>
+      <y>272</y>
+      <w>24</w>
+      <h>72</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;70.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>720</x>
+      <y>464</y>
+      <w>240</w>
+      <h>88</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt; t_color_edge_stream_data &gt;&gt;
+module::SFC_data_types
+--
+rep : type(num_cell_rep)
+--
+Responsibilities
+-- Color edge stream data</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>832</x>
+      <y>408</y>
+      <w>24</w>
+      <h>72</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;70.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>680</x>
+      <y>600</y>
+      <w>320</w>
+      <h>168</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt; t_edge_data &gt;&gt;
+module::SFC_data_types
+--
+data_temp : type(num_edge_data_temp)
+update : type(num_cell_update)
+min_distance : int
+owned_locally : bool
+owned_globally : bool
+depth : int
+transform_data : pointer type(t_edge_transfrom_data)
+--
+Responsibilities
+-- Color edge stack data</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>832</x>
+      <y>544</y>
+      <w>24</w>
+      <h>72</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;70.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLNote</id>
+    <coordinates>
+      <x>1136</x>
+      <y>120</y>
+      <w>112</w>
+      <h>32</h>
+    </coordinates>
+    <panel_attributes>bg=green
+Node data storage</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>1096</x>
+      <y>168</y>
+      <w>200</w>
+      <h>96</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt; t_node_geometry &gt;&gt;
+module::SFC_data_types
+--
+position : real,dim(2)
+--
+Responsibilities
+-- Node geometry data structrue</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>1096</x>
+      <y>320</y>
+      <w>200</w>
+      <h>96</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt; t_node_stream_data &gt;&gt;
+module::SFC_data_types
+--
+data_pers : type(num_node_data_pers)
+--
+Responsibilities
+-- Node stream data</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1184</x>
+      <y>256</y>
+      <w>24</w>
+      <h>80</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;80.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>1096</x>
+      <y>472</y>
+      <w>200</w>
+      <h>144</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt; t_node_data &gt;&gt;
+module::SFC_data_types
+--
+data_temp : type(num_node_data_temp)
+position : real,dim(2)
+distance : int
+owned_locally : bool
+owned_globally : bool
+--
+Responsibilities
+-- Node stack data</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1184</x>
+      <y>408</y>
+      <w>24</w>
+      <h>80</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;80.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLNote</id>
+    <coordinates>
+      <x>1512</x>
+      <y>120</y>
+      <w>136</w>
+      <h>32</h>
+    </coordinates>
+    <panel_attributes>bg=pink
+Traversal data types</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>1424</x>
+      <y>168</y>
+      <w>312</w>
+      <h>120</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt; t_cell_data_ptr &gt;&gt;
+module::SFC_data_types
+--
+geometry : pointer type(fine_triangle)
+data_pers : pointer type(num_cell_data_pers)
+data_temp : pointer type(num_cell_data_temp)
+--
+Responsibilities
+-- Cell geom* + refinement* + pers* + temp* data</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>1480</x>
+      <y>320</y>
+      <w>192</w>
+      <h>88</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt; t_edge_ptr &gt;&gt;
+module::SFC_data_types
+--
+ptr : pointer type(t_edge_data)
+--
+Responsibilities
+-- Edge pointer</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>1480</x>
+      <y>440</y>
+      <w>192</w>
+      <h>88</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt; t_node_ptr &gt;&gt;
+module::SFC_data_types
+--
+ptr : pointer type(t_node_data)
+--
+Responsibilities
+-- Node pointer</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLNote</id>
+    <coordinates>
+      <x>1848</x>
+      <y>112</y>
+      <w>240</w>
+      <h>40</h>
+    </coordinates>
+    <panel_attributes>bg=gray
+Generic triangle &lt;-&gt; Reference triangle 
+transformation data</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>1856</x>
+      <y>176</y>
+      <w>224</w>
+      <h>104</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt; t_edge_transform_data &gt;&gt;
+module::SFC_data_types
+--
+normal : real,dim(2)
+index : int
+orientation : int
+--
+Responsibilities
+-- Reference edge transform data</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>1832</x>
+      <y>312</y>
+      <w>264</w>
+      <h>160</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt; t_cell_transform_data &gt;&gt;
+module::SFC_data_types
+--
+forward : int
+orientation : int
+jacobian : real,dim(2,2)
+jacobian_inv : real,dim(2,2)
+det_jacobian : real
+edges : type(t_edge_transform_data),dim(3)
+--
+Responsibilities
+-- Reference cell transform data for all</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>1824</x>
+      <y>504</y>
+      <w>288</w>
+      <h>112</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt; t_custom_transform_data &gt;&gt;
+module::SFC_data_types
+--
+offset : pointer real, dim(:)
+scaling : real
+--
+Responsibilities
+-- Element-specific data for the generic triangle
+   &lt;-&gt; reference triangle transformation</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>1816</x>
+      <y>648</y>
+      <w>296</w>
+      <h>112</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt; t_transform_data &gt;&gt;
+module::SFC_data_types
+--
+plotter_data : pointer type(t_cell_transform_data)
+custom_data : type(t_custom_transform_data)
+--
+Responsibilities
+-- All data for the generic triangle
+   &lt;-&gt; reference triangle transformation</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLNote</id>
+    <coordinates>
+      <x>1504</x>
+      <y>576</y>
+      <w>120</w>
+      <h>32</h>
+    </coordinates>
+    <panel_attributes>bg=blue
+Element data types</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>1400</x>
+      <y>624</y>
+      <w>320</w>
+      <h>216</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt; t_element_base &gt;&gt;
+module::SFC_data_types
+--
+cell : type(t_cell_data_ptr)
+previous_edge : type(t_edge_ptr)
+next_edge : type(t_edge_ptr)
+color_edge : type(t_edge_ptr)
+color_node_in : type(t_node_ptr)
+color_node_out : type(t_node_ptr)
+transfer_node : type(t_node_ptr)
+edges : type(t_edge_ptr),dim(3)
+nodes : type(t_node_ptr),dim(3)
+transfrom_data : type(t_transform_data)
+
+--
+Responsibilities
+-- Generic element interface type</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLPackage</id>
+    <coordinates>
+      <x>56</x>
+      <y>64</y>
+      <w>136</w>
+      <h>64</h>
+    </coordinates>
+    <panel_attributes>bg=blue
+Module 
+--
+SFC_data_types</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLPackage</id>
+    <coordinates>
+      <x>64</x>
+      <y>864</y>
+      <w>136</w>
+      <h>64</h>
+    </coordinates>
+    <panel_attributes>bg=pink
+Module 
+--
+SWE_data_types</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>168</x>
+      <y>1024</y>
+      <w>192</w>
+      <h>112</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt; t_dof_state &gt;&gt;
+module::SWE_data_types
+--
+h : real
+p : real
+--
+Responsibilities
+-- State vector of DoFs, either
+   as absolute values or updates</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLNote</id>
+    <coordinates>
+      <x>216</x>
+      <y>984</y>
+      <w>88</w>
+      <h>24</h>
+    </coordinates>
+    <panel_attributes>bg=pink
+Entity data</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>0</x>
+      <y>1216</y>
+      <w>240</w>
+      <h>96</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt; t_state &gt;&gt;
+module::SWE_data_types
+--
+b : real
+--
+Responsibilities
+-- Cell state vector including bathymetry</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>112</x>
+      <y>1128</y>
+      <w>120</w>
+      <h>104</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
+    <additional_attributes>130.0;10.0;130.0;60.0;10.0;60.0;10.0;110.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>288</x>
+      <y>1216</y>
+      <w>168</w>
+      <h>96</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt; t_update &gt;&gt;
+module::SWE_data_types
+--
+max_wave_speed : real
+--
+Responsibilities
+-- update vector</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>272</x>
+      <y>1128</y>
+      <w>104</w>
+      <h>104</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;60.0;110.0;60.0;110.0;110.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>544</x>
+      <y>1400</y>
+      <w>232</w>
+      <h>96</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt; num_node_data_pers &gt;&gt;
+module::SWE_data_types
+--
+dummy : int
+--
+Responsibilities
+-- persistent scenario data on a node
+-- for scenario SWE, no data</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>544</x>
+      <y>1520</y>
+      <w>232</w>
+      <h>96</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt; num_edge_data_pers &gt;&gt;
+module::SWE_data_types
+--
+dummy : int,dim(0)
+--
+Responsibilities
+-- persistent scenario data on an edge
+-- for scenario SWE, no data</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>544</x>
+      <y>1024</y>
+      <w>232</w>
+      <h>88</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt; num_cell_data_pers &gt;&gt;
+module::SWE_data_types
+--
+Q : type(t_state), dim(_SWE_CELL_SIZE)
+--
+Responsibilities
+-- persistent scenario data on a cell</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>528</x>
+      <y>1136</y>
+      <w>280</w>
+      <h>120</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt; num_cell_rep &gt;&gt;
+module::SWE_data_types
+--
+Q : type(t_state), dim(_SWE_EDGE_SIZE)
+--
+Responsibilities
+-- Cell representation on an edge, this would
+   typically be everything required from a
+   cell to compute the flux function on an edge</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>520</x>
+      <y>1280</y>
+      <w>304</w>
+      <h>88</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt; num_cell_update &gt;&gt;
+module::SWE_data_types
+--
+flux : type(t_update),dim(_SWE_EDGE_SIZE)
+--
+Responsibilities
+-- Cell update, this would typically be a flux function</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLNote</id>
+    <coordinates>
+      <x>968</x>
+      <y>984</y>
+      <w>176</w>
+      <h>24</h>
+    </coordinates>
+    <panel_attributes>bg=yellow
+Temporary per-Entity data</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>944</x>
+      <y>1024</y>
+      <w>232</w>
+      <h>120</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt; num_node_data_temp &gt;&gt;
+module::SWE_data_types
+--
+dummy : integer,dim(0)
+--
+Responsibilities
+-- Temporary scenario data on a node
+   (deleted after each traversal)
+-- for scenario SWE, no data</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>944</x>
+      <y>1168</y>
+      <w>232</w>
+      <h>120</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt; num_edge_data_temp &gt;&gt;
+module::SWE_data_types
+--
+dummy : integer,dim(0)
+--
+Responsibilities
+-- Temporary scenario data on an edge
+   (deleted after each traversal)
+-- for scenario SWE, no data</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>944</x>
+      <y>1312</y>
+      <w>232</w>
+      <h>120</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt; num_cell_data_temp &gt;&gt;
+module::SWE_data_types
+--
+dummy : integer,dim(0)
+--
+Responsibilities
+-- Temporary scenario data on a cell
+   (deleted after each traversal)
+-- for scenario SWE, no data</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLNote</id>
+    <coordinates>
+      <x>1360</x>
+      <y>984</y>
+      <w>88</w>
+      <h>24</h>
+    </coordinates>
+    <panel_attributes>bg=green
+Global data</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>1264</x>
+      <y>1024</y>
+      <w>264</w>
+      <h>120</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt; num_global_data &gt;&gt;
+module::SWE_data_types
+--
+r_time : real
+r_dt : real
+r_dt_new : real
+--
+Responsibilities
+-- Data type for the scenario configuration</panel_attributes>
+    <additional_attributes/>
+  </element>
+</diagram>
