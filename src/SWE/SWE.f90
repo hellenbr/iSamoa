@@ -73,7 +73,7 @@
 
 			if (l_log) then
 				_log_open_file(s_log_name)
-			endif
+			end if
 
 			call load_scenario(grid)
 
@@ -211,45 +211,82 @@
 			integer (kind = GRID_SI)                                    :: i_initial_step, i_time_step
 			integer  (kind = GRID_SI)                                   :: i_stats_phase
 
-			!init parameters
-			r_time_next_output = 0.0_GRID_SR
-
-            if (rank_MPI == 0) then
-                !$omp master
-                _log_write(0, *) "SWE: setting initial values and a priori refinement.."
-                _log_write(0, *) ""
-                !$omp end master
-            end if
-
-            call update_stats(swe, grid)
-			i_stats_phase = 0
-
-            i_initial_step = 0
-
-            !initialize the bathymetry
-            call swe%init_b%traverse(grid)
-
-			do
-				!initialize dofs and set refinement conditions
-				call swe%init_dofs%traverse(grid)
+!***** IMPI *****
+!Only the NON-joining procs do initialization
+# if defined(_MPI)
+			if (status_MPI /= MPI_ADAPT_STATUS_JOINING) then
+# endif
+!****************
+                !init parameters
+                r_time_next_output = 0.0_GRID_SR
 
                 if (rank_MPI == 0) then
-                    grid_info%i_cells = grid%get_cells(MPI_SUM, .false.)
-
                     !$omp master
-                    _log_write(1, "(A, I0, A, I0, A)") " SWE: ", i_initial_step, " adaptions, ", grid_info%i_cells, " cells"
+                    _log_write(0, *) "SWE: setting initial values and a priori refinement.."
+                    _log_write(0, *) ""
                     !$omp end master
                 end if
 
-                grid_info%i_cells = grid%get_cells(MPI_SUM, .true.)
-				if (swe%init_dofs%i_refinements_issued .le. 0) then
-					exit
-				endif
+                call update_stats(swe, grid)
+                i_stats_phase = 0
 
-				call swe%adaption%traverse(grid)
+                i_initial_step = 0
 
-                !output grids during initial phase if and only if t_out is 0
-                if (cfg%r_output_time_step == 0.0_GRID_SR) then
+                !initialize the bathymetry
+                call swe%init_b%traverse(grid)
+
+                do
+                    !initialize dofs and set refinement conditions
+                    call swe%init_dofs%traverse(grid)
+
+                    if (rank_MPI == 0) then
+                        grid_info%i_cells = grid%get_cells(MPI_SUM, .false.)
+
+                        !$omp master
+                        _log_write(1, "(A, I0, A, I0, A)") " SWE: ", i_initial_step, " adaptions, ", grid_info%i_cells, " cells"
+                        !$omp end master
+                    end if
+
+                    grid_info%i_cells = grid%get_cells(MPI_SUM, .true.)
+                    if (swe%init_dofs%i_refinements_issued .le. 0) then
+                        exit
+                    endif
+
+                    call swe%adaption%traverse(grid)
+
+                    !output grids during initial phase if and only if t_out is 0
+                    if (cfg%r_output_time_step == 0.0_GRID_SR) then
+                        if (cfg%l_ascii_output) then
+                            call swe%ascii_output%traverse(grid)
+                        end if
+
+                        if(cfg%l_gridoutput) then
+                            call swe%xml_output%traverse(grid)
+                        end if
+
+                        if (cfg%l_pointoutput) then
+                            call swe%point_output%traverse(grid)
+                        end if
+
+                        r_time_next_output = r_time_next_output + cfg%r_output_time_step
+                    end if
+
+                    i_initial_step = i_initial_step + 1
+                end do
+
+                grid_info = grid%get_info(MPI_SUM, .true.)
+
+                if (rank_MPI == 0) then
+                    !$omp master
+                    _log_write(0, *) "SWE: done."
+                    _log_write(0, *) ""
+
+                    call grid_info%print()
+                    !$omp end master
+                end if
+
+                !output initial grid
+                if (cfg%i_output_time_steps > 0 .or. cfg%r_output_time_step >= 0.0_GRID_SR) then
                     if (cfg%l_ascii_output) then
                         call swe%ascii_output%traverse(grid)
                     end if
@@ -265,60 +302,28 @@
                     r_time_next_output = r_time_next_output + cfg%r_output_time_step
                 end if
 
-				i_initial_step = i_initial_step + 1
-			end do
+                !print initial stats
+                if (cfg%i_stats_phases >= 0) then
+                    call update_stats(swe, grid)
 
-            grid_info = grid%get_info(MPI_SUM, .true.)
+                    i_stats_phase = i_stats_phase + 1
+                end if
 
-            if (rank_MPI == 0) then
                 !$omp master
-                _log_write(0, *) "SWE: done."
-                _log_write(0, *) ""
+                call swe%init_dofs%reduce_stats(MPI_SUM, .true.)
+                call swe%adaption%reduce_stats(MPI_SUM, .true.)
+                call grid%reduce_stats(MPI_SUM, .true.)
 
-                call grid_info%print()
+                if (rank_MPI == 0) then
+                    _log_write(0, *) "SWE: running time steps.."
+                    _log_write(0, *) ""
+                end if
                 !$omp end master
-			end if
 
-			!output initial grid
-			if (cfg%i_output_time_steps > 0 .or. cfg%r_output_time_step >= 0.0_GRID_SR) then
-                if (cfg%l_ascii_output) then
-                    call swe%ascii_output%traverse(grid)
-                end if
+                i_time_step = 0
 
-                if(cfg%l_gridoutput) then
-                    call swe%xml_output%traverse(grid)
-                end if
-
-                if (cfg%l_pointoutput) then
-                    call swe%point_output%traverse(grid)
-                end if
-
-				r_time_next_output = r_time_next_output + cfg%r_output_time_step
-			end if
-
-			!print initial stats
-			if (cfg%i_stats_phases >= 0) then
-                call update_stats(swe, grid)
-
-                i_stats_phase = i_stats_phase + 1
-			end if
-
-            !$omp master
-            call swe%init_dofs%reduce_stats(MPI_SUM, .true.)
-            call swe%adaption%reduce_stats(MPI_SUM, .true.)
-            call grid%reduce_stats(MPI_SUM, .true.)
-
-            if (rank_MPI == 0) then
-                _log_write(0, *) "SWE: running time steps.."
-                _log_write(0, *) ""
-			end if
-            !$omp end master
-
-            i_time_step = 0
-
-#           if defined(_ASAGI)
+#               if defined(_ASAGI)
                 ! during the earthquake, do small time steps that include a displacement
-
                 do
                     if ((cfg%r_max_time >= 0.0 .and. grid%r_time >= cfg%r_max_time) .or. (cfg%i_max_time_steps >= 0 .and. i_time_step >= cfg%i_max_time_steps)) then
                         exit
@@ -373,25 +378,37 @@
                 if (cfg%i_stats_phases >= 0) then
                     call update_stats(swe, grid)
                 end if
-#           endif
+#               endif
+
+!***** IMPI *****
+!Joining procs avoid any initialization, and jump in impi_adapt immediately
+# if defined(_MPI)
+            else
+                call impi_adapt()
+            end if
+# endif
+!****************
 
             !regular tsunami time steps begin after the earthquake is over
 
 			do
+			    !check for loop termination
 				if ((cfg%r_max_time >= 0.0 .and. grid%r_time >= cfg%r_max_time) .or. (cfg%i_max_time_steps >= 0 .and. i_time_step >= cfg%i_max_time_steps)) then
 					exit
 				end if
 
+                !increment time step
 				i_time_step = i_time_step + 1
 
+			    !refine grid
                 if (cfg%i_adapt_time_steps > 0 .and. mod(i_time_step, cfg%i_adapt_time_steps) == 0) then
-                    !refine grid
                     call swe%adaption%traverse(grid)
                 end if
 
 				!do a time step
 				call swe%euler%traverse(grid)
 
+                !master print screen
                 if (rank_MPI == 0) then
                     grid_info%i_cells = grid%get_cells(MPI_SUM, .false.)
 
@@ -426,6 +443,15 @@
 
                     i_stats_phase = i_stats_phase + 1
                 end if
+
+!***** IMPI *****
+!Joining procs avoid any initialization, and jump in impi_adapt immediately
+# if defined(_MPI)
+                if (time_to_adapt == .true.) then
+                    call impi_adapt()
+                end if
+# endif
+!****************
 			end do
 
             grid_info = grid%get_info(MPI_SUM, .true.)

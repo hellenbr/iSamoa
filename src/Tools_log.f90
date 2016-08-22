@@ -21,7 +21,9 @@ module Tools_mpi
 #   endif
 
     public
-
+#   if defined(_IMPI)
+    integer             :: status_MPI = 0
+#   endif
 	integer 		    :: rank_MPI = 0
 	integer 		    :: size_MPI = 1
 	integer             :: ref_count_MPI = 0
