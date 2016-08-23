@@ -213,7 +213,7 @@
 
 !***** IMPI *****
 !Only the NON-joining procs do initialization
-# if defined(_MPI)
+# if defined(_IMPI)
 			if (status_MPI /= MPI_ADAPT_STATUS_JOINING) then
 # endif
 !****************
@@ -446,7 +446,7 @@
 
 !***** IMPI *****
 !Joining procs avoid any initialization, and jump in impi_adapt immediately
-# if defined(_MPI)
+# if defined(_IMPI)
                 if (time_to_adapt == .true.) then
                     call impi_adapt()
                 end if
@@ -514,5 +514,9 @@
                 t_phase = -get_wtime()
             !$omp end master
         end subroutine
+
+        subroutine impi_adapt()
+
+        end subroutine impi_adapt
 	END MODULE SWE
 #endif

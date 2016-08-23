@@ -1392,6 +1392,8 @@ subroutine collect_minimum_distances(grid, rank_list, neighbor_min_distances, i_
 	        _log_write(4, '(5X, A, 2(F0.4, X))') "min  :", decode_distance(grid%min_distance)
 	        _log_write(4, '(5X, A, 2(F0.4, X))') "end  :", decode_distance(grid%end_distance)
 
+!***********************EXTRACT EVERYTHING BELOW******************************** or maybe not
+
             !HACK: this allows neighbor representations to be transferred from old to new grid
 	        call grid%get_local_sections(i_first_local_section, i_last_local_section)
 
@@ -1399,6 +1401,32 @@ subroutine collect_minimum_distances(grid, rank_list, neighbor_min_distances, i_
 	            assert_eq(grid%sections%elements_alloc(i_section)%index, i_section)
                 call save_neighbor_rep(grid%sections%elements_alloc(i_section))
 	        end do
+
+
+            !Example scenario: Transfer everything from rank 1 to rank 0, transfer everything from rank 2,3 to rank 1
+            !Originally, rank 0 holds 4 sections, rank 1 holds 5, rank 2 holds 4, rank 3 holds 4:
+            !
+            !  grid: stays the same for all ranks
+            !
+            !  i_rank_out: after redistribution, the dest_rank for each of my current sections
+            !       for rank 0: dim(4) [0 0 0 0]
+            !       for rank 1: dim(5) [0 0 0 0 0]
+            !       for rank 2: dim(4) [1 1 1 1]
+            !       for rank 3: dim(5) [1 1 1 1]
+            !
+            !  i_section_index_out: after redistribution, the section index for each of my current sections in the dest_rank
+            !       for rank 0: dim(4) [0 1 2 3]
+            !       for rank 1: dim(5) [4 5 6 7 8]
+            !       for rank 2: dim(4) [0 1 2 3]
+            !       for rank 3: dim(5) [4 5 6 7]
+            !
+            !  i_rank_in: after redistribution, the src_rank for each my NEW sections
+            !       for rank 0: dim(4+5): [0 0 0 0 1 1 1 1 1]
+            !       for rank 1: dim(4+4): [2 2 2 2 3 3 3 3]
+            !       for rank 2: dim(0)
+            !       for rank 3: dim(0)
+            !
+            ! how many sections each proc has? in grid%sections%get_size()
 
             !Rank and section indices may have changed, so send the new information to the neighbors
             call send_recv_comm_changes(grid, i_rank_out, i_section_index_out, i_rank_in)
@@ -1470,6 +1498,7 @@ subroutine collect_minimum_distances(grid, rank_list, neighbor_min_distances, i_
 	            grid%end_distance = 0
 	        end if
 
+            !compute the minimum distance over all sections of the process (local reduction, not involing MPI)
 	        do i_color = RED, GREEN
 	            call reduce(grid%min_distance(i_color), grid%sections%elements%min_distance(i_color), MPI_MIN, .false.)
 	        end do
@@ -1517,6 +1546,7 @@ subroutine collect_minimum_distances(grid, rank_list, neighbor_min_distances, i_
 
 	        !$omp barrier
 #		endif
+!***********************EXTRACT EVERYTHING ABOVE********************************
     end subroutine
 
 #	if defined(_MPI)
