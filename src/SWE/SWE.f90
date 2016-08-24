@@ -382,7 +382,7 @@
 
 !***** IMPI *****
 !Joining procs avoid any initialization, and jump in impi_adapt immediately
-# if defined(_MPI)
+# if defined(_IMPI)
             else
                 call impi_adapt()
             end if

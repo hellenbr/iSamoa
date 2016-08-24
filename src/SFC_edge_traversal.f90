@@ -1341,9 +1341,6 @@ subroutine collect_minimum_distances(grid, rank_list, neighbor_min_distances, i_
         integer (kind = GRID_DI)    :: i_total_load, i_max_load
         integer, pointer            :: i_rank_out(:), i_section_index_out(:), i_rank_in(:)
         logical                     :: l_early_exit
-!        integer (kind = GRID_SI)	:: i_first_local_section, i_last_local_section, i_section
-!        type(t_grid), save			:: grid_temp
-!        integer	(BYTE)  		    :: i_color
 
 #		if defined(_MPI)
             _log_write(3, '(3X, A)') "distribute load"
@@ -1394,6 +1391,28 @@ subroutine collect_minimum_distances(grid, rank_list, neighbor_min_distances, i_
 	        _log_write(4, '(5X, A, 2(F0.4, X))') "end  :", decode_distance(grid%end_distance)
 
         call distribute_sections(grid, i_rank_out, i_section_index_out, i_rank_in)
+    end subroutine
+
+    !In case of resource shrinkage, data must be transfered out from LEAVING processes.
+    ![Assumption]: The LEAVING processes are always the last ones (largest ranks)
+    !This function transfers the data out from the last few ranks, and re-distribute sections
+    !   amongst the STAYING ranks.
+    !This redistribution is rough estimate, not perfect, because load balancing will
+    !   be done again during grid refinement
+    subroutine distribute_load_for_resource_shrinkage()
+        integer, kind(kind = GRID_SI), intent(in) :: num_total_ranks, num_leaving_ranks, my_rank
+
+        integer, kind(kind = GRID_SI):: num_staying_ranks, num_sload_ranks, load
+        integer, kind(kind = GRID_SI):: dest_rank, src_ranks_min, src_ranks_max
+
+        num_staying_ranks = num_total_ranks - num_leaving_ranks
+        load = num_total_ranks / num_staying_ranks
+        num_sload_ranks = num_staying_ranks - mod(num_total_ranks, num_staying_ranks)
+
+
+
+
+
     end subroutine
 
     !distribution only, given computed load

@@ -1,4 +1,4 @@
-target='debug'
+target='release'
 scenario='swe'
 compiler='gnu'
 openmp='noomp'
