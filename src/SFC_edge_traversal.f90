@@ -1399,21 +1399,131 @@ subroutine collect_minimum_distances(grid, rank_list, neighbor_min_distances, i_
     !   amongst the STAYING ranks.
     !This redistribution is rough estimate, not perfect, because load balancing will
     !   be done again during grid refinement
-    subroutine distribute_load_for_resource_shrinkage()
-        integer, kind(kind = GRID_SI), intent(in) :: num_total_ranks, num_leaving_ranks, my_rank
+    subroutine distribute_load_for_resource_shrinkage(grid, num_total_ranks, num_leaving_ranks, my_rank)
+        type(t_grid), intent(inout) :: grid
+        integer, intent(in) :: num_total_ranks, num_leaving_ranks, my_rank
 
-        integer, kind(kind = GRID_SI):: num_staying_ranks, num_sload_ranks, load
-        integer, kind(kind = GRID_SI):: dest_rank, src_ranks_min, src_ranks_max
+        integer :: num_staying_ranks, num_small_ranks, load
+        integer :: dest_rank, src_rank_min, src_rank_max, num_src_ranks
+        integer :: r, err, i
+        integer :: num_sections, num_new_sections, num_reqs, req_cnt
+        integer, allocatable :: reqs(:), new_sections(:), index_offsets(:)
+        integer, pointer, dimension(:) :: i_rank_out => null(), i_section_index_out => null(), i_rank_in => null()
+
+        !Algorithm:
+        !  * move all sections inside a process (no spliting sections that belong to one process)
+        !  * LEAVING ranks's content will be moved to the last few STAYING ranks
+        !  * therefore, the first few ranks might have fewer (~half) the content, they are called
+        !        num_small_ranks
 
         num_staying_ranks = num_total_ranks - num_leaving_ranks
         load = num_total_ranks / num_staying_ranks
-        num_sload_ranks = num_staying_ranks - mod(num_total_ranks, num_staying_ranks)
+        num_small_ranks = num_staying_ranks - mod(num_total_ranks, num_staying_ranks)
 
+        !Compute my NEW sections' source ranks (there can be 0 or multiple source ranks)
+        if (my_rank < num_small_ranks) then
+            src_rank_min = my_rank * load
+            src_rank_max = src_rank_min + load - 1
+        else if (my_rank < num_staying_ranks) then
+            src_rank_min = num_small_ranks * load + (my_rank - num_small_ranks) * (load + 1)
+            src_rank_max = src_rank_min + load
+        else
+            src_rank_min = -1 !This makes sure the resulting num_src_ranks = 0
+            src_rank_max = -2
+        end if
+        num_src_ranks = src_rank_max - src_rank_min + 1
 
+        !Compute my CURRENT sections' destination rank (there MUST 1 destination rank)
+        r = my_rank
+        do i = 0, num_staying_ranks-1
+            r = r - load
+            if (i >= num_small_ranks) then
+                r = r - 1
+            end if
+            if (r < 0) then
+                dest_rank = i
+                exit
+            end if
+        end do
 
+        !***** MPI communications *****
+        !allocate MPI requests: 1 dest_rank send & recv, N src_ranks send & recv
+        num_reqs = num_src_ranks + 1
+        req_cnt = 1
+        allocate(reqs(num_reqs), stat=err); assert_eq(err, 0)
 
+        !stores # of NEW sections from each src_rank
+        allocate(new_sections(num_src_ranks), stat=err); assert_eq(err, 0)
+        allocate(index_offsets(num_src_ranks), stat=err); assert_eq(err, 0)
 
-    end subroutine
+        !allocate arrays on first call
+        num_sections = grid%sections%get_size()
+        allocate(i_rank_out(num_sections), stat=err); assert_eq(err, 0)
+        allocate(i_section_index_out(num_sections), stat=err); assert_eq(err, 0)
+
+        ! 1) Send/recv my section size
+        call mpi_isend(num_sections, 1, MPI_INTEGER, dest_rank, 1010, MPI_COMM_WORLD, reqs(req_cnt), err); assert_eq(err, 0)
+        req_cnt = req_cnt + 1
+
+        ! 2) Recv # NEW sections from src_ranks
+        do i = 1, num_src_ranks
+            call mpi_irecv(new_sections(i), 1, MPI_INTEGER, src_rank_min+i-1, 1010, MPI_COMM_WORLD, reqs(req_cnt), err); assert_eq(err, 0)
+            req_cnt = req_cnt + 1
+        end do
+
+        call mpi_waitall(num_reqs, reqs, MPI_STATUS_IGNORE, err); assert_eq(err, 0)
+        req_cnt = 1
+
+        ! 3) Compute index offset and send to src ranks
+        num_new_sections = 0
+        do i = 1, num_src_ranks
+            num_new_sections = num_new_sections + new_sections(i)
+            ! transform tmp_new_sections(i) to section_index_offset
+            index_offsets(i) = num_new_sections - new_sections(i) + 1
+            call mpi_isend(index_offsets(i), 1, MPI_INTEGER, src_rank_min+i-1, 1020, MPI_COMM_WORLD, reqs(req_cnt), err); assert_eq(err, 0)
+            req_cnt = req_cnt + 1
+        end do
+
+        ! 4) Recv offset from dest_rank
+        call mpi_irecv(i_section_index_out(1), 1, MPI_INTEGER, dest_rank, 1020, MPI_COMM_WORLD, reqs(req_cnt), err); assert_eq(err, 0)
+        req_cnt = req_cnt + 1
+
+        call mpi_waitall(num_reqs, reqs, MPI_STATUS_IGNORE, err); assert_eq(err, 0)
+        req_cnt = 1
+
+        !***** MPI communication completed. Compute the 3 arrays. *****
+        do i = 1, num_sections
+            i_rank_out(i) = dest_rank
+        end do
+
+        do i = 2, num_sections
+            i_section_index_out(i) = i_section_index_out(i-1) + 1
+        end do
+
+        allocate(i_rank_in(num_new_sections), stat=err); !assert_eq(err, 0)
+        do r = src_rank_min, src_rank_max
+            do i = 1, new_sections(r-src_rank_min+1)
+                i_rank_in(req_cnt) = r
+                req_cnt = req_cnt + 1
+            end do
+        end do
+
+        !DEBUG ONLY
+!        do r = 0, num_total_ranks-1
+!            if (my_rank == r) then
+!                print *,"Rank ", my_rank, " : dest_rank = ", dest_rank, ", &
+!                    src_rank_min = ", src_rank_min, ", src_rank_max = ", src_rank_max
+!                write(*, *) (i_rank_out(i), i=1,num_sections)
+!                write(*, *) (i_section_index_out(i), i=1,num_sections)
+!                write(*, *) (i_rank_in(i), i=1,num_new_sections)
+!                write(*, *) (" ")
+!            end if
+!            call mpi_barrier(MPI_COMM_WORLD, err)
+!        end do
+
+        call distribute_sections(grid, i_rank_out, i_section_index_out, i_rank_in)
+
+    end subroutine distribute_load_for_resource_shrinkage
 
     !distribution only, given computed load
     subroutine distribute_sections(grid, i_rank_out, i_section_index_out, i_rank_in)
