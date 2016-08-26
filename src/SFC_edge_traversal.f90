@@ -1401,8 +1401,10 @@ subroutine collect_minimum_distances(grid, rank_list, neighbor_min_distances, i_
     !This redistribution is rough estimate, not perfect, because load balancing will
     !   be done again during grid refinement
     subroutine distribute_load_for_resource_shrinkage(grid, num_total_ranks, num_leaving_ranks, my_rank)
-        type(t_grid), intent(inout) :: grid
-        integer, intent(in) :: num_total_ranks, num_leaving_ranks, my_rank
+        type(t_grid), intent(inout) :: grid      ! Current local grid
+        integer, intent(in) :: num_total_ranks   ! The number of current ranks (size of MPI_COMM_WORLD)
+        integer, intent(in) :: num_leaving_ranks ! The number of ranks that will be leaving
+        integer, intent(in) :: my_rank           ! The rank ID in the current MPI_COMM_WORLD
 
         integer :: num_staying_ranks, num_small_ranks, load
         integer :: dest_rank, src_rank_min, src_rank_max, num_src_ranks
@@ -1458,7 +1460,7 @@ subroutine collect_minimum_distances(grid, rank_list, neighbor_min_distances, i_
         allocate(new_sections(num_src_ranks), stat=err); assert_eq(err, 0)
         allocate(index_offsets(num_src_ranks), stat=err); assert_eq(err, 0)
 
-        !allocate arrays on first call
+        !allocate distribution arrays
         num_sections = grid%sections%get_size()
         allocate(i_rank_out(num_sections), stat=err); assert_eq(err, 0)
         allocate(i_section_index_out(num_sections), stat=err); assert_eq(err, 0)
@@ -1499,7 +1501,7 @@ subroutine collect_minimum_distances(grid, rank_list, neighbor_min_distances, i_
             i_section_index_out(i) = i_section_index_out(i-1) + 1
         end do
 
-        allocate(i_rank_in(num_new_sections), stat=err); !assert_eq(err, 0)
+        allocate(i_rank_in(num_new_sections), stat=err); assert_eq(err, 0)
         do r = src_rank_min, src_rank_max
             do i = 1, new_sections(r-src_rank_min+1)
                 i_rank_in(req_cnt) = r

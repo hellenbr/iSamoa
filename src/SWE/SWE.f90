@@ -44,10 +44,9 @@
             procedure, pass :: create => swe_create
             procedure, pass :: run => swe_run
             procedure, pass :: destroy => swe_destroy
-            procedure, pass, private :: impi_adapte
         end type
 
-#       if define(_IMPI)
+#       if defined(_IMPI)
         type t_impi_bcast
             integer (kind=GRID_SI) :: i_stats_phase    ! MPI_INTEGER4
             integer (kind=GRID_SI) :: i_initial_step
@@ -217,20 +216,24 @@
 
 		!> Sets the initial values of the SWE and runs the time steps
 		subroutine swe_run(swe, grid)
-            class(t_swe), intent(inout)                                 :: swe
-			type(t_grid), intent(inout)									:: grid
+            class(t_swe), intent(inout) :: swe
+			type(t_grid), intent(inout)	:: grid
 
-			real (kind = GRID_SR)										:: r_time_next_output
-			type(t_grid_info)           	                            :: grid_info, grid_info_max
-			integer (kind = GRID_SI)                                    :: i_initial_step, i_time_step
-			integer  (kind = GRID_SI)                                   :: i_stats_phase
+			real (kind = GRID_SR)		:: r_time_next_output
+			type(t_grid_info)           :: grid_info, grid_info_max
+			integer (kind = GRID_SI)    :: i_initial_step, i_time_step
+			integer  (kind = GRID_SI)   :: i_stats_phase
 
-!***** IMPI *****
-!Only the NON-joining procs do initialization
-# if defined(_IMPI)
+#           if defined(_IMPI)
+            integer                :: IMPI_BCAST_TYPE
+            call create_impi_bcast_type(IMPI_BCAST_TYPE)
+#           endif
+
+#           if defined(_IMPI)
+            !Only the NON-joining procs do initialization
 			if (status_MPI /= MPI_ADAPT_STATUS_JOINING) then
-# endif
-!****************
+#           endif
+
                 !init parameters
                 r_time_next_output = 0.0_GRID_SR
 
@@ -394,14 +397,12 @@
                 end if
 #               endif
 
-!***** IMPI *****
-!Joining procs avoid any initialization, and jump in impi_adapt immediately
-# if defined(_IMPI)
+#           if defined(_IMPI)
+            !Joining procs avoid any initialization, and jump in impi_adapt immediately
             else
-                call impi_adapt()
+                call impi_adapt(grid, i_stats_phase, i_initial_step, i_time_step, r_time_next_output, IMPI_BCAST_TYPE)
             end if
-# endif
-!****************
+#           endif
 
             !regular tsunami time steps begin after the earthquake is over
 
@@ -458,14 +459,12 @@
                     i_stats_phase = i_stats_phase + 1
                 end if
 
-!***** IMPI *****
-!Joining procs avoid any initialization, and jump in impi_adapt immediately
-# if defined(_IMPI)
+#               if defined(_IMPI)
+                !Existing processes call impi_adapt
                 if (time_to_adapt == .true.) then
-                    call impi_adapt()
+                    call impi_adapt(grid, i_stats_phase, i_initial_step, i_time_step, r_time_next_output, IMPI_BCAST_TYPE)
                 end if
-# endif
-!****************
+#               endif
 			end do
 
             grid_info = grid%get_info(MPI_SUM, .true.)
@@ -529,21 +528,19 @@
             !$omp end master
         end subroutine
 
-        subroutine impi_adapt(grid, &
-                i_stats_phase, i_initial_step, i_time_step, &
-                r_time_next_output, r_time, r_dt, r_dt_new, &
-                is_forward)
+        subroutine impi_adapt(grid, i_stats_phase, i_initial_step, i_time_step, r_time_next_output, IMPI_BCAST_TYPE)
+
             type(t_grid), intent(inout)           :: grid
             integer (kind=GRID_SI), intent(inout) :: i_stats_phase, i_initial_step, i_time_step
-            real (kind=GRID_SR), intent(inout)    :: r_time_next_output, r_time, r_dt, r_dt_new
-            logical, intent(inout)                :: is_forward
+            real (kind=GRID_SR), intent(inout)    :: r_time_next_output
+            integer, intent(in)                   :: IMPI_BCAST_TYPE
 
-            integer :: adapt_flag, new_comm, inter_comm,
+#           if defined(_IMPI)
+            integer :: adapt_flag, NEW_COMM, INTER_COMM, new_comm_size, num_leaving_ranks
             integer :: info, status, err
             real, kind(kind=GRID_DR) :: tic, toc, tic1, toc1
             type(t_impi_bcast) :: bcast_packet
 
-#           if define(_IMPI)
             tic = mpi_wtime()
             call mpi_probe_adapt(adapt_flag, status, info, err)
             toc = mpi_wtime() - tic
@@ -555,28 +552,44 @@
                 tic1 = mpi_wtime()
 
                 tic = mpi_wtime()
-                call mpi_comm_adapt_begin(inter_comm, new_comm, 0, 0, err); assert_eq(err, 0)
+                call mpi_comm_adapt_begin(INTER_COMM, NEW_COMM, 0, 0, err); assert_eq(err, 0)
                 toc = MPI_Wtime() - tic
 
                 print *, "Rank ", rank_MPI, " [STATUS ", status_MPI, "]: ", &
                         "MPI_Comm_adapt_begin ", toc, " seconds"
 
                 !************************ ADAPT WINDOW ****************************
-
                 ! Broadcast a few values
-                bcast_packet = t_impi_bcast(i_stats_phase, i_initial_step, i_time_step, r_time_next_output, r_time, r_dt, r_dt_new, is_forward)
+                bcast_packet = t_impi_bcast(i_stats_phase, i_initial_step, i_time_step, r_time_next_output, &
+                        grid%r_time, grid%r_dt, grid%r_dt_new, grid%sections%is_forward())
+                call mpi_bcast(bcast_packet, 1, IMPI_BCAST_TYPE, 0, NEW_COMM, err); assert_eq(err, 0)
 
+                if (status_MPI == MPI_ADAPT_STATUS_JOINING) then
+                    i_stats_phase      = bcast_packet%i_stats_phase
+                    i_initial_step     = bcast_packet%i_initial_step
+                    i_time_step        = bcast_packet%i_time_step
+                    r_time_next_output = bcast_packet%r_time_next_output
+                    grid%r_time        = bcast_packet%r_time
+                    grid%r_dt          = bcast_packet%r_dt
+                    grid%r_dt_new      = bcast_packet%r_dt_new
 
-!                type(t_impi_bcast)
-!                    integer (kind=GRID_SI) :: i_stats_phase    ! MPI_INTEGER4
-!                    integer (kind=GRID_SI) :: i_initial_step
-!                    integer (kind=GRID_SI) :: i_time_step
-!                    real (kind=GRID_SR)    :: r_time_next_output  ! MPI_DOUBLE_PRECISION
-!                    real (kind=GRID_SR)    :: r_time
-!                    real (kind=GRID_SR)    :: r_dt
-!                    real (kind=GRID_SR)    :: r_dt_new
-!                    logical                :: is_forward    ! MPI_LOGICAL
+                    ! reverse grid if it is the case (for JOINING procs only)
+                    if (.not. bcast_packet%is_forward) then
+                        call grid%reverse()  ! this will set the grid%sections%forward flag properly
+                    end if
+                end if
 
+                !NOTE:
+                !  If resource expansion, nothing more to be done (load balancign will be done during grid refinement).
+                !  If resource shrinkage, need to transfer data out from LEAVING procs.
+                !  TODO: currently does not support the case of have both JOINING and LEAVING ranks at the same time
+
+                call mpi_comm_size(NEW_COMM, new_comm_size, err); assert_eq(err, 0)
+                if (new_comm_size < size_MPI) then
+                    num_leaving_ranks = size_MPI - new_comm_size
+                    ! Since it is shrinkage, use the current MPI_COMM_WORLD, size_MPI, rank_MPI
+                    call distribute_load_for_resource_shrinkage(grid, size_MPI, num_leaving_ranks, rank_MPI)
+                end
                 !************************ ADAPT WINDOW ****************************
 
                 tic = mpi_wtime();
@@ -600,28 +613,43 @@
         subroutine create_impi_bcast_type(impi_bcast_type)
             integer, intent(out) :: impi_bcast_type
 
+            !Construct an MPI type for the following object
+            !************************
+            !type t_impi_bcast
+            !    integer (kind=GRID_SI) :: i_stats_phase    ! MPI_INTEGER4 x3
+            !    integer (kind=GRID_SI) :: i_initial_step
+            !    integer (kind=GRID_SI) :: i_time_step
+            !    real (kind=GRID_SR)    :: r_time_next_output  ! MPI_DOUBLE_PRECISION x4
+            !    real (kind=GRID_SR)    :: r_time
+            !    real (kind=GRID_SR)    :: r_dt
+            !    real (kind=GRID_SR)    :: r_dt_new
+            !    logical                :: is_forward    ! MPI_LOGICAL x1
+            !end type t_impi_bcast
+            !************************
+
 #           if defined(_IMPI)
-                integer                                 :: blocklengths(2), types(2), disps(2), type_size, i_error
-                integer (kind = MPI_ADDRESS_KIND)       :: lb, ub
+            integer :: lens(3), types(3), disps(3), type_size, err
+            integer (kind = MPI_ADDRESS_KIND)       :: lb, ub
+            integer (kind = GRID_SI)    :: i_sample
+            integer (kind = GRID_SR)    :: r_sample
 
-                blocklengths(1) = 1
-                blocklengths(2) = 1
+            lens(1) = 3
+            lens(2) = 4
+            lens(3) = 1
 
-                disps(1) = 0
-                disps(2) = sizeof(node)
+            disps(1) = 0
+            disps(2) = sizeof(i_sample) * blocklengths(1)
+            disps(3) = sizeof(r_sample) * blocklengths(2) + disps(2)
 
-                types(1) = MPI_LB
-                types(2) = MPI_UB
+            types(1) = MPI_INTEGER4
+            types(2) = MPI_DOUBLE_PRECISION
+            types(3) = MPI_LOGICAL
 
-                call MPI_Type_struct(2, blocklengths, disps, types, mpi_node_type, i_error); assert_eq(i_error, 0)
-                call MPI_Type_commit(mpi_node_type, i_error); assert_eq(i_error, 0)
+            call MPI_Type_struct(3, lens, disps, types, impi_bcast_type, err); assert_eq(err, 0)
+            call MPI_Type_commit(impi_bcast_type, err); assert_eq(err, 0)
 
-                call MPI_Type_size(mpi_node_type, type_size, i_error); assert_eq(i_error, 0)
-                call MPI_Type_get_extent(mpi_node_type, lb, ub, i_error); assert_eq(i_error, 0)
-
-                assert_eq(0, lb)
-                assert_eq(0, type_size)
-                assert_eq(sizeof(node), ub)
+!                call MPI_Type_size(impi_bcast_type, type_size, err); assert_eq(err, 0)
+!                call MPI_Type_get_extent(impi_bcast_type, lb, ub, err); assert_eq(err, 0)
 #           endif
         end subroutine
 
