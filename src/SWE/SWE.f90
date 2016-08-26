@@ -44,7 +44,21 @@
             procedure, pass :: create => swe_create
             procedure, pass :: run => swe_run
             procedure, pass :: destroy => swe_destroy
+            procedure, pass, private :: impi_adapte
         end type
+
+#       if define(_IMPI)
+        type t_impi_bcast
+            integer (kind=GRID_SI) :: i_stats_phase    ! MPI_INTEGER4
+            integer (kind=GRID_SI) :: i_initial_step
+            integer (kind=GRID_SI) :: i_time_step
+            real (kind=GRID_SR)    :: r_time_next_output  ! MPI_DOUBLE_PRECISION
+            real (kind=GRID_SR)    :: r_time
+            real (kind=GRID_SR)    :: r_dt
+            real (kind=GRID_SR)    :: r_dt_new
+            logical                :: is_forward    ! MPI_LOGICAL
+        end type t_impi_bcast
+#       endif
 
 		contains
 
@@ -515,8 +529,101 @@
             !$omp end master
         end subroutine
 
-        subroutine impi_adapt()
+        subroutine impi_adapt(grid, &
+                i_stats_phase, i_initial_step, i_time_step, &
+                r_time_next_output, r_time, r_dt, r_dt_new, &
+                is_forward)
+            type(t_grid), intent(inout)           :: grid
+            integer (kind=GRID_SI), intent(inout) :: i_stats_phase, i_initial_step, i_time_step
+            real (kind=GRID_SR), intent(inout)    :: r_time_next_output, r_time, r_dt, r_dt_new
+            logical, intent(inout)                :: is_forward
 
+            integer :: adapt_flag, new_comm, inter_comm,
+            integer :: info, status, err
+            real, kind(kind=GRID_DR) :: tic, toc, tic1, toc1
+            type(t_impi_bcast) :: bcast_packet
+
+#           if define(_IMPI)
+            tic = mpi_wtime()
+            call mpi_probe_adapt(adapt_flag, status, info, err)
+            toc = mpi_wtime() - tic
+
+            print *, "Rank ", rank_MPI, " [STATUS ", status_MPI , "]: ", &
+                    "MPI_Probe_adapt ", toc, " seconds"
+
+            if (adapt_flag == MPI_ADAPT_TRUE) then
+                tic1 = mpi_wtime()
+
+                tic = mpi_wtime()
+                call mpi_comm_adapt_begin(inter_comm, new_comm, 0, 0, err); assert_eq(err, 0)
+                toc = MPI_Wtime() - tic
+
+                print *, "Rank ", rank_MPI, " [STATUS ", status_MPI, "]: ", &
+                        "MPI_Comm_adapt_begin ", toc, " seconds"
+
+                !************************ ADAPT WINDOW ****************************
+
+                ! Broadcast a few values
+                bcast_packet = t_impi_bcast(i_stats_phase, i_initial_step, i_time_step, r_time_next_output, r_time, r_dt, r_dt_new, is_forward)
+
+
+!                type(t_impi_bcast)
+!                    integer (kind=GRID_SI) :: i_stats_phase    ! MPI_INTEGER4
+!                    integer (kind=GRID_SI) :: i_initial_step
+!                    integer (kind=GRID_SI) :: i_time_step
+!                    real (kind=GRID_SR)    :: r_time_next_output  ! MPI_DOUBLE_PRECISION
+!                    real (kind=GRID_SR)    :: r_time
+!                    real (kind=GRID_SR)    :: r_dt
+!                    real (kind=GRID_SR)    :: r_dt_new
+!                    logical                :: is_forward    ! MPI_LOGICAL
+
+                !************************ ADAPT WINDOW ****************************
+
+                tic = mpi_wtime();
+                call mpi_comm_adapt_commit(adapt_flag);
+                toc = mpi_wtime() - tic;
+
+                print *, "Rank ", rank_MPI, " [STATUS ", status_MPI, "]: ", &
+                        "MPI_Comm_adapt_commit ", toc, " seconds"
+
+                call mpi_comm_size(MPI_COMM_WORLD, size_MPI, err); assert_eq(err, 0)
+                call mpi_comm_rank(MPI_COMM_WORLD, rank_MPI, err); assert_eq(err, 0)
+                status_MPI = MPI_ADAPT_STATUS_STAYING;
+
+                toc1 = mpi_wtime() - tic1;
+                print *, "Rank ", rank_MPI, " [STATUS ", status_MPI, "]: ", &
+                        "Total adaption time = ", toc1, " seconds"
+            end if
+#           endif
         end subroutine impi_adapt
+
+        subroutine create_impi_bcast_type(impi_bcast_type)
+            integer, intent(out) :: impi_bcast_type
+
+#           if defined(_IMPI)
+                integer                                 :: blocklengths(2), types(2), disps(2), type_size, i_error
+                integer (kind = MPI_ADDRESS_KIND)       :: lb, ub
+
+                blocklengths(1) = 1
+                blocklengths(2) = 1
+
+                disps(1) = 0
+                disps(2) = sizeof(node)
+
+                types(1) = MPI_LB
+                types(2) = MPI_UB
+
+                call MPI_Type_struct(2, blocklengths, disps, types, mpi_node_type, i_error); assert_eq(i_error, 0)
+                call MPI_Type_commit(mpi_node_type, i_error); assert_eq(i_error, 0)
+
+                call MPI_Type_size(mpi_node_type, type_size, i_error); assert_eq(i_error, 0)
+                call MPI_Type_get_extent(mpi_node_type, lb, ub, i_error); assert_eq(i_error, 0)
+
+                assert_eq(0, lb)
+                assert_eq(0, type_size)
+                assert_eq(sizeof(node), ub)
+#           endif
+        end subroutine
+
 	END MODULE SWE
 #endif

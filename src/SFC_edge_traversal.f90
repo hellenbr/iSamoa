@@ -1390,7 +1390,8 @@ subroutine collect_minimum_distances(grid, rank_list, neighbor_min_distances, i_
 	        _log_write(4, '(5X, A, 2(F0.4, X))') "min  :", decode_distance(grid%min_distance)
 	        _log_write(4, '(5X, A, 2(F0.4, X))') "end  :", decode_distance(grid%end_distance)
 
-        call distribute_sections(grid, i_rank_out, i_section_index_out, i_rank_in)
+            call distribute_sections(grid, i_rank_out, i_section_index_out, i_rank_in)
+#       endif
     end subroutine
 
     !In case of resource shrinkage, data must be transfered out from LEAVING processes.
@@ -1413,9 +1414,10 @@ subroutine collect_minimum_distances(grid, rank_list, neighbor_min_distances, i_
         !Algorithm:
         !  * move all sections inside a process (no spliting sections that belong to one process)
         !  * LEAVING ranks's content will be moved to the last few STAYING ranks
-        !  * therefore, the first few ranks might have fewer (~half) the content, they are called
+        !  * therefore, the first few ranks might have fewer content, they are called
         !        num_small_ranks
 
+#       if defined(_MPI)
         num_staying_ranks = num_total_ranks - num_leaving_ranks
         load = num_total_ranks / num_staying_ranks
         num_small_ranks = num_staying_ranks - mod(num_total_ranks, num_staying_ranks)
@@ -1433,7 +1435,7 @@ subroutine collect_minimum_distances(grid, rank_list, neighbor_min_distances, i_
         end if
         num_src_ranks = src_rank_max - src_rank_min + 1
 
-        !Compute my CURRENT sections' destination rank (there MUST 1 destination rank)
+        !Compute my CURRENT sections' destination rank (there MUST be 1 destination rank)
         r = my_rank
         do i = 0, num_staying_ranks-1
             r = r - load
@@ -1447,7 +1449,7 @@ subroutine collect_minimum_distances(grid, rank_list, neighbor_min_distances, i_
         end do
 
         !***** MPI communications *****
-        !allocate MPI requests: 1 dest_rank send & recv, N src_ranks send & recv
+        !allocate MPI requests: 1 dest_rank, N src_ranks
         num_reqs = num_src_ranks + 1
         req_cnt = 1
         allocate(reqs(num_reqs), stat=err); assert_eq(err, 0)
@@ -1465,7 +1467,6 @@ subroutine collect_minimum_distances(grid, rank_list, neighbor_min_distances, i_
         call mpi_isend(num_sections, 1, MPI_INTEGER, dest_rank, 1010, MPI_COMM_WORLD, reqs(req_cnt), err); assert_eq(err, 0)
         req_cnt = req_cnt + 1
 
-        ! 2) Recv # NEW sections from src_ranks
         do i = 1, num_src_ranks
             call mpi_irecv(new_sections(i), 1, MPI_INTEGER, src_rank_min+i-1, 1010, MPI_COMM_WORLD, reqs(req_cnt), err); assert_eq(err, 0)
             req_cnt = req_cnt + 1
@@ -1474,17 +1475,15 @@ subroutine collect_minimum_distances(grid, rank_list, neighbor_min_distances, i_
         call mpi_waitall(num_reqs, reqs, MPI_STATUS_IGNORE, err); assert_eq(err, 0)
         req_cnt = 1
 
-        ! 3) Compute index offset and send to src ranks
+        ! 2) Send/recv section index offset
         num_new_sections = 0
         do i = 1, num_src_ranks
             num_new_sections = num_new_sections + new_sections(i)
-            ! transform tmp_new_sections(i) to section_index_offset
             index_offsets(i) = num_new_sections - new_sections(i) + 1
             call mpi_isend(index_offsets(i), 1, MPI_INTEGER, src_rank_min+i-1, 1020, MPI_COMM_WORLD, reqs(req_cnt), err); assert_eq(err, 0)
             req_cnt = req_cnt + 1
         end do
 
-        ! 4) Recv offset from dest_rank
         call mpi_irecv(i_section_index_out(1), 1, MPI_INTEGER, dest_rank, 1020, MPI_COMM_WORLD, reqs(req_cnt), err); assert_eq(err, 0)
         req_cnt = req_cnt + 1
 
@@ -1508,7 +1507,7 @@ subroutine collect_minimum_distances(grid, rank_list, neighbor_min_distances, i_
             end do
         end do
 
-        !DEBUG ONLY
+!        !DEBUG ONLY
 !        do r = 0, num_total_ranks-1
 !            if (my_rank == r) then
 !                print *,"Rank ", my_rank, " : dest_rank = ", dest_rank, ", &
@@ -1522,13 +1521,17 @@ subroutine collect_minimum_distances(grid, rank_list, neighbor_min_distances, i_
 !        end do
 
         call distribute_sections(grid, i_rank_out, i_section_index_out, i_rank_in)
-
+#       endif
     end subroutine distribute_load_for_resource_shrinkage
 
     !distribution only, given computed load
     subroutine distribute_sections(grid, i_rank_out, i_section_index_out, i_rank_in)
         type(t_grid), intent(inout)   :: grid
         integer, pointer, intent(in)  :: i_rank_out(:), i_section_index_out(:), i_rank_in(:)
+
+        integer (kind = GRID_SI) :: i_first_local_section, i_last_local_section, i_section
+        type(t_grid), save       :: grid_temp
+        integer (BYTE)           :: i_color
 
         !Example scenario:
         !  Transfer everything from rank 1 to rank 0, transfer everything from rank 2,3 to rank 1
@@ -1550,142 +1553,139 @@ subroutine collect_minimum_distances(grid, rank_list, neighbor_min_distances, i_
         !       for rank 3: dim(5) [4 5 6 7]
         !
         !  i_rank_in: the src_rank for each of this rank's NEW sections
-        !       for rank 0: dim(4+5): [0 0 0 0 1 1 1 1 1]
-        !       for rank 1: dim(4+4): [2 2 2 2 3 3 3 3]
-        !       for rank 2: dim(0)
-        !       for rank 3: dim(0)
+        !       for rank 0: dim(4+5) [0 0 0 0 1 1 1 1 1]
+        !       for rank 1: dim(4+4) [2 2 2 2 3 3 3 3]
+        !       for rank 2: dim(0)   []
+        !       for rank 3: dim(0)   []
         !
-        ! how many sections each proc has? in grid%sections%get_size()
+        ! how many sections each proc has? num_sections = grid%sections%get_size()
 
-        integer (kind = GRID_SI) :: i_first_local_section, i_last_local_section, i_section
-        type(t_grid), save       :: grid_temp
-        integer (BYTE)           :: i_color
+#       if defined(_MPI)
+        !HACK: this allows neighbor representations to be transferred from old to new grid
+        call grid%get_local_sections(i_first_local_section, i_last_local_section)
+
+        do i_section = i_first_local_section, i_last_local_section
+            assert_eq(grid%sections%elements_alloc(i_section)%index, i_section)
+            call save_neighbor_rep(grid%sections%elements_alloc(i_section))
+        end do
+
+        !Rank and section indices may have changed, so send the new information to the neighbors
+        call send_recv_comm_changes(grid, i_rank_out, i_section_index_out, i_rank_in)
+
+        !$omp barrier
+
+        _log_write(3, '(4X, "migrate sections:")')
+
+        !exit early if nothing changes on this rank
+
+        if (size(i_rank_out) == 0 .and. size(i_rank_in) == 0) then
+            !if we have nothing and we get nothing from others we are done
+            _log_write(2, '(4X, "load balancing: exit, we do not have nor get anything ")')
+            return
+        else if (size(i_rank_in) == 0) then
+            !if we get nothing we cannot give anything to ourselves
+            assert_vne(i_rank_out, rank_MPI)
+        else if (size(i_rank_out) == 0) then
+            !if we have nothing we cannot get anything from ourselves
+            assert_vne(i_rank_in, rank_MPI)
+        else if (i_rank_out(1) .eq. rank_MPI .and. i_rank_out(size(i_rank_out)) .eq. rank_MPI .and. &
+                i_rank_in(1) .eq. rank_MPI .and. i_rank_in(size(i_rank_in)) .eq. rank_MPI) then
+
+            !if we give nothing to others and get nothing from others we are done
+            _log_write(2, '(4X, "load balancing: exit, we have something, but do not give nor get anything")')
+            return
+        end if
+
+        !Delete all buffers
+        do i_section = i_first_local_section, i_last_local_section
+            do i_color = RED, GREEN
+                call delete_comm_neighbor_data(grid%sections%elements_alloc(i_section), i_color)
+            end do
+        end do
+
+        !$omp single
+        if (grid%sections%get_size() > 0) then
+            assert_veq(decode_distance(grid%start_distance), decode_distance(grid%sections%elements(1)%start_distance))
+            assert_veq(decode_distance(grid%end_distance), decode_distance(grid%sections%elements(grid%sections%get_size())%end_distance))
+        end if
+
+        grid_temp%sections = t_grid_section_list()
+        call grid_temp%sections%resize(size(i_rank_in))
+        !$omp end single
+
+        !if necessary, reverse order to match source and destination grid
+        if (.not. grid%sections%is_forward()) then
+            !$omp barrier
+            _log_write(4, '(X, A)') "Reverse destination grid.."
+            call grid_temp%reverse()
+            !$omp barrier
+        end if
+
+        call send_recv_section_infos(grid, grid_temp, i_rank_out, i_rank_in)
+        call send_recv_section_data(grid, grid_temp, i_rank_out, i_rank_in)
+
+        !$omp barrier
+
+        !$omp single
+        call grid%sections%clear()
+        grid%sections = grid_temp%sections
+
+        !update distances again and check for correctness
+        if (grid%sections%get_size() > 0) then
+            grid%start_distance = grid%sections%elements(1)%start_distance
+            grid%end_distance = grid%sections%elements(grid%sections%get_size())%end_distance
+        else
+            grid%start_distance = 0
+            grid%end_distance = 0
+        end if
+
+        !compute the minimum distance over all sections of the process (local reduction, not involing MPI)
+        do i_color = RED, GREEN
+            call reduce(grid%min_distance(i_color), grid%sections%elements%min_distance(i_color), MPI_MIN, .false.)
+        end do
+
+        call prefix_sum(grid%sections%elements_alloc%partial_load, grid%sections%elements_alloc%load)
+        call reduce(grid%load, grid%sections%elements_alloc%load, MPI_SUM, .false.)
+        call reduce(grid%dest_cells, grid%sections%elements%dest_cells, MPI_SUM, .false.)
+
+        _log_write(4, '(4X, A)') "grid distances (after):"
+        _log_write(4, '(5X, A, 2(F0.4, X))') "start:", decode_distance(grid%start_distance)
+        _log_write(4, '(5X, A, 2(F0.4, X))') "min  :", decode_distance(grid%min_distance)
+        _log_write(4, '(5X, A, 2(F0.4, X))') "end  :", decode_distance(grid%end_distance)
+        !$omp end single
+
+        !resize stacks to make sure they are big enough for the new sections
+        call grid%threads%elements(i_thread)%destroy()
+        call grid%threads%elements(i_thread)%create(grid%max_dest_stack - grid%min_dest_stack + 1)
+
+        call grid%get_local_sections(i_first_local_section, i_last_local_section)
+
+        do i_section = i_first_local_section, i_last_local_section
+            assert_eq(grid%sections%elements_alloc(i_section)%index, i_section)
+
+            _log_write(4, '(4X, A, I0)') "section set local pointers: ", i_section
+
+            do i_color = RED, GREEN
+                call set_comm_local_pointers(grid%sections%elements_alloc(i_section), i_color)
+            end do
+        end do
+
+        !$omp barrier
+
+        do i_section = i_first_local_section, i_last_local_section
+            assert_eq(grid%sections%elements_alloc(i_section)%index, i_section)
+
+            _log_write(4, '(4X, A, I0)') "section set neighbor pointers: ", i_section
+
+            do i_color = RED, GREEN
+                call set_comm_neighbor_data(grid, grid%sections%elements_alloc(i_section), i_color)
+            end do
 
             !HACK: this allows neighbor representations to be transferred from old to new grid
-            call grid%get_local_sections(i_first_local_section, i_last_local_section)
+            call load_neighbor_rep(grid%sections%elements_alloc(i_section))
+        end do
 
-            do i_section = i_first_local_section, i_last_local_section
-                assert_eq(grid%sections%elements_alloc(i_section)%index, i_section)
-                call save_neighbor_rep(grid%sections%elements_alloc(i_section))
-            end do
-
-            !Rank and section indices may have changed, so send the new information to the neighbors
-            call send_recv_comm_changes(grid, i_rank_out, i_section_index_out, i_rank_in)
-
-            !$omp barrier
-
-            _log_write(3, '(4X, "migrate sections:")')
-
-            !exit early if nothing changes on this rank
-
-            if (size(i_rank_out) == 0 .and. size(i_rank_in) == 0) then
-                !if we have nothing and we get nothing from others we are done
-                _log_write(2, '(4X, "load balancing: exit, we do not have nor get anything ")')
-                return
-            else if (size(i_rank_in) == 0) then
-                !if we get nothing we cannot give anything to ourselves
-                assert_vne(i_rank_out, rank_MPI)
-            else if (size(i_rank_out) == 0) then
-                !if we have nothing we cannot get anything from ourselves
-                assert_vne(i_rank_in, rank_MPI)
-            else if (i_rank_out(1) .eq. rank_MPI .and. i_rank_out(size(i_rank_out)) .eq. rank_MPI .and. &
-                    i_rank_in(1) .eq. rank_MPI .and. i_rank_in(size(i_rank_in)) .eq. rank_MPI) then
-
-                !if we give nothing to others and get nothing from others we are done
-                _log_write(2, '(4X, "load balancing: exit, we have something, but do not give nor get anything")')
-                return
-            end if
-
-            !Delete all buffers
-            do i_section = i_first_local_section, i_last_local_section
-                do i_color = RED, GREEN
-                    call delete_comm_neighbor_data(grid%sections%elements_alloc(i_section), i_color)
-                end do
-            end do
-
-            !$omp single
-            if (grid%sections%get_size() > 0) then
-                assert_veq(decode_distance(grid%start_distance), decode_distance(grid%sections%elements(1)%start_distance))
-                assert_veq(decode_distance(grid%end_distance), decode_distance(grid%sections%elements(grid%sections%get_size())%end_distance))
-            end if
-
-            grid_temp%sections = t_grid_section_list()
-            call grid_temp%sections%resize(size(i_rank_in))
-            !$omp end single
-
-            !if necessary, reverse order to match source and destination grid
-            if (.not. grid%sections%is_forward()) then
-                !$omp barrier
-                _log_write(4, '(X, A)') "Reverse destination grid.."
-                call grid_temp%reverse()
-                !$omp barrier
-            end if
-
-            call send_recv_section_infos(grid, grid_temp, i_rank_out, i_rank_in)
-            call send_recv_section_data(grid, grid_temp, i_rank_out, i_rank_in)
-
-            !$omp barrier
-
-            !$omp single
-            call grid%sections%clear()
-            grid%sections = grid_temp%sections
-
-            !update distances again and check for correctness
-            if (grid%sections%get_size() > 0) then
-                grid%start_distance = grid%sections%elements(1)%start_distance
-                grid%end_distance = grid%sections%elements(grid%sections%get_size())%end_distance
-            else
-                grid%start_distance = 0
-                grid%end_distance = 0
-            end if
-
-            !compute the minimum distance over all sections of the process (local reduction, not involing MPI)
-            do i_color = RED, GREEN
-                call reduce(grid%min_distance(i_color), grid%sections%elements%min_distance(i_color), MPI_MIN, .false.)
-            end do
-
-            call prefix_sum(grid%sections%elements_alloc%partial_load, grid%sections%elements_alloc%load)
-            call reduce(grid%load, grid%sections%elements_alloc%load, MPI_SUM, .false.)
-            call reduce(grid%dest_cells, grid%sections%elements%dest_cells, MPI_SUM, .false.)
-
-            _log_write(4, '(4X, A)') "grid distances (after):"
-            _log_write(4, '(5X, A, 2(F0.4, X))') "start:", decode_distance(grid%start_distance)
-            _log_write(4, '(5X, A, 2(F0.4, X))') "min  :", decode_distance(grid%min_distance)
-            _log_write(4, '(5X, A, 2(F0.4, X))') "end  :", decode_distance(grid%end_distance)
-            !$omp end single
-
-            !resize stacks to make sure they are big enough for the new sections
-            call grid%threads%elements(i_thread)%destroy()
-            call grid%threads%elements(i_thread)%create(grid%max_dest_stack - grid%min_dest_stack + 1)
-
-            call grid%get_local_sections(i_first_local_section, i_last_local_section)
-
-            do i_section = i_first_local_section, i_last_local_section
-                assert_eq(grid%sections%elements_alloc(i_section)%index, i_section)
-
-                _log_write(4, '(4X, A, I0)') "section set local pointers: ", i_section
-
-                do i_color = RED, GREEN
-                    call set_comm_local_pointers(grid%sections%elements_alloc(i_section), i_color)
-                end do
-            end do
-
-            !$omp barrier
-
-            do i_section = i_first_local_section, i_last_local_section
-                assert_eq(grid%sections%elements_alloc(i_section)%index, i_section)
-
-                _log_write(4, '(4X, A, I0)') "section set neighbor pointers: ", i_section
-
-                do i_color = RED, GREEN
-                    call set_comm_neighbor_data(grid, grid%sections%elements_alloc(i_section), i_color)
-                end do
-
-                !HACK: this allows neighbor representations to be transferred from old to new grid
-                call load_neighbor_rep(grid%sections%elements_alloc(i_section))
-            end do
-
-            !$omp barrier
+        !$omp barrier
 #       endif
     end subroutine distribute_sections
 
