@@ -538,7 +538,7 @@
 #           if defined(_IMPI)
             integer :: adapt_flag, NEW_COMM, INTER_COMM, new_comm_size, num_leaving_ranks
             integer :: info, status, err
-            real, kind(kind=GRID_DR) :: tic, toc, tic1, toc1
+            real (kind=GRID_SR) :: tic, toc, tic1, toc1
             type(t_impi_bcast) :: bcast_packet
 
             tic = mpi_wtime()
@@ -589,7 +589,7 @@
                     num_leaving_ranks = size_MPI - new_comm_size
                     ! Since it is shrinkage, use the current MPI_COMM_WORLD, size_MPI, rank_MPI
                     call distribute_load_for_resource_shrinkage(grid, size_MPI, num_leaving_ranks, rank_MPI)
-                end
+                end if
                 !************************ ADAPT WINDOW ****************************
 
                 tic = mpi_wtime();

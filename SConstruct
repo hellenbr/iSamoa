@@ -72,6 +72,10 @@ vars.AddVariables(
                 allowed_values=('noomp', 'notasks', 'tasks', 'adaptive_tasks')
               ),
 
+  EnumVariable( 'impi', 'iMPI support', 'no',
+                allowed_values=('yes', 'no')
+              ),
+
   EnumVariable( 'mpi', 'MPI support', 'default',
                 allowed_values=('nompi', 'default', 'intel', 'mpich2', 'openmpi', 'ibm')
               ),
@@ -139,6 +143,14 @@ elif  env['compiler'] == 'gnu':
   env['F90FLAGS'] = '-fimplicit-none -cpp -ffree-line-length-none'
   env.SetDefault(openmp = 'notasks')
 
+# If IMPI is active, MPI is forced to be active and use MPICH default
+if env['impi'] == 'yes':
+    if (env['scenario'] == 'swe'):
+        env['mpi'] = 'default'
+        env['F90FLAGS'] += ' -D_IMPI'
+    else:
+        print "Selected scenario has no iMPI supported. iMPI option deactivated."
+
 # If MPI is active, use the mpif90 wrapper for compilation
 if env['mpi'] == 'default':
   env['F90'] = 'MPICH_F90=' + fc + ' OMPI_FC=' + fc + ' I_MPI_F90=' + fc + ' mpif90'
@@ -163,6 +175,7 @@ elif env['mpi'] == 'intel':
 elif env['mpi'] == 'nompi':
   env['F90'] = fc
   env['LINK'] = fc
+
 
 # set scenario with preprocessor macros
 if env['scenario'] == 'darcy':
