@@ -1,0 +1,7 @@
+
+[Usage]: In Samoa root dir run
+
+$ scons config=path/config_file.py
+
+
+
