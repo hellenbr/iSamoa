@@ -225,6 +225,7 @@
 			integer  (kind = GRID_SI)   :: i_stats_phase
 
 #           if defined(_IMPI)
+            real (kind = GRID_SR)  :: tic, toc
             integer                :: IMPI_BCAST_TYPE
             call create_impi_bcast_type(IMPI_BCAST_TYPE)
 #           endif
@@ -402,6 +403,8 @@
             else
                 call impi_adapt(grid, i_stats_phase, i_initial_step, i_time_step, r_time_next_output, IMPI_BCAST_TYPE)
             end if
+
+            tic = mpi_wtime()
 #           endif
 
             !regular tsunami time steps begin after the earthquake is over
@@ -461,7 +464,9 @@
 
 #               if defined(_IMPI)
                 !Existing processes call impi_adapt
-                if (time_to_adapt == .true.) then
+                toc = mpi_wtime() - tic
+                if (tic > 30) then
+                    tic = mpi_wtime()
                     call impi_adapt(grid, i_stats_phase, i_initial_step, i_time_step, r_time_next_output, IMPI_BCAST_TYPE)
                 end if
 #               endif
@@ -593,7 +598,7 @@
                 !************************ ADAPT WINDOW ****************************
 
                 tic = mpi_wtime();
-                call mpi_comm_adapt_commit(adapt_flag);
+                call mpi_comm_adapt_commit(adapt_flag, err); assert_eq(err, 0)
                 toc = mpi_wtime() - tic;
 
                 print *, "Rank ", rank_MPI, " [STATUS ", status_MPI, "]: ", &
@@ -638,8 +643,8 @@
             lens(3) = 1
 
             disps(1) = 0
-            disps(2) = sizeof(i_sample) * blocklengths(1)
-            disps(3) = sizeof(r_sample) * blocklengths(2) + disps(2)
+            disps(2) = sizeof(i_sample) * lens(1)
+            disps(3) = sizeof(r_sample) * lens(2) + disps(2)
 
             types(1) = MPI_INTEGER4
             types(2) = MPI_DOUBLE_PRECISION

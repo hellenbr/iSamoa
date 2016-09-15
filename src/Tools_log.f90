@@ -46,7 +46,11 @@ module Tools_mpi
 
 						try(mpi_prov_thread_support >= MPI_THREAD_MULTIPLE, "MPI version does not support MPI_THREAD_MULTIPLE")
 #                   else
-                        call mpi_init(i_error); assert_eq(i_error, 0)
+#                       if defined(_IMPI)
+                            call mpi_init_adapt(status_MPI, i_error); assert_eq(i_error, 0)
+#                       else
+                            call mpi_init(i_error); assert_eq(i_error, 0)
+#                       endif
 #                   endif
                 else
                     !Set MPI reference counter to 1 if samoa did not initialize MPI

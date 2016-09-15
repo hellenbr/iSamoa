@@ -25,15 +25,15 @@ tout+='-tout 120'
 
 # Grid minimum depth
 dmin=''
-dmin+='-dmin 4'
+dmin+='-dmin 0'
 
 # Grid maximum depth
 dmax=''
 dmax+='-dmax 20'
 
-# Simulation time in seconds??
+# Simulation time in seconds (normally 3 hrs)
 tmax=''
-tmax+='-tmax 1800'
+tmax+='-tmax 10800'
 
 # Data file for displacement
 fdispl=''
@@ -49,10 +49,10 @@ xmlout+='-xmloutput .true.'
 
 # What is stestpoints (for Tohoku only)??
 stestpoints=''
-#stestpoints+='-stestpoints "545735.266126 62716.4740303,935356.566012 -817289.628677,1058466.21575 765077.767857"' 
+stestpoints+='-stestpoints "545735.266126 62716.4740303,935356.566012 -817289.628677,1058466.21575 765077.767857"' 
 
 # Ouput directory
-outdir='./output/swe_mpi'
+outdir='/home/emily/nfs/workspace/isamoa/output/swe_impi'
 rm -rf $outdir
 mkdir $outdir
 output_dir='-output_dir '$outdir
@@ -61,5 +61,6 @@ output_dir='-output_dir '$outdir
 all=$sections' '$split' '$courant' '$threads' '$tout' '$dmin' '$dmax' '$tmax' '$fdispl' '$fbash' '$xmlout' '$stestpoints' '$output_dir
 
 
-mpiexec -n 4 $execname $all >> console.out
+#mpiexec -n 4 $execname $all >> console.out
+srun -n 2 $execname $all > console.out
 
