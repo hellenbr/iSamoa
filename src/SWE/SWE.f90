@@ -465,7 +465,7 @@
 #               if defined(_IMPI)
                 !Existing processes call impi_adapt
                 toc = mpi_wtime() - tic
-                if (tic > 30) then
+                if (toc > 30) then
                     tic = mpi_wtime()
                     call impi_adapt(grid, i_stats_phase, i_initial_step, i_time_step, r_time_next_output, IMPI_BCAST_TYPE)
                 end if
@@ -610,7 +610,7 @@
 
                 toc1 = mpi_wtime() - tic1;
                 print *, "Rank ", rank_MPI, " [STATUS ", status_MPI, "]: ", &
-                        "Total adaption time = ", toc1, " seconds"
+                        "Total adaptation time = ", toc1, " seconds"
             end if
 #           endif
         end subroutine impi_adapt

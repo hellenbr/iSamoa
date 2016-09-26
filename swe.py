@@ -6,7 +6,9 @@ compiler='gnu'
 openmp='noomp'
 mpi='default'
 impi='yes'
-#asagi accepts True or False
+#asagi on/off switch: accept True or False
 asagi=True
+#use this asagi directory when using iMPI
 asagi_dir='/home/emily/nfs/workspace/libasagi'
+#use this asagi directory when using normal MPI
 #asagi_dir='/media/DATA/install/libasagi'
