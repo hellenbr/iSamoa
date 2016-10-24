@@ -1,0 +1,670 @@
+	MPIDI_PG_Create: Creating a process group of size 2; name: 2.0; at rank: 0
+	MPIDI_PG_Create: Creating a process group of size 2; name: 2.0; at rank: 0
+[97m(r0,t0)  sam(oa)²: Space filling curves and Adaptive Meshes for Oceanic and Other Applications
+[97m(r0,t0)  Scenario: SWE
+[97m(r0,t0)  OpenMP: No
+[97m(r0,t0)  MPI: Yes, ranks: 2
+[97m(r0,t0)  ASAGI: Yes, without NUMA support, mode: 2: no mpi
+[97m(r0,t0)  Debug Level: 1
+[97m(r0,t0)  Assertions: Yes
+[97m(r0,t0)  Precision: Double
+[97m(r0,t0)  Compiler: GNU
+[97m(r0,t0)  Sections per thread: 1
+[97m(r0,t0)  Adaptivity: min depth: 0, max depth: 20, start depth: 0
+[97m(r0,t0)  Load balancing: timed load estimate:  No, split sections: Yes, serial:  No
+[97m(r0,t0)  Load balancing: cell weight: 1.00, boundary weight: .00
+[97m(r0,t0)  Scenario: max time steps: -1, max time:  1.08E+04, output step:  1.20E+02
+[97m(r0,t0)  Scenario: output directory: /home/emily/nfs/workspace/isamoa/output/swe_impi
+[97m(r0,t0)  Scenario: courant number: .950
+[97m(r0,t0)  Scenario: Flux solver: Augmented Riemann
+[97m(r0,t0)  Scenario: Input data refinement: Integrate
+[97m(r0,t0)  SWE: bathymetry file: /home/emily/nfs/workspace/samoa-data/tohoku_static/bath_2014.nc, displacement file: /home/emily/nfs/workspace/samoa-data/tohoku_static/displ.nc
+[97m(r0,t0)  SWE: dry_tolerance:  1.0E-02
+[97m(r0,t0) 
+[97m(r0,t0)  SWE: loaded /home/emily/nfs/workspace/samoa-data/tohoku_static/bath_2014.nc, domain: [-500250.00, 6500250.00] x [-2500250.00, 1500250.00]
+[97m(r0,t0)  SWE:  dx: 500.00 dy: 500.00
+[97m(r0,t0)  SWE: loaded /home/emily/nfs/workspace/samoa-data/tohoku_static/displ.nc, domain: [-250000.00, 250000.00] x [-400000.00, 400000.00]
+[97m(r0,t0)  SWE:  dx: 500.00 dy: 500.00
+[97m(r0,t0)  SWE: computational domain: [-500250.00, 6500250.00] x [-5500250.00, 1500250.00]
+[97m(r0,t0)  SWE: setting initial values and a priori refinement..
+[97m(r0,t0)  
+[97m(r0,t0)  SWE: 0 adaptions, 2 cells
+ TAG 1
+ Rank            0 : TAG 2
+ TAG 1
+ Rank            1 : TAG 2
+ Rank            0 : TAG 3
+ Rank            1 : TAG 3
+ Rank            1 : TAG 4
+ Rank            0 : TAG 4
+ Rank            1 : TAG 5
+ Rank            1 : TAG 6
+ Rank            1 : TAG 7
+ Rank            1 : TAG 8
+ Rank            0 : TAG 5
+ Rank            0 : TAG 6
+ Rank            0 : TAG 7
+ Rank            0 : TAG 8
+ Rank            0 : TAG 9
+ Rank            1 : TAG 9
+[97m(r0,t0)  SWE: 1 adaptions, 4 cells
+ TAG 1
+ Rank            0 : TAG 2
+ TAG 1
+ Rank            1 : TAG 2
+ Rank            1 : TAG 3
+ Rank            1 : TAG 4
+ Rank            0 : TAG 3
+ Rank            0 : TAG 4
+ Rank            1 : TAG 5
+ Rank            1 : TAG 6
+ Rank            1 : TAG 7
+ Rank            1 : TAG 8
+ Rank            0 : TAG 5
+ Rank            0 : TAG 6
+ Rank            0 : TAG 7
+ Rank            0 : TAG 8
+ Rank            0 : TAG 9
+ Rank            1 : TAG 9
+[97m(r0,t0)  SWE: 2 adaptions, 5 cells
+ TAG 1
+ Rank            0 : TAG 2
+ TAG 1
+ Rank            1 : TAG 2
+ Rank            1 : TAG 3
+ Rank            1 : TAG 4
+ Rank            0 : TAG 3
+ Rank            0 : TAG 4
+ Rank            1 : TAG 5
+ Rank            1 : TAG 6
+ Rank            1 : TAG 7
+ Rank            1 : TAG 8
+ Rank            0 : TAG 5
+ Rank            0 : TAG 6
+ Rank            0 : TAG 7
+ Rank            0 : TAG 8
+ Rank            0 : TAG 9
+ Rank            1 : TAG 9
+[97m(r0,t0)  SWE: 3 adaptions, 2 cells
+ TAG 1
+ Rank            0 : TAG 2
+ TAG 1
+ Rank            1 : TAG 2
+ Rank            0 : TAG 3
+ Rank            1 : TAG 3
+ Rank            1 : TAG 4
+ Rank            0 : TAG 4
+ Rank            0 : TAG 5
+ Rank            1 : TAG 5
+ Rank            0 : TAG 6
+ Rank            1 : TAG 6
+ Rank            1 : TAG 7
+ Rank            1 : TAG 8
+ Rank            0 : TAG 7
+ Rank            0 : TAG 8
+ Rank            0 : TAG 9
+ Rank            1 : TAG 9
+[97m(r0,t0)  SWE: 4 adaptions, 2 cells
+ TAG 1
+ Rank            0 : TAG 2
+ TAG 1
+ Rank            1 : TAG 2
+ Rank            0 : TAG 3
+ Rank            1 : TAG 3
+ Rank            1 : TAG 4
+ Rank            0 : TAG 4
+ Rank            0 : TAG 5
+ Rank            1 : TAG 5
+ Rank            0 : TAG 6
+ Rank            1 : TAG 6
+ Rank            1 : TAG 7
+ Rank            1 : TAG 8
+ Rank            0 : TAG 7
+ Rank            0 : TAG 8
+ Rank            0 : TAG 9
+ Rank            1 : TAG 9
+[97m(r0,t0)  SWE: 5 adaptions, 9 cells
+ TAG 1
+ Rank            0 : TAG 2
+ TAG 1
+ Rank            1 : TAG 2
+ Rank            0 : TAG 3
+ Rank            1 : TAG 3
+ Rank            0 : TAG 4
+ Rank            1 : TAG 4
+ Rank            0 : TAG 5
+ Rank            1 : TAG 5
+ Rank            0 : TAG 6
+ Rank            1 : TAG 6
+ Rank            1 : TAG 7
+ Rank            1 : TAG 8
+ Rank            0 : TAG 7
+ Rank            0 : TAG 8
+ Rank            0 : TAG 9
+ Rank            1 : TAG 9
+[97m(r0,t0)  SWE: 6 adaptions, 13 cells
+ TAG 1
+ Rank            0 : TAG 2
+ TAG 1
+ Rank            1 : TAG 2
+ Rank            0 : TAG 3
+ Rank            1 : TAG 3
+ Rank            1 : TAG 4
+ Rank            0 : TAG 4
+ Rank            0 : TAG 5
+ Rank            1 : TAG 5
+ Rank            0 : TAG 6
+ Rank            1 : TAG 6
+ Rank            1 : TAG 7
+ Rank            1 : TAG 8
+ Rank            0 : TAG 7
+ Rank            0 : TAG 8
+ Rank            0 : TAG 9
+ Rank            1 : TAG 9
+[97m(r0,t0)  SWE: 7 adaptions, 10 cells
+ TAG 1
+ TAG 1
+ Rank            1 : TAG 2
+ Rank            0 : TAG 2
+ Rank            0 : TAG 3
+ Rank            1 : TAG 3
+ Rank            1 : TAG 4
+ Rank            0 : TAG 4
+ Rank            0 : TAG 5
+ Rank            1 : TAG 5
+ Rank            0 : TAG 6
+ Rank            1 : TAG 6
+ Rank            1 : TAG 7
+ Rank            1 : TAG 8
+ Rank            0 : TAG 7
+ Rank            0 : TAG 8
+ Rank            0 : TAG 9
+ Rank            1 : TAG 9
+[97m(r0,t0)  SWE: 8 adaptions, 24 cells
+ TAG 1
+ Rank            0 : TAG 2
+ TAG 1
+ Rank            1 : TAG 2
+ Rank            0 : TAG 3
+ Rank            1 : TAG 3
+ Rank            1 : TAG 4
+ Rank            0 : TAG 4
+ Rank            0 : TAG 5
+ Rank            1 : TAG 5
+ Rank            0 : TAG 6
+ Rank            1 : TAG 6
+ Rank            1 : TAG 7
+ Rank            1 : TAG 8
+ Rank            0 : TAG 7
+ Rank            0 : TAG 8
+ Rank            1 : TAG 9
+ Rank            0 : TAG 9
+[97m(r0,t0)  SWE: 9 adaptions, 37 cells
+ TAG 1
+ Rank            0 : TAG 2
+ TAG 1
+ Rank            1 : TAG 2
+ Rank            1 : TAG 3
+ Rank            1 : TAG 4
+ Rank            0 : TAG 3
+ Rank            0 : TAG 4
+ Rank            1 : TAG 5
+ Rank            0 : TAG 5
+ Rank            0 : TAG 6
+ Rank            1 : TAG 6
+ Rank            1 : TAG 7
+ Rank            1 : TAG 8
+ Rank            0 : TAG 7
+ Rank            0 : TAG 8
+ Rank            0 : TAG 9
+ Rank            1 : TAG 9
+	MPIDI_PG_Create: Creating a process group of size 6; name: 2.0; at rank: 0
+	MPIDI_PG_Create: Creating a process group of size 6; name: 2.0; at rank: 0
+	MPIDI_PG_Create: Creating a process group of size 6; name: 2.0; at rank: 0
+	MPIDI_PG_Create: Creating a process group of size 6; name: 2.0; at rank: 0
+	MPIDI_PG_Create: Creating a process group of size 6; name: 2.0; at rank: 0
+	MPIDI_PG_Create: Creating a process group of size 6; name: 2.0; at rank: 0
+[97m(r0,t0)  sam(oa)²: Space filling curves and Adaptive Meshes for Oceanic and Other Applications
+[97m(r0,t0)  Scenario: SWE
+[97m(r0,t0)  OpenMP: No
+[97m(r0,t0)  MPI: Yes, ranks: 6
+[97m(r0,t0)  ASAGI: Yes, without NUMA support, mode: 2: no mpi
+[97m(r0,t0)  Debug Level: 1
+[97m(r0,t0)  Assertions: Yes
+[97m(r0,t0)  Precision: Double
+[97m(r0,t0)  Compiler: GNU
+[97m(r0,t0)  Sections per thread: 1
+[97m(r0,t0)  Adaptivity: min depth: 0, max depth: 20, start depth: 0
+[97m(r0,t0)  Load balancing: timed load estimate:  No, split sections: Yes, serial:  No
+[97m(r0,t0)  Load balancing: cell weight: 1.00, boundary weight: .00
+[97m(r0,t0)  Scenario: max time steps: -1, max time:  1.08E+04, output step:  1.20E+02
+[97m(r0,t0)  Scenario: output directory: /home/emily/nfs/workspace/isamoa/output/swe_impi
+[97m(r0,t0)  Scenario: courant number: .950
+[97m(r0,t0)  Scenario: Flux solver: Augmented Riemann
+[97m(r0,t0)  Scenario: Input data refinement: Integrate
+[97m(r0,t0)  SWE: bathymetry file: /home/emily/nfs/workspace/samoa-data/tohoku_static/bath_2014.nc, displacement file: /home/emily/nfs/workspace/samoa-data/tohoku_static/displ.nc
+[97m(r0,t0)  SWE: dry_tolerance:  1.0E-02
+[97m(r0,t0) 
+MPID_nem_tcp_iStartContigMsg
+MPID_nem_tcp_get_vc_from_conninfo
+setting active with MPIDI_PG_Get_vc_set_active
+MPID_nem_tcp_iStartContigMsg
+MPID_nem_tcp_get_vc_from_conninfo
+setting active with MPIDI_PG_Get_vc_set_active
+MPID_nem_tcp_iSendContig
+[97m(r0,t0) MPID_nem_tcp_iSendContig
+ SWE: 10 adaptions, 41 cells
+ TAG 1
+ Rank            0 : TAG 2
+ TAG 1
+ Rank            1 : TAG 2
+ Rank            0 : TAG 3
+ Rank            1 : TAG 3
+ Rank            1 : TAG 4
+ Rank            0 : TAG 4
+ Rank            0 : TAG 5
+ Rank            1 : TAG 5
+MPID_nem_tcp_get_vc_from_conninfo
+setting active with MPIDI_PG_Get_vc_set_active
+ Rank            0 : TAG 6
+ Rank            0 : TAG 7
+ Rank            0 : TAG 8
+ Rank            1 : TAG 6
+ Rank            1 : TAG 7
+ Rank            1 : TAG 8
+ Rank            1 : TAG 9
+ Rank            0 : TAG 9
+MPID_nem_tcp_iSendContig
+MPID_nem_tcp_iSendContig
+MPID_nem_tcp_iSendContig
+MPID_nem_tcp_get_vc_from_conninfo
+setting active with MPIDI_PG_Get_vc_set_active
+MPID_nem_tcp_get_vc_from_conninfo
+setting active with MPIDI_PG_Get_vc_set_active
+MPID_nem_tcp_get_vc_from_conninfo
+setting active with MPIDI_PG_Get_vc_set_active
+MPID_nem_tcp_iSendContig
+MPID_nem_tcp_iSendContig
+MPID_nem_tcp_iSendContig
+MPID_nem_tcp_get_vc_from_conninfo
+setting active with MPIDI_PG_Get_vc_set_active
+MPID_nem_tcp_get_vc_from_conninfo
+setting active with MPIDI_PG_Get_vc_set_active
+MPID_nem_tcp_get_vc_from_conninfo
+setting active with MPIDI_PG_Get_vc_set_active
+ Rank            1  [STATUS            3 ]: MPI_Probe_adapt    4.1961669921875000E-005  seconds
+ Rank            5  [STATUS            3 ]: MPI_Probe_adapt    3.6954879760742188E-005  seconds
+[97m(r0,t0)  SWE: loaded /home/emily/nfs/workspace/samoa-data/tohoku_static/bath_2014.nc, domain: [-500250.00, 6500250.00] x [-2500250.00, 1500250.00]
+[97m(r0,t0)  Rank            2  [STATUS            3 ]: MPI_Probe_adapt    3.1232833862304688E-005  seconds
+ SWE:  dx: 500.00 dy: 500.00
+[97m(r0,t0)  Rank            4  [STATUS            3 ]: MPI_Probe_adapt    2.5033950805664062E-005  seconds
+ SWE: loaded /home/emily/nfs/workspace/samoa-data/tohoku_static/displ.nc, domain: [-250000.00, 250000.00] x [-400000.00, 400000.00]
+[97m(r0,t0)  SWE:  dx: 500.00 dy: 500.00
+[97m(r0,t0)  SWE: computational domain: [-500250.00, 6500250.00] x [-5500250.00, 1500250.00]
+ Rank            0  [STATUS            3 ]: MPI_Probe_adapt    2.6702880859375000E-005  seconds
+ Rank            3  [STATUS            3 ]: MPI_Probe_adapt    3.0994415283203125E-005  seconds
+[97m(r0,t0)  SWE: 11 adaptions, 65 cells
+ TAG 1
+ Rank            0 : TAG 2
+ Rank            0 : TAG 3
+ Rank            0 : TAG 4
+ Rank            0 : TAG 5
+ TAG 1
+ Rank            1 : TAG 2
+ Rank            1 : TAG 3
+ Rank            1 : TAG 4
+ Rank            1 : TAG 5
+ Rank            0 : TAG 6
+ Rank            1 : TAG 6
+ Rank            1 : TAG 7
+ Rank            1 : TAG 8
+ Rank            0 : TAG 7
+ Rank            0 : TAG 8
+ Rank            0 : TAG 9
+ Rank            1 : TAG 9
+[97m(r0,t0)  SWE: 12 adaptions, 107 cells
+ TAG 1
+ Rank            0 : TAG 2
+ TAG 1
+ Rank            1 : TAG 2
+ Rank            0 : TAG 3
+ Rank            1 : TAG 3
+ Rank            1 : TAG 4
+ Rank            0 : TAG 4
+ Rank            0 : TAG 5
+ Rank            1 : TAG 5
+ Rank            0 : TAG 6
+ Rank            1 : TAG 6
+ Rank            1 : TAG 7
+ Rank            1 : TAG 8
+ Rank            0 : TAG 7
+ Rank            0 : TAG 8
+ Rank            1 : TAG 9
+ Rank            0 : TAG 9
+[97m(r0,t0)  SWE: 13 adaptions, 157 cells
+ TAG 1
+ Rank            0 : TAG 2
+ TAG 1
+ Rank            1 : TAG 2
+ Rank            1 : TAG 3
+ Rank            1 : TAG 4
+ Rank            0 : TAG 3
+ Rank            0 : TAG 4
+ Rank            0 : TAG 5
+ Rank            1 : TAG 5
+ Rank            0 : TAG 6
+ Rank            1 : TAG 6
+ Rank            1 : TAG 7
+ Rank            1 : TAG 8
+ Rank            0 : TAG 7
+ Rank            0 : TAG 8
+ Rank            0 : TAG 9
+ Rank            1 : TAG 9
+[97m(r0,t0)  SWE: 14 adaptions, 246 cells
+ TAG 1
+ Rank            0 : TAG 2
+ TAG 1
+ Rank            1 : TAG 2
+ Rank            1 : TAG 3
+ Rank            1 : TAG 4
+ Rank            0 : TAG 3
+ Rank            0 : TAG 4
+ Rank            0 : TAG 5
+ Rank            1 : TAG 5
+ Rank            0 : TAG 6
+ Rank            1 : TAG 6
+ Rank            1 : TAG 7
+ Rank            1 : TAG 8
+ Rank            0 : TAG 7
+ Rank            0 : TAG 8
+ Rank            0 : TAG 9
+ Rank            1 : TAG 9
+[97m(r0,t0)  SWE: 15 adaptions, 370 cells
+ TAG 1
+ Rank            0 : TAG 2
+ TAG 1
+ Rank            1 : TAG 2
+ Rank            0 : TAG 3
+ Rank            1 : TAG 3
+ Rank            1 : TAG 4
+ Rank            0 : TAG 4
+ Rank            0 : TAG 5
+ Rank            1 : TAG 5
+ Rank            0 : TAG 6
+ Rank            1 : TAG 6
+ Rank            1 : TAG 7
+ Rank            1 : TAG 8
+ Rank            0 : TAG 7
+ Rank            0 : TAG 8
+ Rank            0 : TAG 9
+ Rank            1 : TAG 9
+[97m(r0,t0)  SWE: 16 adaptions, 649 cells
+ TAG 1
+ Rank            0 : TAG 2
+ Rank            0 : TAG 3
+ Rank            0 : TAG 4
+ Rank            0 : TAG 5
+ TAG 1
+ Rank            1 : TAG 2
+ Rank            1 : TAG 3
+ Rank            1 : TAG 4
+ Rank            1 : TAG 5
+ Rank            1 : TAG 6
+ Rank            1 : TAG 7
+ Rank            1 : TAG 8
+ Rank            0 : TAG 6
+ Rank            0 : TAG 7
+ Rank            0 : TAG 8
+ Rank            0 : TAG 9
+ Rank            1 : TAG 9
+[97m(r0,t0)  SWE: 17 adaptions, 1108 cells
+ TAG 1
+ Rank            0 : TAG 2
+ TAG 1
+ Rank            1 : TAG 2
+ Rank            0 : TAG 3
+ Rank            0 : TAG 4
+ Rank            1 : TAG 3
+ Rank            1 : TAG 4
+ Rank            0 : TAG 5
+ Rank            1 : TAG 5
+ Rank            0 : TAG 6
+ Rank            1 : TAG 6
+ Rank            1 : TAG 7
+ Rank            1 : TAG 8
+ Rank            0 : TAG 7
+ Rank            0 : TAG 8
+ Rank            1 : TAG 9
+ Rank            0 : TAG 9
+[97m(r0,t0)  SWE: 18 adaptions, 2104 cells
+ TAG 1
+ Rank            0 : TAG 2
+ Rank            0 : TAG 3
+ Rank            0 : TAG 4
+ Rank            0 : TAG 5
+ TAG 1
+ Rank            1 : TAG 2
+ Rank            1 : TAG 3
+ Rank            1 : TAG 4
+ Rank            1 : TAG 5
+ Rank            1 : TAG 6
+ Rank            1 : TAG 7
+ Rank            1 : TAG 8
+ Rank            0 : TAG 6
+ Rank            0 : TAG 7
+ Rank            0 : TAG 8
+ Rank            0 : TAG 9
+ Rank            1 : TAG 9
+[97m(r0,t0)  SWE: 19 adaptions, 3843 cells
+ TAG 1
+ TAG 1
+ Rank            0 : TAG 2
+ Rank            1 : TAG 2
+ Rank            0 : TAG 3
+ Rank            1 : TAG 3
+ Rank            1 : TAG 4
+ Rank            0 : TAG 4
+ Rank            0 : TAG 5
+ Rank            1 : TAG 5
+ Rank            0 : TAG 6
+ Rank            1 : TAG 6
+ Rank            1 : TAG 7
+ Rank            1 : TAG 8
+ Rank            0 : TAG 7
+ Rank            0 : TAG 8
+ Rank            0 : TAG 9
+ Rank            1 : TAG 9
+[97m(r0,t0)  SWE: 20 adaptions, 7370 cells
+[97m(r0,t0)  SWE: done.
+[97m(r0,t0)  
+[97m(r0,t0)   Info:
+[97m(r0,t0) 
+[97m(r0,t0)   Cells                         :         14750
+[97m(r0,t0)   Crossed edges                 :         14747
+[97m(r0,t0)   Inner color edges             :          7190
+[97m(r0,t0)   Boundary edges (red/green)    :           222           154
+[97m(r0,t0)   Stack edges (red/green)       :            52            37
+[97m(r0,t0)   Inner nodes                   :             0
+[97m(r0,t0)   Boundary nodes (red/green)    :           219           157
+[97m(r0,t0)   Stack nodes (red/green)       :            52            37
+[97m(r0,t0)   Comms (red/green)             :            12            12
+[97m(r0,t0)   Partition quality (1.0: perfect, infinity: worst): .8808
+[97m(r0,t0)  
+[97m(r0,t0)  SWE: output step: 0
+[97m(r0,t0)  SWE: output step: 0
+[97m(r0,t0)  
+[97m(r0,t0)  Phase statistics:
+[97m(r0,t0)  
+[97m(r0,t0)  Init:                           #travs: 54 time: 302.4178 s (comp: 227.1648 s (pre: .0001 s inner: 227.1646 s post: .0001 s) asagi: .0000 s sync: 74.1220 s barr: 1.1305 s) ET: .0001 M/s  MT: .0000 GB/s
+[97m(r0,t0)  Displace:                       #travs: 0 time: .0000 s (comp: .0000 s (pre: .0000 s inner: .0000 s post: .0000 s) asagi: .0000 s sync: .0000 s barr: .0000 s) ET: -1.0000 M/s  MT: -1.0000 GB/s
+[97m(r0,t0)  Time steps:                     #travs: 0 time: .0000 s (comp: .0000 s (pre: .0000 s inner: .0000 s post: .0000 s) asagi: .0000 s sync: .0000 s barr: .0000 s) ET: -1.0000 M/s  MT: -1.0000 GB/s
+[97m(r0,t0)  Adaptions:                      #travs: 53 time: 43.2211 s (comp: 32.3380 s (pre: .0001 s inner: 32.3379 s post: .0000 s) asagi: .0000 s sync: .0182 s barr: .0001 s update distances: .0002 s update neighbors: 10.8648 s) integrity: .0604 s load balancing: 1.3621 s (de)allocation: .0573 s ET: .0007 M/s  MT: .0001 GB/s
+[97m(r0,t0)  Grid:                           #travs: 114 time: 346.5548 s (comp: 260.0374 s (pre: .0021 s inner: 259.8342 s post: .2011 s) asagi: .0000 s sync: 74.1567 s barr: 1.4953 s update distances: .0000 s update neighbors: .0000 s) integrity: .0000 s load balancing: .0000 s (de)allocation: .0000 s ET: .0003 M/s  MT: .0000 GB/s
+[97m(r0,t0)  Element throughput:                   0.0005 M/s
+[97m(r0,t0)  Memory throughput:                    0.0000 GB/s
+[97m(r0,t0)  Cell update throughput:               0.0000 M/s
+[97m(r0,t0)  Flux solver throughput:               0.0000 M/s
+[97m(r0,t0)  Asagi time:                           0.0000 s
+[97m(r0,t0)  Phase time:                         174.1362 s
+[97m(r0,t0)  
+[97m(r0,t0)  TAG 1
+ Rank            1 : TAG 2
+ SWE: running time steps..
+[97m(r0,t0)  
+ TAG 1
+ Rank            0 : TAG 2
+ Rank            0 : TAG 3
+ Rank            1 : TAG 3
+ Rank            1 : TAG 4
+ Rank            0 : TAG 4
+ Rank            0 : TAG 5
+ Rank            1 : TAG 5
+ Rank            0 : TAG 6
+ Rank            1 : TAG 6
+ Rank            1 : TAG 7
+ Rank            1 : TAG 8
+ Rank            0 : TAG 7
+ Rank            0 : TAG 8
+ Rank            0 : TAG 9
+ Rank            1 : TAG 9
+[97m(r0,t0)  SWE: EQ time step: 1, sim. time: 475ns, dt: 3s 327ms 609µs, cells: 7378
+[97m(r0,t0)  THIS SHIT!
+ TAG 1
+ Rank            1 : TAG 2
+ 
+[97m(r0,t0)  Phase statistics:
+[97m(r0,t0)  
+[97m(r0,t0)  Init:                           #travs: 0 time: .0000 s (comp: .0000 s (pre: .0000 s inner: .0000 s post: .0000 s) asagi: .0000 s sync: .0000 s barr: .0000 s) ET: -1.0000 M/s  MT: -1.0000 GB/s
+[97m(r0,t0)  Displace:                       #travs: 3 time: 27.0062 s (comp: 24.1702 s (pre: .0000 s inner: 24.1702 s post: .0000 s) asagi: .0000 s sync: 2.8359 s barr: .0000 s) ET: .0005 M/s  MT: .0000 GB/s
+[97m(r0,t0)  Time steps:                     #travs: 3 time: .3238 s (comp: .2204 s (pre: .0078 s inner: .2126 s post: .0000 s) asagi: .0000 s sync: .0411 s barr: .0623 s) ET: .0456 M/s  MT: .0032 GB/s
+[97m(r0,t0)  Adaptions:                      #travs: 3 time: .0965 s (comp: .0602 s (pre: .0000 s inner: .0601 s post: .0000 s) asagi: .0000 s sync: .0001 s barr: .0000 s update distances: .0000 s update neighbors: .0362 s) integrity: .0076 s load balancing: .0009 s (de)allocation: .0006 s ET: .1529 M/s  MT: .0109 GB/s
+[97m(r0,t0)  Grid:                           #travs: 9 time: 27.4265 s (comp: 24.4507 s (pre: .0078 s inner: 24.4429 s post: .0000 s) asagi: .0000 s sync: 2.8772 s barr: .0623 s update distances: .0000 s update neighbors: .0000 s) integrity: .0000 s load balancing: .0000 s (de)allocation: .0000 s ET: .0016 M/s  MT: .0001 GB/s
+[97m(r0,t0)  Element throughput:                   0.0032 M/s
+[97m(r0,t0)  Memory throughput:                    0.0002 GB/s
+[97m(r0,t0)  Cell update throughput:               0.0011 M/s
+[97m(r0,t0)  Flux solver throughput:               0.0016 M/s
+[97m(r0,t0)  Asagi time:                           0.0000 s
+[97m(r0,t0)  Phase time:                          13.7316 s
+[97m(r0,t0)  
+ THIS SHIT!
+ TAG 1
+ Rank            0 : TAG 2
+ Rank            0 : TAG 3
+ Rank            0 : TAG 4
+ Rank            0 : TAG 5
+ Rank            1 : TAG 3
+ Rank            1 : TAG 4
+ Rank            1 : TAG 5
+ Rank            0 : TAG 6
+ Rank            1 : TAG 6
+ Rank            1 : TAG 7
+ Rank            1 : TAG 8
+ Rank            0 : TAG 7
+ Rank            0 : TAG 8
+ Rank            0 : TAG 9
+ Rank            1 : TAG 9
+[97m(r0,t0)  Rank            1  [STATUS            2 ]: MPI_Probe_adapt    3.8862228393554688E-005  seconds
+ SWE: time step: 2, sim. time: 3s 327ms 610µs, dt: 3s 327ms 609µs, cells: 7371
+ Rank            0  [STATUS            2 ]: MPI_Probe_adapt    2.2411346435546875E-005  seconds
+MPID_nem_tcp_iSendContig
+	MPIDI_PG_Create: Creating a process group of size 2; name: 2.0; at rank: 0
+	MPIDI_PG_Create: Creating a process group of size 2; name: 2.0; at rank: 4
+	MPIDI_PG_Create: Creating a process group of size 2; name: 2.0; at rank: 2
+	MPIDI_PG_Create: Creating a process group of size 2; name: 2.0; at rank: 1
+	MPIDI_PG_Create: Creating a process group of size 2; name: 2.0; at rank: 5
+	MPIDI_PG_Create: Creating a process group of size 2; name: 2.0; at rank: 3
+	MPIDI_PG_Create: Creating a process group of size 6; name: ---; at rank: 0
+	MPIDI_PG_Create: Creating a process group of size 6; name: ---; at rank: 1
+received an intercomm, possible pure expansion
+ Rank            1  [STATUS            2 ]: MPI_Comm_adapt_begin   0.27321553230285645       seconds
+received an intercomm, possible pure expansion
+ Rank            0  [STATUS            2 ]: MPI_Comm_adapt_begin   0.28682160377502441       seconds
+MPID_nem_tcp_iStartContigMsg
+received an intercomm, possible pure expansion
+ Rank            4  [STATUS            3 ]: MPI_Comm_adapt_begin    158.90161252021790       seconds
+received an intercomm, possible pure expansion
+ Rank            5  [STATUS            3 ]: MPI_Comm_adapt_begin    158.90508389472961       seconds
+received an intercomm, possible pure expansion
+ Rank            2  [STATUS            3 ]: MPI_Comm_adapt_begin    158.90721726417542       seconds
+received an intercomm, possible pure expansion
+ Rank            1  [STATUS            3 ]: MPI_Comm_adapt_begin    158.90861797332764       seconds
+received an intercomm, possible pure expansion
+MPID_nem_tcp_get_vc_from_conninfo
+setting active with MPIDI_PG_Get_vc_set_active
+ Rank            0  [STATUS            3 ]: MPI_Comm_adapt_begin    158.91187143325806       seconds
+received an intercomm, possible pure expansion
+ Rank            3  [STATUS            3 ]: MPI_Comm_adapt_begin    158.91743278503418       seconds
+MPID_nem_tcp_iStartContigMsg
+	MPIDI_PG_Create: Creating a process group of size 8; name: 2.0; at rank: 2
+	MPIDI_PG_Create: Creating a process group of size 8; name: 2.0; at rank: 4
+	MPIDI_PG_Create: Creating a process group of size 8; name: 2.0; at rank: 5
+	MPIDI_PG_Create: Creating a process group of size 8; name: 2.0; at rank: 3
+MPID_nem_tcp_get_vc_from_conninfo
+setting active with MPIDI_PG_Get_vc_set_active
+	MPIDI_PG_Create: Creating a process group of size 8; name: 2.0; at rank: 0
+	MPIDI_PG_Create: Creating a process group of size 8; name: 2.0; at rank: 1
+	MPIDI_PG_Create: Creating a process group of size 8; name: 2.0; at rank: 0
+	MPIDI_PG_Create: Creating a process group of size 8; name: 2.0; at rank: 1
+MPID_nem_tcp_iSendContig
+PMI2_Notify_adapt_commit_done
+calling PMIi_WriteSimpleCommandStr
+MPID_nem_tcp_iSendContig
+MPID_nem_tcp_iSendContig
+MPID_nem_tcp_get_vc_from_conninfo
+setting active with MPIDI_PG_Get_vc_set_active
+MPID_nem_tcp_get_vc_from_conninfo
+setting active with MPIDI_PG_Get_vc_set_active
+MPID_nem_tcp_iSendContig
+PMIi_WriteSimpleCommandStr: pmi2_errno: 0
+PMIi_ReadCommandExp: rc: 0, pmi2_errno: 0
+returned from PMIi_ReadCommandExp
+MPID_nem_tcp_iSendContig
+MPID_nem_tcp_iSendContig
+MPID_nem_tcp_get_vc_from_conninfo
+setting active with MPIDI_PG_Get_vc_set_active
+MPID_nem_tcp_get_vc_from_conninfo
+setting active with MPIDI_PG_Get_vc_set_active
+MPID_nem_tcp_get_vc_from_conninfo
+setting active with MPIDI_PG_Get_vc_set_active
+MPID_nem_tcp_get_vc_from_conninfo
+setting active with MPIDI_PG_Get_vc_set_active
+ Rank            0  [STATUS            2 ]: MPI_Comm_adapt_commit   0.21573734283447266       seconds
+ Rank            0  [STATUS            4 ]: Total adaption time =   0.58551383018493652       seconds
+ THIS SHIT!
+ TAG 1
+ Rank            0 : TAG 2
+ Rank            1  [STATUS            2 ]: MPI_Comm_adapt_commit   0.21698212623596191       seconds
+ Rank            1  [STATUS            4 ]: Total adaption time =   0.58725142478942871       seconds
+ THIS SHIT!
+ TAG 1
+ Rank            1 : TAG 2
+ Rank            0  [STATUS            3 ]: MPI_Comm_adapt_commit   0.21653723716735840       seconds
+ Rank            4  [STATUS            3 ]: MPI_Comm_adapt_commit   0.25181055068969727       seconds
+ Rank            2  [STATUS            3 ]: MPI_Comm_adapt_commit   0.25342774391174316       seconds
+ Rank            5  [STATUS            3 ]: MPI_Comm_adapt_commit   0.24308276176452637       seconds
+ Rank            7  [STATUS            4 ]: Total adaption time =    159.21478986740112       seconds
+ THIS SHIT!
+ TAG 1
+ Rank            7 : TAG 2
+ Rank            6  [STATUS            4 ]: Total adaption time =    159.21758651733398       seconds
+ THIS SHIT!
+ Rank            2  [STATUS            4 ]: Total adaption time =    159.21243810653687       seconds
+ THIS SHIT!
+ TAG 1
+ Rank            2 : TAG 2
+ Rank            4  [STATUS            4 ]: Total adaption time =    159.21605658531189       seconds
+ THIS SHIT!
+ TAG 1
+ Rank            4 : TAG 2
+ Rank            3  [STATUS            3 ]: MPI_Comm_adapt_commit   0.26009297370910645       seconds
+ Rank            5  [STATUS            4 ]: Total adaption time =    159.21558165550232       seconds
+ THIS SHIT!
+ TAG 1
+ Rank            5 : TAG 2
+ Rank            1  [STATUS            3 ]: MPI_Comm_adapt_commit   0.22547888755798340       seconds
+ Rank            3  [STATUS            4 ]: Total adaption time =    159.22688412666321       seconds
+ THIS SHIT!
+ TAG 1
+ Rank            3 : TAG 2
+ TAG 1
+ Rank            6 : TAG 2

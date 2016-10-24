@@ -420,7 +420,12 @@
 
 			    !refine grid
                 if (cfg%i_adapt_time_steps > 0 .and. mod(i_time_step, cfg%i_adapt_time_steps) == 0) then
+
+                    print *,"THIS SHIT!"
+                    call flush(6)
                     call swe%adaption%traverse(grid)
+
+
                 end if
 
 				!do a time step
@@ -570,6 +575,9 @@
                 call mpi_bcast(bcast_packet, 1, IMPI_BCAST_TYPE, 0, NEW_COMM, err); assert_eq(err, 0)
 
                 if (status_MPI == MPI_ADAPT_STATUS_JOINING) then
+                    call grid%destroy()
+                    assert_eq(grid%sections%get_size(), 0)
+
                     i_stats_phase      = bcast_packet%i_stats_phase
                     i_initial_step     = bcast_packet%i_initial_step
                     i_time_step        = bcast_packet%i_time_step
