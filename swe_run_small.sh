@@ -29,11 +29,11 @@ dmin+='-dmin 0'
 
 # Grid maximum depth
 dmax=''
-dmax+='-dmax 20'
+dmax+='-dmax 10'
 
 # Simulation time in seconds (normally 3 hrs)
 tmax=''
-tmax+='-tmax 10800'
+tmax+='-tmax -1'
 
 # Data file for displacement
 fdispl=''

@@ -113,8 +113,9 @@ end subroutine
 subroutine destroy(stack)
 	class(_CNT), intent(inout)					:: stack					!< stack object
 
-	assert(associated(stack%elements))
-	call free_wrapper(stack%elements)
+	if (associated(stack%elements)) then
+	    call free_wrapper(stack%elements)
+	end if
 end subroutine
 
 !array access

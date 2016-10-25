@@ -1,4 +1,5 @@
-target='release'
+target='debug'
+assertions=True
 scenario='swe'
 flux_solver='aug_riemann'
 compiler='gnu'
