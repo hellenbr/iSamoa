@@ -1,5 +1,5 @@
-	MPIDI_PG_Create: Creating a process group of size 2; name: 2.0; at rank: 0
-	MPIDI_PG_Create: Creating a process group of size 2; name: 2.0; at rank: 0
+	MPIDI_PG_Create: Creating a process group of size 2; name: 8.0; at rank: 0
+	MPIDI_PG_Create: Creating a process group of size 2; name: 8.0; at rank: 0
 [97m(r0,t0)  sam(oa)²: Space filling curves and Adaptive Meshes for Oceanic and Other Applications
 [97m(r0,t0)  Scenario: SWE
 [97m(r0,t0)  OpenMP: No
@@ -29,32 +29,32 @@
 [97m(r0,t0)  SWE: setting initial values and a priori refinement..
 [97m(r0,t0)  
 [97m(r0,t0)  SWE: 0 adaptions, 2 cells
- TAG 1
- Rank            0 : TAG 2
- TAG 1
+ Rank            0 : TAG 1
+ Rank            1 : TAG 1
  Rank            1 : TAG 2
+ Rank            0 : TAG 2
  Rank            0 : TAG 3
  Rank            1 : TAG 3
  Rank            1 : TAG 4
  Rank            0 : TAG 4
+ Rank            0 : TAG 5
  Rank            1 : TAG 5
  Rank            1 : TAG 6
  Rank            1 : TAG 7
  Rank            1 : TAG 8
- Rank            0 : TAG 5
  Rank            0 : TAG 6
  Rank            0 : TAG 7
  Rank            0 : TAG 8
  Rank            0 : TAG 9
  Rank            1 : TAG 9
 [97m(r0,t0)  SWE: 1 adaptions, 4 cells
- TAG 1
- Rank            0 : TAG 2
- TAG 1
+ Rank            0 : TAG 1
+ Rank            1 : TAG 1
  Rank            1 : TAG 2
+ Rank            0 : TAG 2
+ Rank            0 : TAG 3
  Rank            1 : TAG 3
  Rank            1 : TAG 4
- Rank            0 : TAG 3
  Rank            0 : TAG 4
  Rank            1 : TAG 5
  Rank            1 : TAG 6
@@ -67,13 +67,13 @@
  Rank            0 : TAG 9
  Rank            1 : TAG 9
 [97m(r0,t0)  SWE: 2 adaptions, 5 cells
- TAG 1
- Rank            0 : TAG 2
- TAG 1
+ Rank            0 : TAG 1
+ Rank            1 : TAG 1
  Rank            1 : TAG 2
+ Rank            0 : TAG 2
+ Rank            0 : TAG 3
  Rank            1 : TAG 3
  Rank            1 : TAG 4
- Rank            0 : TAG 3
  Rank            0 : TAG 4
  Rank            1 : TAG 5
  Rank            1 : TAG 6
@@ -86,10 +86,10 @@
  Rank            0 : TAG 9
  Rank            1 : TAG 9
 [97m(r0,t0)  SWE: 3 adaptions, 2 cells
- TAG 1
- Rank            0 : TAG 2
- TAG 1
+ Rank            0 : TAG 1
+ Rank            1 : TAG 1
  Rank            1 : TAG 2
+ Rank            0 : TAG 2
  Rank            0 : TAG 3
  Rank            1 : TAG 3
  Rank            1 : TAG 4
@@ -105,10 +105,10 @@
  Rank            0 : TAG 9
  Rank            1 : TAG 9
 [97m(r0,t0)  SWE: 4 adaptions, 2 cells
- TAG 1
- Rank            0 : TAG 2
- TAG 1
+ Rank            0 : TAG 1
+ Rank            1 : TAG 1
  Rank            1 : TAG 2
+ Rank            0 : TAG 2
  Rank            0 : TAG 3
  Rank            1 : TAG 3
  Rank            1 : TAG 4
@@ -124,15 +124,15 @@
  Rank            0 : TAG 9
  Rank            1 : TAG 9
 [97m(r0,t0)  SWE: 5 adaptions, 9 cells
- TAG 1
+ Rank            0 : TAG 1
  Rank            0 : TAG 2
- TAG 1
+ Rank            1 : TAG 1
  Rank            1 : TAG 2
  Rank            0 : TAG 3
- Rank            1 : TAG 3
  Rank            0 : TAG 4
- Rank            1 : TAG 4
  Rank            0 : TAG 5
+ Rank            1 : TAG 3
+ Rank            1 : TAG 4
  Rank            1 : TAG 5
  Rank            0 : TAG 6
  Rank            1 : TAG 6
@@ -143,16 +143,16 @@
  Rank            0 : TAG 9
  Rank            1 : TAG 9
 [97m(r0,t0)  SWE: 6 adaptions, 13 cells
- TAG 1
- Rank            0 : TAG 2
- TAG 1
+ Rank            0 : TAG 1
+ Rank            1 : TAG 1
  Rank            1 : TAG 2
+ Rank            0 : TAG 2
  Rank            0 : TAG 3
  Rank            1 : TAG 3
  Rank            1 : TAG 4
  Rank            0 : TAG 4
- Rank            0 : TAG 5
  Rank            1 : TAG 5
+ Rank            0 : TAG 5
  Rank            0 : TAG 6
  Rank            1 : TAG 6
  Rank            1 : TAG 7
@@ -162,8 +162,8 @@
  Rank            0 : TAG 9
  Rank            1 : TAG 9
 [97m(r0,t0)  SWE: 7 adaptions, 10 cells
- TAG 1
- TAG 1
+ Rank            0 : TAG 1
+ Rank            1 : TAG 1
  Rank            1 : TAG 2
  Rank            0 : TAG 2
  Rank            0 : TAG 3
@@ -181,10 +181,10 @@
  Rank            0 : TAG 9
  Rank            1 : TAG 9
 [97m(r0,t0)  SWE: 8 adaptions, 24 cells
- TAG 1
- Rank            0 : TAG 2
- TAG 1
+ Rank            0 : TAG 1
+ Rank            1 : TAG 1
  Rank            1 : TAG 2
+ Rank            0 : TAG 2
  Rank            0 : TAG 3
  Rank            1 : TAG 3
  Rank            1 : TAG 4
@@ -197,19 +197,19 @@
  Rank            1 : TAG 8
  Rank            0 : TAG 7
  Rank            0 : TAG 8
- Rank            1 : TAG 9
  Rank            0 : TAG 9
+ Rank            1 : TAG 9
 [97m(r0,t0)  SWE: 9 adaptions, 37 cells
- TAG 1
- Rank            0 : TAG 2
- TAG 1
+ Rank            0 : TAG 1
+ Rank            1 : TAG 1
  Rank            1 : TAG 2
+ Rank            0 : TAG 2
+ Rank            0 : TAG 3
  Rank            1 : TAG 3
  Rank            1 : TAG 4
- Rank            0 : TAG 3
  Rank            0 : TAG 4
- Rank            1 : TAG 5
  Rank            0 : TAG 5
+ Rank            1 : TAG 5
  Rank            0 : TAG 6
  Rank            1 : TAG 6
  Rank            1 : TAG 7
@@ -218,16 +218,183 @@
  Rank            0 : TAG 8
  Rank            0 : TAG 9
  Rank            1 : TAG 9
-	MPIDI_PG_Create: Creating a process group of size 6; name: 2.0; at rank: 0
-	MPIDI_PG_Create: Creating a process group of size 6; name: 2.0; at rank: 0
-	MPIDI_PG_Create: Creating a process group of size 6; name: 2.0; at rank: 0
-	MPIDI_PG_Create: Creating a process group of size 6; name: 2.0; at rank: 0
-	MPIDI_PG_Create: Creating a process group of size 6; name: 2.0; at rank: 0
-	MPIDI_PG_Create: Creating a process group of size 6; name: 2.0; at rank: 0
+[97m(r0,t0)  SWE: 10 adaptions, 41 cells
+ Rank            0 : TAG 1
+ Rank            1 : TAG 1
+ Rank            1 : TAG 2
+ Rank            0 : TAG 2
+ Rank            0 : TAG 3
+ Rank            1 : TAG 3
+ Rank            1 : TAG 4
+ Rank            0 : TAG 4
+ Rank            0 : TAG 5
+ Rank            1 : TAG 5
+ Rank            0 : TAG 6
+ Rank            1 : TAG 6
+ Rank            1 : TAG 7
+ Rank            1 : TAG 8
+ Rank            0 : TAG 7
+ Rank            0 : TAG 8
+ Rank            0 : TAG 9
+ Rank            1 : TAG 9
+[97m(r0,t0)  SWE: 11 adaptions, 65 cells
+ Rank            0 : TAG 1
+ Rank            1 : TAG 1
+ Rank            1 : TAG 2
+ Rank            0 : TAG 2
+ Rank            0 : TAG 3
+ Rank            1 : TAG 3
+ Rank            1 : TAG 4
+ Rank            0 : TAG 4
+ Rank            0 : TAG 5
+ Rank            1 : TAG 5
+ Rank            0 : TAG 6
+ Rank            1 : TAG 6
+ Rank            1 : TAG 7
+ Rank            1 : TAG 8
+ Rank            0 : TAG 7
+ Rank            0 : TAG 8
+ Rank            0 : TAG 9
+ Rank            1 : TAG 9
+[97m(r0,t0)  SWE: 12 adaptions, 107 cells
+ Rank            0 : TAG 1
+ Rank            1 : TAG 1
+ Rank            1 : TAG 2
+ Rank            0 : TAG 2
+ Rank            0 : TAG 3
+ Rank            1 : TAG 3
+ Rank            1 : TAG 4
+ Rank            0 : TAG 4
+ Rank            0 : TAG 5
+ Rank            1 : TAG 5
+ Rank            0 : TAG 6
+ Rank            1 : TAG 6
+ Rank            1 : TAG 7
+ Rank            1 : TAG 8
+ Rank            0 : TAG 7
+ Rank            0 : TAG 8
+ Rank            0 : TAG 9
+ Rank            1 : TAG 9
+[97m(r0,t0)  SWE: 13 adaptions, 157 cells
+ Rank            0 : TAG 1
+ Rank            1 : TAG 1
+ Rank            1 : TAG 2
+ Rank            0 : TAG 2
+ Rank            1 : TAG 3
+ Rank            1 : TAG 4
+ Rank            0 : TAG 3
+ Rank            0 : TAG 4
+ Rank            0 : TAG 5
+ Rank            1 : TAG 5
+ Rank            0 : TAG 6
+ Rank            1 : TAG 6
+ Rank            1 : TAG 7
+ Rank            1 : TAG 8
+ Rank            0 : TAG 7
+ Rank            0 : TAG 8
+ Rank            0 : TAG 9
+ Rank            1 : TAG 9
+[97m(r0,t0)  SWE: 14 adaptions, 246 cells
+ Rank            0 : TAG 1
+ Rank            1 : TAG 1
+ Rank            1 : TAG 2
+ Rank            0 : TAG 2
+ Rank            0 : TAG 3
+ Rank            1 : TAG 3
+ Rank            1 : TAG 4
+ Rank            0 : TAG 4
+ Rank            0 : TAG 5
+ Rank            1 : TAG 5
+ Rank            0 : TAG 6
+ Rank            1 : TAG 6
+ Rank            1 : TAG 7
+ Rank            1 : TAG 8
+ Rank            0 : TAG 7
+ Rank            0 : TAG 8
+ Rank            0 : TAG 9
+ Rank            1 : TAG 9
+[97m(r0,t0)  SWE: 15 adaptions, 370 cells
+ Rank            0 : TAG 1
+ Rank            1 : TAG 1
+ Rank            1 : TAG 2
+ Rank            0 : TAG 2
+ Rank            0 : TAG 3
+ Rank            1 : TAG 3
+ Rank            1 : TAG 4
+ Rank            0 : TAG 4
+ Rank            0 : TAG 5
+ Rank            1 : TAG 5
+ Rank            0 : TAG 6
+ Rank            1 : TAG 6
+ Rank            1 : TAG 7
+ Rank            1 : TAG 8
+ Rank            0 : TAG 7
+ Rank            0 : TAG 8
+ Rank            0 : TAG 9
+ Rank            1 : TAG 9
+[97m(r0,t0)  SWE: 16 adaptions, 649 cells
+ Rank            0 : TAG 1
+ Rank            1 : TAG 1
+ Rank            1 : TAG 2
+ Rank            0 : TAG 2
+ Rank            1 : TAG 3
+ Rank            1 : TAG 4
+ Rank            0 : TAG 3
+ Rank            0 : TAG 4
+ Rank            0 : TAG 5
+ Rank            1 : TAG 5
+ Rank            0 : TAG 6
+ Rank            1 : TAG 6
+ Rank            1 : TAG 7
+ Rank            1 : TAG 8
+ Rank            0 : TAG 7
+ Rank            0 : TAG 8
+ Rank            0 : TAG 9
+ Rank            1 : TAG 9
+[97m(r0,t0)  SWE: 17 adaptions, 1108 cells
+ Rank            0 : TAG 1
+ Rank            1 : TAG 1
+ Rank            1 : TAG 2
+ Rank            0 : TAG 2
+ Rank            0 : TAG 3
+ Rank            1 : TAG 3
+ Rank            1 : TAG 4
+ Rank            0 : TAG 4
+ Rank            0 : TAG 5
+ Rank            1 : TAG 5
+ Rank            0 : TAG 6
+ Rank            1 : TAG 6
+ Rank            1 : TAG 7
+ Rank            1 : TAG 8
+ Rank            0 : TAG 7
+ Rank            0 : TAG 8
+ Rank            1 : TAG 9
+ Rank            0 : TAG 9
+[97m(r0,t0)  SWE: 18 adaptions, 2104 cells
+ Rank            0 : TAG 1
+ Rank            1 : TAG 1
+ Rank            1 : TAG 2
+ Rank            0 : TAG 2
+ Rank            1 : TAG 3
+ Rank            1 : TAG 4
+ Rank            0 : TAG 3
+ Rank            0 : TAG 4
+ Rank            0 : TAG 5
+ Rank            1 : TAG 5
+ Rank            1 : TAG 6
+ Rank            1 : TAG 7
+ Rank            1 : TAG 8
+ Rank            0 : TAG 6
+ Rank            0 : TAG 7
+ Rank            0 : TAG 8
+ Rank            0 : TAG 9
+ Rank            1 : TAG 9
+	MPIDI_PG_Create: Creating a process group of size 2; name: 8.0; at rank: 0
+	MPIDI_PG_Create: Creating a process group of size 2; name: 8.0; at rank: 0
 [97m(r0,t0)  sam(oa)²: Space filling curves and Adaptive Meshes for Oceanic and Other Applications
 [97m(r0,t0)  Scenario: SWE
 [97m(r0,t0)  OpenMP: No
-[97m(r0,t0)  MPI: Yes, ranks: 6
+[97m(r0,t0)  MPI: Yes, ranks: 2
 [97m(r0,t0)  ASAGI: Yes, without NUMA support, mode: 2: no mpi
 [97m(r0,t0)  Debug Level: 1
 [97m(r0,t0)  Assertions: Yes
@@ -245,225 +412,22 @@
 [97m(r0,t0)  SWE: bathymetry file: /home/emily/nfs/workspace/samoa-data/tohoku_static/bath_2014.nc, displacement file: /home/emily/nfs/workspace/samoa-data/tohoku_static/displ.nc
 [97m(r0,t0)  SWE: dry_tolerance:  1.0E-02
 [97m(r0,t0) 
-MPID_nem_tcp_iStartContigMsg
-MPID_nem_tcp_get_vc_from_conninfo
-setting active with MPIDI_PG_Get_vc_set_active
-MPID_nem_tcp_iStartContigMsg
-MPID_nem_tcp_get_vc_from_conninfo
-setting active with MPIDI_PG_Get_vc_set_active
-MPID_nem_tcp_iSendContig
-[97m(r0,t0) MPID_nem_tcp_iSendContig
- SWE: 10 adaptions, 41 cells
- TAG 1
- Rank            0 : TAG 2
- TAG 1
- Rank            1 : TAG 2
- Rank            0 : TAG 3
- Rank            1 : TAG 3
- Rank            1 : TAG 4
- Rank            0 : TAG 4
- Rank            0 : TAG 5
- Rank            1 : TAG 5
-MPID_nem_tcp_get_vc_from_conninfo
-setting active with MPIDI_PG_Get_vc_set_active
- Rank            0 : TAG 6
- Rank            0 : TAG 7
- Rank            0 : TAG 8
- Rank            1 : TAG 6
- Rank            1 : TAG 7
- Rank            1 : TAG 8
- Rank            1 : TAG 9
- Rank            0 : TAG 9
-MPID_nem_tcp_iSendContig
-MPID_nem_tcp_iSendContig
-MPID_nem_tcp_iSendContig
-MPID_nem_tcp_get_vc_from_conninfo
-setting active with MPIDI_PG_Get_vc_set_active
-MPID_nem_tcp_get_vc_from_conninfo
-setting active with MPIDI_PG_Get_vc_set_active
-MPID_nem_tcp_get_vc_from_conninfo
-setting active with MPIDI_PG_Get_vc_set_active
-MPID_nem_tcp_iSendContig
-MPID_nem_tcp_iSendContig
-MPID_nem_tcp_iSendContig
-MPID_nem_tcp_get_vc_from_conninfo
-setting active with MPIDI_PG_Get_vc_set_active
-MPID_nem_tcp_get_vc_from_conninfo
-setting active with MPIDI_PG_Get_vc_set_active
-MPID_nem_tcp_get_vc_from_conninfo
-setting active with MPIDI_PG_Get_vc_set_active
- Rank            1  [STATUS            3 ]: MPI_Probe_adapt    4.1961669921875000E-005  seconds
- Rank            5  [STATUS            3 ]: MPI_Probe_adapt    3.6954879760742188E-005  seconds
 [97m(r0,t0)  SWE: loaded /home/emily/nfs/workspace/samoa-data/tohoku_static/bath_2014.nc, domain: [-500250.00, 6500250.00] x [-2500250.00, 1500250.00]
-[97m(r0,t0)  Rank            2  [STATUS            3 ]: MPI_Probe_adapt    3.1232833862304688E-005  seconds
- SWE:  dx: 500.00 dy: 500.00
-[97m(r0,t0)  Rank            4  [STATUS            3 ]: MPI_Probe_adapt    2.5033950805664062E-005  seconds
- SWE: loaded /home/emily/nfs/workspace/samoa-data/tohoku_static/displ.nc, domain: [-250000.00, 250000.00] x [-400000.00, 400000.00]
+[97m(r0,t0)  SWE:  dx: 500.00 dy: 500.00
+[97m(r0,t0)  SWE: loaded /home/emily/nfs/workspace/samoa-data/tohoku_static/displ.nc, domain: [-250000.00, 250000.00] x [-400000.00, 400000.00]
 [97m(r0,t0)  SWE:  dx: 500.00 dy: 500.00
 [97m(r0,t0)  SWE: computational domain: [-500250.00, 6500250.00] x [-5500250.00, 1500250.00]
- Rank            0  [STATUS            3 ]: MPI_Probe_adapt    2.6702880859375000E-005  seconds
- Rank            3  [STATUS            3 ]: MPI_Probe_adapt    3.0994415283203125E-005  seconds
-[97m(r0,t0)  SWE: 11 adaptions, 65 cells
- TAG 1
- Rank            0 : TAG 2
- Rank            0 : TAG 3
- Rank            0 : TAG 4
- Rank            0 : TAG 5
- TAG 1
- Rank            1 : TAG 2
- Rank            1 : TAG 3
- Rank            1 : TAG 4
- Rank            1 : TAG 5
- Rank            0 : TAG 6
- Rank            1 : TAG 6
- Rank            1 : TAG 7
- Rank            1 : TAG 8
- Rank            0 : TAG 7
- Rank            0 : TAG 8
- Rank            0 : TAG 9
- Rank            1 : TAG 9
-[97m(r0,t0)  SWE: 12 adaptions, 107 cells
- TAG 1
- Rank            0 : TAG 2
- TAG 1
- Rank            1 : TAG 2
- Rank            0 : TAG 3
- Rank            1 : TAG 3
- Rank            1 : TAG 4
- Rank            0 : TAG 4
- Rank            0 : TAG 5
- Rank            1 : TAG 5
- Rank            0 : TAG 6
- Rank            1 : TAG 6
- Rank            1 : TAG 7
- Rank            1 : TAG 8
- Rank            0 : TAG 7
- Rank            0 : TAG 8
- Rank            1 : TAG 9
- Rank            0 : TAG 9
-[97m(r0,t0)  SWE: 13 adaptions, 157 cells
- TAG 1
- Rank            0 : TAG 2
- TAG 1
- Rank            1 : TAG 2
- Rank            1 : TAG 3
- Rank            1 : TAG 4
- Rank            0 : TAG 3
- Rank            0 : TAG 4
- Rank            0 : TAG 5
- Rank            1 : TAG 5
- Rank            0 : TAG 6
- Rank            1 : TAG 6
- Rank            1 : TAG 7
- Rank            1 : TAG 8
- Rank            0 : TAG 7
- Rank            0 : TAG 8
- Rank            0 : TAG 9
- Rank            1 : TAG 9
-[97m(r0,t0)  SWE: 14 adaptions, 246 cells
- TAG 1
- Rank            0 : TAG 2
- TAG 1
- Rank            1 : TAG 2
- Rank            1 : TAG 3
- Rank            1 : TAG 4
- Rank            0 : TAG 3
- Rank            0 : TAG 4
- Rank            0 : TAG 5
- Rank            1 : TAG 5
- Rank            0 : TAG 6
- Rank            1 : TAG 6
- Rank            1 : TAG 7
- Rank            1 : TAG 8
- Rank            0 : TAG 7
- Rank            0 : TAG 8
- Rank            0 : TAG 9
- Rank            1 : TAG 9
-[97m(r0,t0)  SWE: 15 adaptions, 370 cells
- TAG 1
- Rank            0 : TAG 2
- TAG 1
- Rank            1 : TAG 2
- Rank            0 : TAG 3
- Rank            1 : TAG 3
- Rank            1 : TAG 4
- Rank            0 : TAG 4
- Rank            0 : TAG 5
- Rank            1 : TAG 5
- Rank            0 : TAG 6
- Rank            1 : TAG 6
- Rank            1 : TAG 7
- Rank            1 : TAG 8
- Rank            0 : TAG 7
- Rank            0 : TAG 8
- Rank            0 : TAG 9
- Rank            1 : TAG 9
-[97m(r0,t0)  SWE: 16 adaptions, 649 cells
- TAG 1
- Rank            0 : TAG 2
- Rank            0 : TAG 3
- Rank            0 : TAG 4
- Rank            0 : TAG 5
- TAG 1
- Rank            1 : TAG 2
- Rank            1 : TAG 3
- Rank            1 : TAG 4
- Rank            1 : TAG 5
- Rank            1 : TAG 6
- Rank            1 : TAG 7
- Rank            1 : TAG 8
- Rank            0 : TAG 6
- Rank            0 : TAG 7
- Rank            0 : TAG 8
- Rank            0 : TAG 9
- Rank            1 : TAG 9
-[97m(r0,t0)  SWE: 17 adaptions, 1108 cells
- TAG 1
- Rank            0 : TAG 2
- TAG 1
- Rank            1 : TAG 2
- Rank            0 : TAG 3
- Rank            0 : TAG 4
- Rank            1 : TAG 3
- Rank            1 : TAG 4
- Rank            0 : TAG 5
- Rank            1 : TAG 5
- Rank            0 : TAG 6
- Rank            1 : TAG 6
- Rank            1 : TAG 7
- Rank            1 : TAG 8
- Rank            0 : TAG 7
- Rank            0 : TAG 8
- Rank            1 : TAG 9
- Rank            0 : TAG 9
-[97m(r0,t0)  SWE: 18 adaptions, 2104 cells
- TAG 1
- Rank            0 : TAG 2
- Rank            0 : TAG 3
- Rank            0 : TAG 4
- Rank            0 : TAG 5
- TAG 1
- Rank            1 : TAG 2
- Rank            1 : TAG 3
- Rank            1 : TAG 4
- Rank            1 : TAG 5
- Rank            1 : TAG 6
- Rank            1 : TAG 7
- Rank            1 : TAG 8
- Rank            0 : TAG 6
- Rank            0 : TAG 7
- Rank            0 : TAG 8
- Rank            0 : TAG 9
- Rank            1 : TAG 9
+ Rank            1  [STATUS            3 ]: MPI_Probe_adapt    3.4570693969726562E-005  seconds
+ Rank            0  [STATUS            3 ]: MPI_Probe_adapt    1.9073486328125000E-005  seconds
 [97m(r0,t0)  SWE: 19 adaptions, 3843 cells
- TAG 1
- TAG 1
- Rank            0 : TAG 2
+ Rank            0 : TAG 1
+ Rank            1 : TAG 1
  Rank            1 : TAG 2
+ Rank            0 : TAG 2
  Rank            0 : TAG 3
+ Rank            0 : TAG 4
  Rank            1 : TAG 3
  Rank            1 : TAG 4
- Rank            0 : TAG 4
  Rank            0 : TAG 5
  Rank            1 : TAG 5
  Rank            0 : TAG 6
@@ -495,23 +459,23 @@ setting active with MPIDI_PG_Get_vc_set_active
 [97m(r0,t0)  
 [97m(r0,t0)  Phase statistics:
 [97m(r0,t0)  
-[97m(r0,t0)  Init:                           #travs: 54 time: 302.4178 s (comp: 227.1648 s (pre: .0001 s inner: 227.1646 s post: .0001 s) asagi: .0000 s sync: 74.1220 s barr: 1.1305 s) ET: .0001 M/s  MT: .0000 GB/s
+[97m(r0,t0)  Init:                           #travs: 54 time: 194.0854 s (comp: 144.6368 s (pre: .0002 s inner: 144.6364 s post: .0002 s) asagi: .0000 s sync: 47.7932 s barr: 1.6549 s) ET: .0002 M/s  MT: .0000 GB/s
 [97m(r0,t0)  Displace:                       #travs: 0 time: .0000 s (comp: .0000 s (pre: .0000 s inner: .0000 s post: .0000 s) asagi: .0000 s sync: .0000 s barr: .0000 s) ET: -1.0000 M/s  MT: -1.0000 GB/s
 [97m(r0,t0)  Time steps:                     #travs: 0 time: .0000 s (comp: .0000 s (pre: .0000 s inner: .0000 s post: .0000 s) asagi: .0000 s sync: .0000 s barr: .0000 s) ET: -1.0000 M/s  MT: -1.0000 GB/s
-[97m(r0,t0)  Adaptions:                      #travs: 53 time: 43.2211 s (comp: 32.3380 s (pre: .0001 s inner: 32.3379 s post: .0000 s) asagi: .0000 s sync: .0182 s barr: .0001 s update distances: .0002 s update neighbors: 10.8648 s) integrity: .0604 s load balancing: 1.3621 s (de)allocation: .0573 s ET: .0007 M/s  MT: .0001 GB/s
-[97m(r0,t0)  Grid:                           #travs: 114 time: 346.5548 s (comp: 260.0374 s (pre: .0021 s inner: 259.8342 s post: .2011 s) asagi: .0000 s sync: 74.1567 s barr: 1.4953 s update distances: .0000 s update neighbors: .0000 s) integrity: .0000 s load balancing: .0000 s (de)allocation: .0000 s ET: .0003 M/s  MT: .0000 GB/s
-[97m(r0,t0)  Element throughput:                   0.0005 M/s
-[97m(r0,t0)  Memory throughput:                    0.0000 GB/s
+[97m(r0,t0)  Adaptions:                      #travs: 53 time: 31.7167 s (comp: 22.6484 s (pre: .0000 s inner: 22.6483 s post: .0000 s) asagi: .0000 s sync: .0016 s barr: .0001 s update distances: .0002 s update neighbors: 9.0666 s) integrity: .0767 s load balancing: 1.5788 s (de)allocation: .0869 s ET: .0010 M/s  MT: .0001 GB/s
+[97m(r0,t0)  Grid:                           #travs: 114 time: 227.3289 s (comp: 168.4566 s (pre: .0019 s inner: 167.6734 s post: .7812 s) asagi: .0000 s sync: 47.8059 s barr: 1.9992 s update distances: .0000 s update neighbors: .0000 s) integrity: .0000 s load balancing: .0000 s (de)allocation: .0000 s ET: .0004 M/s  MT: .0000 GB/s
+[97m(r0,t0)  Element throughput:                   0.0008 M/s
+[97m(r0,t0)  Memory throughput:                    0.0001 GB/s
 [97m(r0,t0)  Cell update throughput:               0.0000 M/s
 [97m(r0,t0)  Flux solver throughput:               0.0000 M/s
 [97m(r0,t0)  Asagi time:                           0.0000 s
-[97m(r0,t0)  Phase time:                         174.1362 s
+[97m(r0,t0)  Phase time:                         114.6316 s
 [97m(r0,t0)  
-[97m(r0,t0)  TAG 1
+[97m(r0,t0)  Rank            1 : TAG 1
  Rank            1 : TAG 2
  SWE: running time steps..
 [97m(r0,t0)  
- TAG 1
+ Rank            0 : TAG 1
  Rank            0 : TAG 2
  Rank            0 : TAG 3
  Rank            1 : TAG 3
@@ -528,32 +492,53 @@ setting active with MPIDI_PG_Get_vc_set_active
  Rank            0 : TAG 9
  Rank            1 : TAG 9
 [97m(r0,t0)  SWE: EQ time step: 1, sim. time: 475ns, dt: 3s 327ms 609µs, cells: 7378
-[97m(r0,t0)  THIS SHIT!
- TAG 1
- Rank            1 : TAG 2
- 
+[97m(r0,t0)  
 [97m(r0,t0)  Phase statistics:
 [97m(r0,t0)  
 [97m(r0,t0)  Init:                           #travs: 0 time: .0000 s (comp: .0000 s (pre: .0000 s inner: .0000 s post: .0000 s) asagi: .0000 s sync: .0000 s barr: .0000 s) ET: -1.0000 M/s  MT: -1.0000 GB/s
-[97m(r0,t0)  Displace:                       #travs: 3 time: 27.0062 s (comp: 24.1702 s (pre: .0000 s inner: 24.1702 s post: .0000 s) asagi: .0000 s sync: 2.8359 s barr: .0000 s) ET: .0005 M/s  MT: .0000 GB/s
-[97m(r0,t0)  Time steps:                     #travs: 3 time: .3238 s (comp: .2204 s (pre: .0078 s inner: .2126 s post: .0000 s) asagi: .0000 s sync: .0411 s barr: .0623 s) ET: .0456 M/s  MT: .0032 GB/s
-[97m(r0,t0)  Adaptions:                      #travs: 3 time: .0965 s (comp: .0602 s (pre: .0000 s inner: .0601 s post: .0000 s) asagi: .0000 s sync: .0001 s barr: .0000 s update distances: .0000 s update neighbors: .0362 s) integrity: .0076 s load balancing: .0009 s (de)allocation: .0006 s ET: .1529 M/s  MT: .0109 GB/s
-[97m(r0,t0)  Grid:                           #travs: 9 time: 27.4265 s (comp: 24.4507 s (pre: .0078 s inner: 24.4429 s post: .0000 s) asagi: .0000 s sync: 2.8772 s barr: .0623 s update distances: .0000 s update neighbors: .0000 s) integrity: .0000 s load balancing: .0000 s (de)allocation: .0000 s ET: .0016 M/s  MT: .0001 GB/s
-[97m(r0,t0)  Element throughput:                   0.0032 M/s
-[97m(r0,t0)  Memory throughput:                    0.0002 GB/s
-[97m(r0,t0)  Cell update throughput:               0.0011 M/s
-[97m(r0,t0)  Flux solver throughput:               0.0016 M/s
+[97m(r0,t0)  Displace:                       #travs: 3 time: 12.4854 s (comp: 11.4341 s (pre: .0000 s inner: 11.4341 s post: .0000 s) asagi: .0000 s sync: 1.0513 s barr: .0000 s) ET: .0012 M/s  MT: .0001 GB/s
+[97m(r0,t0)  Time steps:                     #travs: 3 time: .1493 s (comp: .0898 s (pre: .0008 s inner: .0890 s post: .0000 s) asagi: .0000 s sync: .0502 s barr: .0093 s) ET: .0988 M/s  MT: .0070 GB/s
+[97m(r0,t0)  Adaptions:                      #travs: 3 time: .0217 s (comp: .0177 s (pre: .0000 s inner: .0177 s post: .0000 s) asagi: .0000 s sync: .0001 s barr: .0000 s update distances: .0000 s update neighbors: .0038 s) integrity: .0047 s load balancing: .0010 s (de)allocation: .0006 s ET: .6807 M/s  MT: .0486 GB/s
+[97m(r0,t0)  Grid:                           #travs: 9 time: 12.6564 s (comp: 11.5417 s (pre: .0008 s inner: 11.5408 s post: .0000 s) asagi: .0000 s sync: 1.1016 s barr: .0093 s update distances: .0000 s update neighbors: .0000 s) integrity: .0000 s load balancing: .0000 s (de)allocation: .0000 s ET: .0035 M/s  MT: .0002 GB/s
+[97m(r0,t0)  Element throughput:                   0.0070 M/s
+[97m(r0,t0)  Memory throughput:                    0.0005 GB/s
+[97m(r0,t0)  Cell update throughput:               0.0023 M/s
+[97m(r0,t0)  Flux solver throughput:               0.0035 M/s
 [97m(r0,t0)  Asagi time:                           0.0000 s
-[97m(r0,t0)  Phase time:                          13.7316 s
+[97m(r0,t0)  Phase time:                           6.3634 s
 [97m(r0,t0)  
  THIS SHIT!
- TAG 1
+ Rank            0 : TAG 1
  Rank            0 : TAG 2
  Rank            0 : TAG 3
  Rank            0 : TAG 4
  Rank            0 : TAG 5
+ Rank            0 : TAG 6
+ Rank            0 : TAG 7
+ Rank            0 : TAG 8
+ Rank            0 : TAG 9
+ THIS SHIT!
+ Rank            1 : TAG 1
+ Rank            1 : TAG 2
  Rank            1 : TAG 3
  Rank            1 : TAG 4
+ Rank            1 : TAG 5
+ Rank            1 : TAG 6
+ Rank            1 : TAG 7
+ Rank            1 : TAG 8
+ Rank            1 : TAG 9
+[97m(r0,t0)  THIS SHIT!
+ Rank            1 : TAG 1
+ Rank            1 : TAG 2
+ SWE: time step: 2, sim. time: 3s 327ms 610µs, dt: 3s 327ms 609µs, cells: 7371
+ THIS SHIT!
+ Rank            0 : TAG 1
+ Rank            0 : TAG 2
+ Rank            1 : TAG 3
+ Rank            1 : TAG 4
+ Rank            0 : TAG 3
+ Rank            0 : TAG 4
+ Rank            0 : TAG 5
  Rank            1 : TAG 5
  Rank            0 : TAG 6
  Rank            1 : TAG 6
@@ -563,108 +548,5099 @@ setting active with MPIDI_PG_Get_vc_set_active
  Rank            0 : TAG 8
  Rank            0 : TAG 9
  Rank            1 : TAG 9
-[97m(r0,t0)  Rank            1  [STATUS            2 ]: MPI_Probe_adapt    3.8862228393554688E-005  seconds
- SWE: time step: 2, sim. time: 3s 327ms 610µs, dt: 3s 327ms 609µs, cells: 7371
- Rank            0  [STATUS            2 ]: MPI_Probe_adapt    2.2411346435546875E-005  seconds
-MPID_nem_tcp_iSendContig
-	MPIDI_PG_Create: Creating a process group of size 2; name: 2.0; at rank: 0
-	MPIDI_PG_Create: Creating a process group of size 2; name: 2.0; at rank: 4
-	MPIDI_PG_Create: Creating a process group of size 2; name: 2.0; at rank: 2
-	MPIDI_PG_Create: Creating a process group of size 2; name: 2.0; at rank: 1
-	MPIDI_PG_Create: Creating a process group of size 2; name: 2.0; at rank: 5
-	MPIDI_PG_Create: Creating a process group of size 2; name: 2.0; at rank: 3
-	MPIDI_PG_Create: Creating a process group of size 6; name: ---; at rank: 0
-	MPIDI_PG_Create: Creating a process group of size 6; name: ---; at rank: 1
+[97m(r0,t0)  THIS SHIT!
+ Rank            1 : TAG 1
+ Rank            1 : TAG 2
+ SWE: time step: 3, sim. time: 6s 655ms 220µs, dt: 3s 378ms 923µs, cells: 5791
+ THIS SHIT!
+ Rank            0 : TAG 1
+ Rank            0 : TAG 2
+ Rank            1 : TAG 3
+ Rank            1 : TAG 4
+ Rank            0 : TAG 3
+ Rank            0 : TAG 4
+ Rank            0 : TAG 5
+ Rank            1 : TAG 5
+ Rank            0 : TAG 6
+ Rank            1 : TAG 6
+ Rank            1 : TAG 7
+ Rank            1 : TAG 8
+ Rank            0 : TAG 7
+ Rank            0 : TAG 8
+ Rank            0 : TAG 9
+ Rank            1 : TAG 9
+[97m(r0,t0)  THIS SHIT!
+ Rank            1 : TAG 1
+ Rank            1 : TAG 2
+ SWE: time step: 4, sim. time: 10s 34ms 143µs, dt: 3s 378ms 923µs, cells: 5147
+ THIS SHIT!
+ Rank            0 : TAG 1
+ Rank            0 : TAG 2
+ Rank            1 : TAG 3
+ Rank            1 : TAG 4
+ Rank            0 : TAG 3
+ Rank            0 : TAG 4
+ Rank            0 : TAG 5
+ Rank            1 : TAG 5
+ Rank            0 : TAG 6
+ Rank            1 : TAG 6
+ Rank            1 : TAG 7
+ Rank            1 : TAG 8
+ Rank            0 : TAG 7
+ Rank            0 : TAG 8
+ Rank            0 : TAG 9
+ Rank            1 : TAG 9
+[97m(r0,t0)  THIS SHIT!
+ Rank            1 : TAG 1
+ Rank            1 : TAG 2
+ SWE: time step: 5, sim. time: 13s 413ms 67µs, dt: 3s 378ms 924µs, cells: 4861
+ THIS SHIT!
+ Rank            0 : TAG 1
+ Rank            0 : TAG 2
+ Rank            1 : TAG 3
+ Rank            1 : TAG 4
+ Rank            0 : TAG 3
+ Rank            0 : TAG 4
+ Rank            1 : TAG 5
+ Rank            0 : TAG 5
+ Rank            0 : TAG 6
+ Rank            1 : TAG 6
+ Rank            1 : TAG 7
+ Rank            1 : TAG 8
+ Rank            0 : TAG 7
+ Rank            0 : TAG 8
+ Rank            1 : TAG 9
+ Rank            0 : TAG 9
+[97m(r0,t0)  THIS SHIT!
+ Rank            1 : TAG 1
+ Rank            1 : TAG 2
+ SWE: time step: 6, sim. time: 16s 791ms 992µs, dt: 3s 378ms 925µs, cells: 4731
+ THIS SHIT!
+ Rank            0 : TAG 1
+ Rank            0 : TAG 2
+ Rank            1 : TAG 3
+ Rank            1 : TAG 4
+ Rank            0 : TAG 3
+ Rank            0 : TAG 4
+ Rank            0 : TAG 5
+ Rank            1 : TAG 5
+ Rank            0 : TAG 6
+ Rank            1 : TAG 6
+ Rank            1 : TAG 7
+ Rank            1 : TAG 8
+ Rank            0 : TAG 7
+ Rank            0 : TAG 8
+ Rank            0 : TAG 9
+ Rank            1 : TAG 9
+[97m(r0,t0)  THIS SHIT!
+ Rank            1 : TAG 1
+ Rank            1 : TAG 2
+ SWE: time step: 7, sim. time: 20s 170ms 917µs, dt: 3s 378ms 926µs, cells: 4681
+ THIS SHIT!
+ Rank            0 : TAG 1
+ Rank            0 : TAG 2
+ Rank            1 : TAG 3
+ Rank            1 : TAG 4
+ Rank            0 : TAG 3
+ Rank            0 : TAG 4
+ Rank            0 : TAG 5
+ Rank            1 : TAG 5
+ Rank            0 : TAG 6
+ Rank            1 : TAG 6
+ Rank            1 : TAG 7
+ Rank            1 : TAG 8
+ Rank            0 : TAG 7
+ Rank            0 : TAG 8
+ Rank            0 : TAG 9
+ Rank            1 : TAG 9
+[97m(r0,t0)  THIS SHIT!
+ Rank            1 : TAG 1
+ Rank            1 : TAG 2
+ SWE: time step: 8, sim. time: 23s 549ms 844µs, dt: 3s 378ms 927µs, cells: 4635
+ THIS SHIT!
+ Rank            0 : TAG 1
+ Rank            0 : TAG 2
+ Rank            1 : TAG 3
+ Rank            1 : TAG 4
+ Rank            0 : TAG 3
+ Rank            0 : TAG 4
+ Rank            0 : TAG 5
+ Rank            1 : TAG 5
+ Rank            0 : TAG 6
+ Rank            1 : TAG 6
+ Rank            1 : TAG 7
+ Rank            1 : TAG 8
+ Rank            0 : TAG 7
+ Rank            0 : TAG 8
+ Rank            0 : TAG 9
+ Rank            1 : TAG 9
+[97m(r0,t0)  THIS SHIT!
+ Rank            1 : TAG 1
+ Rank            1 : TAG 2
+ SWE: time step: 9, sim. time: 26s 928ms 772µs, dt: 3s 378ms 929µs, cells: 4632
+ THIS SHIT!
+ Rank            0 : TAG 1
+ Rank            0 : TAG 2
+ Rank            1 : TAG 3
+ Rank            1 : TAG 4
+ Rank            0 : TAG 3
+ Rank            0 : TAG 4
+ Rank            0 : TAG 5
+ Rank            1 : TAG 5
+ Rank            0 : TAG 6
+ Rank            1 : TAG 6
+ Rank            1 : TAG 7
+ Rank            1 : TAG 8
+ Rank            0 : TAG 7
+ Rank            0 : TAG 8
+ Rank            0 : TAG 9
+ Rank            1 : TAG 9
+[97m(r0,t0)  THIS SHIT!
+ Rank            1 : TAG 1
+ Rank            1 : TAG 2
+ SWE: time step: 10, sim. time: 30s 307ms 701µs, dt: 3s 378ms 930µs, cells: 4629
+ THIS SHIT!
+ Rank            0 : TAG 1
+ Rank            0 : TAG 2
+ Rank            1 : TAG 3
+ Rank            1 : TAG 4
+ Rank            0 : TAG 3
+ Rank            0 : TAG 4
+ Rank            0 : TAG 5
+ Rank            1 : TAG 5
+ Rank            0 : TAG 6
+ Rank            1 : TAG 6
+ Rank            1 : TAG 7
+ Rank            1 : TAG 8
+ Rank            0 : TAG 7
+ Rank            0 : TAG 8
+ Rank            0 : TAG 9
+ Rank            1 : TAG 9
+[97m(r0,t0)  THIS SHIT!
+ Rank            1 : TAG 1
+ Rank            1 : TAG 2
+ SWE: time step: 11, sim. time: 33s 686ms 631µs, dt: 3s 327ms 611µs, cells: 4622
+ THIS SHIT!
+ Rank            0 : TAG 1
+ Rank            0 : TAG 2
+ Rank            0 : TAG 3
+ Rank            1 : TAG 3
+ Rank            1 : TAG 4
+ Rank            0 : TAG 4
+ Rank            0 : TAG 5
+ Rank            1 : TAG 5
+ Rank            0 : TAG 6
+ Rank            1 : TAG 6
+ Rank            1 : TAG 7
+ Rank            1 : TAG 8
+ Rank            0 : TAG 7
+ Rank            0 : TAG 8
+ Rank            0 : TAG 9
+ Rank            1 : TAG 9
+[97m(r0,t0)  THIS SHIT!
+ Rank            1 : TAG 1
+ Rank            1 : TAG 2
+ SWE: time step: 12, sim. time: 37s 14ms 243µs, dt: 3s 327ms 611µs, cells: 4618
+ THIS SHIT!
+ Rank            0 : TAG 1
+ Rank            0 : TAG 2
+ Rank            1 : TAG 3
+ Rank            1 : TAG 4
+ Rank            0 : TAG 3
+ Rank            0 : TAG 4
+ Rank            0 : TAG 5
+ Rank            1 : TAG 5
+ Rank            0 : TAG 6
+ Rank            1 : TAG 6
+ Rank            1 : TAG 7
+ Rank            1 : TAG 8
+ Rank            0 : TAG 7
+ Rank            0 : TAG 8
+ Rank            1 : TAG 9
+ Rank            0 : TAG 9
+[97m(r0,t0)  THIS SHIT!
+ Rank            1 : TAG 1
+ Rank            1 : TAG 2
+ SWE: time step: 13, sim. time: 40s 341ms 855µs, dt: 3s 327ms 612µs, cells: 4633
+ THIS SHIT!
+ Rank            0 : TAG 1
+ Rank            0 : TAG 2
+ Rank            1 : TAG 3
+ Rank            1 : TAG 4
+ Rank            0 : TAG 3
+ Rank            0 : TAG 4
+ Rank            0 : TAG 5
+ Rank            1 : TAG 5
+ Rank            1 : TAG 6
+ Rank            1 : TAG 7
+ Rank            1 : TAG 8
+ Rank            0 : TAG 6
+ Rank            0 : TAG 7
+ Rank            0 : TAG 8
+ Rank            0 : TAG 9
+ Rank            1 : TAG 9
+[97m(r0,t0)  THIS SHIT!
+ Rank            1 : TAG 1
+ Rank            1 : TAG 2
+ SWE: time step: 14, sim. time: 43s 669ms 467µs, dt: 3s 327ms 612µs, cells: 4634
+ THIS SHIT!
+ Rank            0 : TAG 1
+ Rank            0 : TAG 2
+ Rank            1 : TAG 3
+ Rank            1 : TAG 4
+ Rank            0 : TAG 3
+ Rank            0 : TAG 4
+ Rank            0 : TAG 5
+ Rank            1 : TAG 5
+ Rank            0 : TAG 6
+ Rank            1 : TAG 6
+ Rank            1 : TAG 7
+ Rank            1 : TAG 8
+ Rank            0 : TAG 7
+ Rank            0 : TAG 8
+ Rank            1 : TAG 9
+ Rank            0 : TAG 9
+[97m(r0,t0)  THIS SHIT!
+ Rank            1 : TAG 1
+ Rank            1 : TAG 2
+ SWE: time step: 15, sim. time: 46s 997ms 79µs, dt: 3s 327ms 612µs, cells: 4644
+ THIS SHIT!
+ Rank            0 : TAG 1
+ Rank            0 : TAG 2
+ Rank            1 : TAG 3
+ Rank            1 : TAG 4
+ Rank            0 : TAG 3
+ Rank            0 : TAG 4
+ Rank            0 : TAG 5
+ Rank            1 : TAG 5
+ Rank            0 : TAG 6
+ Rank            1 : TAG 6
+ Rank            1 : TAG 7
+ Rank            1 : TAG 8
+ Rank            0 : TAG 7
+ Rank            0 : TAG 8
+ Rank            0 : TAG 9
+ Rank            1 : TAG 9
+[97m(r0,t0)  THIS SHIT!
+ Rank            1 : TAG 1
+ Rank            1 : TAG 2
+ SWE: time step: 16, sim. time: 50s 324ms 692µs, dt: 3s 327ms 613µs, cells: 4659
+ THIS SHIT!
+ Rank            0 : TAG 1
+ Rank            0 : TAG 2
+ Rank            0 : TAG 3
+ Rank            0 : TAG 4
+ Rank            1 : TAG 3
+ Rank            1 : TAG 4
+ Rank            0 : TAG 5
+ Rank            1 : TAG 5
+ Rank            0 : TAG 6
+ Rank            1 : TAG 6
+ Rank            1 : TAG 7
+ Rank            1 : TAG 8
+ Rank            0 : TAG 7
+ Rank            0 : TAG 8
+ Rank            0 : TAG 9
+ Rank            1 : TAG 9
+[97m(r0,t0)  THIS SHIT!
+ Rank            1 : TAG 1
+ Rank            1 : TAG 2
+ SWE: time step: 17, sim. time: 53s 652ms 306µs, dt: 3s 327ms 613µs, cells: 4670
+ THIS SHIT!
+ Rank            0 : TAG 1
+ Rank            0 : TAG 2
+ Rank            0 : TAG 3
+ Rank            1 : TAG 3
+ Rank            1 : TAG 4
+ Rank            0 : TAG 4
+ Rank            0 : TAG 5
+ Rank            0 : TAG 6
+ Rank            0 : TAG 7
+ Rank            0 : TAG 8
+ Rank            0 : TAG 9
+ Rank            1 : TAG 5
+ Rank            1 : TAG 6
+ Rank            1 : TAG 7
+ Rank            1 : TAG 8
+ Rank            1 : TAG 9
+[97m(r0,t0)  THIS SHIT!
+ Rank            1 : TAG 1
+ Rank            1 : TAG 2
+ SWE: time step: 18, sim. time: 56s 979ms 919µs, dt: 3s 327ms 614µs, cells: 4686
+ THIS SHIT!
+ Rank            0 : TAG 1
+ Rank            0 : TAG 2
+ Rank            1 : TAG 3
+ Rank            1 : TAG 4
+ Rank            0 : TAG 3
+ Rank            0 : TAG 4
+ Rank            0 : TAG 5
+ Rank            1 : TAG 5
+ Rank            0 : TAG 6
+ Rank            1 : TAG 6
+ Rank            1 : TAG 7
+ Rank            1 : TAG 8
+ Rank            0 : TAG 7
+ Rank            0 : TAG 8
+ Rank            0 : TAG 9
+ Rank            1 : TAG 9
+[97m(r0,t0)  THIS SHIT!
+ Rank            1 : TAG 1
+ Rank            1 : TAG 2
+ SWE: time step: 19, sim. time: 1min 307ms 534µs, dt: 3s 327ms 614µs, cells: 4703
+ THIS SHIT!
+ Rank            0 : TAG 1
+ Rank            0 : TAG 2
+ Rank            1 : TAG 3
+ Rank            1 : TAG 4
+ Rank            0 : TAG 3
+ Rank            0 : TAG 4
+ Rank            0 : TAG 5
+ Rank            1 : TAG 5
+ Rank            0 : TAG 6
+ Rank            1 : TAG 6
+ Rank            1 : TAG 7
+ Rank            1 : TAG 8
+ Rank            0 : TAG 7
+ Rank            0 : TAG 8
+ Rank            0 : TAG 9
+ Rank            1 : TAG 9
+[97m(r0,t0)  THIS SHIT!
+ Rank            1 : TAG 1
+ Rank            1 : TAG 2
+ SWE: time step: 20, sim. time: 1min 3s 635ms, dt: 3s 327ms 615µs, cells: 4728
+ THIS SHIT!
+ Rank            0 : TAG 1
+ Rank            0 : TAG 2
+ Rank            0 : TAG 3
+ Rank            0 : TAG 4
+ Rank            1 : TAG 3
+ Rank            1 : TAG 4
+ Rank            0 : TAG 5
+ Rank            1 : TAG 5
+ Rank            0 : TAG 6
+ Rank            1 : TAG 6
+ Rank            1 : TAG 7
+ Rank            1 : TAG 8
+ Rank            0 : TAG 7
+ Rank            0 : TAG 8
+ Rank            0 : TAG 9
+ Rank            1 : TAG 9
+[97m(r0,t0)  THIS SHIT!
+ Rank            1 : TAG 1
+ Rank            1 : TAG 2
+ SWE: time step: 21, sim. time: 1min 6s 962ms, dt: 3s 327ms 615µs, cells: 4747
+ THIS SHIT!
+ Rank            0 : TAG 1
+ Rank            0 : TAG 2
+ Rank            1 : TAG 3
+ Rank            1 : TAG 4
+ Rank            0 : TAG 3
+ Rank            0 : TAG 4
+ Rank            0 : TAG 5
+ Rank            1 : TAG 5
+ Rank            0 : TAG 6
+ Rank            1 : TAG 6
+ Rank            1 : TAG 7
+ Rank            1 : TAG 8
+ Rank            0 : TAG 7
+ Rank            0 : TAG 8
+ Rank            0 : TAG 9
+ Rank            1 : TAG 9
+[97m(r0,t0)  THIS SHIT!
+ Rank            1 : TAG 1
+ Rank            1 : TAG 2
+ SWE: time step: 22, sim. time: 1min 10s 290ms, dt: 3s 327ms 615µs, cells: 4757
+ THIS SHIT!
+ Rank            0 : TAG 1
+ Rank            0 : TAG 2
+ Rank            0 : TAG 3
+ Rank            1 : TAG 3
+ Rank            1 : TAG 4
+ Rank            0 : TAG 4
+ Rank            0 : TAG 5
+ Rank            1 : TAG 5
+ Rank            0 : TAG 6
+ Rank            1 : TAG 6
+ Rank            1 : TAG 7
+ Rank            1 : TAG 8
+ Rank            0 : TAG 7
+ Rank            0 : TAG 8
+ Rank            0 : TAG 9
+ Rank            1 : TAG 9
+[97m(r0,t0)  THIS SHIT!
+ Rank            1 : TAG 1
+ Rank            1 : TAG 2
+ SWE: time step: 23, sim. time: 1min 13s 617ms, dt: 3s 327ms 616µs, cells: 4764
+ THIS SHIT!
+ Rank            0 : TAG 1
+ Rank            0 : TAG 2
+ Rank            0 : TAG 3
+ Rank            1 : TAG 3
+ Rank            1 : TAG 4
+ Rank            0 : TAG 4
+ Rank            0 : TAG 5
+ Rank            1 : TAG 5
+ Rank            0 : TAG 6
+ Rank            1 : TAG 6
+ Rank            1 : TAG 7
+ Rank            1 : TAG 8
+ Rank            0 : TAG 7
+ Rank            0 : TAG 8
+ Rank            0 : TAG 9
+ Rank            1 : TAG 9
+[97m(r0,t0)  THIS SHIT!
+ Rank            1 : TAG 1
+ Rank            1 : TAG 2
+ SWE: time step: 24, sim. time: 1min 16s 945ms, dt: 3s 327ms 616µs, cells: 4766
+ THIS SHIT!
+ Rank            0 : TAG 1
+ Rank            0 : TAG 2
+ Rank            1 : TAG 3
+ Rank            1 : TAG 4
+ Rank            0 : TAG 3
+ Rank            0 : TAG 4
+ Rank            0 : TAG 5
+ Rank            1 : TAG 5
+ Rank            1 : TAG 6
+ Rank            1 : TAG 7
+ Rank            1 : TAG 8
+ Rank            0 : TAG 6
+ Rank            0 : TAG 7
+ Rank            0 : TAG 8
+ Rank            0 : TAG 9
+ Rank            1 : TAG 9
+[97m(r0,t0)  THIS SHIT!
+ Rank            1 : TAG 1
+ Rank            1 : TAG 2
+ SWE: time step: 25, sim. time: 1min 20s 273ms, dt: 3s 327ms 616µs, cells: 4753
+ THIS SHIT!
+ Rank            0 : TAG 1
+ Rank            0 : TAG 2
+ Rank            0 : TAG 3
+ Rank            0 : TAG 4
+ Rank            1 : TAG 3
+ Rank            1 : TAG 4
+ Rank            0 : TAG 5
+ Rank            1 : TAG 5
+ Rank            0 : TAG 6
+ Rank            1 : TAG 6
+ Rank            1 : TAG 7
+ Rank            1 : TAG 8
+ Rank            0 : TAG 7
+ Rank            0 : TAG 8
+ Rank            1 : TAG 9
+ Rank            0 : TAG 9
+[97m(r0,t0)  THIS SHIT!
+ Rank            1 : TAG 1
+ Rank            1 : TAG 2
+ SWE: time step: 26, sim. time: 1min 23s 600ms, dt: 3s 327ms 616µs, cells: 4771
+ THIS SHIT!
+ Rank            0 : TAG 1
+ Rank            0 : TAG 2
+ Rank            1 : TAG 3
+ Rank            1 : TAG 4
+ Rank            0 : TAG 3
+ Rank            0 : TAG 4
+ Rank            0 : TAG 5
+ Rank            1 : TAG 5
+ Rank            1 : TAG 6
+ Rank            1 : TAG 7
+ Rank            1 : TAG 8
+ Rank            0 : TAG 6
+ Rank            0 : TAG 7
+ Rank            0 : TAG 8
+ Rank            0 : TAG 9
+ Rank            1 : TAG 9
+[97m(r0,t0)  THIS SHIT!
+ Rank            1 : TAG 1
+ Rank            1 : TAG 2
+ SWE: time step: 27, sim. time: 1min 26s 928ms, dt: 3s 327ms 617µs, cells: 4767
+ THIS SHIT!
+ Rank            0 : TAG 1
+ Rank            0 : TAG 2
+ Rank            1 : TAG 3
+ Rank            1 : TAG 4
+ Rank            0 : TAG 3
+ Rank            0 : TAG 4
+ Rank            0 : TAG 5
+ Rank            1 : TAG 5
+ Rank            0 : TAG 6
+ Rank            1 : TAG 6
+ Rank            1 : TAG 7
+ Rank            1 : TAG 8
+ Rank            0 : TAG 7
+ Rank            0 : TAG 8
+ Rank            0 : TAG 9
+ Rank            1 : TAG 9
+[97m(r0,t0)  THIS SHIT!
+ Rank            1 : TAG 1
+ Rank            1 : TAG 2
+ SWE: time step: 28, sim. time: 1min 30s 256ms, dt: 3s 327ms 617µs, cells: 4794
+ THIS SHIT!
+ Rank            0 : TAG 1
+ Rank            0 : TAG 2
+ Rank            1 : TAG 3
+ Rank            1 : TAG 4
+ Rank            0 : TAG 3
+ Rank            0 : TAG 4
+ Rank            0 : TAG 5
+ Rank            1 : TAG 5
+ Rank            0 : TAG 6
+ Rank            1 : TAG 6
+ Rank            1 : TAG 7
+ Rank            1 : TAG 8
+ Rank            0 : TAG 7
+ Rank            0 : TAG 8
+ Rank            0 : TAG 9
+ Rank            1 : TAG 9
+[97m(r0,t0)  THIS SHIT!
+ Rank            1 : TAG 1
+ Rank            1 : TAG 2
+ SWE: time step: 29, sim. time: 1min 33s 583ms, dt: 3s 327ms 617µs, cells: 4812
+ THIS SHIT!
+ Rank            0 : TAG 1
+ Rank            0 : TAG 2
+ Rank            1 : TAG 3
+ Rank            1 : TAG 4
+ Rank            0 : TAG 3
+ Rank            0 : TAG 4
+ Rank            0 : TAG 5
+ Rank            1 : TAG 5
+ Rank            0 : TAG 6
+ Rank            1 : TAG 6
+ Rank            1 : TAG 7
+ Rank            1 : TAG 8
+ Rank            0 : TAG 7
+ Rank            0 : TAG 8
+ Rank            0 : TAG 9
+ Rank            1 : TAG 9
+ THIS SHIT!
+ Rank            1 : TAG 1
+ Rank            1 : TAG 2
+[97m(r0,t0)  SWE: time step: 30, sim. time: 1min 36s 911ms, dt: 3s 327ms 617µs, cells: 4815
+ THIS SHIT!
+ Rank            0 : TAG 1
+ Rank            0 : TAG 2
+ Rank            1 : TAG 3
+ Rank            1 : TAG 4
+ Rank            0 : TAG 3
+ Rank            0 : TAG 4
+ Rank            0 : TAG 5
+ Rank            1 : TAG 5
+ Rank            0 : TAG 6
+ Rank            1 : TAG 6
+ Rank            1 : TAG 7
+ Rank            1 : TAG 8
+ Rank            0 : TAG 7
+ Rank            0 : TAG 8
+ Rank            0 : TAG 9
+ Rank            1 : TAG 9
+[97m(r0,t0)  THIS SHIT!
+ Rank            1 : TAG 1
+ Rank            1 : TAG 2
+ SWE: time step: 31, sim. time: 1min 40s 238ms, dt: 3s 339ms 818µs, cells: 4830
+ THIS SHIT!
+ Rank            0 : TAG 1
+ Rank            0 : TAG 2
+ Rank            1 : TAG 3
+ Rank            1 : TAG 4
+ Rank            0 : TAG 3
+ Rank            0 : TAG 4
+ Rank            0 : TAG 5
+ Rank            1 : TAG 5
+ Rank            0 : TAG 6
+ Rank            1 : TAG 6
+ Rank            1 : TAG 7
+ Rank            1 : TAG 8
+ Rank            0 : TAG 7
+ Rank            0 : TAG 8
+ Rank            0 : TAG 9
+ Rank            1 : TAG 9
+[97m(r0,t0)  THIS SHIT!
+ Rank            1 : TAG 1
+ Rank            1 : TAG 2
+ SWE: time step: 32, sim. time: 1min 43s 578ms, dt: 3s 339ms 818µs, cells: 4850
+ THIS SHIT!
+ Rank            0 : TAG 1
+ Rank            0 : TAG 2
+ Rank            1 : TAG 3
+ Rank            1 : TAG 4
+ Rank            0 : TAG 3
+ Rank            0 : TAG 4
+ Rank            0 : TAG 5
+ Rank            1 : TAG 5
+ Rank            0 : TAG 6
+ Rank            1 : TAG 6
+ Rank            1 : TAG 7
+ Rank            1 : TAG 8
+ Rank            0 : TAG 7
+ Rank            0 : TAG 8
+ Rank            0 : TAG 9
+ Rank            1 : TAG 9
+[97m(r0,t0)  SWE: time step: 33, sim. time: 1min 46s 918ms, dt: 3s 339ms 819µs, cells: 4850
+ THIS SHIT!
+ Rank            0 : TAG 1
+ Rank            0 : TAG 2
+ THIS SHIT!
+ Rank            1 : TAG 1
+ Rank            1 : TAG 2
+ Rank            0 : TAG 3
+ Rank            1 : TAG 3
+ Rank            1 : TAG 4
+ Rank            0 : TAG 4
+ Rank            0 : TAG 5
+ Rank            1 : TAG 5
+ Rank            0 : TAG 6
+ Rank            1 : TAG 6
+ Rank            1 : TAG 7
+ Rank            1 : TAG 8
+ Rank            0 : TAG 7
+ Rank            0 : TAG 8
+ Rank            0 : TAG 9
+ Rank            1 : TAG 9
+[97m(r0,t0)  THIS SHIT!
+ Rank            1 : TAG 1
+ Rank            1 : TAG 2
+ SWE: time step: 34, sim. time: 1min 50s 258ms, dt: 3s 339ms 820µs, cells: 4851
+ THIS SHIT!
+ Rank            0 : TAG 1
+ Rank            0 : TAG 2
+ Rank            0 : TAG 3
+ Rank            1 : TAG 3
+ Rank            1 : TAG 4
+ Rank            0 : TAG 4
+ Rank            0 : TAG 5
+ Rank            1 : TAG 5
+ Rank            0 : TAG 6
+ Rank            1 : TAG 6
+ Rank            1 : TAG 7
+ Rank            1 : TAG 8
+ Rank            0 : TAG 7
+ Rank            0 : TAG 8
+ Rank            0 : TAG 9
+ Rank            1 : TAG 9
+[97m(r0,t0)  THIS SHIT!
+ Rank            1 : TAG 1
+ Rank            1 : TAG 2
+ SWE: time step: 35, sim. time: 1min 53s 598ms, dt: 3s 339ms 820µs, cells: 4856
+ THIS SHIT!
+ Rank            0 : TAG 1
+ Rank            0 : TAG 2
+ Rank            1 : TAG 3
+ Rank            1 : TAG 4
+ Rank            0 : TAG 3
+ Rank            0 : TAG 4
+ Rank            0 : TAG 5
+ Rank            1 : TAG 5
+ Rank            0 : TAG 6
+ Rank            1 : TAG 6
+ Rank            1 : TAG 7
+ Rank            1 : TAG 8
+ Rank            0 : TAG 7
+ Rank            0 : TAG 8
+ Rank            0 : TAG 9
+ Rank            1 : TAG 9
+[97m(r0,t0)  THIS SHIT!
+ Rank            1 : TAG 1
+ Rank            1 : TAG 2
+ SWE: time step: 36, sim. time: 1min 56s 938ms, dt: 3s 339ms 821µs, cells: 4870
+ THIS SHIT!
+ Rank            0 : TAG 1
+ Rank            0 : TAG 2
+ Rank            0 : TAG 3
+ Rank            0 : TAG 4
+ Rank            1 : TAG 3
+ Rank            1 : TAG 4
+ Rank            0 : TAG 5
+ Rank            1 : TAG 5
+ Rank            0 : TAG 6
+ Rank            1 : TAG 6
+ Rank            1 : TAG 7
+ Rank            1 : TAG 8
+ Rank            0 : TAG 7
+ Rank            0 : TAG 8
+ Rank            0 : TAG 9
+ Rank            1 : TAG 9
+[97m(r0,t0)  SWE: time step: 37, sim. time: 2min 277ms 850µs, dt: 3s 339ms 821µs, cells: 4881
+[97m(r0,t0)  SWE: output step: 1
+[97m(r0,t0)  SWE: output step: 1
+ THIS SHIT!
+ Rank            1 : TAG 1
+ Rank            1 : TAG 2
+ THIS SHIT!
+ Rank            0 : TAG 1
+ Rank            0 : TAG 2
+ Rank            1 : TAG 3
+ Rank            1 : TAG 4
+ Rank            0 : TAG 3
+ Rank            0 : TAG 4
+ Rank            1 : TAG 5
+ Rank            0 : TAG 5
+ Rank            0 : TAG 6
+ Rank            1 : TAG 6
+ Rank            1 : TAG 7
+ Rank            1 : TAG 8
+ Rank            0 : TAG 7
+ Rank            0 : TAG 8
+ Rank            0 : TAG 9
+ Rank            1 : TAG 9
+[97m(r0,t0)  THIS SHIT!
+ Rank            1 : TAG 1
+ Rank            1 : TAG 2
+ SWE: time step: 38, sim. time: 2min 3s 617ms, dt: 3s 339ms 822µs, cells: 4869
+ THIS SHIT!
+ Rank            0 : TAG 1
+ Rank            0 : TAG 2
+ Rank            0 : TAG 3
+ Rank            1 : TAG 3
+ Rank            1 : TAG 4
+ Rank            0 : TAG 4
+ Rank            0 : TAG 5
+ Rank            1 : TAG 5
+ Rank            0 : TAG 6
+ Rank            1 : TAG 6
+ Rank            1 : TAG 7
+ Rank            1 : TAG 8
+ Rank            0 : TAG 7
+ Rank            0 : TAG 8
+ Rank            0 : TAG 9
+ Rank            1 : TAG 9
+[97m(r0,t0)  THIS SHIT!
+ Rank            1 : TAG 1
+ Rank            1 : TAG 2
+ SWE: time step: 39, sim. time: 2min 6s 957ms, dt: 3s 339ms 822µs, cells: 4877
+ THIS SHIT!
+ Rank            0 : TAG 1
+ Rank            0 : TAG 2
+ Rank            1 : TAG 3
+ Rank            1 : TAG 4
+ Rank            0 : TAG 3
+ Rank            0 : TAG 4
+ Rank            0 : TAG 5
+ Rank            1 : TAG 5
+ Rank            0 : TAG 6
+ Rank            1 : TAG 6
+ Rank            1 : TAG 7
+ Rank            1 : TAG 8
+ Rank            0 : TAG 7
+ Rank            0 : TAG 8
+ Rank            0 : TAG 9
+ Rank            1 : TAG 9
+[97m(r0,t0)  THIS SHIT!
+ Rank            1 : TAG 1
+ Rank            1 : TAG 2
+ SWE: time step: 40, sim. time: 2min 10s 297ms, dt: 3s 339ms 822µs, cells: 4876
+ THIS SHIT!
+ Rank            0 : TAG 1
+ Rank            0 : TAG 2
+ Rank            1 : TAG 3
+ Rank            1 : TAG 4
+ Rank            0 : TAG 3
+ Rank            0 : TAG 4
+ Rank            0 : TAG 5
+ Rank            1 : TAG 5
+ Rank            0 : TAG 6
+ Rank            1 : TAG 6
+ Rank            1 : TAG 7
+ Rank            1 : TAG 8
+ Rank            0 : TAG 7
+ Rank            0 : TAG 8
+ Rank            0 : TAG 9
+ Rank            1 : TAG 9
+[97m(r0,t0)  THIS SHIT!
+ Rank            1 : TAG 1
+ Rank            1 : TAG 2
+ SWE: time step: 41, sim. time: 2min 13s 637ms, dt: 3s 341ms 442µs, cells: 4895
+ THIS SHIT!
+ Rank            0 : TAG 1
+ Rank            0 : TAG 2
+ Rank            0 : TAG 3
+ Rank            1 : TAG 3
+ Rank            1 : TAG 4
+ Rank            0 : TAG 4
+ Rank            0 : TAG 5
+ Rank            1 : TAG 5
+ Rank            0 : TAG 6
+ Rank            1 : TAG 6
+ Rank            1 : TAG 7
+ Rank            1 : TAG 8
+ Rank            0 : TAG 7
+ Rank            0 : TAG 8
+ Rank            0 : TAG 9
+ Rank            1 : TAG 9
+[97m(r0,t0)  THIS SHIT!
+ Rank            1 : TAG 1
+ Rank            1 : TAG 2
+ SWE: time step: 42, sim. time: 2min 16s 978ms, dt: 3s 341ms 441µs, cells: 4905
+ THIS SHIT!
+ Rank            0 : TAG 1
+ Rank            0 : TAG 2
+ Rank            0 : TAG 3
+ Rank            1 : TAG 3
+ Rank            1 : TAG 4
+ Rank            0 : TAG 4
+ Rank            0 : TAG 5
+ Rank            0 : TAG 6
+ Rank            0 : TAG 7
+ Rank            0 : TAG 8
+ Rank            0 : TAG 9
+ Rank            1 : TAG 5
+ Rank            1 : TAG 6
+ Rank            1 : TAG 7
+ Rank            1 : TAG 8
+ Rank            1 : TAG 9
+[97m(r0,t0)  THIS SHIT!
+ Rank            1 : TAG 1
+ Rank            1 : TAG 2
+ SWE: time step: 43, sim. time: 2min 20s 320ms, dt: 3s 341ms 441µs, cells: 4916
+ THIS SHIT!
+ Rank            0 : TAG 1
+ Rank            0 : TAG 2
+ Rank            0 : TAG 3
+ Rank            1 : TAG 3
+ Rank            1 : TAG 4
+ Rank            0 : TAG 4
+ Rank            0 : TAG 5
+ Rank            1 : TAG 5
+ Rank            0 : TAG 6
+ Rank            1 : TAG 6
+ Rank            1 : TAG 7
+ Rank            1 : TAG 8
+ Rank            0 : TAG 7
+ Rank            0 : TAG 8
+ Rank            0 : TAG 9
+ Rank            1 : TAG 9
+[97m(r0,t0)  THIS SHIT!
+ Rank            1 : TAG 1
+ Rank            1 : TAG 2
+ SWE: time step: 44, sim. time: 2min 23s 661ms, dt: 3s 219ms 187µs, cells: 4935
+ THIS SHIT!
+ Rank            0 : TAG 1
+ Rank            0 : TAG 2
+ Rank            1 : TAG 3
+ Rank            1 : TAG 4
+ Rank            0 : TAG 3
+ Rank            0 : TAG 4
+ Rank            0 : TAG 5
+ Rank            1 : TAG 5
+ Rank            0 : TAG 6
+ Rank            1 : TAG 6
+ Rank            1 : TAG 7
+ Rank            1 : TAG 8
+ Rank            0 : TAG 7
+ Rank            0 : TAG 8
+ Rank            0 : TAG 9
+ Rank            1 : TAG 9
+[97m(r0,t0)  THIS SHIT!
+ Rank            1 : TAG 1
+ Rank            1 : TAG 2
+ SWE: time step: 45, sim. time: 2min 26s 880ms, dt: 3s 219ms 188µs, cells: 4932
+ THIS SHIT!
+ Rank            0 : TAG 1
+ Rank            0 : TAG 2
+ Rank            0 : TAG 3
+ Rank            1 : TAG 3
+ Rank            1 : TAG 4
+ Rank            0 : TAG 4
+ Rank            0 : TAG 5
+ Rank            1 : TAG 5
+ Rank            0 : TAG 6
+ Rank            1 : TAG 6
+ Rank            1 : TAG 7
+ Rank            1 : TAG 8
+ Rank            0 : TAG 7
+ Rank            0 : TAG 8
+ Rank            1 : TAG 9
+ Rank            0 : TAG 9
+[97m(r0,t0)  THIS SHIT!
+ Rank            1 : TAG 1
+ Rank            1 : TAG 2
+ SWE: time step: 46, sim. time: 2min 30s 99ms, dt: 3s 219ms 188µs, cells: 4950
+ THIS SHIT!
+ Rank            0 : TAG 1
+ Rank            0 : TAG 2
+ Rank            0 : TAG 3
+ Rank            0 : TAG 4
+ Rank            1 : TAG 3
+ Rank            1 : TAG 4
+ Rank            0 : TAG 5
+ Rank            1 : TAG 5
+ Rank            0 : TAG 6
+ Rank            1 : TAG 6
+ Rank            1 : TAG 7
+ Rank            1 : TAG 8
+ Rank            0 : TAG 7
+ Rank            0 : TAG 8
+ Rank            0 : TAG 9
+ Rank            1 : TAG 9
+[97m(r0,t0)  THIS SHIT!
+ Rank            1 : TAG 1
+ Rank            1 : TAG 2
+ SWE: time step: 47, sim. time: 2min 33s 319ms, dt: 3s 219ms 189µs, cells: 4964
+ THIS SHIT!
+ Rank            0 : TAG 1
+ Rank            0 : TAG 2
+ Rank            0 : TAG 3
+ Rank            1 : TAG 3
+ Rank            1 : TAG 4
+ Rank            0 : TAG 4
+ Rank            0 : TAG 5
+ Rank            1 : TAG 5
+ Rank            0 : TAG 6
+ Rank            1 : TAG 6
+ Rank            1 : TAG 7
+ Rank            1 : TAG 8
+ Rank            0 : TAG 7
+ Rank            0 : TAG 8
+ Rank            0 : TAG 9
+ Rank            1 : TAG 9
+[97m(r0,t0)  THIS SHIT!
+ Rank            1 : TAG 1
+ Rank            1 : TAG 2
+ SWE: time step: 48, sim. time: 2min 36s 538ms, dt: 3s 219ms 189µs, cells: 4978
+ THIS SHIT!
+ Rank            0 : TAG 1
+ Rank            0 : TAG 2
+ Rank            1 : TAG 3
+ Rank            1 : TAG 4
+ Rank            0 : TAG 3
+ Rank            0 : TAG 4
+ Rank            0 : TAG 5
+ Rank            1 : TAG 5
+ Rank            0 : TAG 6
+ Rank            1 : TAG 6
+ Rank            1 : TAG 7
+ Rank            1 : TAG 8
+ Rank            0 : TAG 7
+ Rank            0 : TAG 8
+ Rank            1 : TAG 9
+ Rank            0 : TAG 9
+[97m(r0,t0)  THIS SHIT!
+ Rank            1 : TAG 1
+ Rank            1 : TAG 2
+ SWE: time step: 49, sim. time: 2min 39s 757ms, dt: 3s 219ms 189µs, cells: 4994
+ THIS SHIT!
+ Rank            0 : TAG 1
+ Rank            0 : TAG 2
+ Rank            0 : TAG 3
+ Rank            1 : TAG 3
+ Rank            1 : TAG 4
+ Rank            0 : TAG 4
+ Rank            0 : TAG 5
+ Rank            1 : TAG 5
+ Rank            0 : TAG 6
+ Rank            1 : TAG 6
+ Rank            1 : TAG 7
+ Rank            1 : TAG 8
+ Rank            0 : TAG 7
+ Rank            0 : TAG 8
+ Rank            0 : TAG 9
+ Rank            1 : TAG 9
+[97m(r0,t0)  THIS SHIT!
+ Rank            1 : TAG 1
+ Rank            1 : TAG 2
+ SWE: time step: 50, sim. time: 2min 42s 976ms, dt: 3s 219ms 189µs, cells: 5019
+ THIS SHIT!
+ Rank            0 : TAG 1
+ Rank            0 : TAG 2
+ Rank            1 : TAG 3
+ Rank            1 : TAG 4
+ Rank            0 : TAG 3
+ Rank            0 : TAG 4
+ Rank            0 : TAG 5
+ Rank            1 : TAG 5
+ Rank            0 : TAG 6
+ Rank            1 : TAG 6
+ Rank            1 : TAG 7
+ Rank            1 : TAG 8
+ Rank            0 : TAG 7
+ Rank            0 : TAG 8
+ Rank            1 : TAG 9
+ Rank            0 : TAG 9
+[97m(r0,t0)  THIS SHIT!
+ Rank            1 : TAG 1
+ Rank            1 : TAG 2
+ SWE: time step: 51, sim. time: 2min 46s 195ms, dt: 3s 219ms 190µs, cells: 5050
+ THIS SHIT!
+ Rank            0 : TAG 1
+ Rank            0 : TAG 2
+ Rank            0 : TAG 3
+ Rank            0 : TAG 4
+ Rank            1 : TAG 3
+ Rank            1 : TAG 4
+ Rank            0 : TAG 5
+ Rank            1 : TAG 5
+ Rank            0 : TAG 6
+ Rank            1 : TAG 6
+ Rank            1 : TAG 7
+ Rank            1 : TAG 8
+ Rank            0 : TAG 7
+ Rank            0 : TAG 8
+ Rank            0 : TAG 9
+ Rank            1 : TAG 9
+[97m(r0,t0)  THIS SHIT!
+ Rank            1 : TAG 1
+ Rank            1 : TAG 2
+ SWE: time step: 52, sim. time: 2min 49s 414ms, dt: 3s 219ms 190µs, cells: 5053
+ THIS SHIT!
+ Rank            0 : TAG 1
+ Rank            0 : TAG 2
+ Rank            0 : TAG 3
+ Rank            0 : TAG 4
+ Rank            1 : TAG 3
+ Rank            1 : TAG 4
+ Rank            0 : TAG 5
+ Rank            1 : TAG 5
+ Rank            0 : TAG 6
+ Rank            1 : TAG 6
+ Rank            1 : TAG 7
+ Rank            1 : TAG 8
+ Rank            0 : TAG 7
+ Rank            0 : TAG 8
+ Rank            0 : TAG 9
+ Rank            1 : TAG 9
+[97m(r0,t0)  THIS SHIT!
+ Rank            1 : TAG 1
+ Rank            1 : TAG 2
+ SWE: time step: 53, sim. time: 2min 52s 634ms, dt: 3s 219ms 190µs, cells: 5081
+ THIS SHIT!
+ Rank            0 : TAG 1
+ Rank            0 : TAG 2
+ Rank            0 : TAG 3
+ Rank            0 : TAG 4
+ Rank            1 : TAG 3
+ Rank            1 : TAG 4
+ Rank            0 : TAG 5
+ Rank            1 : TAG 5
+ Rank            0 : TAG 6
+ Rank            1 : TAG 6
+ Rank            1 : TAG 7
+ Rank            1 : TAG 8
+ Rank            0 : TAG 7
+ Rank            0 : TAG 8
+ Rank            0 : TAG 9
+ Rank            1 : TAG 9
+[97m(r0,t0)  THIS SHIT!
+ Rank            1 : TAG 1
+ Rank            1 : TAG 2
+ SWE: time step: 54, sim. time: 2min 55s 853ms, dt: 3s 219ms 190µs, cells: 5081
+ THIS SHIT!
+ Rank            0 : TAG 1
+ Rank            0 : TAG 2
+ Rank            1 : TAG 3
+ Rank            1 : TAG 4
+ Rank            0 : TAG 3
+ Rank            0 : TAG 4
+ Rank            0 : TAG 5
+ Rank            1 : TAG 5
+ Rank            0 : TAG 6
+ Rank            1 : TAG 6
+ Rank            1 : TAG 7
+ Rank            1 : TAG 8
+ Rank            0 : TAG 7
+ Rank            0 : TAG 8
+ Rank            0 : TAG 9
+ Rank            1 : TAG 9
+[97m(r0,t0)  THIS SHIT!
+ Rank            1 : TAG 1
+ Rank            1 : TAG 2
+ SWE: time step: 55, sim. time: 2min 59s 72ms, dt: 3s 219ms 190µs, cells: 5102
+ THIS SHIT!
+ Rank            0 : TAG 1
+ Rank            0 : TAG 2
+ Rank            0 : TAG 3
+ Rank            0 : TAG 4
+ Rank            1 : TAG 3
+ Rank            1 : TAG 4
+ Rank            0 : TAG 5
+ Rank            1 : TAG 5
+ Rank            1 : TAG 6
+ Rank            1 : TAG 7
+ Rank            1 : TAG 8
+ Rank            0 : TAG 6
+ Rank            0 : TAG 7
+ Rank            0 : TAG 8
+ Rank            0 : TAG 9
+ Rank            1 : TAG 9
+[97m(r0,t0)  THIS SHIT!
+ Rank            1 : TAG 1
+ Rank            1 : TAG 2
+ SWE: time step: 56, sim. time: 3min 2s 291ms, dt: 3s 219ms 190µs, cells: 5102
+ THIS SHIT!
+ Rank            0 : TAG 1
+ Rank            0 : TAG 2
+ Rank            0 : TAG 3
+ Rank            1 : TAG 3
+ Rank            1 : TAG 4
+ Rank            0 : TAG 4
+ Rank            0 : TAG 5
+ Rank            1 : TAG 5
+ Rank            0 : TAG 6
+ Rank            1 : TAG 6
+ Rank            1 : TAG 7
+ Rank            1 : TAG 8
+ Rank            0 : TAG 7
+ Rank            0 : TAG 8
+ Rank            0 : TAG 9
+ Rank            1 : TAG 9
+[97m(r0,t0)  THIS SHIT!
+ Rank            1 : TAG 1
+ Rank            1 : TAG 2
+ SWE: time step: 57, sim. time: 3min 5s 510ms, dt: 3s 341ms 439µs, cells: 5106
+ THIS SHIT!
+ Rank            0 : TAG 1
+ Rank            0 : TAG 2
+ Rank            1 : TAG 3
+ Rank            1 : TAG 4
+ Rank            0 : TAG 3
+ Rank            0 : TAG 4
+ Rank            0 : TAG 5
+ Rank            1 : TAG 5
+ Rank            0 : TAG 6
+ Rank            1 : TAG 6
+ Rank            1 : TAG 7
+ Rank            1 : TAG 8
+ Rank            0 : TAG 7
+ Rank            0 : TAG 8
+ Rank            0 : TAG 9
+ Rank            1 : TAG 9
+[97m(r0,t0)  THIS SHIT!
+ Rank            1 : TAG 1
+ Rank            1 : TAG 2
+ SWE: time step: 58, sim. time: 3min 8s 852ms, dt: 3s 341ms 438µs, cells: 5104
+ THIS SHIT!
+ Rank            0 : TAG 1
+ Rank            0 : TAG 2
+ Rank            0 : TAG 3
+ Rank            1 : TAG 3
+ Rank            1 : TAG 4
+ Rank            0 : TAG 4
+ Rank            0 : TAG 5
+ Rank            1 : TAG 5
+ Rank            0 : TAG 6
+ Rank            1 : TAG 6
+ Rank            1 : TAG 7
+ Rank            1 : TAG 8
+ Rank            0 : TAG 7
+ Rank            0 : TAG 8
+ Rank            0 : TAG 9
+ Rank            1 : TAG 9
+[97m(r0,t0)  THIS SHIT!
+ Rank            1 : TAG 1
+ Rank            1 : TAG 2
+ SWE: time step: 59, sim. time: 3min 12s 193ms, dt: 3s 341ms 438µs, cells: 5127
+ THIS SHIT!
+ Rank            0 : TAG 1
+ Rank            0 : TAG 2
+ Rank            0 : TAG 3
+ Rank            0 : TAG 4
+ Rank            1 : TAG 3
+ Rank            1 : TAG 4
+ Rank            0 : TAG 5
+ Rank            1 : TAG 5
+ Rank            0 : TAG 6
+ Rank            1 : TAG 6
+ Rank            1 : TAG 7
+ Rank            1 : TAG 8
+ Rank            0 : TAG 7
+ Rank            0 : TAG 8
+ Rank            0 : TAG 9
+ Rank            1 : TAG 9
+[97m(r0,t0)  THIS SHIT!
+ Rank            1 : TAG 1
+ Rank            1 : TAG 2
+ SWE: time step: 60, sim. time: 3min 15s 535ms, dt: 3s 341ms 438µs, cells: 5120
+ THIS SHIT!
+ Rank            0 : TAG 1
+ Rank            0 : TAG 2
+ Rank            0 : TAG 3
+ Rank            1 : TAG 3
+ Rank            1 : TAG 4
+ Rank            0 : TAG 4
+ Rank            0 : TAG 5
+ Rank            1 : TAG 5
+ Rank            0 : TAG 6
+ Rank            1 : TAG 6
+ Rank            1 : TAG 7
+ Rank            1 : TAG 8
+ Rank            0 : TAG 7
+ Rank            0 : TAG 8
+ Rank            0 : TAG 9
+ Rank            1 : TAG 9
+[97m(r0,t0)  THIS SHIT!
+ Rank            1 : TAG 1
+ Rank            1 : TAG 2
+ SWE: time step: 61, sim. time: 3min 18s 876ms, dt: 3s 341ms 438µs, cells: 5121
+ THIS SHIT!
+ Rank            0 : TAG 1
+ Rank            0 : TAG 2
+ Rank            1 : TAG 3
+ Rank            1 : TAG 4
+ Rank            0 : TAG 3
+ Rank            0 : TAG 4
+ Rank            0 : TAG 5
+ Rank            1 : TAG 5
+ Rank            1 : TAG 6
+ Rank            1 : TAG 7
+ Rank            1 : TAG 8
+ Rank            0 : TAG 6
+ Rank            0 : TAG 7
+ Rank            0 : TAG 8
+ Rank            0 : TAG 9
+ Rank            1 : TAG 9
+[97m(r0,t0)  THIS SHIT!
+ Rank            1 : TAG 1
+ Rank            1 : TAG 2
+ SWE: time step: 62, sim. time: 3min 22s 218ms, dt: 3s 341ms 438µs, cells: 5116
+ THIS SHIT!
+ Rank            0 : TAG 1
+ Rank            0 : TAG 2
+ Rank            0 : TAG 3
+ Rank            0 : TAG 4
+ Rank            1 : TAG 3
+ Rank            1 : TAG 4
+ Rank            1 : TAG 5
+ Rank            0 : TAG 5
+ Rank            0 : TAG 6
+ Rank            1 : TAG 6
+ Rank            1 : TAG 7
+ Rank            1 : TAG 8
+ Rank            0 : TAG 7
+ Rank            0 : TAG 8
+ Rank            0 : TAG 9
+ Rank            1 : TAG 9
+[97m(r0,t0)  THIS SHIT!
+ Rank            1 : TAG 1
+ Rank            1 : TAG 2
+ SWE: time step: 63, sim. time: 3min 25s 559ms, dt: 3s 341ms 437µs, cells: 5130
+ THIS SHIT!
+ Rank            0 : TAG 1
+ Rank            0 : TAG 2
+ Rank            1 : TAG 3
+ Rank            1 : TAG 4
+ Rank            0 : TAG 3
+ Rank            0 : TAG 4
+ Rank            0 : TAG 5
+ Rank            1 : TAG 5
+ Rank            0 : TAG 6
+ Rank            1 : TAG 6
+ Rank            1 : TAG 7
+ Rank            1 : TAG 8
+ Rank            0 : TAG 7
+ Rank            0 : TAG 8
+ Rank            0 : TAG 9
+ Rank            1 : TAG 9
+[97m(r0,t0)  THIS SHIT!
+ Rank            1 : TAG 1
+ Rank            1 : TAG 2
+ SWE: time step: 64, sim. time: 3min 28s 900ms, dt: 3s 341ms 437µs, cells: 5158
+ THIS SHIT!
+ Rank            0 : TAG 1
+ Rank            0 : TAG 2
+ Rank            1 : TAG 3
+ Rank            1 : TAG 4
+ Rank            0 : TAG 3
+ Rank            0 : TAG 4
+ Rank            0 : TAG 5
+ Rank            1 : TAG 5
+ Rank            1 : TAG 6
+ Rank            1 : TAG 7
+ Rank            1 : TAG 8
+ Rank            0 : TAG 6
+ Rank            0 : TAG 7
+ Rank            0 : TAG 8
+ Rank            0 : TAG 9
+ Rank            1 : TAG 9
+[97m(r0,t0)  THIS SHIT!
+ Rank            1 : TAG 1
+ Rank            1 : TAG 2
+ SWE: time step: 65, sim. time: 3min 32s 242ms, dt: 3s 341ms 437µs, cells: 5155
+ THIS SHIT!
+ Rank            0 : TAG 1
+ Rank            0 : TAG 2
+ Rank            0 : TAG 3
+ Rank            0 : TAG 4
+ Rank            1 : TAG 3
+ Rank            1 : TAG 4
+ Rank            0 : TAG 5
+ Rank            1 : TAG 5
+ Rank            0 : TAG 6
+ Rank            1 : TAG 6
+ Rank            1 : TAG 7
+ Rank            1 : TAG 8
+ Rank            0 : TAG 7
+ Rank            0 : TAG 8
+ Rank            1 : TAG 9
+ Rank            0 : TAG 9
+[97m(r0,t0)  THIS SHIT!
+ Rank            1 : TAG 1
+ Rank            1 : TAG 2
+ SWE: time step: 66, sim. time: 3min 35s 583ms, dt: 3s 341ms 437µs, cells: 5183
+ THIS SHIT!
+ Rank            0 : TAG 1
+ Rank            0 : TAG 2
+ Rank            1 : TAG 3
+ Rank            1 : TAG 4
+ Rank            0 : TAG 3
+ Rank            0 : TAG 4
+ Rank            0 : TAG 5
+ Rank            1 : TAG 5
+ Rank            0 : TAG 6
+ Rank            1 : TAG 6
+ Rank            1 : TAG 7
+ Rank            1 : TAG 8
+ Rank            0 : TAG 7
+ Rank            0 : TAG 8
+ Rank            0 : TAG 9
+ Rank            1 : TAG 9
+[97m(r0,t0)  THIS SHIT!
+ Rank            1 : TAG 1
+ Rank            1 : TAG 2
+ SWE: time step: 67, sim. time: 3min 38s 925ms, dt: 3s 341ms 436µs, cells: 5200
+ THIS SHIT!
+ Rank            0 : TAG 1
+ Rank            0 : TAG 2
+ Rank            0 : TAG 3
+ Rank            1 : TAG 3
+ Rank            1 : TAG 4
+ Rank            0 : TAG 4
+ Rank            0 : TAG 5
+ Rank            1 : TAG 5
+ Rank            0 : TAG 6
+ Rank            1 : TAG 6
+ Rank            1 : TAG 7
+ Rank            1 : TAG 8
+ Rank            0 : TAG 7
+ Rank            0 : TAG 8
+ Rank            0 : TAG 9
+ Rank            1 : TAG 9
+[97m(r0,t0)  THIS SHIT!
+ Rank            1 : TAG 1
+ Rank            1 : TAG 2
+ SWE: time step: 68, sim. time: 3min 42s 266ms, dt: 3s 341ms 436µs, cells: 5206
+ THIS SHIT!
+ Rank            0 : TAG 1
+ Rank            0 : TAG 2
+ Rank            0 : TAG 3
+ Rank            0 : TAG 4
+ Rank            1 : TAG 3
+ Rank            1 : TAG 4
+ Rank            0 : TAG 5
+ Rank            1 : TAG 5
+ Rank            0 : TAG 6
+ Rank            1 : TAG 6
+ Rank            1 : TAG 7
+ Rank            1 : TAG 8
+ Rank            0 : TAG 7
+ Rank            0 : TAG 8
+ Rank            1 : TAG 9
+ Rank            0 : TAG 9
+[97m(r0,t0)  THIS SHIT!
+ Rank            1 : TAG 1
+ Rank            1 : TAG 2
+ SWE: time step: 69, sim. time: 3min 45s 608ms, dt: 3s 341ms 436µs, cells: 5223
+ THIS SHIT!
+ Rank            0 : TAG 1
+ Rank            0 : TAG 2
+ Rank            0 : TAG 3
+ Rank            0 : TAG 4
+ Rank            1 : TAG 3
+ Rank            1 : TAG 4
+ Rank            0 : TAG 5
+ Rank            1 : TAG 5
+ Rank            0 : TAG 6
+ Rank            1 : TAG 6
+ Rank            1 : TAG 7
+ Rank            1 : TAG 8
+ Rank            0 : TAG 7
+ Rank            0 : TAG 8
+ Rank            0 : TAG 9
+ Rank            1 : TAG 9
+[97m(r0,t0)  THIS SHIT!
+ Rank            1 : TAG 1
+ Rank            1 : TAG 2
+ SWE: time step: 70, sim. time: 3min 48s 949ms, dt: 3s 341ms 436µs, cells: 5228
+ THIS SHIT!
+ Rank            0 : TAG 1
+ Rank            0 : TAG 2
+ Rank            0 : TAG 3
+ Rank            0 : TAG 4
+ Rank            1 : TAG 3
+ Rank            1 : TAG 4
+ Rank            0 : TAG 5
+ Rank            1 : TAG 5
+ Rank            0 : TAG 6
+ Rank            1 : TAG 6
+ Rank            1 : TAG 7
+ Rank            1 : TAG 8
+ Rank            0 : TAG 7
+ Rank            0 : TAG 8
+ Rank            0 : TAG 9
+ Rank            1 : TAG 9
+[97m(r0,t0)  THIS SHIT!
+ Rank            1 : TAG 1
+ Rank            1 : TAG 2
+ SWE: time step: 71, sim. time: 3min 52s 291ms, dt: 3s 341ms 435µs, cells: 5238
+ THIS SHIT!
+ Rank            0 : TAG 1
+ Rank            0 : TAG 2
+ Rank            0 : TAG 3
+ Rank            1 : TAG 3
+ Rank            1 : TAG 4
+ Rank            0 : TAG 4
+ Rank            0 : TAG 5
+ Rank            1 : TAG 5
+ Rank            0 : TAG 6
+ Rank            1 : TAG 6
+ Rank            1 : TAG 7
+ Rank            1 : TAG 8
+ Rank            0 : TAG 7
+ Rank            0 : TAG 8
+ Rank            0 : TAG 9
+ Rank            1 : TAG 9
+[97m(r0,t0)  THIS SHIT!
+ Rank            1 : TAG 1
+ Rank            1 : TAG 2
+ SWE: time step: 72, sim. time: 3min 55s 632ms, dt: 3s 341ms 435µs, cells: 5247
+ THIS SHIT!
+ Rank            0 : TAG 1
+ Rank            0 : TAG 2
+ Rank            0 : TAG 3
+ Rank            1 : TAG 3
+ Rank            1 : TAG 4
+ Rank            0 : TAG 4
+ Rank            0 : TAG 5
+ Rank            1 : TAG 5
+ Rank            0 : TAG 6
+ Rank            1 : TAG 6
+ Rank            1 : TAG 7
+ Rank            1 : TAG 8
+ Rank            0 : TAG 7
+ Rank            0 : TAG 8
+ Rank            0 : TAG 9
+ Rank            1 : TAG 9
+[97m(r0,t0)  THIS SHIT!
+ Rank            1 : TAG 1
+ Rank            1 : TAG 2
+ SWE: time step: 73, sim. time: 3min 58s 973ms, dt: 3s 341ms 435µs, cells: 5265
+ THIS SHIT!
+ Rank            0 : TAG 1
+ Rank            0 : TAG 2
+ Rank            1 : TAG 3
+ Rank            1 : TAG 4
+ Rank            0 : TAG 3
+ Rank            0 : TAG 4
+ Rank            0 : TAG 5
+ Rank            1 : TAG 5
+ Rank            0 : TAG 6
+ Rank            1 : TAG 6
+ Rank            1 : TAG 7
+ Rank            1 : TAG 8
+ Rank            0 : TAG 7
+ Rank            0 : TAG 8
+ Rank            0 : TAG 9
+ Rank            1 : TAG 9
+[97m(r0,t0)  SWE: time step: 74, sim. time: 4min 2s 315ms, dt: 3s 341ms 435µs, cells: 5270
+[97m(r0,t0)  SWE: output step: 2
+[97m(r0,t0)  SWE: output step: 2
+ THIS SHIT!
+ Rank            1 : TAG 1
+ Rank            1 : TAG 2
+ THIS SHIT!
+ Rank            0 : TAG 1
+ Rank            0 : TAG 2
+ Rank            0 : TAG 3
+ Rank            0 : TAG 4
+ Rank            1 : TAG 3
+ Rank            1 : TAG 4
+ Rank            0 : TAG 5
+ Rank            1 : TAG 5
+ Rank            0 : TAG 6
+ Rank            0 : TAG 7
+ Rank            0 : TAG 8
+ Rank            1 : TAG 6
+ Rank            1 : TAG 7
+ Rank            1 : TAG 8
+ Rank            0 : TAG 9
+ Rank            1 : TAG 9
+[97m(r0,t0)  THIS SHIT!
+ SWE: time step: 75, sim. time: 4min 5s 656ms, dt: 3s 341ms 434µs, cells: 5279
+ THIS SHIT!
+ Rank            0 : TAG 1
+ Rank            0 : TAG 2
+ Rank            1 : TAG 1
+ Rank            1 : TAG 2
+ Rank            1 : TAG 3
+ Rank            0 : TAG 3
+ Rank            0 : TAG 4
+ Rank            1 : TAG 4
+ Rank            0 : TAG 5
+ Rank            1 : TAG 5
+ Rank            0 : TAG 6
+ Rank            0 : TAG 7
+ Rank            0 : TAG 8
+ Rank            1 : TAG 6
+ Rank            1 : TAG 7
+ Rank            1 : TAG 8
+ Rank            0 : TAG 9
+ Rank            1 : TAG 9
+[97m(r0,t0)  THIS SHIT!
+ SWE: time step: 76, sim. time: 4min 8s 998ms, dt: 3s 341ms 434µs, cells: 5278
+ THIS SHIT!
+ Rank            0 : TAG 1
+ Rank            0 : TAG 2
+ Rank            1 : TAG 1
+ Rank            1 : TAG 2
+ Rank            0 : TAG 3
+ Rank            0 : TAG 4
+ Rank            1 : TAG 3
+ Rank            1 : TAG 4
+ Rank            0 : TAG 5
+ Rank            1 : TAG 5
+ Rank            0 : TAG 6
+ Rank            0 : TAG 7
+ Rank            0 : TAG 8
+ Rank            1 : TAG 6
+ Rank            1 : TAG 7
+ Rank            1 : TAG 8
+ Rank            1 : TAG 9
+ Rank            0 : TAG 9
+[97m(r0,t0)  THIS SHIT!
+ SWE: time step: 77, sim. time: 4min 12s 339ms, dt: 3s 341ms 434µs, cells: 5302
+ THIS SHIT!
+ Rank            0 : TAG 1
+ Rank            0 : TAG 2
+ Rank            1 : TAG 1
+ Rank            1 : TAG 2
+ Rank            0 : TAG 3
+ Rank            0 : TAG 4
+ Rank            1 : TAG 3
+ Rank            1 : TAG 4
+ Rank            1 : TAG 5
+ Rank            0 : TAG 5
+ Rank            1 : TAG 6
+ Rank            0 : TAG 6
+ Rank            0 : TAG 7
+ Rank            0 : TAG 8
+ Rank            1 : TAG 7
+ Rank            1 : TAG 8
+ Rank            0 : TAG 9
+ Rank            1 : TAG 9
+[97m(r0,t0)  THIS SHIT!
+ SWE: time step: 78, sim. time: 4min 15s 681ms, dt: 3s 341ms 433µs, cells: 5306
+ THIS SHIT!
+ Rank            0 : TAG 1
+ Rank            0 : TAG 2
+ Rank            1 : TAG 1
+ Rank            1 : TAG 2
+ Rank            0 : TAG 3
+ Rank            0 : TAG 4
+ Rank            1 : TAG 3
+ Rank            1 : TAG 4
+ Rank            0 : TAG 5
+ Rank            1 : TAG 5
+ Rank            0 : TAG 6
+ Rank            0 : TAG 7
+ Rank            0 : TAG 8
+ Rank            1 : TAG 6
+ Rank            1 : TAG 7
+ Rank            1 : TAG 8
+ Rank            0 : TAG 9
+ Rank            1 : TAG 9
+[97m(r0,t0)  THIS SHIT!
+ SWE: time step: 79, sim. time: 4min 19s 22ms, dt: 3s 341ms 433µs, cells: 5317
+ THIS SHIT!
+ Rank            0 : TAG 1
+ Rank            0 : TAG 2
+ Rank            1 : TAG 1
+ Rank            1 : TAG 2
+ Rank            1 : TAG 3
+ Rank            1 : TAG 4
+ Rank            0 : TAG 3
+ Rank            0 : TAG 4
+ Rank            1 : TAG 5
+ Rank            0 : TAG 5
+ Rank            0 : TAG 6
+ Rank            1 : TAG 6
+ Rank            0 : TAG 7
+ Rank            0 : TAG 8
+ Rank            1 : TAG 7
+ Rank            1 : TAG 8
+ Rank            0 : TAG 9
+ Rank            1 : TAG 9
+[97m(r0,t0)  THIS SHIT!
+ SWE: time step: 80, sim. time: 4min 22s 363ms, dt: 3s 341ms 433µs, cells: 5315
+ THIS SHIT!
+ Rank            0 : TAG 1
+ Rank            0 : TAG 2
+ Rank            1 : TAG 1
+ Rank            1 : TAG 2
+ Rank            1 : TAG 3
+ Rank            1 : TAG 4
+ Rank            0 : TAG 3
+ Rank            0 : TAG 4
+ Rank            0 : TAG 5
+ Rank            1 : TAG 5
+ Rank            0 : TAG 6
+ Rank            0 : TAG 7
+ Rank            1 : TAG 6
+ Rank            0 : TAG 8
+ Rank            1 : TAG 7
+ Rank            1 : TAG 8
+ Rank            1 : TAG 9
+ Rank            0 : TAG 9
+[97m(r0,t0)  THIS SHIT!
+ SWE: time step: 81, sim. time: 4min 25s 705ms, dt: 3s 341ms 432µs, cells: 5333
+ THIS SHIT!
+ Rank            0 : TAG 1
+ Rank            0 : TAG 2
+ Rank            1 : TAG 1
+ Rank            1 : TAG 2
+ Rank            0 : TAG 3
+ Rank            0 : TAG 4
+ Rank            1 : TAG 3
+ Rank            1 : TAG 4
+ Rank            0 : TAG 5
+ Rank            1 : TAG 5
+ Rank            0 : TAG 6
+ Rank            1 : TAG 6
+ Rank            0 : TAG 7
+ Rank            0 : TAG 8
+ Rank            1 : TAG 7
+ Rank            1 : TAG 8
+ Rank            0 : TAG 9
+ Rank            1 : TAG 9
+[97m(r0,t0)  THIS SHIT!
+ SWE: time step: 82, sim. time: 4min 29s 46ms, dt: 3s 341ms 432µs, cells: 5326
+ THIS SHIT!
+ Rank            0 : TAG 1
+ Rank            0 : TAG 2
+ Rank            1 : TAG 1
+ Rank            1 : TAG 2
+ Rank            0 : TAG 3
+ Rank            0 : TAG 4
+ Rank            1 : TAG 3
+ Rank            1 : TAG 4
+ Rank            0 : TAG 5
+ Rank            1 : TAG 5
+ Rank            0 : TAG 6
+ Rank            0 : TAG 7
+ Rank            0 : TAG 8
+ Rank            1 : TAG 6
+ Rank            1 : TAG 7
+ Rank            1 : TAG 8
+ Rank            1 : TAG 9
+ Rank            0 : TAG 9
+[97m(r0,t0)  THIS SHIT!
+ SWE: time step: 83, sim. time: 4min 32s 388ms, dt: 3s 341ms 432µs, cells: 5346
+ THIS SHIT!
+ Rank            0 : TAG 1
+ Rank            0 : TAG 2
+ Rank            1 : TAG 1
+ Rank            1 : TAG 2
+ Rank            0 : TAG 3
+ Rank            0 : TAG 4
+ Rank            1 : TAG 3
+ Rank            1 : TAG 4
+ Rank            1 : TAG 5
+ Rank            0 : TAG 5
+ Rank            0 : TAG 6
+ Rank            1 : TAG 6
+ Rank            0 : TAG 7
+ Rank            0 : TAG 8
+ Rank            1 : TAG 7
+ Rank            1 : TAG 8
+ Rank            1 : TAG 9
+ Rank            0 : TAG 9
+[97m(r0,t0)  THIS SHIT!
+ SWE: time step: 84, sim. time: 4min 35s 729ms, dt: 3s 341ms 431µs, cells: 5378
+ THIS SHIT!
+ Rank            0 : TAG 1
+ Rank            0 : TAG 2
+ Rank            1 : TAG 1
+ Rank            1 : TAG 2
+ Rank            0 : TAG 3
+ Rank            0 : TAG 4
+ Rank            1 : TAG 3
+ Rank            1 : TAG 4
+ Rank            0 : TAG 5
+ Rank            1 : TAG 5
+ Rank            0 : TAG 6
+ Rank            0 : TAG 7
+ Rank            0 : TAG 8
+ Rank            1 : TAG 6
+ Rank            1 : TAG 7
+ Rank            1 : TAG 8
+ Rank            0 : TAG 9
+ Rank            1 : TAG 9
+[97m(r0,t0)  THIS SHIT!
+ SWE: time step: 85, sim. time: 4min 39s 71ms, dt: 3s 341ms 431µs, cells: 5388
+ THIS SHIT!
+ Rank            0 : TAG 1
+ Rank            0 : TAG 2
+ Rank            1 : TAG 1
+ Rank            1 : TAG 2
+ Rank            1 : TAG 3
+ Rank            1 : TAG 4
+ Rank            0 : TAG 3
+ Rank            0 : TAG 4
+ Rank            0 : TAG 5
+ Rank            1 : TAG 5
+ Rank            0 : TAG 6
+ Rank            1 : TAG 6
+ Rank            0 : TAG 7
+ Rank            0 : TAG 8
+ Rank            1 : TAG 7
+ Rank            1 : TAG 8
+ Rank            1 : TAG 9
+ Rank            0 : TAG 9
+[97m(r0,t0)  THIS SHIT!
+ SWE: time step: 86, sim. time: 4min 42s 412ms, dt: 3s 341ms 430µs, cells: 5408
+ THIS SHIT!
+ Rank            0 : TAG 1
+ Rank            0 : TAG 2
+ Rank            1 : TAG 1
+ Rank            1 : TAG 2
+ Rank            1 : TAG 3
+ Rank            1 : TAG 4
+ Rank            0 : TAG 3
+ Rank            0 : TAG 4
+ Rank            0 : TAG 5
+ Rank            1 : TAG 5
+ Rank            0 : TAG 6
+ Rank            0 : TAG 7
+ Rank            1 : TAG 6
+ Rank            0 : TAG 8
+ Rank            1 : TAG 7
+ Rank            1 : TAG 8
+ Rank            1 : TAG 9
+ Rank            0 : TAG 9
+[97m(r0,t0)  THIS SHIT!
+ SWE: time step: 87, sim. time: 4min 45s 753ms, dt: 3s 341ms 430µs, cells: 5427
+ THIS SHIT!
+ Rank            0 : TAG 1
+ Rank            0 : TAG 2
+ Rank            1 : TAG 1
+ Rank            1 : TAG 2
+ Rank            0 : TAG 3
+ Rank            0 : TAG 4
+ Rank            1 : TAG 3
+ Rank            1 : TAG 4
+ Rank            0 : TAG 5
+ Rank            1 : TAG 5
+ Rank            0 : TAG 6
+ Rank            0 : TAG 7
+ Rank            0 : TAG 8
+ Rank            1 : TAG 6
+ Rank            1 : TAG 7
+ Rank            1 : TAG 8
+ Rank            0 : TAG 9
+ Rank            1 : TAG 9
+[97m(r0,t0)  THIS SHIT!
+ SWE: time step: 88, sim. time: 4min 49s 95ms, dt: 3s 341ms 430µs, cells: 5437
+ THIS SHIT!
+ Rank            0 : TAG 1
+ Rank            0 : TAG 2
+ Rank            1 : TAG 1
+ Rank            1 : TAG 2
+ Rank            0 : TAG 3
+ Rank            0 : TAG 4
+ Rank            1 : TAG 3
+ Rank            1 : TAG 4
+ Rank            0 : TAG 5
+ Rank            1 : TAG 5
+ Rank            0 : TAG 6
+ Rank            0 : TAG 7
+ Rank            0 : TAG 8
+ Rank            1 : TAG 6
+ Rank            1 : TAG 7
+ Rank            1 : TAG 8
+ Rank            0 : TAG 9
+ Rank            1 : TAG 9
+[97m(r0,t0)  THIS SHIT!
+ SWE: time step: 89, sim. time: 4min 52s 436ms, dt: 3s 341ms 429µs, cells: 5459
+ THIS SHIT!
+ Rank            0 : TAG 1
+ Rank            0 : TAG 2
+ Rank            1 : TAG 1
+ Rank            1 : TAG 2
+ Rank            1 : TAG 3
+ Rank            0 : TAG 3
+ Rank            0 : TAG 4
+ Rank            1 : TAG 4
+ Rank            0 : TAG 5
+ Rank            1 : TAG 5
+ Rank            1 : TAG 6
+ Rank            0 : TAG 6
+ Rank            0 : TAG 7
+ Rank            0 : TAG 8
+ Rank            1 : TAG 7
+ Rank            1 : TAG 8
+ Rank            0 : TAG 9
+ Rank            1 : TAG 9
+[97m(r0,t0)  THIS SHIT!
+ SWE: time step: 90, sim. time: 4min 55s 778ms, dt: 3s 341ms 429µs, cells: 5473
+ THIS SHIT!
+ Rank            0 : TAG 1
+ Rank            0 : TAG 2
+ Rank            1 : TAG 1
+ Rank            1 : TAG 2
+ Rank            0 : TAG 3
+ Rank            0 : TAG 4
+ Rank            1 : TAG 3
+ Rank            1 : TAG 4
+ Rank            0 : TAG 5
+ Rank            1 : TAG 5
+ Rank            0 : TAG 6
+ Rank            0 : TAG 7
+ Rank            0 : TAG 8
+ Rank            1 : TAG 6
+ Rank            1 : TAG 7
+ Rank            1 : TAG 8
+ Rank            1 : TAG 9
+ Rank            0 : TAG 9
+[97m(r0,t0)  THIS SHIT!
+ SWE: time step: 91, sim. time: 4min 59s 119ms, dt: 3s 341ms 428µs, cells: 5486
+ THIS SHIT!
+ Rank            0 : TAG 1
+ Rank            0 : TAG 2
+ Rank            1 : TAG 1
+ Rank            1 : TAG 2
+ Rank            0 : TAG 3
+ Rank            0 : TAG 4
+ Rank            1 : TAG 3
+ Rank            1 : TAG 4
+ Rank            0 : TAG 5
+ Rank            1 : TAG 5
+ Rank            0 : TAG 6
+ Rank            0 : TAG 7
+ Rank            1 : TAG 6
+ Rank            0 : TAG 8
+ Rank            1 : TAG 7
+ Rank            1 : TAG 8
+ Rank            0 : TAG 9
+ Rank            1 : TAG 9
+[97m(r0,t0)  THIS SHIT!
+ SWE: time step: 92, sim. time: 5min 2s 461ms, dt: 3s 341ms 428µs, cells: 5485
+ THIS SHIT!
+ Rank            0 : TAG 1
+ Rank            0 : TAG 2
+ Rank            1 : TAG 1
+ Rank            1 : TAG 2
+ Rank            1 : TAG 3
+ Rank            1 : TAG 4
+ Rank            0 : TAG 3
+ Rank            0 : TAG 4
+ Rank            0 : TAG 5
+ Rank            1 : TAG 5
+ Rank            0 : TAG 6
+ Rank            0 : TAG 7
+ Rank            0 : TAG 8
+ Rank            1 : TAG 6
+ Rank            1 : TAG 7
+ Rank            1 : TAG 8
+ Rank            0 : TAG 9
+ Rank            1 : TAG 9
+[97m(r0,t0)  THIS SHIT!
+ SWE: time step: 93, sim. time: 5min 5s 802ms, dt: 3s 341ms 427µs, cells: 5496
+ THIS SHIT!
+ Rank            0 : TAG 1
+ Rank            0 : TAG 2
+ Rank            1 : TAG 1
+ Rank            1 : TAG 2
+ Rank            1 : TAG 3
+ Rank            1 : TAG 4
+ Rank            0 : TAG 3
+ Rank            0 : TAG 4
+ Rank            0 : TAG 5
+ Rank            1 : TAG 5
+ Rank            0 : TAG 6
+ Rank            1 : TAG 6
+ Rank            0 : TAG 7
+ Rank            0 : TAG 8
+ Rank            1 : TAG 7
+ Rank            1 : TAG 8
+ Rank            1 : TAG 9
+ Rank            0 : TAG 9
+[97m(r0,t0)  THIS SHIT!
+ SWE: time step: 94, sim. time: 5min 9s 143ms, dt: 3s 341ms 427µs, cells: 5512
+ THIS SHIT!
+ Rank            0 : TAG 1
+ Rank            0 : TAG 2
+ Rank            1 : TAG 1
+ Rank            1 : TAG 2
+ Rank            0 : TAG 3
+ Rank            0 : TAG 4
+ Rank            1 : TAG 3
+ Rank            1 : TAG 4
+ Rank            0 : TAG 5
+ Rank            1 : TAG 5
+ Rank            0 : TAG 6
+ Rank            0 : TAG 7
+ Rank            0 : TAG 8
+ Rank            1 : TAG 6
+ Rank            1 : TAG 7
+ Rank            1 : TAG 8
+ Rank            0 : TAG 9
+ Rank            1 : TAG 9
+[97m(r0,t0)  THIS SHIT!
+ SWE: time step: 95, sim. time: 5min 12s 485ms, dt: 3s 341ms 426µs, cells: 5512
+ THIS SHIT!
+ Rank            0 : TAG 1
+ Rank            0 : TAG 2
+ Rank            1 : TAG 1
+ Rank            1 : TAG 2
+ Rank            0 : TAG 3
+ Rank            0 : TAG 4
+ Rank            1 : TAG 3
+ Rank            1 : TAG 4
+ Rank            1 : TAG 5
+ Rank            0 : TAG 5
+ Rank            0 : TAG 6
+ Rank            0 : TAG 7
+ Rank            0 : TAG 8
+ Rank            1 : TAG 6
+ Rank            1 : TAG 7
+ Rank            1 : TAG 8
+ Rank            1 : TAG 9
+ Rank            0 : TAG 9
+[97m(r0,t0)  THIS SHIT!
+ SWE: time step: 96, sim. time: 5min 15s 826ms, dt: 3s 341ms 425µs, cells: 5529
+ THIS SHIT!
+ Rank            0 : TAG 1
+ Rank            0 : TAG 2
+ Rank            1 : TAG 1
+ Rank            1 : TAG 2
+ Rank            1 : TAG 3
+ Rank            1 : TAG 4
+ Rank            0 : TAG 3
+ Rank            0 : TAG 4
+ Rank            1 : TAG 5
+ Rank            0 : TAG 5
+ Rank            0 : TAG 6
+ Rank            0 : TAG 7
+ Rank            0 : TAG 8
+ Rank            1 : TAG 6
+ Rank            1 : TAG 7
+ Rank            1 : TAG 8
+ Rank            0 : TAG 9
+ Rank            1 : TAG 9
+[97m(r0,t0)  THIS SHIT!
+ SWE: time step: 97, sim. time: 5min 19s 168ms, dt: 3s 341ms 425µs, cells: 5536
+ THIS SHIT!
+ Rank            0 : TAG 1
+ Rank            0 : TAG 2
+ Rank            1 : TAG 1
+ Rank            1 : TAG 2
+ Rank            0 : TAG 3
+ Rank            0 : TAG 4
+ Rank            1 : TAG 3
+ Rank            1 : TAG 4
+ Rank            0 : TAG 5
+ Rank            1 : TAG 5
+ Rank            0 : TAG 6
+ Rank            1 : TAG 6
+ Rank            0 : TAG 7
+ Rank            0 : TAG 8
+ Rank            1 : TAG 7
+ Rank            1 : TAG 8
+ Rank            0 : TAG 9
+ Rank            1 : TAG 9
+[97m(r0,t0)  THIS SHIT!
+ SWE: time step: 98, sim. time: 5min 22s 509ms, dt: 3s 341ms 424µs, cells: 5551
+ THIS SHIT!
+ Rank            0 : TAG 1
+ Rank            0 : TAG 2
+ Rank            1 : TAG 1
+ Rank            1 : TAG 2
+ Rank            1 : TAG 3
+ Rank            1 : TAG 4
+ Rank            0 : TAG 3
+ Rank            0 : TAG 4
+ Rank            0 : TAG 5
+ Rank            1 : TAG 5
+ Rank            0 : TAG 6
+ Rank            0 : TAG 7
+ Rank            0 : TAG 8
+ Rank            1 : TAG 6
+ Rank            1 : TAG 7
+ Rank            1 : TAG 8
+ Rank            1 : TAG 9
+ Rank            0 : TAG 9
+[97m(r0,t0)  THIS SHIT!
+ SWE: time step: 99, sim. time: 5min 25s 851ms, dt: 3s 341ms 423µs, cells: 5576
+ THIS SHIT!
+ Rank            0 : TAG 1
+ Rank            0 : TAG 2
+ Rank            1 : TAG 1
+ Rank            1 : TAG 2
+ Rank            1 : TAG 3
+ Rank            0 : TAG 3
+ Rank            0 : TAG 4
+ Rank            1 : TAG 4
+ Rank            0 : TAG 5
+ Rank            1 : TAG 5
+ Rank            0 : TAG 6
+ Rank            0 : TAG 7
+ Rank            0 : TAG 8
+ Rank            1 : TAG 6
+ Rank            1 : TAG 7
+ Rank            1 : TAG 8
+ Rank            0 : TAG 9
+ Rank            1 : TAG 9
+[97m(r0,t0)  THIS SHIT!
+ SWE: time step: 100, sim. time: 5min 29s 192ms, dt: 3s 341ms 423µs, cells: 5603
+ THIS SHIT!
+ Rank            0 : TAG 1
+ Rank            0 : TAG 2
+ Rank            1 : TAG 1
+ Rank            1 : TAG 2
+ Rank            1 : TAG 3
+ Rank            1 : TAG 4
+ Rank            0 : TAG 3
+ Rank            0 : TAG 4
+ Rank            0 : TAG 5
+ Rank            1 : TAG 5
+ Rank            0 : TAG 6
+ Rank            0 : TAG 7
+ Rank            0 : TAG 8
+ Rank            1 : TAG 6
+ Rank            1 : TAG 7
+ Rank            1 : TAG 8
+ Rank            0 : TAG 9
+ Rank            1 : TAG 9
+[97m(r0,t0)  THIS SHIT!
+ SWE: time step: 101, sim. time: 5min 32s 533ms, dt: 3s 341ms 422µs, cells: 5606
+ THIS SHIT!
+ Rank            0 : TAG 1
+ Rank            0 : TAG 2
+ Rank            1 : TAG 1
+ Rank            1 : TAG 2
+ Rank            0 : TAG 3
+ Rank            0 : TAG 4
+ Rank            1 : TAG 3
+ Rank            1 : TAG 4
+ Rank            0 : TAG 5
+ Rank            1 : TAG 5
+ Rank            0 : TAG 6
+ Rank            0 : TAG 7
+ Rank            0 : TAG 8
+ Rank            1 : TAG 6
+ Rank            1 : TAG 7
+ Rank            1 : TAG 8
+ Rank            0 : TAG 9
+ Rank            1 : TAG 9
+[97m(r0,t0)  THIS SHIT!
+ SWE: time step: 102, sim. time: 5min 35s 875ms, dt: 3s 341ms 421µs, cells: 5623
+ THIS SHIT!
+ Rank            0 : TAG 1
+ Rank            0 : TAG 2
+ Rank            1 : TAG 1
+ Rank            1 : TAG 2
+ Rank            1 : TAG 3
+ Rank            1 : TAG 4
+ Rank            0 : TAG 3
+ Rank            0 : TAG 4
+ Rank            0 : TAG 5
+ Rank            1 : TAG 5
+ Rank            0 : TAG 6
+ Rank            0 : TAG 7
+ Rank            0 : TAG 8
+ Rank            1 : TAG 6
+ Rank            1 : TAG 7
+ Rank            1 : TAG 8
+ Rank            0 : TAG 9
+ Rank            1 : TAG 9
+[97m(r0,t0)  THIS SHIT!
+ SWE: time step: 103, sim. time: 5min 39s 216ms, dt: 3s 341ms 421µs, cells: 5639
+ THIS SHIT!
+ Rank            0 : TAG 1
+ Rank            0 : TAG 2
+ Rank            1 : TAG 1
+ Rank            1 : TAG 2
+ Rank            0 : TAG 3
+ Rank            0 : TAG 4
+ Rank            1 : TAG 3
+ Rank            1 : TAG 4
+ Rank            0 : TAG 5
+ Rank            1 : TAG 5
+ Rank            1 : TAG 6
+ Rank            0 : TAG 6
+ Rank            0 : TAG 7
+ Rank            0 : TAG 8
+ Rank            1 : TAG 7
+ Rank            1 : TAG 8
+ Rank            1 : TAG 9
+ Rank            0 : TAG 9
+[97m(r0,t0)  THIS SHIT!
+ SWE: time step: 104, sim. time: 5min 42s 558ms, dt: 3s 341ms 420µs, cells: 5648
+ THIS SHIT!
+ Rank            0 : TAG 1
+ Rank            0 : TAG 2
+ Rank            1 : TAG 1
+ Rank            1 : TAG 2
+ Rank            0 : TAG 3
+ Rank            0 : TAG 4
+ Rank            1 : TAG 3
+ Rank            1 : TAG 4
+ Rank            0 : TAG 5
+ Rank            1 : TAG 5
+ Rank            0 : TAG 6
+ Rank            0 : TAG 7
+ Rank            0 : TAG 8
+ Rank            1 : TAG 6
+ Rank            1 : TAG 7
+ Rank            1 : TAG 8
+ Rank            0 : TAG 9
+ Rank            1 : TAG 9
+[97m(r0,t0)  THIS SHIT!
+ SWE: time step: 105, sim. time: 5min 45s 899ms, dt: 3s 341ms 419µs, cells: 5669
+ THIS SHIT!
+ Rank            0 : TAG 1
+ Rank            0 : TAG 2
+ Rank            1 : TAG 1
+ Rank            1 : TAG 2
+ Rank            0 : TAG 3
+ Rank            1 : TAG 3
+ Rank            0 : TAG 4
+ Rank            1 : TAG 4
+ Rank            1 : TAG 5
+ Rank            0 : TAG 5
+ Rank            0 : TAG 6
+ Rank            0 : TAG 7
+ Rank            0 : TAG 8
+ Rank            1 : TAG 6
+ Rank            1 : TAG 7
+ Rank            1 : TAG 8
+ Rank            0 : TAG 9
+ Rank            1 : TAG 9
+[97m(r0,t0)  THIS SHIT!
+ SWE: time step: 106, sim. time: 5min 49s 241ms, dt: 3s 341ms 419µs, cells: 5694
+ THIS SHIT!
+ Rank            0 : TAG 1
+ Rank            0 : TAG 2
+ Rank            1 : TAG 1
+ Rank            1 : TAG 2
+ Rank            1 : TAG 3
+ Rank            1 : TAG 4
+ Rank            0 : TAG 3
+ Rank            0 : TAG 4
+ Rank            0 : TAG 5
+ Rank            1 : TAG 5
+ Rank            0 : TAG 6
+ Rank            1 : TAG 6
+ Rank            0 : TAG 7
+ Rank            0 : TAG 8
+ Rank            1 : TAG 7
+ Rank            1 : TAG 8
+ Rank            1 : TAG 9
+ Rank            0 : TAG 9
+[97m(r0,t0)  SWE: time step: 107, sim. time: 5min 52s 582ms, dt: 3s 341ms 418µs, cells: 5714
+ THIS SHIT!
+ Rank            0 : TAG 1
+ Rank            0 : TAG 2
+ THIS SHIT!
+ Rank            1 : TAG 1
+ Rank            1 : TAG 2
+ Rank            0 : TAG 3
+ Rank            1 : TAG 3
+ Rank            0 : TAG 4
+ Rank            1 : TAG 4
+ Rank            0 : TAG 5
+ Rank            1 : TAG 5
+ Rank            0 : TAG 6
+ Rank            0 : TAG 7
+ Rank            0 : TAG 8
+ Rank            1 : TAG 6
+ Rank            1 : TAG 7
+ Rank            1 : TAG 8
+ Rank            0 : TAG 9
+ Rank            1 : TAG 9
+[97m(r0,t0)  THIS SHIT!
+ SWE: time step: 108, sim. time: 5min 55s 923ms, dt: 3s 341ms 417µs, cells: 5721
+ THIS SHIT!
+ Rank            0 : TAG 1
+ Rank            0 : TAG 2
+ Rank            1 : TAG 1
+ Rank            1 : TAG 2
+ Rank            1 : TAG 3
+ Rank            1 : TAG 4
+ Rank            0 : TAG 3
+ Rank            0 : TAG 4
+ Rank            0 : TAG 5
+ Rank            1 : TAG 5
+ Rank            0 : TAG 6
+ Rank            0 : TAG 7
+ Rank            0 : TAG 8
+ Rank            1 : TAG 6
+ Rank            1 : TAG 7
+ Rank            1 : TAG 8
+ Rank            1 : TAG 9
+ Rank            0 : TAG 9
+[97m(r0,t0)  THIS SHIT!
+ SWE: time step: 109, sim. time: 5min 59s 265ms, dt: 3s 341ms 416µs, cells: 5736
+ THIS SHIT!
+ Rank            0 : TAG 1
+ Rank            0 : TAG 2
+ Rank            1 : TAG 1
+ Rank            1 : TAG 2
+ Rank            0 : TAG 3
+ Rank            0 : TAG 4
+ Rank            1 : TAG 3
+ Rank            1 : TAG 4
+ Rank            0 : TAG 5
+ Rank            1 : TAG 5
+ Rank            0 : TAG 6
+ Rank            1 : TAG 6
+ Rank            0 : TAG 7
+ Rank            0 : TAG 8
+ Rank            1 : TAG 7
+ Rank            1 : TAG 8
+ Rank            0 : TAG 9
+ Rank            1 : TAG 9
+[97m(r0,t0)  SWE: time step: 110, sim. time: 6min 2s 606ms, dt: 3s 341ms 415µs, cells: 5756
+[97m(r0,t0)  SWE: output step: 3
+[97m(r0,t0)  SWE: output step: 3
+ THIS SHIT!
+ Rank            1 : TAG 1
+ Rank            1 : TAG 2
+ THIS SHIT!
+ Rank            0 : TAG 1
+ Rank            0 : TAG 2
+ Rank            1 : TAG 3
+ Rank            1 : TAG 4
+ Rank            0 : TAG 3
+ Rank            0 : TAG 4
+ Rank            1 : TAG 5
+ Rank            0 : TAG 5
+ Rank            0 : TAG 6
+ Rank            0 : TAG 7
+ Rank            1 : TAG 6
+ Rank            0 : TAG 8
+ Rank            1 : TAG 7
+ Rank            1 : TAG 8
+ Rank            0 : TAG 9
+ Rank            1 : TAG 9
+[97m(r0,t0)  THIS SHIT!
+ SWE: time step: 111, sim. time: 6min 5s 948ms, dt: 3s 341ms 415µs, cells: 5768
+ THIS SHIT!
+ Rank            0 : TAG 1
+ Rank            0 : TAG 2
+ Rank            1 : TAG 1
+ Rank            1 : TAG 2
+ Rank            1 : TAG 3
+ Rank            1 : TAG 4
+ Rank            0 : TAG 3
+ Rank            0 : TAG 4
+ Rank            0 : TAG 5
+ Rank            1 : TAG 5
+ Rank            0 : TAG 6
+ Rank            0 : TAG 7
+ Rank            0 : TAG 8
+ Rank            1 : TAG 6
+ Rank            1 : TAG 7
+ Rank            1 : TAG 8
+ Rank            1 : TAG 9
+ Rank            0 : TAG 9
+[97m(r0,t0)  THIS SHIT!
+ SWE: time step: 112, sim. time: 6min 9s 289ms, dt: 3s 341ms 414µs, cells: 5784
+ THIS SHIT!
+ Rank            0 : TAG 1
+ Rank            0 : TAG 2
+ Rank            1 : TAG 1
+ Rank            1 : TAG 2
+ Rank            1 : TAG 3
+ Rank            1 : TAG 4
+ Rank            0 : TAG 3
+ Rank            0 : TAG 4
+ Rank            0 : TAG 5
+ Rank            1 : TAG 5
+ Rank            0 : TAG 6
+ Rank            1 : TAG 6
+ Rank            0 : TAG 7
+ Rank            0 : TAG 8
+ Rank            1 : TAG 7
+ Rank            1 : TAG 8
+ Rank            1 : TAG 9
+ Rank            0 : TAG 9
+[97m(r0,t0)  THIS SHIT!
+ SWE: time step: 113, sim. time: 6min 12s 630ms, dt: 3s 341ms 413µs, cells: 5798
+ THIS SHIT!
+ Rank            0 : TAG 1
+ Rank            0 : TAG 2
+ Rank            1 : TAG 1
+ Rank            1 : TAG 2
+ Rank            1 : TAG 3
+ Rank            1 : TAG 4
+ Rank            0 : TAG 3
+ Rank            0 : TAG 4
+ Rank            0 : TAG 5
+ Rank            1 : TAG 5
+ Rank            0 : TAG 6
+ Rank            0 : TAG 7
+ Rank            0 : TAG 8
+ Rank            1 : TAG 6
+ Rank            1 : TAG 7
+ Rank            1 : TAG 8
+ Rank            0 : TAG 9
+ Rank            1 : TAG 9
+[97m(r0,t0)  THIS SHIT!
+ SWE: time step: 114, sim. time: 6min 15s 972ms, dt: 3s 341ms 412µs, cells: 5805
+ THIS SHIT!
+ Rank            0 : TAG 1
+ Rank            0 : TAG 2
+ Rank            1 : TAG 1
+ Rank            1 : TAG 2
+ Rank            0 : TAG 3
+ Rank            0 : TAG 4
+ Rank            1 : TAG 3
+ Rank            1 : TAG 4
+ Rank            0 : TAG 5
+ Rank            1 : TAG 5
+ Rank            0 : TAG 6
+ Rank            0 : TAG 7
+ Rank            1 : TAG 6
+ Rank            0 : TAG 8
+ Rank            1 : TAG 7
+ Rank            1 : TAG 8
+ Rank            1 : TAG 9
+ Rank            0 : TAG 9
+[97m(r0,t0)  THIS SHIT!
+ SWE: time step: 115, sim. time: 6min 19s 313ms, dt: 3s 341ms 412µs, cells: 5824
+ THIS SHIT!
+ Rank            0 : TAG 1
+ Rank            0 : TAG 2
+ Rank            1 : TAG 1
+ Rank            1 : TAG 2
+ Rank            1 : TAG 3
+ Rank            1 : TAG 4
+ Rank            0 : TAG 3
+ Rank            0 : TAG 4
+ Rank            1 : TAG 5
+ Rank            0 : TAG 5
+ Rank            0 : TAG 6
+ Rank            0 : TAG 7
+ Rank            0 : TAG 8
+ Rank            1 : TAG 6
+ Rank            1 : TAG 7
+ Rank            1 : TAG 8
+ Rank            0 : TAG 9
+ Rank            1 : TAG 9
+[97m(r0,t0)  THIS SHIT!
+ SWE: time step: 116, sim. time: 6min 22s 655ms, dt: 3s 341ms 411µs, cells: 5834
+ THIS SHIT!
+ Rank            0 : TAG 1
+ Rank            0 : TAG 2
+ Rank            1 : TAG 1
+ Rank            1 : TAG 2
+ Rank            0 : TAG 3
+ Rank            0 : TAG 4
+ Rank            1 : TAG 3
+ Rank            1 : TAG 4
+ Rank            0 : TAG 5
+ Rank            1 : TAG 5
+ Rank            0 : TAG 6
+ Rank            0 : TAG 7
+ Rank            0 : TAG 8
+ Rank            1 : TAG 6
+ Rank            1 : TAG 7
+ Rank            1 : TAG 8
+ Rank            0 : TAG 9
+ Rank            1 : TAG 9
+[97m(r0,t0)  THIS SHIT!
+ SWE: time step: 117, sim. time: 6min 25s 996ms, dt: 3s 341ms 410µs, cells: 5850
+ THIS SHIT!
+ Rank            0 : TAG 1
+ Rank            0 : TAG 2
+ Rank            1 : TAG 1
+ Rank            1 : TAG 2
+ Rank            0 : TAG 3
+ Rank            0 : TAG 4
+ Rank            1 : TAG 3
+ Rank            1 : TAG 4
+ Rank            1 : TAG 5
+ Rank            0 : TAG 5
+ Rank            0 : TAG 6
+ Rank            0 : TAG 7
+ Rank            1 : TAG 6
+ Rank            0 : TAG 8
+ Rank            1 : TAG 7
+ Rank            1 : TAG 8
+ Rank            1 : TAG 9
+ Rank            0 : TAG 9
+[97m(r0,t0)  THIS SHIT!
+ SWE: time step: 118, sim. time: 6min 29s 338ms, dt: 3s 341ms 409µs, cells: 5871
+ THIS SHIT!
+ Rank            0 : TAG 1
+ Rank            0 : TAG 2
+ Rank            1 : TAG 1
+ Rank            1 : TAG 2
+ Rank            1 : TAG 3
+ Rank            1 : TAG 4
+ Rank            0 : TAG 3
+ Rank            0 : TAG 4
+ Rank            0 : TAG 5
+ Rank            1 : TAG 5
+ Rank            0 : TAG 6
+ Rank            0 : TAG 7
+ Rank            0 : TAG 8
+ Rank            1 : TAG 6
+ Rank            1 : TAG 7
+ Rank            1 : TAG 8
+ Rank            1 : TAG 9
+ Rank            0 : TAG 9
+[97m(r0,t0)  THIS SHIT!
+ SWE: time step: 119, sim. time: 6min 32s 679ms, dt: 3s 341ms 409µs, cells: 5890
+ THIS SHIT!
+ Rank            0 : TAG 1
+ Rank            0 : TAG 2
+ Rank            1 : TAG 1
+ Rank            1 : TAG 2
+ Rank            1 : TAG 3
+ Rank            1 : TAG 4
+ Rank            0 : TAG 3
+ Rank            0 : TAG 4
+ Rank            1 : TAG 5
+ Rank            0 : TAG 5
+ Rank            0 : TAG 6
+ Rank            0 : TAG 7
+ Rank            1 : TAG 6
+ Rank            0 : TAG 8
+ Rank            1 : TAG 7
+ Rank            1 : TAG 8
+ Rank            1 : TAG 9
+ Rank            0 : TAG 9
+[97m(r0,t0)  THIS SHIT!
+ SWE: time step: 120, sim. time: 6min 36s 20ms, dt: 3s 341ms 408µs, cells: 5909
+ THIS SHIT!
+ Rank            0 : TAG 1
+ Rank            0 : TAG 2
+ Rank            1 : TAG 1
+ Rank            1 : TAG 2
+ Rank            0 : TAG 3
+ Rank            0 : TAG 4
+ Rank            1 : TAG 3
+ Rank            1 : TAG 4
+ Rank            0 : TAG 5
+ Rank            1 : TAG 5
+ Rank            0 : TAG 6
+ Rank            0 : TAG 7
+ Rank            0 : TAG 8
+ Rank            1 : TAG 6
+ Rank            1 : TAG 7
+ Rank            1 : TAG 8
+ Rank            0 : TAG 9
+ Rank            1 : TAG 9
+[97m(r0,t0)  THIS SHIT!
+ SWE: time step: 121, sim. time: 6min 39s 362ms, dt: 3s 341ms 407µs, cells: 5912
+ THIS SHIT!
+ Rank            0 : TAG 1
+ Rank            0 : TAG 2
+ Rank            1 : TAG 1
+ Rank            1 : TAG 2
+ Rank            0 : TAG 3
+ Rank            0 : TAG 4
+ Rank            1 : TAG 3
+ Rank            1 : TAG 4
+ Rank            0 : TAG 5
+ Rank            1 : TAG 5
+ Rank            0 : TAG 6
+ Rank            0 : TAG 7
+ Rank            0 : TAG 8
+ Rank            1 : TAG 6
+ Rank            1 : TAG 7
+ Rank            1 : TAG 8
+ Rank            0 : TAG 9
+ Rank            1 : TAG 9
+[97m(r0,t0)  THIS SHIT!
+ SWE: time step: 122, sim. time: 6min 42s 703ms, dt: 3s 341ms 406µs, cells: 5926
+ THIS SHIT!
+ Rank            0 : TAG 1
+ Rank            0 : TAG 2
+ Rank            1 : TAG 1
+ Rank            1 : TAG 2
+ Rank            0 : TAG 3
+ Rank            0 : TAG 4
+ Rank            1 : TAG 3
+ Rank            1 : TAG 4
+ Rank            0 : TAG 5
+ Rank            1 : TAG 5
+ Rank            0 : TAG 6
+ Rank            0 : TAG 7
+ Rank            0 : TAG 8
+ Rank            1 : TAG 6
+ Rank            1 : TAG 7
+ Rank            1 : TAG 8
+ Rank            0 : TAG 9
+ Rank            1 : TAG 9
+[97m(r0,t0)  THIS SHIT!
+ SWE: time step: 123, sim. time: 6min 46s 45ms, dt: 3s 341ms 406µs, cells: 5932
+ THIS SHIT!
+ Rank            0 : TAG 1
+ Rank            0 : TAG 2
+ Rank            1 : TAG 1
+ Rank            1 : TAG 2
+ Rank            1 : TAG 3
+ Rank            1 : TAG 4
+ Rank            0 : TAG 3
+ Rank            0 : TAG 4
+ Rank            0 : TAG 5
+ Rank            1 : TAG 5
+ Rank            0 : TAG 6
+ Rank            0 : TAG 7
+ Rank            0 : TAG 8
+ Rank            1 : TAG 6
+ Rank            1 : TAG 7
+ Rank            1 : TAG 8
+ Rank            1 : TAG 9
+ Rank            0 : TAG 9
+[97m(r0,t0)  THIS SHIT!
+ SWE: time step: 124, sim. time: 6min 49s 386ms, dt: 3s 341ms 405µs, cells: 5960
+ THIS SHIT!
+ Rank            0 : TAG 1
+ Rank            0 : TAG 2
+ Rank            1 : TAG 1
+ Rank            1 : TAG 2
+ Rank            1 : TAG 3
+ Rank            1 : TAG 4
+ Rank            0 : TAG 3
+ Rank            0 : TAG 4
+ Rank            0 : TAG 5
+ Rank            1 : TAG 5
+ Rank            0 : TAG 6
+ Rank            0 : TAG 7
+ Rank            1 : TAG 6
+ Rank            0 : TAG 8
+ Rank            1 : TAG 7
+ Rank            1 : TAG 8
+ Rank            0 : TAG 9
+ Rank            1 : TAG 9
+[97m(r0,t0)  SWE: time step: 125, sim. time: 6min 52s 727ms, dt: 3s 341ms 404µs, cells: 5972
+ THIS SHIT!
+ Rank            0 : TAG 1
+ Rank            0 : TAG 2
+ THIS SHIT!
+ Rank            1 : TAG 1
+ Rank            1 : TAG 2
+ Rank            0 : TAG 3
+ Rank            0 : TAG 4
+ Rank            1 : TAG 3
+ Rank            1 : TAG 4
+ Rank            0 : TAG 5
+ Rank            1 : TAG 5
+ Rank            0 : TAG 6
+ Rank            0 : TAG 7
+ Rank            0 : TAG 8
+ Rank            1 : TAG 6
+ Rank            1 : TAG 7
+ Rank            1 : TAG 8
+ Rank            0 : TAG 9
+ Rank            1 : TAG 9
+[97m(r0,t0)  SWE: time step: 126, sim. time: 6min 56s 69ms, dt: 3s 341ms 404µs, cells: 5989
+ THIS SHIT!
+ Rank            0 : TAG 1
+ Rank            0 : TAG 2
+ THIS SHIT!
+ Rank            1 : TAG 1
+ Rank            1 : TAG 2
+ Rank            0 : TAG 3
+ Rank            0 : TAG 4
+ Rank            1 : TAG 3
+ Rank            1 : TAG 4
+ Rank            0 : TAG 5
+ Rank            1 : TAG 5
+ Rank            0 : TAG 6
+ Rank            0 : TAG 7
+ Rank            1 : TAG 6
+ Rank            0 : TAG 8
+ Rank            1 : TAG 7
+ Rank            1 : TAG 8
+ Rank            0 : TAG 9
+ Rank            1 : TAG 9
+[97m(r0,t0)  THIS SHIT!
+ SWE: time step: 127, sim. time: 6min 59s 410ms, dt: 3s 341ms 403µs, cells: 6010
+ THIS SHIT!
+ Rank            0 : TAG 1
+ Rank            0 : TAG 2
+ Rank            1 : TAG 1
+ Rank            1 : TAG 2
+ Rank            0 : TAG 3
+ Rank            0 : TAG 4
+ Rank            1 : TAG 3
+ Rank            1 : TAG 4
+ Rank            1 : TAG 5
+ Rank            0 : TAG 5
+ Rank            0 : TAG 6
+ Rank            0 : TAG 7
+ Rank            0 : TAG 8
+ Rank            1 : TAG 6
+ Rank            1 : TAG 7
+ Rank            1 : TAG 8
+ Rank            1 : TAG 9
+ Rank            0 : TAG 9
+[97m(r0,t0)  THIS SHIT!
+ SWE: time step: 128, sim. time: 7min 2s 752ms, dt: 3s 341ms 402µs, cells: 6028
+ THIS SHIT!
+ Rank            0 : TAG 1
+ Rank            0 : TAG 2
+ Rank            1 : TAG 1
+ Rank            1 : TAG 2
+ Rank            1 : TAG 3
+ Rank            1 : TAG 4
+ Rank            0 : TAG 3
+ Rank            0 : TAG 4
+ Rank            0 : TAG 5
+ Rank            1 : TAG 5
+ Rank            0 : TAG 6
+ Rank            0 : TAG 7
+ Rank            0 : TAG 8
+ Rank            1 : TAG 6
+ Rank            1 : TAG 7
+ Rank            1 : TAG 8
+ Rank            1 : TAG 9
+ Rank            0 : TAG 9
+[97m(r0,t0)  THIS SHIT!
+ SWE: time step: 129, sim. time: 7min 6s 93ms, dt: 3s 341ms 402µs, cells: 6038
+ THIS SHIT!
+ Rank            0 : TAG 1
+ Rank            0 : TAG 2
+ Rank            1 : TAG 1
+ Rank            1 : TAG 2
+ Rank            1 : TAG 3
+ Rank            1 : TAG 4
+ Rank            0 : TAG 3
+ Rank            0 : TAG 4
+ Rank            0 : TAG 5
+ Rank            1 : TAG 5
+ Rank            0 : TAG 6
+ Rank            0 : TAG 7
+ Rank            0 : TAG 8
+ Rank            1 : TAG 6
+ Rank            1 : TAG 7
+ Rank            1 : TAG 8
+ Rank            1 : TAG 9
+ Rank            0 : TAG 9
+[97m(r0,t0)  THIS SHIT!
+ SWE: time step: 130, sim. time: 7min 9s 434ms, dt: 3s 341ms 401µs, cells: 6064
+ THIS SHIT!
+ Rank            0 : TAG 1
+ Rank            0 : TAG 2
+ Rank            1 : TAG 1
+ Rank            1 : TAG 2
+ Rank            0 : TAG 3
+ Rank            0 : TAG 4
+ Rank            1 : TAG 3
+ Rank            1 : TAG 4
+ Rank            0 : TAG 5
+ Rank            1 : TAG 5
+ Rank            0 : TAG 6
+ Rank            0 : TAG 7
+ Rank            0 : TAG 8
+ Rank            1 : TAG 6
+ Rank            1 : TAG 7
+ Rank            1 : TAG 8
+ Rank            1 : TAG 9
+ Rank            0 : TAG 9
+[97m(r0,t0)  SWE: time step: 131, sim. time: 7min 12s 776ms, dt: 3s 341ms 400µs, cells: 6078
+ THIS SHIT!
+ Rank            0 : TAG 1
+ Rank            0 : TAG 2
+ THIS SHIT!
+ Rank            1 : TAG 1
+ Rank            1 : TAG 2
+ Rank            1 : TAG 3
+ Rank            1 : TAG 4
+ Rank            0 : TAG 3
+ Rank            0 : TAG 4
+ Rank            0 : TAG 5
+ Rank            1 : TAG 5
+ Rank            0 : TAG 6
+ Rank            0 : TAG 7
+ Rank            1 : TAG 6
+ Rank            0 : TAG 8
+ Rank            1 : TAG 7
+ Rank            1 : TAG 8
+ Rank            1 : TAG 9
+ Rank            0 : TAG 9
+[97m(r0,t0)  THIS SHIT!
+ SWE: time step: 132, sim. time: 7min 16s 117ms, dt: 3s 341ms 400µs, cells: 6098
+ THIS SHIT!
+ Rank            0 : TAG 1
+ Rank            0 : TAG 2
+ Rank            1 : TAG 1
+ Rank            1 : TAG 2
+ Rank            1 : TAG 3
+ Rank            1 : TAG 4
+ Rank            0 : TAG 3
+ Rank            0 : TAG 4
+ Rank            0 : TAG 5
+ Rank            1 : TAG 5
+ Rank            0 : TAG 6
+ Rank            1 : TAG 6
+ Rank            0 : TAG 7
+ Rank            0 : TAG 8
+ Rank            1 : TAG 7
+ Rank            1 : TAG 8
+ Rank            1 : TAG 9
+ Rank            0 : TAG 9
+[97m(r0,t0)  THIS SHIT!
+ SWE: time step: 133, sim. time: 7min 19s 459ms, dt: 3s 341ms 399µs, cells: 6109
+ THIS SHIT!
+ Rank            0 : TAG 1
+ Rank            0 : TAG 2
+ Rank            1 : TAG 1
+ Rank            1 : TAG 2
+ Rank            0 : TAG 3
+ Rank            0 : TAG 4
+ Rank            1 : TAG 3
+ Rank            1 : TAG 4
+ Rank            0 : TAG 5
+ Rank            1 : TAG 5
+ Rank            0 : TAG 6
+ Rank            0 : TAG 7
+ Rank            1 : TAG 6
+ Rank            0 : TAG 8
+ Rank            1 : TAG 7
+ Rank            1 : TAG 8
+ Rank            1 : TAG 9
+ Rank            0 : TAG 9
+[97m(r0,t0)  THIS SHIT!
+ SWE: time step: 134, sim. time: 7min 22s 800ms, dt: 3s 341ms 399µs, cells: 6122
+ THIS SHIT!
+ Rank            0 : TAG 1
+ Rank            0 : TAG 2
+ Rank            1 : TAG 1
+ Rank            1 : TAG 2
+ Rank            1 : TAG 3
+ Rank            1 : TAG 4
+ Rank            0 : TAG 3
+ Rank            0 : TAG 4
+ Rank            0 : TAG 5
+ Rank            1 : TAG 5
+ Rank            0 : TAG 6
+ Rank            1 : TAG 6
+ Rank            0 : TAG 7
+ Rank            0 : TAG 8
+ Rank            1 : TAG 7
+ Rank            1 : TAG 8
+ Rank            1 : TAG 9
+ Rank            0 : TAG 9
+[97m(r0,t0)  THIS SHIT!
+ SWE: time step: 135, sim. time: 7min 26s 141ms, dt: 3s 341ms 398µs, cells: 6127
+ THIS SHIT!
+ Rank            0 : TAG 1
+ Rank            0 : TAG 2
+ Rank            1 : TAG 1
+ Rank            1 : TAG 2
+ Rank            1 : TAG 3
+ Rank            1 : TAG 4
+ Rank            0 : TAG 3
+ Rank            0 : TAG 4
+ Rank            0 : TAG 5
+ Rank            1 : TAG 5
+ Rank            0 : TAG 6
+ Rank            0 : TAG 7
+ Rank            0 : TAG 8
+ Rank            1 : TAG 6
+ Rank            1 : TAG 7
+ Rank            1 : TAG 8
+ Rank            1 : TAG 9
+ Rank            0 : TAG 9
+[97m(r0,t0)  THIS SHIT!
+ SWE: time step: 136, sim. time: 7min 29s 483ms, dt: 3s 339ms 806µs, cells: 6158
+ THIS SHIT!
+ Rank            0 : TAG 1
+ Rank            0 : TAG 2
+ Rank            1 : TAG 1
+ Rank            1 : TAG 2
+ Rank            1 : TAG 3
+ Rank            1 : TAG 4
+ Rank            0 : TAG 3
+ Rank            0 : TAG 4
+ Rank            1 : TAG 5
+ Rank            0 : TAG 5
+ Rank            0 : TAG 6
+ Rank            0 : TAG 7
+ Rank            1 : TAG 6
+ Rank            0 : TAG 8
+ Rank            1 : TAG 7
+ Rank            1 : TAG 8
+ Rank            1 : TAG 9
+ Rank            0 : TAG 9
+[97m(r0,t0)  THIS SHIT!
+ SWE: time step: 137, sim. time: 7min 32s 823ms, dt: 3s 339ms 805µs, cells: 6172
+ THIS SHIT!
+ Rank            0 : TAG 1
+ Rank            0 : TAG 2
+ Rank            1 : TAG 1
+ Rank            1 : TAG 2
+ Rank            0 : TAG 3
+ Rank            0 : TAG 4
+ Rank            1 : TAG 3
+ Rank            1 : TAG 4
+ Rank            0 : TAG 5
+ Rank            1 : TAG 5
+ Rank            0 : TAG 6
+ Rank            0 : TAG 7
+ Rank            0 : TAG 8
+ Rank            1 : TAG 6
+ Rank            1 : TAG 7
+ Rank            1 : TAG 8
+ Rank            1 : TAG 9
+ Rank            0 : TAG 9
+[97m(r0,t0)  THIS SHIT!
+ SWE: time step: 138, sim. time: 7min 36s 162ms, dt: 3s 327ms 603µs, cells: 6199
+ THIS SHIT!
+ Rank            0 : TAG 1
+ Rank            0 : TAG 2
+ Rank            1 : TAG 1
+ Rank            1 : TAG 2
+ Rank            0 : TAG 3
+ Rank            0 : TAG 4
+ Rank            1 : TAG 3
+ Rank            1 : TAG 4
+ Rank            0 : TAG 5
+ Rank            1 : TAG 5
+ Rank            0 : TAG 6
+ Rank            0 : TAG 7
+ Rank            0 : TAG 8
+ Rank            1 : TAG 6
+ Rank            1 : TAG 7
+ Rank            1 : TAG 8
+ Rank            0 : TAG 9
+ Rank            1 : TAG 9
+[97m(r0,t0)  THIS SHIT!
+ SWE: time step: 139, sim. time: 7min 39s 490ms, dt: 3s 327ms 603µs, cells: 6207
+ THIS SHIT!
+ Rank            0 : TAG 1
+ Rank            0 : TAG 2
+ Rank            1 : TAG 1
+ Rank            1 : TAG 2
+ Rank            1 : TAG 3
+ Rank            1 : TAG 4
+ Rank            0 : TAG 3
+ Rank            0 : TAG 4
+ Rank            0 : TAG 5
+ Rank            1 : TAG 5
+ Rank            0 : TAG 6
+ Rank            0 : TAG 7
+ Rank            0 : TAG 8
+ Rank            1 : TAG 6
+ Rank            1 : TAG 7
+ Rank            1 : TAG 8
+ Rank            0 : TAG 9
+ Rank            1 : TAG 9
+[97m(r0,t0)  THIS SHIT!
+ SWE: time step: 140, sim. time: 7min 42s 818ms, dt: 3s 327ms 603µs, cells: 6236
+ THIS SHIT!
+ Rank            0 : TAG 1
+ Rank            0 : TAG 2
+ Rank            1 : TAG 1
+ Rank            1 : TAG 2
+ Rank            0 : TAG 3
+ Rank            0 : TAG 4
+ Rank            1 : TAG 3
+ Rank            1 : TAG 4
+ Rank            0 : TAG 5
+ Rank            1 : TAG 5
+ Rank            0 : TAG 6
+ Rank            0 : TAG 7
+ Rank            0 : TAG 8
+ Rank            1 : TAG 6
+ Rank            1 : TAG 7
+ Rank            1 : TAG 8
+ Rank            0 : TAG 9
+ Rank            1 : TAG 9
+[97m(r0,t0)  THIS SHIT!
+ SWE: time step: 141, sim. time: 7min 46s 145ms, dt: 3s 327ms 193µs, cells: 6251
+ THIS SHIT!
+ Rank            0 : TAG 1
+ Rank            0 : TAG 2
+ Rank            1 : TAG 1
+ Rank            1 : TAG 2
+ Rank            0 : TAG 3
+ Rank            0 : TAG 4
+ Rank            1 : TAG 3
+ Rank            1 : TAG 4
+ Rank            0 : TAG 5
+ Rank            1 : TAG 5
+ Rank            0 : TAG 6
+ Rank            0 : TAG 7
+ Rank            0 : TAG 8
+ Rank            1 : TAG 6
+ Rank            1 : TAG 7
+ Rank            1 : TAG 8
+ Rank            0 : TAG 9
+ Rank            1 : TAG 9
+[97m(r0,t0)  THIS SHIT!
+ SWE: time step: 142, sim. time: 7min 49s 472ms, dt: 3s 327ms 192µs, cells: 6264
+ THIS SHIT!
+ Rank            0 : TAG 1
+ Rank            0 : TAG 2
+ Rank            0 : TAG 3
+ Rank            0 : TAG 4
+ Rank            0 : TAG 5
+ Rank            1 : TAG 1
+ Rank            1 : TAG 2
+ Rank            1 : TAG 3
+ Rank            1 : TAG 4
+ Rank            1 : TAG 5
+ Rank            0 : TAG 6
+ Rank            0 : TAG 7
+ Rank            0 : TAG 8
+ Rank            1 : TAG 6
+ Rank            1 : TAG 7
+ Rank            1 : TAG 8
+ Rank            0 : TAG 9
+ Rank            1 : TAG 9
+[97m(r0,t0)  THIS SHIT!
+ SWE: time step: 143, sim. time: 7min 52s 800ms, dt: 3s 327ms 192µs, cells: 6281
+ THIS SHIT!
+ Rank            0 : TAG 1
+ Rank            0 : TAG 2
+ Rank            1 : TAG 1
+ Rank            1 : TAG 2
+ Rank            1 : TAG 3
+ Rank            0 : TAG 3
+ Rank            0 : TAG 4
+ Rank            1 : TAG 4
+ Rank            0 : TAG 5
+ Rank            1 : TAG 5
+ Rank            0 : TAG 6
+ Rank            0 : TAG 7
+ Rank            0 : TAG 8
+ Rank            1 : TAG 6
+ Rank            1 : TAG 7
+ Rank            1 : TAG 8
+ Rank            1 : TAG 9
+ Rank            0 : TAG 9
+[97m(r0,t0)  THIS SHIT!
+ SWE: time step: 144, sim. time: 7min 56s 127ms, dt: 3s 327ms 191µs, cells: 6296
+ THIS SHIT!
+ Rank            0 : TAG 1
+ Rank            0 : TAG 2
+ Rank            1 : TAG 1
+ Rank            1 : TAG 2
+ Rank            0 : TAG 3
+ Rank            0 : TAG 4
+ Rank            1 : TAG 3
+ Rank            1 : TAG 4
+ Rank            1 : TAG 5
+ Rank            0 : TAG 5
+ Rank            0 : TAG 6
+ Rank            0 : TAG 7
+ Rank            0 : TAG 8
+ Rank            1 : TAG 6
+ Rank            1 : TAG 7
+ Rank            1 : TAG 8
+ Rank            1 : TAG 9
+ Rank            0 : TAG 9
+[97m(r0,t0)  THIS SHIT!
+ SWE: time step: 145, sim. time: 7min 59s 454ms, dt: 3s 327ms 191µs, cells: 6313
+ THIS SHIT!
+ Rank            0 : TAG 1
+ Rank            0 : TAG 2
+ Rank            1 : TAG 1
+ Rank            1 : TAG 2
+ Rank            0 : TAG 3
+ Rank            0 : TAG 4
+ Rank            1 : TAG 3
+ Rank            1 : TAG 4
+ Rank            0 : TAG 5
+ Rank            1 : TAG 5
+ Rank            0 : TAG 6
+ Rank            0 : TAG 7
+ Rank            0 : TAG 8
+ Rank            1 : TAG 6
+ Rank            1 : TAG 7
+ Rank            1 : TAG 8
+ Rank            0 : TAG 9
+ Rank            1 : TAG 9
+[97m(r0,t0)  SWE: time step: 146, sim. time: 8min 2s 781ms, dt: 3s 327ms 190µs, cells: 6329
+[97m(r0,t0)  SWE: output step: 4
+[97m(r0,t0)  SWE: output step: 4
+ THIS SHIT!
+ Rank            1 : TAG 1
+ Rank            1 : TAG 2
+ THIS SHIT!
+ Rank            0 : TAG 1
+ Rank            0 : TAG 2
+ Rank            1 : TAG 3
+ Rank            1 : TAG 4
+ Rank            0 : TAG 3
+ Rank            0 : TAG 4
+ Rank            1 : TAG 5
+ Rank            0 : TAG 5
+ Rank            0 : TAG 6
+ Rank            0 : TAG 7
+ Rank            0 : TAG 8
+ Rank            1 : TAG 6
+ Rank            1 : TAG 7
+ Rank            1 : TAG 8
+ Rank            1 : TAG 9
+ Rank            0 : TAG 9
+[97m(r0,t0)  THIS SHIT!
+ SWE: time step: 147, sim. time: 8min 6s 108ms, dt: 3s 327ms 189µs, cells: 6345
+ THIS SHIT!
+ Rank            0 : TAG 1
+ Rank            0 : TAG 2
+ Rank            1 : TAG 1
+ Rank            1 : TAG 2
+ Rank            1 : TAG 3
+ Rank            1 : TAG 4
+ Rank            0 : TAG 3
+ Rank            0 : TAG 4
+ Rank            0 : TAG 5
+ Rank            1 : TAG 5
+ Rank            0 : TAG 6
+ Rank            1 : TAG 6
+ Rank            0 : TAG 7
+ Rank            0 : TAG 8
+ Rank            1 : TAG 7
+ Rank            1 : TAG 8
+ Rank            1 : TAG 9
+ Rank            0 : TAG 9
+[97m(r0,t0)  SWE: time step: 148, sim. time: 8min 9s 436ms, dt: 3s 327ms 189µs, cells: 6358
+ THIS SHIT!
+ Rank            0 : TAG 1
+ Rank            0 : TAG 2
+ THIS SHIT!
+ Rank            1 : TAG 1
+ Rank            1 : TAG 2
+ Rank            0 : TAG 3
+ Rank            0 : TAG 4
+ Rank            1 : TAG 3
+ Rank            1 : TAG 4
+ Rank            0 : TAG 5
+ Rank            1 : TAG 5
+ Rank            0 : TAG 6
+ Rank            0 : TAG 7
+ Rank            0 : TAG 8
+ Rank            1 : TAG 6
+ Rank            1 : TAG 7
+ Rank            1 : TAG 8
+ Rank            0 : TAG 9
+ Rank            1 : TAG 9
+[97m(r0,t0)  THIS SHIT!
+ SWE: time step: 149, sim. time: 8min 12s 763ms, dt: 3s 327ms 188µs, cells: 6368
+ THIS SHIT!
+ Rank            0 : TAG 1
+ Rank            0 : TAG 2
+ Rank            1 : TAG 1
+ Rank            1 : TAG 2
+ Rank            1 : TAG 3
+ Rank            1 : TAG 4
+ Rank            0 : TAG 3
+ Rank            0 : TAG 4
+ Rank            0 : TAG 5
+ Rank            1 : TAG 5
+ Rank            0 : TAG 6
+ Rank            0 : TAG 7
+ Rank            0 : TAG 8
+ Rank            1 : TAG 6
+ Rank            1 : TAG 7
+ Rank            1 : TAG 8
+ Rank            1 : TAG 9
+ Rank            0 : TAG 9
+ THIS SHIT!
+ Rank            1 : TAG 1
+ Rank            1 : TAG 2
+[97m(r0,t0)  SWE: time step: 150, sim. time: 8min 16s 90ms, dt: 3s 327ms 187µs, cells: 6383
+ THIS SHIT!
+ Rank            0 : TAG 1
+ Rank            0 : TAG 2
+ Rank            1 : TAG 3
+ Rank            1 : TAG 4
+ Rank            0 : TAG 3
+ Rank            0 : TAG 4
+ Rank            1 : TAG 5
+ Rank            0 : TAG 5
+ Rank            0 : TAG 6
+ Rank            0 : TAG 7
+ Rank            0 : TAG 8
+ Rank            1 : TAG 6
+ Rank            1 : TAG 7
+ Rank            1 : TAG 8
+ Rank            1 : TAG 9
+ Rank            0 : TAG 9
+[97m(r0,t0)  THIS SHIT!
+ SWE: time step: 151, sim. time: 8min 19s 417ms, dt: 3s 327ms 187µs, cells: 6403
+ THIS SHIT!
+ Rank            0 : TAG 1
+ Rank            0 : TAG 2
+ Rank            1 : TAG 1
+ Rank            1 : TAG 2
+ Rank            1 : TAG 3
+ Rank            1 : TAG 4
+ Rank            0 : TAG 3
+ Rank            0 : TAG 4
+ Rank            1 : TAG 5
+ Rank            0 : TAG 5
+ Rank            0 : TAG 6
+ Rank            0 : TAG 7
+ Rank            0 : TAG 8
+ Rank            1 : TAG 6
+ Rank            1 : TAG 7
+ Rank            1 : TAG 8
+ Rank            1 : TAG 9
+ Rank            0 : TAG 9
+[97m(r0,t0)  THIS SHIT!
+ SWE: time step: 152, sim. time: 8min 22s 744ms, dt: 3s 219ms 183µs, cells: 6425
+ THIS SHIT!
+ Rank            0 : TAG 1
+ Rank            0 : TAG 2
+ Rank            1 : TAG 1
+ Rank            1 : TAG 2
+ Rank            1 : TAG 3
+ Rank            1 : TAG 4
+ Rank            0 : TAG 3
+ Rank            0 : TAG 4
+ Rank            0 : TAG 5
+ Rank            1 : TAG 5
+ Rank            0 : TAG 6
+ Rank            1 : TAG 6
+ Rank            0 : TAG 7
+ Rank            0 : TAG 8
+ Rank            1 : TAG 7
+ Rank            1 : TAG 8
+ Rank            1 : TAG 9
+ Rank            0 : TAG 9
+[97m(r0,t0)  THIS SHIT!
+ SWE: time step: 153, sim. time: 8min 25s 964ms, dt: 3s 219ms 182µs, cells: 6439
+ THIS SHIT!
+ Rank            0 : TAG 1
+ Rank            0 : TAG 2
+ Rank            1 : TAG 1
+ Rank            1 : TAG 2
+ Rank            1 : TAG 3
+ Rank            1 : TAG 4
+ Rank            0 : TAG 3
+ Rank            0 : TAG 4
+ Rank            0 : TAG 5
+ Rank            1 : TAG 5
+ Rank            0 : TAG 6
+ Rank            0 : TAG 7
+ Rank            0 : TAG 8
+ Rank            1 : TAG 6
+ Rank            1 : TAG 7
+ Rank            1 : TAG 8
+ Rank            1 : TAG 9
+ Rank            0 : TAG 9
+[97m(r0,t0)  THIS SHIT!
+ SWE: time step: 154, sim. time: 8min 29s 183ms, dt: 3s 219ms 182µs, cells: 6455
+ THIS SHIT!
+ Rank            0 : TAG 1
+ Rank            0 : TAG 2
+ Rank            1 : TAG 1
+ Rank            1 : TAG 2
+ Rank            1 : TAG 3
+ Rank            1 : TAG 4
+ Rank            0 : TAG 3
+ Rank            0 : TAG 4
+ Rank            0 : TAG 5
+ Rank            1 : TAG 5
+ Rank            0 : TAG 6
+ Rank            0 : TAG 7
+ Rank            0 : TAG 8
+ Rank            1 : TAG 6
+ Rank            1 : TAG 7
+ Rank            1 : TAG 8
+ Rank            1 : TAG 9
+ Rank            0 : TAG 9
+[97m(r0,t0)  THIS SHIT!
+ SWE: time step: 155, sim. time: 8min 32s 402ms, dt: 3s 219ms 181µs, cells: 6476
+ THIS SHIT!
+ Rank            0 : TAG 1
+ Rank            0 : TAG 2
+ Rank            1 : TAG 1
+ Rank            1 : TAG 2
+ Rank            1 : TAG 3
+ Rank            1 : TAG 4
+ Rank            0 : TAG 3
+ Rank            0 : TAG 4
+ Rank            0 : TAG 5
+ Rank            1 : TAG 5
+ Rank            0 : TAG 6
+ Rank            0 : TAG 7
+ Rank            0 : TAG 8
+ Rank            1 : TAG 6
+ Rank            1 : TAG 7
+ Rank            1 : TAG 8
+ Rank            0 : TAG 9
+ Rank            1 : TAG 9
+[97m(r0,t0)  THIS SHIT!
+ SWE: time step: 156, sim. time: 8min 35s 621ms, dt: 3s 219ms 181µs, cells: 6474
+ THIS SHIT!
+ Rank            0 : TAG 1
+ Rank            0 : TAG 2
+ Rank            1 : TAG 1
+ Rank            1 : TAG 2
+ Rank            1 : TAG 3
+ Rank            1 : TAG 4
+ Rank            0 : TAG 3
+ Rank            0 : TAG 4
+ Rank            0 : TAG 5
+ Rank            1 : TAG 5
+ Rank            0 : TAG 6
+ Rank            0 : TAG 7
+ Rank            0 : TAG 8
+ Rank            1 : TAG 6
+ Rank            1 : TAG 7
+ Rank            1 : TAG 8
+ Rank            1 : TAG 9
+ Rank            0 : TAG 9
+[97m(r0,t0)  THIS SHIT!
+ SWE: time step: 157, sim. time: 8min 38s 840ms, dt: 3s 219ms 181µs, cells: 6500
+ THIS SHIT!
+ Rank            0 : TAG 1
+ Rank            0 : TAG 2
+ Rank            1 : TAG 1
+ Rank            1 : TAG 2
+ Rank            1 : TAG 3
+ Rank            1 : TAG 4
+ Rank            0 : TAG 3
+ Rank            0 : TAG 4
+ Rank            0 : TAG 5
+ Rank            1 : TAG 5
+ Rank            0 : TAG 6
+ Rank            0 : TAG 7
+ Rank            1 : TAG 6
+ Rank            0 : TAG 8
+ Rank            1 : TAG 7
+ Rank            1 : TAG 8
+ Rank            1 : TAG 9
+ Rank            0 : TAG 9
+[97m(r0,t0)  THIS SHIT!
+ SWE: time step: 158, sim. time: 8min 42s 59ms, dt: 3s 219ms 180µs, cells: 6516
+ THIS SHIT!
+ Rank            0 : TAG 1
+ Rank            0 : TAG 2
+ Rank            1 : TAG 1
+ Rank            1 : TAG 2
+ Rank            0 : TAG 3
+ Rank            0 : TAG 4
+ Rank            1 : TAG 3
+ Rank            1 : TAG 4
+ Rank            1 : TAG 5
+ Rank            0 : TAG 5
+ Rank            0 : TAG 6
+ Rank            0 : TAG 7
+ Rank            0 : TAG 8
+ Rank            1 : TAG 6
+ Rank            1 : TAG 7
+ Rank            1 : TAG 8
+ Rank            1 : TAG 9
+ Rank            0 : TAG 9
+[97m(r0,t0)  THIS SHIT!
+ SWE: time step: 159, sim. time: 8min 45s 279ms, dt: 3s 219ms 180µs, cells: 6530
+ THIS SHIT!
+ Rank            0 : TAG 1
+ Rank            0 : TAG 2
+ Rank            1 : TAG 1
+ Rank            1 : TAG 2
+ Rank            1 : TAG 3
+ Rank            1 : TAG 4
+ Rank            0 : TAG 3
+ Rank            0 : TAG 4
+ Rank            0 : TAG 5
+ Rank            1 : TAG 5
+ Rank            0 : TAG 6
+ Rank            0 : TAG 7
+ Rank            0 : TAG 8
+ Rank            1 : TAG 6
+ Rank            1 : TAG 7
+ Rank            1 : TAG 8
+ Rank            1 : TAG 9
+ Rank            0 : TAG 9
+[97m(r0,t0)  THIS SHIT!
+ SWE: time step: 160, sim. time: 8min 48s 498ms, dt: 3s 219ms 179µs, cells: 6554
+ THIS SHIT!
+ Rank            0 : TAG 1
+ Rank            0 : TAG 2
+ Rank            1 : TAG 1
+ Rank            1 : TAG 2
+ Rank            1 : TAG 3
+ Rank            1 : TAG 4
+ Rank            0 : TAG 3
+ Rank            0 : TAG 4
+ Rank            0 : TAG 5
+ Rank            1 : TAG 5
+ Rank            0 : TAG 6
+ Rank            0 : TAG 7
+ Rank            0 : TAG 8
+ Rank            1 : TAG 6
+ Rank            1 : TAG 7
+ Rank            1 : TAG 8
+ Rank            1 : TAG 9
+ Rank            0 : TAG 9
+[97m(r0,t0)  THIS SHIT!
+ SWE: time step: 161, sim. time: 8min 51s 717ms, dt: 3s 219ms 179µs, cells: 6582
+ THIS SHIT!
+ Rank            0 : TAG 1
+ Rank            0 : TAG 2
+ Rank            1 : TAG 1
+ Rank            1 : TAG 2
+ Rank            1 : TAG 3
+ Rank            1 : TAG 4
+ Rank            0 : TAG 3
+ Rank            0 : TAG 4
+ Rank            0 : TAG 5
+ Rank            1 : TAG 5
+ Rank            0 : TAG 6
+ Rank            0 : TAG 7
+ Rank            0 : TAG 8
+ Rank            1 : TAG 6
+ Rank            1 : TAG 7
+ Rank            1 : TAG 8
+ Rank            1 : TAG 9
+ Rank            0 : TAG 9
+[97m(r0,t0)  THIS SHIT!
+ SWE: time step: 162, sim. time: 8min 54s 936ms, dt: 3s 219ms 179µs, cells: 6607
+ THIS SHIT!
+ Rank            0 : TAG 1
+ Rank            0 : TAG 2
+ Rank            1 : TAG 1
+ Rank            1 : TAG 2
+ Rank            1 : TAG 3
+ Rank            1 : TAG 4
+ Rank            0 : TAG 3
+ Rank            0 : TAG 4
+ Rank            0 : TAG 5
+ Rank            1 : TAG 5
+ Rank            0 : TAG 6
+ Rank            1 : TAG 6
+ Rank            0 : TAG 7
+ Rank            0 : TAG 8
+ Rank            1 : TAG 7
+ Rank            1 : TAG 8
+ Rank            0 : TAG 9
+ Rank            1 : TAG 9
+[97m(r0,t0)  THIS SHIT!
+ SWE: time step: 163, sim. time: 8min 58s 155ms, dt: 3s 219ms 179µs, cells: 6620
+ THIS SHIT!
+ Rank            0 : TAG 1
+ Rank            0 : TAG 2
+ Rank            1 : TAG 1
+ Rank            1 : TAG 2
+ Rank            1 : TAG 3
+ Rank            1 : TAG 4
+ Rank            0 : TAG 3
+ Rank            0 : TAG 4
+ Rank            0 : TAG 5
+ Rank            1 : TAG 5
+ Rank            0 : TAG 6
+ Rank            0 : TAG 7
+ Rank            0 : TAG 8
+ Rank            1 : TAG 6
+ Rank            1 : TAG 7
+ Rank            1 : TAG 8
+ Rank            1 : TAG 9
+ Rank            0 : TAG 9
+[97m(r0,t0)  THIS SHIT!
+ SWE: time step: 164, sim. time: 9min 1s 375ms, dt: 3s 219ms 178µs, cells: 6638
+ THIS SHIT!
+ Rank            0 : TAG 1
+ Rank            0 : TAG 2
+ Rank            1 : TAG 1
+ Rank            1 : TAG 2
+ Rank            0 : TAG 3
+ Rank            0 : TAG 4
+ Rank            1 : TAG 3
+ Rank            1 : TAG 4
+ Rank            0 : TAG 5
+ Rank            1 : TAG 5
+ Rank            0 : TAG 6
+ Rank            0 : TAG 7
+ Rank            0 : TAG 8
+ Rank            1 : TAG 6
+ Rank            1 : TAG 7
+ Rank            1 : TAG 8
+ Rank            1 : TAG 9
+ Rank            0 : TAG 9
+[97m(r0,t0)  THIS SHIT!
+ SWE: time step: 165, sim. time: 9min 4s 594ms, dt: 3s 219ms 178µs, cells: 6652
+ THIS SHIT!
+ Rank            0 : TAG 1
+ Rank            0 : TAG 2
+ Rank            1 : TAG 1
+ Rank            1 : TAG 2
+ Rank            0 : TAG 3
+ Rank            0 : TAG 4
+ Rank            1 : TAG 3
+ Rank            1 : TAG 4
+ Rank            0 : TAG 5
+ Rank            1 : TAG 5
+ Rank            0 : TAG 6
+ Rank            0 : TAG 7
+ Rank            0 : TAG 8
+ Rank            1 : TAG 6
+ Rank            1 : TAG 7
+ Rank            1 : TAG 8
+ Rank            0 : TAG 9
+ Rank            1 : TAG 9
+[97m(r0,t0)  SWE: time step: 166, sim. time: 9min 7s 813ms, dt: 3s 219ms 178µs, cells: 6656
+ THIS SHIT!
+ Rank            0 : TAG 1
+ Rank            0 : TAG 2
+ THIS SHIT!
+ Rank            1 : TAG 1
+ Rank            1 : TAG 2
+ Rank            1 : TAG 3
+ Rank            1 : TAG 4
+ Rank            0 : TAG 3
+ Rank            0 : TAG 4
+ Rank            0 : TAG 5
+ Rank            1 : TAG 5
+ Rank            0 : TAG 6
+ Rank            0 : TAG 7
+ Rank            0 : TAG 8
+ Rank            1 : TAG 6
+ Rank            1 : TAG 7
+ Rank            1 : TAG 8
+ Rank            1 : TAG 9
+ Rank            0 : TAG 9
+[97m(r0,t0)  THIS SHIT!
+ SWE: time step: 167, sim. time: 9min 11s 32ms, dt: 3s 219ms 177µs, cells: 6673
+ THIS SHIT!
+ Rank            0 : TAG 1
+ Rank            0 : TAG 2
+ Rank            1 : TAG 1
+ Rank            1 : TAG 2
+ Rank            1 : TAG 3
+ Rank            1 : TAG 4
+ Rank            0 : TAG 3
+ Rank            0 : TAG 4
+ Rank            0 : TAG 5
+ Rank            1 : TAG 5
+ Rank            0 : TAG 6
+ Rank            0 : TAG 7
+ Rank            0 : TAG 8
+ Rank            1 : TAG 6
+ Rank            1 : TAG 7
+ Rank            1 : TAG 8
+ Rank            1 : TAG 9
+ Rank            0 : TAG 9
+[97m(r0,t0)  THIS SHIT!
+ SWE: time step: 168, sim. time: 9min 14s 251ms, dt: 3s 219ms 177µs, cells: 6691
+ THIS SHIT!
+ Rank            0 : TAG 1
+ Rank            0 : TAG 2
+ Rank            1 : TAG 1
+ Rank            1 : TAG 2
+ Rank            1 : TAG 3
+ Rank            1 : TAG 4
+ Rank            0 : TAG 3
+ Rank            0 : TAG 4
+ Rank            0 : TAG 5
+ Rank            1 : TAG 5
+ Rank            0 : TAG 6
+ Rank            0 : TAG 7
+ Rank            0 : TAG 8
+ Rank            1 : TAG 6
+ Rank            1 : TAG 7
+ Rank            1 : TAG 8
+ Rank            1 : TAG 9
+ Rank            0 : TAG 9
+[97m(r0,t0)  THIS SHIT!
+ SWE: time step: 169, sim. time: 9min 17s 470ms, dt: 3s 219ms 176µs, cells: 6706
+ THIS SHIT!
+ Rank            0 : TAG 1
+ Rank            0 : TAG 2
+ Rank            1 : TAG 1
+ Rank            1 : TAG 2
+ Rank            1 : TAG 3
+ Rank            1 : TAG 4
+ Rank            0 : TAG 3
+ Rank            0 : TAG 4
+ Rank            0 : TAG 5
+ Rank            1 : TAG 5
+ Rank            0 : TAG 6
+ Rank            1 : TAG 6
+ Rank            0 : TAG 7
+ Rank            0 : TAG 8
+ Rank            1 : TAG 7
+ Rank            1 : TAG 8
+ Rank            1 : TAG 9
+ Rank            0 : TAG 9
+[97m(r0,t0)  THIS SHIT!
+ SWE: time step: 170, sim. time: 9min 20s 690ms, dt: 3s 219ms 176µs, cells: 6733
+ THIS SHIT!
+ Rank            0 : TAG 1
+ Rank            0 : TAG 2
+ Rank            1 : TAG 1
+ Rank            1 : TAG 2
+ Rank            1 : TAG 3
+ Rank            1 : TAG 4
+ Rank            0 : TAG 3
+ Rank            0 : TAG 4
+ Rank            0 : TAG 5
+ Rank            1 : TAG 5
+ Rank            0 : TAG 6
+ Rank            0 : TAG 7
+ Rank            0 : TAG 8
+ Rank            1 : TAG 6
+ Rank            1 : TAG 7
+ Rank            1 : TAG 8
+ Rank            1 : TAG 9
+ Rank            0 : TAG 9
+[97m(r0,t0)  THIS SHIT!
+ SWE: time step: 171, sim. time: 9min 23s 909ms, dt: 3s 219ms 176µs, cells: 6755
+ THIS SHIT!
+ Rank            0 : TAG 1
+ Rank            0 : TAG 2
+ Rank            1 : TAG 1
+ Rank            1 : TAG 2
+ Rank            1 : TAG 3
+ Rank            1 : TAG 4
+ Rank            0 : TAG 3
+ Rank            0 : TAG 4
+ Rank            0 : TAG 5
+ Rank            1 : TAG 5
+ Rank            0 : TAG 6
+ Rank            0 : TAG 7
+ Rank            0 : TAG 8
+ Rank            1 : TAG 6
+ Rank            1 : TAG 7
+ Rank            1 : TAG 8
+ Rank            1 : TAG 9
+ Rank            0 : TAG 9
+[97m(r0,t0)  THIS SHIT!
+ SWE: time step: 172, sim. time: 9min 27s 128ms, dt: 3s 219ms 175µs, cells: 6766
+ THIS SHIT!
+ Rank            0 : TAG 1
+ Rank            0 : TAG 2
+ Rank            1 : TAG 1
+ Rank            1 : TAG 2
+ Rank            1 : TAG 3
+ Rank            1 : TAG 4
+ Rank            0 : TAG 3
+ Rank            0 : TAG 4
+ Rank            0 : TAG 5
+ Rank            1 : TAG 5
+ Rank            0 : TAG 6
+ Rank            0 : TAG 7
+ Rank            0 : TAG 8
+ Rank            1 : TAG 6
+ Rank            1 : TAG 7
+ Rank            1 : TAG 8
+ Rank            1 : TAG 9
+ Rank            0 : TAG 9
+[97m(r0,t0)  THIS SHIT!
+ SWE: time step: 173, sim. time: 9min 30s 347ms, dt: 3s 219ms 175µs, cells: 6770
+ THIS SHIT!
+ Rank            0 : TAG 1
+ Rank            0 : TAG 2
+ Rank            1 : TAG 1
+ Rank            1 : TAG 2
+ Rank            1 : TAG 3
+ Rank            1 : TAG 4
+ Rank            0 : TAG 3
+ Rank            0 : TAG 4
+ Rank            1 : TAG 5
+ Rank            0 : TAG 5
+ Rank            0 : TAG 6
+ Rank            0 : TAG 7
+ Rank            0 : TAG 8
+ Rank            1 : TAG 6
+ Rank            1 : TAG 7
+ Rank            1 : TAG 8
+ Rank            1 : TAG 9
+ Rank            0 : TAG 9
+[97m(r0,t0)  THIS SHIT!
+ SWE: time step: 174, sim. time: 9min 33s 566ms, dt: 3s 219ms 174µs, cells: 6794
+ THIS SHIT!
+ Rank            0 : TAG 1
+ Rank            0 : TAG 2
+ Rank            1 : TAG 1
+ Rank            1 : TAG 2
+ Rank            1 : TAG 3
+ Rank            1 : TAG 4
+ Rank            0 : TAG 3
+ Rank            0 : TAG 4
+ Rank            0 : TAG 5
+ Rank            1 : TAG 5
+ Rank            0 : TAG 6
+ Rank            0 : TAG 7
+ Rank            0 : TAG 8
+ Rank            1 : TAG 6
+ Rank            1 : TAG 7
+ Rank            1 : TAG 8
+ Rank            1 : TAG 9
+ Rank            0 : TAG 9
+[97m(r0,t0)  THIS SHIT!
+ SWE: time step: 175, sim. time: 9min 36s 785ms, dt: 3s 219ms 174µs, cells: 6809
+ THIS SHIT!
+ Rank            0 : TAG 1
+ Rank            0 : TAG 2
+ Rank            1 : TAG 1
+ Rank            1 : TAG 2
+ Rank            1 : TAG 3
+ Rank            1 : TAG 4
+ Rank            0 : TAG 3
+ Rank            0 : TAG 4
+ Rank            0 : TAG 5
+ Rank            1 : TAG 5
+ Rank            0 : TAG 6
+ Rank            0 : TAG 7
+ Rank            0 : TAG 8
+ Rank            1 : TAG 6
+ Rank            1 : TAG 7
+ Rank            1 : TAG 8
+ Rank            1 : TAG 9
+ Rank            0 : TAG 9
+[97m(r0,t0)  THIS SHIT!
+ SWE: time step: 176, sim. time: 9min 40s 5ms, dt: 3s 219ms 173µs, cells: 6822
+ THIS SHIT!
+ Rank            0 : TAG 1
+ Rank            0 : TAG 2
+ Rank            1 : TAG 1
+ Rank            1 : TAG 2
+ Rank            0 : TAG 3
+ Rank            0 : TAG 4
+ Rank            1 : TAG 3
+ Rank            1 : TAG 4
+ Rank            0 : TAG 5
+ Rank            1 : TAG 5
+ Rank            0 : TAG 6
+ Rank            0 : TAG 7
+ Rank            0 : TAG 8
+ Rank            1 : TAG 6
+ Rank            1 : TAG 7
+ Rank            1 : TAG 8
+ Rank            1 : TAG 9
+ Rank            0 : TAG 9
+[97m(r0,t0)  THIS SHIT!
+ SWE: time step: 177, sim. time: 9min 43s 224ms, dt: 3s 219ms 173µs, cells: 6835
+ THIS SHIT!
+ Rank            0 : TAG 1
+ Rank            0 : TAG 2
+ Rank            1 : TAG 1
+ Rank            1 : TAG 2
+ Rank            0 : TAG 3
+ Rank            0 : TAG 4
+ Rank            1 : TAG 3
+ Rank            1 : TAG 4
+ Rank            0 : TAG 5
+ Rank            1 : TAG 5
+ Rank            0 : TAG 6
+ Rank            0 : TAG 7
+ Rank            0 : TAG 8
+ Rank            1 : TAG 6
+ Rank            1 : TAG 7
+ Rank            1 : TAG 8
+ Rank            0 : TAG 9
+ Rank            1 : TAG 9
+[97m(r0,t0)  THIS SHIT!
+ SWE: time step: 178, sim. time: 9min 46s 443ms, dt: 3s 219ms 172µs, cells: 6865
+ THIS SHIT!
+ Rank            0 : TAG 1
+ Rank            0 : TAG 2
+ Rank            1 : TAG 1
+ Rank            1 : TAG 2
+ Rank            1 : TAG 3
+ Rank            1 : TAG 4
+ Rank            0 : TAG 3
+ Rank            0 : TAG 4
+ Rank            1 : TAG 5
+ Rank            0 : TAG 5
+ Rank            0 : TAG 6
+ Rank            0 : TAG 7
+ Rank            0 : TAG 8
+ Rank            1 : TAG 6
+ Rank            1 : TAG 7
+ Rank            1 : TAG 8
+ Rank            1 : TAG 9
+ Rank            0 : TAG 9
+[97m(r0,t0)  THIS SHIT!
+ SWE: time step: 179, sim. time: 9min 49s 662ms, dt: 3s 219ms 172µs, cells: 6882
+ THIS SHIT!
+ Rank            0 : TAG 1
+ Rank            0 : TAG 2
+ Rank            1 : TAG 1
+ Rank            1 : TAG 2
+ Rank            1 : TAG 3
+ Rank            1 : TAG 4
+ Rank            0 : TAG 3
+ Rank            0 : TAG 4
+ Rank            1 : TAG 5
+ Rank            0 : TAG 5
+ Rank            0 : TAG 6
+ Rank            0 : TAG 7
+ Rank            0 : TAG 8
+ Rank            1 : TAG 6
+ Rank            1 : TAG 7
+ Rank            1 : TAG 8
+ Rank            1 : TAG 9
+ Rank            0 : TAG 9
+[97m(r0,t0)  THIS SHIT!
+ SWE: time step: 180, sim. time: 9min 52s 881ms, dt: 3s 219ms 171µs, cells: 6901
+ THIS SHIT!
+ Rank            0 : TAG 1
+ Rank            0 : TAG 2
+ Rank            1 : TAG 1
+ Rank            1 : TAG 2
+ Rank            1 : TAG 3
+ Rank            1 : TAG 4
+ Rank            0 : TAG 3
+ Rank            0 : TAG 4
+ Rank            0 : TAG 5
+ Rank            1 : TAG 5
+ Rank            0 : TAG 6
+ Rank            0 : TAG 7
+ Rank            0 : TAG 8
+ Rank            1 : TAG 6
+ Rank            1 : TAG 7
+ Rank            1 : TAG 8
+ Rank            1 : TAG 9
+ Rank            0 : TAG 9
+[97m(r0,t0)  THIS SHIT!
+ SWE: time step: 181, sim. time: 9min 56s 101ms, dt: 3s 219ms 171µs, cells: 6921
+ THIS SHIT!
+ Rank            0 : TAG 1
+ Rank            0 : TAG 2
+ Rank            1 : TAG 1
+ Rank            1 : TAG 2
+ Rank            1 : TAG 3
+ Rank            1 : TAG 4
+ Rank            0 : TAG 3
+ Rank            0 : TAG 4
+ Rank            0 : TAG 5
+ Rank            1 : TAG 5
+ Rank            0 : TAG 6
+ Rank            0 : TAG 7
+ Rank            0 : TAG 8
+ Rank            1 : TAG 6
+ Rank            1 : TAG 7
+ Rank            1 : TAG 8
+ Rank            1 : TAG 9
+ Rank            0 : TAG 9
+[97m(r0,t0)  THIS SHIT!
+ SWE: time step: 182, sim. time: 9min 59s 320ms, dt: 3s 219ms 170µs, cells: 6936
+ THIS SHIT!
+ Rank            0 : TAG 1
+ Rank            0 : TAG 2
+ Rank            1 : TAG 1
+ Rank            1 : TAG 2
+ Rank            0 : TAG 3
+ Rank            0 : TAG 4
+ Rank            1 : TAG 3
+ Rank            1 : TAG 4
+ Rank            0 : TAG 5
+ Rank            1 : TAG 5
+ Rank            0 : TAG 6
+ Rank            0 : TAG 7
+ Rank            0 : TAG 8
+ Rank            1 : TAG 6
+ Rank            1 : TAG 7
+ Rank            1 : TAG 8
+ Rank            0 : TAG 9
+ Rank            1 : TAG 9
+[97m(r0,t0)  SWE: time step: 183, sim. time: 10min 2s 539ms, dt: 3s 183ms 831µs, cells: 6967
+[97m(r0,t0)  SWE: output step: 5
+[97m(r0,t0)  SWE: output step: 5
+ THIS SHIT!
+ Rank            0 : TAG 1
+ Rank            0 : TAG 2
+ Rank            0 : TAG 3
+ Rank            0 : TAG 4
+ Rank            0 : TAG 5
+ THIS SHIT!
+ Rank            1 : TAG 1
+ Rank            1 : TAG 2
+ Rank            1 : TAG 3
+ Rank            1 : TAG 4
+ Rank            1 : TAG 5
+ Rank            0 : TAG 6
+ Rank            0 : TAG 7
+ Rank            0 : TAG 8
+ Rank            1 : TAG 6
+ Rank            1 : TAG 7
+ Rank            1 : TAG 8
+ Rank            1 : TAG 9
+ Rank            0 : TAG 9
+[97m(r0,t0)  THIS SHIT!
+ SWE: time step: 184, sim. time: 10min 5s 723ms, dt: 3s 183ms 830µs, cells: 6987
+ THIS SHIT!
+ Rank            0 : TAG 1
+ Rank            0 : TAG 2
+ Rank            1 : TAG 1
+ Rank            1 : TAG 2
+ Rank            0 : TAG 3
+ Rank            0 : TAG 4
+ Rank            1 : TAG 3
+ Rank            1 : TAG 4
+ Rank            0 : TAG 5
+ Rank            1 : TAG 5
+ Rank            0 : TAG 6
+ Rank            0 : TAG 7
+ Rank            0 : TAG 8
+ Rank            1 : TAG 6
+ Rank            1 : TAG 7
+ Rank            1 : TAG 8
+ Rank            1 : TAG 9
+ Rank            0 : TAG 9
+[97m(r0,t0)  THIS SHIT!
+ SWE: time step: 185, sim. time: 10min 8s 907ms, dt: 3s 183ms 830µs, cells: 7013
+ THIS SHIT!
+ Rank            0 : TAG 1
+ Rank            0 : TAG 2
+ Rank            1 : TAG 1
+ Rank            1 : TAG 2
+ Rank            1 : TAG 3
+ Rank            1 : TAG 4
+ Rank            0 : TAG 3
+ Rank            0 : TAG 4
+ Rank            0 : TAG 5
+ Rank            1 : TAG 5
+ Rank            0 : TAG 6
+ Rank            1 : TAG 6
+ Rank            0 : TAG 7
+ Rank            0 : TAG 8
+ Rank            1 : TAG 7
+ Rank            1 : TAG 8
+ Rank            1 : TAG 9
+ Rank            0 : TAG 9
+[97m(r0,t0)  THIS SHIT!
+ SWE: time step: 186, sim. time: 10min 12s 90ms, dt: 3s 183ms 829µs, cells: 7030
+ THIS SHIT!
+ Rank            0 : TAG 1
+ Rank            0 : TAG 2
+ Rank            1 : TAG 1
+ Rank            1 : TAG 2
+ Rank            0 : TAG 3
+ Rank            0 : TAG 4
+ Rank            1 : TAG 3
+ Rank            1 : TAG 4
+ Rank            0 : TAG 5
+ Rank            1 : TAG 5
+ Rank            0 : TAG 6
+ Rank            0 : TAG 7
+ Rank            0 : TAG 8
+ Rank            1 : TAG 6
+ Rank            1 : TAG 7
+ Rank            1 : TAG 8
+ Rank            0 : TAG 9
+ Rank            1 : TAG 9
+[97m(r0,t0)  THIS SHIT!
+ SWE: time step: 187, sim. time: 10min 15s 274ms, dt: 3s 183ms 828µs, cells: 7053
+ THIS SHIT!
+ Rank            0 : TAG 1
+ Rank            0 : TAG 2
+ Rank            1 : TAG 1
+ Rank            1 : TAG 2
+ Rank            1 : TAG 3
+ Rank            1 : TAG 4
+ Rank            0 : TAG 3
+ Rank            0 : TAG 4
+ Rank            0 : TAG 5
+ Rank            1 : TAG 5
+ Rank            0 : TAG 6
+ Rank            0 : TAG 7
+ Rank            0 : TAG 8
+ Rank            1 : TAG 6
+ Rank            1 : TAG 7
+ Rank            1 : TAG 8
+ Rank            1 : TAG 9
+ Rank            0 : TAG 9
+[97m(r0,t0)  THIS SHIT!
+ SWE: time step: 188, sim. time: 10min 18s 458ms, dt: 3s 183ms 828µs, cells: 7071
+ THIS SHIT!
+ Rank            0 : TAG 1
+ Rank            0 : TAG 2
+ Rank            1 : TAG 1
+ Rank            1 : TAG 2
+ Rank            0 : TAG 3
+ Rank            0 : TAG 4
+ Rank            1 : TAG 3
+ Rank            1 : TAG 4
+ Rank            0 : TAG 5
+ Rank            1 : TAG 5
+ Rank            0 : TAG 6
+ Rank            0 : TAG 7
+ Rank            0 : TAG 8
+ Rank            1 : TAG 6
+ Rank            1 : TAG 7
+ Rank            1 : TAG 8
+ Rank            0 : TAG 9
+ Rank            1 : TAG 9
+[97m(r0,t0)  THIS SHIT!
+ SWE: time step: 189, sim. time: 10min 21s 642ms, dt: 3s 183ms 827µs, cells: 7080
+ THIS SHIT!
+ Rank            0 : TAG 1
+ Rank            0 : TAG 2
+ Rank            1 : TAG 1
+ Rank            1 : TAG 2
+ Rank            1 : TAG 3
+ Rank            1 : TAG 4
+ Rank            0 : TAG 3
+ Rank            0 : TAG 4
+ Rank            0 : TAG 5
+ Rank            1 : TAG 5
+ Rank            0 : TAG 6
+ Rank            0 : TAG 7
+ Rank            0 : TAG 8
+ Rank            1 : TAG 6
+ Rank            1 : TAG 7
+ Rank            1 : TAG 8
+ Rank            1 : TAG 9
+ Rank            0 : TAG 9
+[97m(r0,t0)  THIS SHIT!
+ SWE: time step: 190, sim. time: 10min 24s 826ms, dt: 3s 183ms 826µs, cells: 7115
+ THIS SHIT!
+ Rank            0 : TAG 1
+ Rank            0 : TAG 2
+ Rank            1 : TAG 1
+ Rank            1 : TAG 2
+ Rank            0 : TAG 3
+ Rank            0 : TAG 4
+ Rank            1 : TAG 3
+ Rank            1 : TAG 4
+ Rank            0 : TAG 5
+ Rank            1 : TAG 5
+ Rank            0 : TAG 6
+ Rank            0 : TAG 7
+ Rank            0 : TAG 8
+ Rank            1 : TAG 6
+ Rank            1 : TAG 7
+ Rank            1 : TAG 8
+ Rank            1 : TAG 9
+ Rank            0 : TAG 9
+[97m(r0,t0)  THIS SHIT!
+ SWE: time step: 191, sim. time: 10min 28s 9ms, dt: 3s 183ms 825µs, cells: 7132
+ THIS SHIT!
+ Rank            0 : TAG 1
+ Rank            0 : TAG 2
+ Rank            1 : TAG 1
+ Rank            1 : TAG 2
+ Rank            1 : TAG 3
+ Rank            1 : TAG 4
+ Rank            0 : TAG 3
+ Rank            0 : TAG 4
+ Rank            0 : TAG 5
+ Rank            1 : TAG 5
+ Rank            0 : TAG 6
+ Rank            0 : TAG 7
+ Rank            0 : TAG 8
+ Rank            1 : TAG 6
+ Rank            1 : TAG 7
+ Rank            1 : TAG 8
+ Rank            1 : TAG 9
+ Rank            0 : TAG 9
+[97m(r0,t0)  THIS SHIT!
+ SWE: time step: 192, sim. time: 10min 31s 193ms, dt: 3s 183ms 824µs, cells: 7151
+ THIS SHIT!
+ Rank            0 : TAG 1
+ Rank            0 : TAG 2
+ Rank            1 : TAG 1
+ Rank            1 : TAG 2
+ Rank            1 : TAG 3
+ Rank            1 : TAG 4
+ Rank            0 : TAG 3
+ Rank            0 : TAG 4
+ Rank            0 : TAG 5
+ Rank            1 : TAG 5
+ Rank            0 : TAG 6
+ Rank            1 : TAG 6
+ Rank            0 : TAG 7
+ Rank            0 : TAG 8
+ Rank            1 : TAG 7
+ Rank            1 : TAG 8
+ Rank            1 : TAG 9
+ Rank            0 : TAG 9
+[97m(r0,t0)  THIS SHIT!
+ SWE: time step: 193, sim. time: 10min 34s 377ms, dt: 3s 183ms 824µs, cells: 7175
+ THIS SHIT!
+ Rank            0 : TAG 1
+ Rank            0 : TAG 2
+ Rank            1 : TAG 1
+ Rank            1 : TAG 2
+ Rank            0 : TAG 3
+ Rank            0 : TAG 4
+ Rank            1 : TAG 3
+ Rank            1 : TAG 4
+ Rank            0 : TAG 5
+ Rank            1 : TAG 5
+ Rank            0 : TAG 6
+ Rank            0 : TAG 7
+ Rank            0 : TAG 8
+ Rank            1 : TAG 6
+ Rank            1 : TAG 7
+ Rank            1 : TAG 8
+ Rank            1 : TAG 9
+ Rank            0 : TAG 9
+[97m(r0,t0)  THIS SHIT!
+ SWE: time step: 194, sim. time: 10min 37s 561ms, dt: 3s 183ms 823µs, cells: 7191
+ THIS SHIT!
+ Rank            0 : TAG 1
+ Rank            0 : TAG 2
+ Rank            1 : TAG 1
+ Rank            1 : TAG 2
+ Rank            0 : TAG 3
+ Rank            0 : TAG 4
+ Rank            1 : TAG 3
+ Rank            1 : TAG 4
+ Rank            0 : TAG 5
+ Rank            1 : TAG 5
+ Rank            0 : TAG 6
+ Rank            0 : TAG 7
+ Rank            1 : TAG 6
+ Rank            0 : TAG 8
+ Rank            1 : TAG 7
+ Rank            1 : TAG 8
+ Rank            0 : TAG 9
+ Rank            1 : TAG 9
+[97m(r0,t0)  THIS SHIT!
+ SWE: time step: 195, sim. time: 10min 40s 745ms, dt: 3s 183ms 822µs, cells: 7198
+ THIS SHIT!
+ Rank            0 : TAG 1
+ Rank            0 : TAG 2
+ Rank            1 : TAG 1
+ Rank            1 : TAG 2
+ Rank            1 : TAG 3
+ Rank            1 : TAG 4
+ Rank            0 : TAG 3
+ Rank            0 : TAG 4
+ Rank            0 : TAG 5
+ Rank            1 : TAG 5
+ Rank            0 : TAG 6
+ Rank            0 : TAG 7
+ Rank            1 : TAG 6
+ Rank            0 : TAG 8
+ Rank            1 : TAG 7
+ Rank            1 : TAG 8
+ Rank            1 : TAG 9
+ Rank            0 : TAG 9
+[97m(r0,t0)  THIS SHIT!
+ SWE: time step: 196, sim. time: 10min 43s 929ms, dt: 3s 183ms 821µs, cells: 7233
+ THIS SHIT!
+ Rank            0 : TAG 1
+ Rank            0 : TAG 2
+ Rank            1 : TAG 1
+ Rank            1 : TAG 2
+ Rank            1 : TAG 3
+ Rank            1 : TAG 4
+ Rank            0 : TAG 3
+ Rank            0 : TAG 4
+ Rank            0 : TAG 5
+ Rank            1 : TAG 5
+ Rank            0 : TAG 6
+ Rank            0 : TAG 7
+ Rank            0 : TAG 8
+ Rank            1 : TAG 6
+ Rank            1 : TAG 7
+ Rank            1 : TAG 8
+ Rank            1 : TAG 9
+ Rank            0 : TAG 9
+[97m(r0,t0)  THIS SHIT!
+ SWE: time step: 197, sim. time: 10min 47s 112ms, dt: 3s 183ms 820µs, cells: 7262
+ THIS SHIT!
+ Rank            0 : TAG 1
+ Rank            0 : TAG 2
+ Rank            1 : TAG 1
+ Rank            1 : TAG 2
+ Rank            1 : TAG 3
+ Rank            1 : TAG 4
+ Rank            0 : TAG 3
+ Rank            0 : TAG 4
+ Rank            0 : TAG 5
+ Rank            1 : TAG 5
+ Rank            0 : TAG 6
+ Rank            0 : TAG 7
+ Rank            0 : TAG 8
+ Rank            1 : TAG 6
+ Rank            1 : TAG 7
+ Rank            1 : TAG 8
+ Rank            1 : TAG 9
+ Rank            0 : TAG 9
+[97m(r0,t0)  THIS SHIT!
+ SWE: time step: 198, sim. time: 10min 50s 296ms, dt: 3s 183ms 820µs, cells: 7284
+ THIS SHIT!
+ Rank            0 : TAG 1
+ Rank            0 : TAG 2
+ Rank            1 : TAG 1
+ Rank            1 : TAG 2
+ Rank            0 : TAG 3
+ Rank            0 : TAG 4
+ Rank            1 : TAG 3
+ Rank            1 : TAG 4
+ Rank            1 : TAG 5
+ Rank            0 : TAG 5
+ Rank            0 : TAG 6
+ Rank            0 : TAG 7
+ Rank            0 : TAG 8
+ Rank            1 : TAG 6
+ Rank            1 : TAG 7
+ Rank            1 : TAG 8
+ Rank            1 : TAG 9
+ Rank            0 : TAG 9
+[97m(r0,t0)  THIS SHIT!
+ SWE: time step: 199, sim. time: 10min 53s 480ms, dt: 3s 183ms 819µs, cells: 7300
+ THIS SHIT!
+ Rank            0 : TAG 1
+ Rank            0 : TAG 2
+ Rank            1 : TAG 1
+ Rank            1 : TAG 2
+ Rank            1 : TAG 3
+ Rank            1 : TAG 4
+ Rank            0 : TAG 3
+ Rank            0 : TAG 4
+ Rank            1 : TAG 5
+ Rank            0 : TAG 5
+ Rank            0 : TAG 6
+ Rank            0 : TAG 7
+ Rank            0 : TAG 8
+ Rank            1 : TAG 6
+ Rank            1 : TAG 7
+ Rank            1 : TAG 8
+ Rank            1 : TAG 9
+ Rank            0 : TAG 9
+[97m(r0,t0)  THIS SHIT!
+ SWE: time step: 200, sim. time: 10min 56s 664ms, dt: 3s 183ms 818µs, cells: 7324
+ THIS SHIT!
+ Rank            0 : TAG 1
+ Rank            0 : TAG 2
+ Rank            1 : TAG 1
+ Rank            1 : TAG 2
+ Rank            1 : TAG 3
+ Rank            0 : TAG 3
+ Rank            0 : TAG 4
+ Rank            0 : TAG 5
+ Rank            0 : TAG 6
+ Rank            0 : TAG 7
+ Rank            0 : TAG 8
+ Rank            0 : TAG 9
+ Rank            1 : TAG 4
+ Rank            1 : TAG 5
+ Rank            1 : TAG 6
+ Rank            1 : TAG 7
+ Rank            1 : TAG 8
+ Rank            1 : TAG 9
+[97m(r0,t0)  THIS SHIT!
+ SWE: time step: 201, sim. time: 10min 59s 848ms, dt: 3s 183ms 817µs, cells: 7335
+ THIS SHIT!
+ Rank            0 : TAG 1
+ Rank            0 : TAG 2
+ Rank            1 : TAG 1
+ Rank            1 : TAG 2
+ Rank            1 : TAG 3
+ Rank            1 : TAG 4
+ Rank            0 : TAG 3
+ Rank            0 : TAG 4
+ Rank            0 : TAG 5
+ Rank            1 : TAG 5
+ Rank            0 : TAG 6
+ Rank            0 : TAG 7
+ Rank            0 : TAG 8
+ Rank            1 : TAG 6
+ Rank            1 : TAG 7
+ Rank            1 : TAG 8
+ Rank            1 : TAG 9
+ Rank            0 : TAG 9
+[97m(r0,t0)  THIS SHIT!
+ SWE: time step: 202, sim. time: 11min 3s 32ms, dt: 3s 183ms 816µs, cells: 7345
+ THIS SHIT!
+ Rank            0 : TAG 1
+ Rank            0 : TAG 2
+ Rank            1 : TAG 1
+ Rank            1 : TAG 2
+ Rank            1 : TAG 3
+ Rank            1 : TAG 4
+ Rank            0 : TAG 3
+ Rank            0 : TAG 4
+ Rank            0 : TAG 5
+ Rank            1 : TAG 5
+ Rank            0 : TAG 6
+ Rank            0 : TAG 7
+ Rank            0 : TAG 8
+ Rank            1 : TAG 6
+ Rank            1 : TAG 7
+ Rank            1 : TAG 8
+ Rank            1 : TAG 9
+ Rank            0 : TAG 9
+[97m(r0,t0)  THIS SHIT!
+ SWE: time step: 203, sim. time: 11min 6s 215ms, dt: 3s 183ms 816µs, cells: 7369
+ THIS SHIT!
+ Rank            0 : TAG 1
+ Rank            0 : TAG 2
+ Rank            1 : TAG 1
+ Rank            1 : TAG 2
+ Rank            0 : TAG 3
+ Rank            0 : TAG 4
+ Rank            1 : TAG 3
+ Rank            1 : TAG 4
+ Rank            0 : TAG 5
+ Rank            1 : TAG 5
+ Rank            0 : TAG 6
+ Rank            1 : TAG 6
+ Rank            0 : TAG 7
+ Rank            0 : TAG 8
+ Rank            1 : TAG 7
+ Rank            1 : TAG 8
+ Rank            1 : TAG 9
+ Rank            0 : TAG 9
+[97m(r0,t0)  THIS SHIT!
+ SWE: time step: 204, sim. time: 11min 9s 399ms, dt: 3s 183ms 815µs, cells: 7390
+ THIS SHIT!
+ Rank            0 : TAG 1
+ Rank            0 : TAG 2
+ Rank            0 : TAG 3
+ Rank            0 : TAG 4
+ Rank            0 : TAG 5
+ Rank            1 : TAG 1
+ Rank            1 : TAG 2
+ Rank            1 : TAG 3
+ Rank            1 : TAG 4
+ Rank            1 : TAG 5
+ Rank            0 : TAG 6
+ Rank            1 : TAG 6
+ Rank            0 : TAG 7
+ Rank            0 : TAG 8
+ Rank            1 : TAG 7
+ Rank            1 : TAG 8
+ Rank            1 : TAG 9
+ Rank            0 : TAG 9
+[97m(r0,t0)  THIS SHIT!
+ SWE: time step: 205, sim. time: 11min 12s 583ms, dt: 3s 183ms 814µs, cells: 7405
+ THIS SHIT!
+ Rank            0 : TAG 1
+ Rank            0 : TAG 2
+ Rank            1 : TAG 1
+ Rank            1 : TAG 2
+ Rank            1 : TAG 3
+ Rank            1 : TAG 4
+ Rank            0 : TAG 3
+ Rank            0 : TAG 4
+ Rank            1 : TAG 5
+ Rank            0 : TAG 5
+ Rank            0 : TAG 6
+ Rank            0 : TAG 7
+ Rank            0 : TAG 8
+ Rank            1 : TAG 6
+ Rank            1 : TAG 7
+ Rank            1 : TAG 8
+ Rank            0 : TAG 9
+ Rank            1 : TAG 9
+[97m(r0,t0)  THIS SHIT!
+ SWE: time step: 206, sim. time: 11min 15s 767ms, dt: 3s 183ms 813µs, cells: 7421
+ THIS SHIT!
+ Rank            0 : TAG 1
+ Rank            0 : TAG 2
+ Rank            1 : TAG 1
+ Rank            1 : TAG 2
+ Rank            1 : TAG 3
+ Rank            1 : TAG 4
+ Rank            0 : TAG 3
+ Rank            0 : TAG 4
+ Rank            0 : TAG 5
+ Rank            1 : TAG 5
+ Rank            0 : TAG 6
+ Rank            0 : TAG 7
+ Rank            1 : TAG 6
+ Rank            0 : TAG 8
+ Rank            1 : TAG 7
+ Rank            1 : TAG 8
+ Rank            1 : TAG 9
+ Rank            0 : TAG 9
+[97m(r0,t0)  THIS SHIT!
+ SWE: time step: 207, sim. time: 11min 18s 951ms, dt: 3s 183ms 812µs, cells: 7432
+ THIS SHIT!
+ Rank            0 : TAG 1
+ Rank            0 : TAG 2
+ Rank            1 : TAG 1
+ Rank            1 : TAG 2
+ Rank            1 : TAG 3
+ Rank            1 : TAG 4
+ Rank            0 : TAG 3
+ Rank            0 : TAG 4
+ Rank            0 : TAG 5
+ Rank            1 : TAG 5
+ Rank            0 : TAG 6
+ Rank            0 : TAG 7
+ Rank            0 : TAG 8
+ Rank            1 : TAG 6
+ Rank            1 : TAG 7
+ Rank            1 : TAG 8
+ Rank            1 : TAG 9
+ Rank            0 : TAG 9
+[97m(r0,t0)  THIS SHIT!
+ SWE: time step: 208, sim. time: 11min 22s 134ms, dt: 3s 183ms 811µs, cells: 7448
+ THIS SHIT!
+ Rank            0 : TAG 1
+ Rank            0 : TAG 2
+ Rank            1 : TAG 1
+ Rank            1 : TAG 2
+ Rank            1 : TAG 3
+ Rank            0 : TAG 3
+ Rank            0 : TAG 4
+ Rank            0 : TAG 5
+ Rank            1 : TAG 4
+ Rank            1 : TAG 5
+ Rank            1 : TAG 6
+ Rank            0 : TAG 6
+ Rank            0 : TAG 7
+ Rank            0 : TAG 8
+ Rank            1 : TAG 7
+ Rank            1 : TAG 8
+ Rank            1 : TAG 9
+ Rank            0 : TAG 9
+[97m(r0,t0)  THIS SHIT!
+ SWE: time step: 209, sim. time: 11min 25s 318ms, dt: 3s 183ms 810µs, cells: 7474
+ THIS SHIT!
+ Rank            0 : TAG 1
+ Rank            0 : TAG 2
+ Rank            1 : TAG 1
+ Rank            1 : TAG 2
+ Rank            0 : TAG 3
+ Rank            0 : TAG 4
+ Rank            1 : TAG 3
+ Rank            1 : TAG 4
+ Rank            0 : TAG 5
+ Rank            1 : TAG 5
+ Rank            1 : TAG 6
+ Rank            0 : TAG 6
+ Rank            0 : TAG 7
+ Rank            0 : TAG 8
+ Rank            1 : TAG 7
+ Rank            1 : TAG 8
+ Rank            1 : TAG 9
+ Rank            0 : TAG 9
+[97m(r0,t0)  THIS SHIT!
+ SWE: time step: 210, sim. time: 11min 28s 502ms, dt: 3s 183ms 809µs, cells: 7500
+ THIS SHIT!
+ Rank            0 : TAG 1
+ Rank            0 : TAG 2
+ Rank            1 : TAG 1
+ Rank            1 : TAG 2
+ Rank            1 : TAG 3
+ Rank            1 : TAG 4
+ Rank            0 : TAG 3
+ Rank            0 : TAG 4
+ Rank            0 : TAG 5
+ Rank            1 : TAG 5
+ Rank            0 : TAG 6
+ Rank            0 : TAG 7
+ Rank            1 : TAG 6
+ Rank            0 : TAG 8
+ Rank            1 : TAG 7
+ Rank            1 : TAG 8
+ Rank            1 : TAG 9
+ Rank            0 : TAG 9
+[97m(r0,t0)  THIS SHIT!
+ SWE: time step: 211, sim. time: 11min 31s 686ms, dt: 3s 183ms 808µs, cells: 7525
+ THIS SHIT!
+ Rank            0 : TAG 1
+ Rank            0 : TAG 2
+ Rank            1 : TAG 1
+ Rank            1 : TAG 2
+ Rank            1 : TAG 3
+ Rank            1 : TAG 4
+ Rank            0 : TAG 3
+ Rank            0 : TAG 4
+ Rank            0 : TAG 5
+ Rank            1 : TAG 5
+ Rank            0 : TAG 6
+ Rank            1 : TAG 6
+ Rank            0 : TAG 7
+ Rank            0 : TAG 8
+ Rank            1 : TAG 7
+ Rank            1 : TAG 8
+ Rank            0 : TAG 9
+ Rank            1 : TAG 9
+[97m(r0,t0)  THIS SHIT!
+ SWE: time step: 212, sim. time: 11min 34s 870ms, dt: 3s 183ms 807µs, cells: 7539
+ THIS SHIT!
+ Rank            0 : TAG 1
+ Rank            0 : TAG 2
+ Rank            0 : TAG 3
+ Rank            0 : TAG 4
+ Rank            0 : TAG 5
+ Rank            1 : TAG 1
+ Rank            1 : TAG 2
+ Rank            1 : TAG 3
+ Rank            1 : TAG 4
+ Rank            1 : TAG 5
+ Rank            0 : TAG 6
+ Rank            0 : TAG 7
+ Rank            0 : TAG 8
+ Rank            1 : TAG 6
+ Rank            0 : TAG 9
+ Rank            1 : TAG 7
+ Rank            1 : TAG 8
+ Rank            1 : TAG 9
+[97m(r0,t0)  THIS SHIT!
+ SWE: time step: 213, sim. time: 11min 38s 53ms, dt: 3s 183ms 807µs, cells: 7570
+ THIS SHIT!
+ Rank            0 : TAG 1
+ Rank            0 : TAG 2
+ Rank            1 : TAG 1
+ Rank            1 : TAG 2
+ Rank            1 : TAG 3
+ Rank            0 : TAG 3
+ Rank            0 : TAG 4
+ Rank            1 : TAG 4
+ Rank            0 : TAG 5
+ Rank            1 : TAG 5
+ Rank            0 : TAG 6
+ Rank            1 : TAG 6
+ Rank            0 : TAG 7
+ Rank            0 : TAG 8
+ Rank            1 : TAG 7
+ Rank            1 : TAG 8
+ Rank            1 : TAG 9
+ Rank            0 : TAG 9
+[97m(r0,t0)  THIS SHIT!
+ SWE: time step: 214, sim. time: 11min 41s 237ms, dt: 3s 183ms 806µs, cells: 7594
+ THIS SHIT!
+ Rank            0 : TAG 1
+ Rank            0 : TAG 2
+ Rank            1 : TAG 1
+ Rank            1 : TAG 2
+ Rank            0 : TAG 3
+ Rank            0 : TAG 4
+ Rank            1 : TAG 3
+ Rank            1 : TAG 4
+ Rank            0 : TAG 5
+ Rank            1 : TAG 5
+ Rank            0 : TAG 6
+ Rank            1 : TAG 6
+ Rank            0 : TAG 7
+ Rank            0 : TAG 8
+ Rank            1 : TAG 7
+ Rank            1 : TAG 8
+ Rank            1 : TAG 9
+ Rank            0 : TAG 9
+[97m(r0,t0)  THIS SHIT!
+ SWE: time step: 215, sim. time: 11min 44s 421ms, dt: 3s 183ms 805µs, cells: 7611
+ THIS SHIT!
+ Rank            0 : TAG 1
+ Rank            0 : TAG 2
+ Rank            1 : TAG 1
+ Rank            1 : TAG 2
+ Rank            1 : TAG 3
+ Rank            1 : TAG 4
+ Rank            0 : TAG 3
+ Rank            0 : TAG 4
+ Rank            1 : TAG 5
+ Rank            0 : TAG 5
+ Rank            0 : TAG 6
+ Rank            0 : TAG 7
+ Rank            0 : TAG 8
+ Rank            1 : TAG 6
+ Rank            1 : TAG 7
+ Rank            1 : TAG 8
+ Rank            0 : TAG 9
+ Rank            1 : TAG 9
+[97m(r0,t0)  SWE: time step: 216, sim. time: 11min 47s 605ms, dt: 3s 183ms 804µs, cells: 7616
+ THIS SHIT!
+ Rank            0 : TAG 1
+ Rank            0 : TAG 2
+ THIS SHIT!
+ Rank            1 : TAG 1
+ Rank            1 : TAG 2
+ Rank            1 : TAG 3
+ Rank            1 : TAG 4
+ Rank            0 : TAG 3
+ Rank            0 : TAG 4
+ Rank            0 : TAG 5
+ Rank            1 : TAG 5
+ Rank            0 : TAG 6
+ Rank            0 : TAG 7
+ Rank            0 : TAG 8
+ Rank            1 : TAG 6
+ Rank            1 : TAG 7
+ Rank            1 : TAG 8
+ Rank            0 : TAG 9
+ Rank            1 : TAG 9
+[97m(r0,t0)  THIS SHIT!
+ SWE: time step: 217, sim. time: 11min 50s 789ms, dt: 3s 183ms 803µs, cells: 7635
+ THIS SHIT!
+ Rank            0 : TAG 1
+ Rank            0 : TAG 2
+ Rank            1 : TAG 1
+ Rank            1 : TAG 2
+ Rank            1 : TAG 3
+ Rank            1 : TAG 4
+ Rank            0 : TAG 3
+ Rank            0 : TAG 4
+ Rank            1 : TAG 5
+ Rank            0 : TAG 5
+ Rank            0 : TAG 6
+ Rank            0 : TAG 7
+ Rank            0 : TAG 8
+ Rank            1 : TAG 6
+ Rank            1 : TAG 7
+ Rank            1 : TAG 8
+ Rank            0 : TAG 9
+ Rank            1 : TAG 9
+[97m(r0,t0)  THIS SHIT!
+ SWE: time step: 218, sim. time: 11min 53s 972ms, dt: 3s 174ms 218µs, cells: 7649
+ THIS SHIT!
+ Rank            0 : TAG 1
+ Rank            0 : TAG 2
+ Rank            1 : TAG 1
+ Rank            1 : TAG 2
+ Rank            0 : TAG 3
+ Rank            0 : TAG 4
+ Rank            1 : TAG 3
+ Rank            1 : TAG 4
+ Rank            0 : TAG 5
+ Rank            1 : TAG 5
+ Rank            0 : TAG 6
+ Rank            0 : TAG 7
+ Rank            0 : TAG 8
+ Rank            1 : TAG 6
+ Rank            1 : TAG 7
+ Rank            1 : TAG 8
+ Rank            0 : TAG 9
+ Rank            1 : TAG 9
+[97m(r0,t0)  THIS SHIT!
+ SWE: time step: 219, sim. time: 11min 57s 147ms, dt: 3s 174ms 218µs, cells: 7676
+ THIS SHIT!
+ Rank            0 : TAG 1
+ Rank            0 : TAG 2
+ Rank            1 : TAG 1
+ Rank            1 : TAG 2
+ Rank            1 : TAG 3
+ Rank            1 : TAG 4
+ Rank            0 : TAG 3
+ Rank            0 : TAG 4
+ Rank            0 : TAG 5
+ Rank            1 : TAG 5
+ Rank            0 : TAG 6
+ Rank            0 : TAG 7
+ Rank            0 : TAG 8
+ Rank            1 : TAG 6
+ Rank            1 : TAG 7
+ Rank            1 : TAG 8
+ Rank            0 : TAG 9
+ Rank            1 : TAG 9
+[97m(r0,t0)  SWE: time step: 220, sim. time: 12min 321ms 414µs, dt: 3s 174ms 217µs, cells: 7703
+[97m(r0,t0)  SWE: output step: 6
+[97m(r0,t0)  SWE: output step: 6
+ THIS SHIT!
+ Rank            1 : TAG 1
+ Rank            1 : TAG 2
+ THIS SHIT!
+ Rank            0 : TAG 1
+ Rank            0 : TAG 2
+ Rank            1 : TAG 3
+ Rank            1 : TAG 4
+ Rank            0 : TAG 3
+ Rank            0 : TAG 4
+ Rank            0 : TAG 5
+ Rank            1 : TAG 5
+ Rank            0 : TAG 6
+ Rank            0 : TAG 7
+ Rank            0 : TAG 8
+ Rank            1 : TAG 6
+ Rank            1 : TAG 7
+ Rank            1 : TAG 8
+ Rank            1 : TAG 9
+ Rank            0 : TAG 9
+[97m(r0,t0)  THIS SHIT!
+ SWE: time step: 221, sim. time: 12min 3s 495ms, dt: 3s 174ms 217µs, cells: 7728
+ THIS SHIT!
+ Rank            0 : TAG 1
+ Rank            0 : TAG 2
+ Rank            1 : TAG 1
+ Rank            1 : TAG 2
+ Rank            1 : TAG 3
+ Rank            1 : TAG 4
+ Rank            0 : TAG 3
+ Rank            0 : TAG 4
+ Rank            1 : TAG 5
+ Rank            0 : TAG 5
+ Rank            0 : TAG 6
+ Rank            0 : TAG 7
+ Rank            0 : TAG 8
+ Rank            1 : TAG 6
+ Rank            1 : TAG 7
+ Rank            1 : TAG 8
+ Rank            1 : TAG 9
+ Rank            0 : TAG 9
+[97m(r0,t0)  THIS SHIT!
+ SWE: time step: 222, sim. time: 12min 6s 669ms, dt: 3s 174ms 217µs, cells: 7749
+ THIS SHIT!
+ Rank            0 : TAG 1
+ Rank            0 : TAG 2
+ Rank            1 : TAG 1
+ Rank            1 : TAG 2
+ Rank            1 : TAG 3
+ Rank            1 : TAG 4
+ Rank            0 : TAG 3
+ Rank            0 : TAG 4
+ Rank            0 : TAG 5
+ Rank            1 : TAG 5
+ Rank            0 : TAG 6
+ Rank            0 : TAG 7
+ Rank            0 : TAG 8
+ Rank            1 : TAG 6
+ Rank            1 : TAG 7
+ Rank            1 : TAG 8
+ Rank            0 : TAG 9
+ Rank            1 : TAG 9
+[97m(r0,t0)  THIS SHIT!
+ SWE: time step: 223, sim. time: 12min 9s 844ms, dt: 3s 174ms 216µs, cells: 7793
+ THIS SHIT!
+ Rank            0 : TAG 1
+ Rank            0 : TAG 2
+ Rank            1 : TAG 1
+ Rank            1 : TAG 2
+ Rank            1 : TAG 3
+ Rank            1 : TAG 4
+ Rank            0 : TAG 3
+ Rank            0 : TAG 4
+ Rank            0 : TAG 5
+ Rank            1 : TAG 5
+ Rank            0 : TAG 6
+ Rank            0 : TAG 7
+ Rank            0 : TAG 8
+ Rank            1 : TAG 6
+ Rank            1 : TAG 7
+ Rank            1 : TAG 8
+ Rank            0 : TAG 9
+ Rank            1 : TAG 9
+[97m(r0,t0)  THIS SHIT!
+ SWE: time step: 224, sim. time: 12min 13s 18ms, dt: 3s 170ms 145µs, cells: 7823
+ THIS SHIT!
+ Rank            0 : TAG 1
+ Rank            0 : TAG 2
+ Rank            1 : TAG 1
+ Rank            1 : TAG 2
+ Rank            0 : TAG 3
+ Rank            0 : TAG 4
+ Rank            1 : TAG 3
+ Rank            1 : TAG 4
+ Rank            0 : TAG 5
+ Rank            1 : TAG 5
+ Rank            0 : TAG 6
+ Rank            0 : TAG 7
+ Rank            0 : TAG 8
+ Rank            1 : TAG 6
+ Rank            1 : TAG 7
+ Rank            1 : TAG 8
+ Rank            1 : TAG 9
+ Rank            0 : TAG 9
+[97m(r0,t0)  THIS SHIT!
+ SWE: time step: 225, sim. time: 12min 16s 188ms, dt: 3s 170ms 145µs, cells: 7841
+ THIS SHIT!
+ Rank            0 : TAG 1
+ Rank            0 : TAG 2
+ Rank            1 : TAG 1
+ Rank            1 : TAG 2
+ Rank            0 : TAG 3
+ Rank            0 : TAG 4
+ Rank            1 : TAG 3
+ Rank            1 : TAG 4
+ Rank            0 : TAG 5
+ Rank            1 : TAG 5
+ Rank            0 : TAG 6
+ Rank            1 : TAG 6
+ Rank            0 : TAG 7
+ Rank            0 : TAG 8
+ Rank            1 : TAG 7
+ Rank            1 : TAG 8
+ Rank            1 : TAG 9
+ Rank            0 : TAG 9
+[97m(r0,t0)  THIS SHIT!
+ SWE: time step: 226, sim. time: 12min 19s 358ms, dt: 3s 170ms 144µs, cells: 7866
+ THIS SHIT!
+ Rank            0 : TAG 1
+ Rank            0 : TAG 2
+ Rank            1 : TAG 1
+ Rank            1 : TAG 2
+ Rank            1 : TAG 3
+ Rank            0 : TAG 3
+ Rank            0 : TAG 4
+ Rank            1 : TAG 4
+ Rank            0 : TAG 5
+ Rank            1 : TAG 5
+ Rank            0 : TAG 6
+ Rank            0 : TAG 7
+ Rank            0 : TAG 8
+ Rank            1 : TAG 6
+ Rank            1 : TAG 7
+ Rank            1 : TAG 8
+ Rank            0 : TAG 9
+ Rank            1 : TAG 9
+[97m(r0,t0)  THIS SHIT!
+ SWE: time step: 227, sim. time: 12min 22s 528ms, dt: 3s 170ms 144µs, cells: 7891
+ THIS SHIT!
+ Rank            0 : TAG 1
+ Rank            0 : TAG 2
+ Rank            1 : TAG 1
+ Rank            1 : TAG 2
+ Rank            1 : TAG 3
+ Rank            1 : TAG 4
+ Rank            0 : TAG 3
+ Rank            0 : TAG 4
+ Rank            0 : TAG 5
+ Rank            1 : TAG 5
+ Rank            1 : TAG 6
+ Rank            0 : TAG 6
+ Rank            0 : TAG 7
+ Rank            0 : TAG 8
+ Rank            1 : TAG 7
+ Rank            1 : TAG 8
+ Rank            1 : TAG 9
+ Rank            0 : TAG 9
+[97m(r0,t0)  THIS SHIT!
+ SWE: time step: 228, sim. time: 12min 25s 698ms, dt: 3s 170ms 144µs, cells: 7915
+ THIS SHIT!
+ Rank            0 : TAG 1
+ Rank            0 : TAG 2
+ Rank            1 : TAG 1
+ Rank            1 : TAG 2
+ Rank            0 : TAG 3
+ Rank            0 : TAG 4
+ Rank            1 : TAG 3
+ Rank            1 : TAG 4
+ Rank            0 : TAG 5
+ Rank            1 : TAG 5
+ Rank            0 : TAG 6
+ Rank            1 : TAG 6
+ Rank            0 : TAG 7
+ Rank            0 : TAG 8
+ Rank            1 : TAG 7
+ Rank            1 : TAG 8
+ Rank            1 : TAG 9
+ Rank            0 : TAG 9
+[97m(r0,t0)  THIS SHIT!
+ SWE: time step: 229, sim. time: 12min 28s 869ms, dt: 3s 170ms 143µs, cells: 7930
+ THIS SHIT!
+ Rank            0 : TAG 1
+ Rank            0 : TAG 2
+ Rank            1 : TAG 1
+ Rank            1 : TAG 2
+ Rank            0 : TAG 3
+ Rank            0 : TAG 4
+ Rank            1 : TAG 3
+ Rank            1 : TAG 4
+ Rank            0 : TAG 5
+ Rank            1 : TAG 5
+ Rank            0 : TAG 6
+ Rank            1 : TAG 6
+ Rank            0 : TAG 7
+ Rank            0 : TAG 8
+ Rank            1 : TAG 7
+ Rank            1 : TAG 8
+ Rank            1 : TAG 9
+ Rank            0 : TAG 9
+[97m(r0,t0)  THIS SHIT!
+ SWE: time step: 230, sim. time: 12min 32s 39ms, dt: 3s 170ms 143µs, cells: 7946
+ THIS SHIT!
+ Rank            0 : TAG 1
+ Rank            0 : TAG 2
+ Rank            1 : TAG 1
+ Rank            1 : TAG 2
+ Rank            1 : TAG 3
+ Rank            1 : TAG 4
+ Rank            0 : TAG 3
+ Rank            0 : TAG 4
+ Rank            0 : TAG 5
+ Rank            1 : TAG 5
+ Rank            0 : TAG 6
+ Rank            0 : TAG 7
+ Rank            0 : TAG 8
+ Rank            1 : TAG 6
+ Rank            1 : TAG 7
+ Rank            1 : TAG 8
+ Rank            0 : TAG 9
+ Rank            1 : TAG 9
+[97m(r0,t0)  THIS SHIT!
+ SWE: time step: 231, sim. time: 12min 35s 209ms, dt: 3s 170ms 143µs, cells: 7960
+ THIS SHIT!
+ Rank            0 : TAG 1
+ Rank            0 : TAG 2
+ Rank            1 : TAG 1
+ Rank            1 : TAG 2
+ Rank            1 : TAG 3
+ Rank            1 : TAG 4
+ Rank            0 : TAG 3
+ Rank            0 : TAG 4
+ Rank            0 : TAG 5
+ Rank            1 : TAG 5
+ Rank            0 : TAG 6
+ Rank            0 : TAG 7
+ Rank            0 : TAG 8
+ Rank            1 : TAG 6
+ Rank            1 : TAG 7
+ Rank            1 : TAG 8
+ Rank            0 : TAG 9
+ Rank            1 : TAG 9
+[97m(r0,t0)  SWE: time step: 232, sim. time: 12min 38s 379ms, dt: 3s 170ms 143µs, cells: 7992
+ THIS SHIT!
+ Rank            0 : TAG 1
+ Rank            0 : TAG 2
+ THIS SHIT!
+ Rank            1 : TAG 1
+ Rank            1 : TAG 2
+ Rank            1 : TAG 3
+ Rank            1 : TAG 4
+ Rank            0 : TAG 3
+ Rank            0 : TAG 4
+ Rank            0 : TAG 5
+ Rank            1 : TAG 5
+ Rank            0 : TAG 6
+ Rank            1 : TAG 6
+ Rank            0 : TAG 7
+ Rank            0 : TAG 8
+ Rank            1 : TAG 7
+ Rank            1 : TAG 8
+ Rank            1 : TAG 9
+ Rank            0 : TAG 9
+[97m(r0,t0)  THIS SHIT!
+ SWE: time step: 233, sim. time: 12min 41s 549ms, dt: 3s 170ms 142µs, cells: 8008
+ THIS SHIT!
+ Rank            0 : TAG 1
+ Rank            0 : TAG 2
+ Rank            1 : TAG 1
+ Rank            1 : TAG 2
+ Rank            1 : TAG 3
+ Rank            1 : TAG 4
+ Rank            0 : TAG 3
+ Rank            0 : TAG 4
+ Rank            0 : TAG 5
+ Rank            1 : TAG 5
+ Rank            1 : TAG 6
+ Rank            0 : TAG 6
+ Rank            0 : TAG 7
+ Rank            0 : TAG 8
+ Rank            1 : TAG 7
+ Rank            1 : TAG 8
+ Rank            1 : TAG 9
+ Rank            0 : TAG 9
+[97m(r0,t0)  THIS SHIT!
+ SWE: time step: 234, sim. time: 12min 44s 719ms, dt: 3s 170ms 142µs, cells: 8035
+ THIS SHIT!
+ Rank            0 : TAG 1
+ Rank            0 : TAG 2
+ Rank            1 : TAG 1
+ Rank            1 : TAG 2
+ Rank            1 : TAG 3
+ Rank            1 : TAG 4
+ Rank            0 : TAG 3
+ Rank            0 : TAG 4
+ Rank            0 : TAG 5
+ Rank            1 : TAG 5
+ Rank            0 : TAG 6
+ Rank            0 : TAG 7
+ Rank            0 : TAG 8
+ Rank            1 : TAG 6
+ Rank            1 : TAG 7
+ Rank            1 : TAG 8
+ Rank            1 : TAG 9
+ Rank            0 : TAG 9
+[97m(r0,t0)  THIS SHIT!
+ SWE: time step: 235, sim. time: 12min 47s 889ms, dt: 3s 170ms 142µs, cells: 8046
+ THIS SHIT!
+ Rank            0 : TAG 1
+ Rank            0 : TAG 2
+ Rank            1 : TAG 1
+ Rank            1 : TAG 2
+ Rank            0 : TAG 3
+ Rank            0 : TAG 4
+ Rank            1 : TAG 3
+ Rank            0 : TAG 5
+ Rank            1 : TAG 4
+ Rank            1 : TAG 5
+ Rank            0 : TAG 6
+ Rank            0 : TAG 7
+ Rank            0 : TAG 8
+ Rank            0 : TAG 9
+ Rank            1 : TAG 6
+ Rank            1 : TAG 7
+ Rank            1 : TAG 8
+ Rank            1 : TAG 9
+[97m(r0,t0)  THIS SHIT!
+ SWE: time step: 236, sim. time: 12min 51s 60ms, dt: 3s 170ms 141µs, cells: 8062
+ THIS SHIT!
+ Rank            0 : TAG 1
+ Rank            0 : TAG 2
+ Rank            1 : TAG 1
+ Rank            1 : TAG 2
+ Rank            0 : TAG 3
+ Rank            0 : TAG 4
+ Rank            1 : TAG 3
+ Rank            1 : TAG 4
+ Rank            0 : TAG 5
+ Rank            1 : TAG 5
+ Rank            0 : TAG 6
+ Rank            0 : TAG 7
+ Rank            0 : TAG 8
+ Rank            1 : TAG 6
+ Rank            1 : TAG 7
+ Rank            1 : TAG 8
+ Rank            1 : TAG 9
+ Rank            0 : TAG 9
+[97m(r0,t0)  THIS SHIT!
+ SWE: time step: 237, sim. time: 12min 54s 230ms, dt: 3s 170ms 141µs, cells: 8086
+ THIS SHIT!
+ Rank            0 : TAG 1
+ Rank            0 : TAG 2
+ Rank            1 : TAG 1
+ Rank            1 : TAG 2
+ Rank            1 : TAG 3
+ Rank            0 : TAG 3
+ Rank            0 : TAG 4
+ Rank            1 : TAG 4
+ Rank            0 : TAG 5
+ Rank            1 : TAG 5
+ Rank            0 : TAG 6
+ Rank            0 : TAG 7
+ Rank            0 : TAG 8
+ Rank            1 : TAG 6
+ Rank            1 : TAG 7
+ Rank            1 : TAG 8
+ Rank            1 : TAG 9
+ Rank            0 : TAG 9
+[97m(r0,t0)  THIS SHIT!
+ SWE: time step: 238, sim. time: 12min 57s 400ms, dt: 3s 170ms 140µs, cells: 8124
+ THIS SHIT!
+ Rank            0 : TAG 1
+ Rank            0 : TAG 2
+ Rank            1 : TAG 1
+ Rank            1 : TAG 2
+ Rank            1 : TAG 3
+ Rank            0 : TAG 3
+ Rank            0 : TAG 4
+ Rank            1 : TAG 4
+ Rank            0 : TAG 5
+ Rank            1 : TAG 5
+ Rank            0 : TAG 6
+ Rank            1 : TAG 6
+ Rank            0 : TAG 7
+ Rank            0 : TAG 8
+ Rank            1 : TAG 7
+ Rank            1 : TAG 8
+ Rank            1 : TAG 9
+ Rank            0 : TAG 9
+[97m(r0,t0)  THIS SHIT!
+ SWE: time step: 239, sim. time: 13min 570ms 432µs, dt: 3s 170ms 140µs, cells: 8148
+ THIS SHIT!
+ Rank            0 : TAG 1
+ Rank            0 : TAG 2
+ Rank            1 : TAG 1
+ Rank            1 : TAG 2
+ Rank            0 : TAG 3
+ Rank            0 : TAG 4
+ Rank            1 : TAG 3
+ Rank            1 : TAG 4
+ Rank            0 : TAG 5
+ Rank            1 : TAG 5
+ Rank            0 : TAG 6
+ Rank            1 : TAG 6
+ Rank            0 : TAG 7
+ Rank            0 : TAG 8
+ Rank            1 : TAG 7
+ Rank            1 : TAG 8
+ Rank            1 : TAG 9
+ Rank            0 : TAG 9
+[97m(r0,t0)  THIS SHIT!
+ SWE: time step: 240, sim. time: 13min 3s 740ms, dt: 3s 170ms 140µs, cells: 8167
+ THIS SHIT!
+ Rank            0 : TAG 1
+ Rank            0 : TAG 2
+ Rank            1 : TAG 1
+ Rank            1 : TAG 2
+ Rank            0 : TAG 3
+ Rank            0 : TAG 4
+ Rank            1 : TAG 3
+ Rank            1 : TAG 4
+ Rank            0 : TAG 5
+ Rank            1 : TAG 5
+ Rank            0 : TAG 6
+ Rank            0 : TAG 7
+ Rank            0 : TAG 8
+ Rank            1 : TAG 6
+ Rank            1 : TAG 7
+ Rank            1 : TAG 8
+ Rank            1 : TAG 9
+ Rank            0 : TAG 9
+[97m(r0,t0)  THIS SHIT!
+ SWE: time step: 241, sim. time: 13min 6s 910ms, dt: 3s 170ms 139µs, cells: 8181
+ THIS SHIT!
+ Rank            0 : TAG 1
+ Rank            0 : TAG 2
+ Rank            1 : TAG 1
+ Rank            1 : TAG 2
+ Rank            0 : TAG 3
+ Rank            0 : TAG 4
+ Rank            1 : TAG 3
+ Rank            1 : TAG 4
+ Rank            0 : TAG 5
+ Rank            1 : TAG 5
+ Rank            0 : TAG 6
+ Rank            1 : TAG 6
+ Rank            0 : TAG 7
+ Rank            0 : TAG 8
+ Rank            1 : TAG 7
+ Rank            1 : TAG 8
+ Rank            1 : TAG 9
+ Rank            0 : TAG 9
+[97m(r0,t0)  THIS SHIT!
+ SWE: time step: 242, sim. time: 13min 10s 80ms, dt: 3s 170ms 139µs, cells: 8200
+ THIS SHIT!
+ Rank            0 : TAG 1
+ Rank            0 : TAG 2
+ Rank            1 : TAG 1
+ Rank            1 : TAG 2
+ Rank            0 : TAG 3
+ Rank            1 : TAG 3
+ Rank            0 : TAG 4
+ Rank            1 : TAG 4
+ Rank            0 : TAG 5
+ Rank            1 : TAG 5
+ Rank            0 : TAG 6
+ Rank            0 : TAG 7
+ Rank            0 : TAG 8
+ Rank            1 : TAG 6
+ Rank            1 : TAG 7
+ Rank            1 : TAG 8
+ Rank            1 : TAG 9
+ Rank            0 : TAG 9
+[97m(r0,t0)  SWE: time step: 243, sim. time: 13min 13s 250ms, dt: 3s 170ms 139µs, cells: 8223
+ Rank            0  [STATUS            2 ]: MPI_Probe_adapt    2.5749206542968750E-005  seconds
+ Rank            1  [STATUS            2 ]: MPI_Probe_adapt    2.0194053649902344E-004  seconds
+	MPIDI_PG_Create: Creating a process group of size 2; name: 8.0; at rank: 0
+	MPIDI_PG_Create: Creating a process group of size 2; name: 8.0; at rank: 1
+	MPIDI_PG_Create: Creating a process group of size 2; name: ---; at rank: 0
+	MPIDI_PG_Create: Creating a process group of size 2; name: ---; at rank: 1
 received an intercomm, possible pure expansion
- Rank            1  [STATUS            2 ]: MPI_Comm_adapt_begin   0.27321553230285645       seconds
 received an intercomm, possible pure expansion
- Rank            0  [STATUS            2 ]: MPI_Comm_adapt_begin   0.28682160377502441       seconds
-MPID_nem_tcp_iStartContigMsg
+ Rank            1  [STATUS            3 ]: MPI_Comm_adapt_begin    47.561553955078125       seconds
+ Rank            1  [STATUS            2 ]: MPI_Comm_adapt_begin    3.6550521850585938E-002  seconds
 received an intercomm, possible pure expansion
- Rank            4  [STATUS            3 ]: MPI_Comm_adapt_begin    158.90161252021790       seconds
+ Rank            0  [STATUS            2 ]: MPI_Comm_adapt_begin    3.6742448806762695E-002  seconds
 received an intercomm, possible pure expansion
- Rank            5  [STATUS            3 ]: MPI_Comm_adapt_begin    158.90508389472961       seconds
-received an intercomm, possible pure expansion
- Rank            2  [STATUS            3 ]: MPI_Comm_adapt_begin    158.90721726417542       seconds
-received an intercomm, possible pure expansion
- Rank            1  [STATUS            3 ]: MPI_Comm_adapt_begin    158.90861797332764       seconds
-received an intercomm, possible pure expansion
-MPID_nem_tcp_get_vc_from_conninfo
-setting active with MPIDI_PG_Get_vc_set_active
- Rank            0  [STATUS            3 ]: MPI_Comm_adapt_begin    158.91187143325806       seconds
-received an intercomm, possible pure expansion
- Rank            3  [STATUS            3 ]: MPI_Comm_adapt_begin    158.91743278503418       seconds
-MPID_nem_tcp_iStartContigMsg
-	MPIDI_PG_Create: Creating a process group of size 8; name: 2.0; at rank: 2
-	MPIDI_PG_Create: Creating a process group of size 8; name: 2.0; at rank: 4
-	MPIDI_PG_Create: Creating a process group of size 8; name: 2.0; at rank: 5
-	MPIDI_PG_Create: Creating a process group of size 8; name: 2.0; at rank: 3
-MPID_nem_tcp_get_vc_from_conninfo
-setting active with MPIDI_PG_Get_vc_set_active
-	MPIDI_PG_Create: Creating a process group of size 8; name: 2.0; at rank: 0
-	MPIDI_PG_Create: Creating a process group of size 8; name: 2.0; at rank: 1
-	MPIDI_PG_Create: Creating a process group of size 8; name: 2.0; at rank: 0
-	MPIDI_PG_Create: Creating a process group of size 8; name: 2.0; at rank: 1
-MPID_nem_tcp_iSendContig
+ Rank            0  [STATUS            3 ]: MPI_Comm_adapt_begin    47.563039541244507       seconds
+	MPIDI_PG_Create: Creating a process group of size 4; name: 8.0; at rank: 0
+	MPIDI_PG_Create: Creating a process group of size 4; name: 8.0; at rank: 1
+	MPIDI_PG_Create: Creating a process group of size 4; name: 8.0; at rank: 0
+	MPIDI_PG_Create: Creating a process group of size 4; name: 8.0; at rank: 1
 PMI2_Notify_adapt_commit_done
 calling PMIi_WriteSimpleCommandStr
-MPID_nem_tcp_iSendContig
-MPID_nem_tcp_iSendContig
-MPID_nem_tcp_get_vc_from_conninfo
-setting active with MPIDI_PG_Get_vc_set_active
-MPID_nem_tcp_get_vc_from_conninfo
-setting active with MPIDI_PG_Get_vc_set_active
-MPID_nem_tcp_iSendContig
 PMIi_WriteSimpleCommandStr: pmi2_errno: 0
 PMIi_ReadCommandExp: rc: 0, pmi2_errno: 0
 returned from PMIi_ReadCommandExp
-MPID_nem_tcp_iSendContig
-MPID_nem_tcp_iSendContig
-MPID_nem_tcp_get_vc_from_conninfo
-setting active with MPIDI_PG_Get_vc_set_active
-MPID_nem_tcp_get_vc_from_conninfo
-setting active with MPIDI_PG_Get_vc_set_active
-MPID_nem_tcp_get_vc_from_conninfo
-setting active with MPIDI_PG_Get_vc_set_active
-MPID_nem_tcp_get_vc_from_conninfo
-setting active with MPIDI_PG_Get_vc_set_active
- Rank            0  [STATUS            2 ]: MPI_Comm_adapt_commit   0.21573734283447266       seconds
- Rank            0  [STATUS            4 ]: Total adaption time =   0.58551383018493652       seconds
+ Rank            0  [STATUS            2 ]: MPI_Comm_adapt_commit    4.0883541107177734E-002  seconds
+ Rank            0  [STATUS            3 ]: MPI_Comm_adapt_commit    4.0310859680175781E-002  seconds
+ Rank            2  [STATUS            4 ]: Total adaptation time =    47.604413986206055       seconds
  THIS SHIT!
- TAG 1
- Rank            0 : TAG 2
- Rank            1  [STATUS            2 ]: MPI_Comm_adapt_commit   0.21698212623596191       seconds
- Rank            1  [STATUS            4 ]: Total adaption time =   0.58725142478942871       seconds
+ Rank            2 : TAG 1
+ Rank            1  [STATUS            2 ]: MPI_Comm_adapt_commit    4.0895700454711914E-002  seconds
+ Rank            1  [STATUS            3 ]: MPI_Comm_adapt_commit    4.0316104888916016E-002  seconds
+ Rank            1  [STATUS            4 ]: Total adaptation time =    7.9282522201538086E-002  seconds
  THIS SHIT!
- TAG 1
+ Rank            1 : TAG 1
  Rank            1 : TAG 2
- Rank            0  [STATUS            3 ]: MPI_Comm_adapt_commit   0.21653723716735840       seconds
- Rank            4  [STATUS            3 ]: MPI_Comm_adapt_commit   0.25181055068969727       seconds
- Rank            2  [STATUS            3 ]: MPI_Comm_adapt_commit   0.25342774391174316       seconds
- Rank            5  [STATUS            3 ]: MPI_Comm_adapt_commit   0.24308276176452637       seconds
- Rank            7  [STATUS            4 ]: Total adaption time =    159.21478986740112       seconds
+ Rank            3  [STATUS            4 ]: Total adaptation time =    47.604663372039795       seconds
+ Rank            0  [STATUS            4 ]: Total adaptation time =    7.9515218734741211E-002  seconds
  THIS SHIT!
- TAG 1
- Rank            7 : TAG 2
- Rank            6  [STATUS            4 ]: Total adaption time =    159.21758651733398       seconds
  THIS SHIT!
- Rank            2  [STATUS            4 ]: Total adaption time =    159.21243810653687       seconds
- THIS SHIT!
- TAG 1
- Rank            2 : TAG 2
- Rank            4  [STATUS            4 ]: Total adaption time =    159.21605658531189       seconds
- THIS SHIT!
- TAG 1
- Rank            4 : TAG 2
- Rank            3  [STATUS            3 ]: MPI_Comm_adapt_commit   0.26009297370910645       seconds
- Rank            5  [STATUS            4 ]: Total adaption time =    159.21558165550232       seconds
- THIS SHIT!
- TAG 1
- Rank            5 : TAG 2
- Rank            1  [STATUS            3 ]: MPI_Comm_adapt_commit   0.22547888755798340       seconds
- Rank            3  [STATUS            4 ]: Total adaption time =    159.22688412666321       seconds
- THIS SHIT!
- TAG 1
+ Rank            0 : TAG 1
+ Rank            0 : TAG 2
+ Rank            3 : TAG 1
  Rank            3 : TAG 2
- TAG 1
- Rank            6 : TAG 2
+ Rank            2 : TAG 2

@@ -1,0 +1,1573 @@
+	MPIDI_PG_Create: Creating a process group of size 2; name: 3.0; at rank: 0
+	MPIDI_PG_Create: Creating a process group of size 2; name: 3.0; at rank: 0
+[97m(r0,t0)  sam(oa)²: Space filling curves and Adaptive Meshes for Oceanic and Other Applications
+[97m(r0,t0)  Scenario: SWE
+[97m(r0,t0)  OpenMP: No
+[97m(r0,t0)  MPI: Yes, ranks: 2
+[97m(r0,t0)  ASAGI: Yes, without NUMA support, mode: 2: no mpi
+[97m(r0,t0)  Debug Level: 1
+[97m(r0,t0)  Assertions: No
+[97m(r0,t0)  Precision: Double
+[97m(r0,t0)  Compiler: GNU
+[97m(r0,t0)  Sections per thread: 1
+[97m(r0,t0)  Adaptivity: min depth: 0, max depth: 20, start depth: 0
+[97m(r0,t0)  Load balancing: timed load estimate:  No, split sections: Yes, serial:  No
+[97m(r0,t0)  Load balancing: cell weight: 1.00, boundary weight: .00
+[97m(r0,t0)  Scenario: max time steps: -1, max time:  1.08E+04, output step:  1.20E+02
+[97m(r0,t0)  Scenario: output directory: /home/emily/nfs/workspace/isamoa/output/swe_impi
+[97m(r0,t0)  Scenario: courant number: .950
+[97m(r0,t0)  Scenario: Flux solver: Augmented Riemann
+[97m(r0,t0)  Scenario: Input data refinement: Integrate
+[97m(r0,t0)  SWE: bathymetry file: /home/emily/nfs/workspace/samoa-data/tohoku_static/bath_2014.nc, displacement file: /home/emily/nfs/workspace/samoa-data/tohoku_static/displ.nc
+[97m(r0,t0)  SWE: dry_tolerance:  1.0E-02
+[97m(r0,t0) 
+[97m(r0,t0)  SWE: loaded /home/emily/nfs/workspace/samoa-data/tohoku_static/bath_2014.nc, domain: [-500250.00, 6500250.00] x [-2500250.00, 1500250.00]
+[97m(r0,t0)  SWE:  dx: 500.00 dy: 500.00
+[97m(r0,t0)  SWE: loaded /home/emily/nfs/workspace/samoa-data/tohoku_static/displ.nc, domain: [-250000.00, 250000.00] x [-400000.00, 400000.00]
+[97m(r0,t0)  SWE:  dx: 500.00 dy: 500.00
+[97m(r0,t0)  SWE: computational domain: [-500250.00, 6500250.00] x [-5500250.00, 1500250.00]
+[97m(r0,t0)  SWE: setting initial values and a priori refinement..
+[97m(r0,t0)  
+[97m(r0,t0)  SWE: 0 adaptions, 2 cells
+[97m(r0,t0)  SWE: 1 adaptions, 4 cells
+[97m(r0,t0)  SWE: 2 adaptions, 5 cells
+[97m(r0,t0)  SWE: 3 adaptions, 2 cells
+[97m(r0,t0)  SWE: 4 adaptions, 2 cells
+[97m(r0,t0)  SWE: 5 adaptions, 9 cells
+[97m(r0,t0)  SWE: 6 adaptions, 13 cells
+[97m(r0,t0)  SWE: 7 adaptions, 10 cells
+[97m(r0,t0)  SWE: 8 adaptions, 24 cells
+[97m(r0,t0)  SWE: 9 adaptions, 37 cells
+[97m(r0,t0)  SWE: 10 adaptions, 41 cells
+[97m(r0,t0)  SWE: 11 adaptions, 65 cells
+[97m(r0,t0)  SWE: 12 adaptions, 107 cells
+[97m(r0,t0)  SWE: 13 adaptions, 157 cells
+[97m(r0,t0)  SWE: 14 adaptions, 246 cells
+[97m(r0,t0)  SWE: 15 adaptions, 370 cells
+[97m(r0,t0)  SWE: 16 adaptions, 649 cells
+[97m(r0,t0)  SWE: 17 adaptions, 1108 cells
+[97m(r0,t0)  SWE: 18 adaptions, 2104 cells
+[97m(r0,t0)  SWE: 19 adaptions, 3843 cells
+[97m(r0,t0)  SWE: 20 adaptions, 7370 cells
+[97m(r0,t0)  SWE: done.
+[97m(r0,t0)  
+[97m(r0,t0)   Info:
+[97m(r0,t0) 
+[97m(r0,t0)   Cells                         :         14750
+[97m(r0,t0)   Crossed edges                 :         14747
+[97m(r0,t0)   Inner color edges             :          7190
+[97m(r0,t0)   Boundary edges (red/green)    :           222           154
+[97m(r0,t0)   Stack edges (red/green)       :            52            37
+[97m(r0,t0)   Inner nodes                   :             0
+[97m(r0,t0)   Boundary nodes (red/green)    :           219           157
+[97m(r0,t0)   Stack nodes (red/green)       :            52            37
+[97m(r0,t0)   Comms (red/green)             :            12            12
+[97m(r0,t0)   Partition quality (1.0: perfect, infinity: worst): .8808
+[97m(r0,t0)  
+[97m(r0,t0)  SWE: output step: 0
+[97m(r0,t0)  SWE: output step: 0
+[97m(r0,t0)  
+[97m(r0,t0)  Phase statistics:
+[97m(r0,t0)  
+[97m(r0,t0)  Init:                           #travs: 54 time: 51.8072 s (comp: 38.3416 s (pre: .0001 s inner: 38.3415 s post: .0001 s) asagi: .0000 s sync: 12.8964 s barr: .5690 s) ET: .0006 M/s  MT: .0000 GB/s
+[97m(r0,t0)  Displace:                       #travs: 0 time: .0000 s (comp: .0000 s (pre: .0000 s inner: .0000 s post: .0000 s) asagi: .0000 s sync: .0000 s barr: .0000 s) ET: -1.0000 M/s  MT: -1.0000 GB/s
+[97m(r0,t0)  Time steps:                     #travs: 0 time: .0000 s (comp: .0000 s (pre: .0000 s inner: .0000 s post: .0000 s) asagi: .0000 s sync: .0000 s barr: .0000 s) ET: -1.0000 M/s  MT: -1.0000 GB/s
+[97m(r0,t0)  Adaptions:                      #travs: 53 time: 9.0343 s (comp: 6.5922 s (pre: .0000 s inner: 6.5922 s post: .0000 s) asagi: .0000 s sync: .0006 s barr: .0000 s update distances: .0001 s update neighbors: 2.4414 s) integrity: .0733 s load balancing: .4970 s (de)allocation: .0021 s ET: .0036 M/s  MT: .0003 GB/s
+[97m(r0,t0)  Grid:                           #travs: 114 time: 61.2993 s (comp: 45.1879 s (pre: .0018 s inner: 45.0849 s post: .1011 s) asagi: .0000 s sync: 12.9026 s barr: .7671 s update distances: .0000 s update neighbors: .0000 s) integrity: .0000 s load balancing: .0000 s (de)allocation: .0000 s ET: .0015 M/s  MT: .0001 GB/s
+[97m(r0,t0)  Element throughput:                   0.0030 M/s
+[97m(r0,t0)  Memory throughput:                    0.0002 GB/s
+[97m(r0,t0)  Cell update throughput:               0.0000 M/s
+[97m(r0,t0)  Flux solver throughput:               0.0000 M/s
+[97m(r0,t0)  Asagi time:                           0.0000 s
+[97m(r0,t0)  Phase time:                          31.0055 s
+[97m(r0,t0)  
+[97m(r0,t0)  SWE: running time steps..
+[97m(r0,t0)  
+[97m(r0,t0)  SWE: EQ time step: 1, sim. time: 475ns, dt: 3s 327ms 609µs, cells: 7378
+[97m(r0,t0)  
+[97m(r0,t0)  Phase statistics:
+[97m(r0,t0)  
+[97m(r0,t0)  Init:                           #travs: 0 time: .0000 s (comp: .0000 s (pre: .0000 s inner: .0000 s post: .0000 s) asagi: .0000 s sync: .0000 s barr: .0000 s) ET: -1.0000 M/s  MT: -1.0000 GB/s
+[97m(r0,t0)  Displace:                       #travs: 3 time: 3.2997 s (comp: 3.0021 s (pre: .0000 s inner: 3.0021 s post: .0000 s) asagi: .0000 s sync: .2975 s barr: .0000 s) ET: .0045 M/s  MT: .0003 GB/s
+[97m(r0,t0)  Time steps:                     #travs: 3 time: .0206 s (comp: .0194 s (pre: .0003 s inner: .0191 s post: .0000 s) asagi: .0000 s sync: .0011 s barr: .0000 s) ET: .7168 M/s  MT: .0511 GB/s
+[97m(r0,t0)  Adaptions:                      #travs: 3 time: .0071 s (comp: .0068 s (pre: .0000 s inner: .0068 s post: .0000 s) asagi: .0000 s sync: .0001 s barr: .0000 s update distances: .0000 s update neighbors: .0001 s) integrity: .0018 s load balancing: .0003 s (de)allocation: .0001 s ET: 2.0758 M/s  MT: .1481 GB/s
+[97m(r0,t0)  Grid:                           #travs: 9 time: 3.3274 s (comp: 3.0283 s (pre: .0003 s inner: 3.0280 s post: .0000 s) asagi: .0000 s sync: .2987 s barr: .0001 s update distances: .0000 s update neighbors: .0000 s) integrity: .0000 s load balancing: .0000 s (de)allocation: .0000 s ET: .0133 M/s  MT: .0009 GB/s
+[97m(r0,t0)  Element throughput:                   0.0266 M/s
+[97m(r0,t0)  Memory throughput:                    0.0019 GB/s
+[97m(r0,t0)  Cell update throughput:               0.0089 M/s
+[97m(r0,t0)  Flux solver throughput:               0.0134 M/s
+[97m(r0,t0)  Asagi time:                           0.0000 s
+[97m(r0,t0)  Phase time:                           1.6653 s
+[97m(r0,t0)  
+[97m(r0,t0)  SWE: time step: 2, sim. time: 3s 327ms 610µs, dt: 3s 327ms 609µs, cells: 7371
+[97m(r0,t0)  SWE: time step: 3, sim. time: 6s 655ms 220µs, dt: 3s 378ms 923µs, cells: 5791
+[97m(r0,t0)  SWE: time step: 4, sim. time: 10s 34ms 143µs, dt: 3s 378ms 923µs, cells: 5147
+[97m(r0,t0)  SWE: time step: 5, sim. time: 13s 413ms 67µs, dt: 3s 378ms 924µs, cells: 4861
+[97m(r0,t0)  SWE: time step: 6, sim. time: 16s 791ms 992µs, dt: 3s 378ms 925µs, cells: 4731
+[97m(r0,t0)  SWE: time step: 7, sim. time: 20s 170ms 917µs, dt: 3s 378ms 926µs, cells: 4681
+[97m(r0,t0)  SWE: time step: 8, sim. time: 23s 549ms 844µs, dt: 3s 378ms 927µs, cells: 4635
+[97m(r0,t0)  SWE: time step: 9, sim. time: 26s 928ms 772µs, dt: 3s 378ms 929µs, cells: 4632
+[97m(r0,t0)  SWE: time step: 10, sim. time: 30s 307ms 701µs, dt: 3s 378ms 930µs, cells: 4629
+[97m(r0,t0)  SWE: time step: 11, sim. time: 33s 686ms 631µs, dt: 3s 327ms 611µs, cells: 4622
+[97m(r0,t0)  SWE: time step: 12, sim. time: 37s 14ms 243µs, dt: 3s 327ms 611µs, cells: 4618
+[97m(r0,t0)  SWE: time step: 13, sim. time: 40s 341ms 855µs, dt: 3s 327ms 612µs, cells: 4633
+[97m(r0,t0)  SWE: time step: 14, sim. time: 43s 669ms 467µs, dt: 3s 327ms 612µs, cells: 4634
+[97m(r0,t0)  SWE: time step: 15, sim. time: 46s 997ms 79µs, dt: 3s 327ms 612µs, cells: 4644
+[97m(r0,t0)  SWE: time step: 16, sim. time: 50s 324ms 692µs, dt: 3s 327ms 613µs, cells: 4659
+[97m(r0,t0)  SWE: time step: 17, sim. time: 53s 652ms 306µs, dt: 3s 327ms 613µs, cells: 4670
+[97m(r0,t0)  SWE: time step: 18, sim. time: 56s 979ms 919µs, dt: 3s 327ms 614µs, cells: 4686
+[97m(r0,t0)  SWE: time step: 19, sim. time: 1min 307ms 534µs, dt: 3s 327ms 614µs, cells: 4703
+[97m(r0,t0)  SWE: time step: 20, sim. time: 1min 3s 635ms, dt: 3s 327ms 615µs, cells: 4728
+[97m(r0,t0)  SWE: time step: 21, sim. time: 1min 6s 962ms, dt: 3s 327ms 615µs, cells: 4747
+[97m(r0,t0)  SWE: time step: 22, sim. time: 1min 10s 290ms, dt: 3s 327ms 615µs, cells: 4757
+[97m(r0,t0)  SWE: time step: 23, sim. time: 1min 13s 617ms, dt: 3s 327ms 616µs, cells: 4764
+[97m(r0,t0)  SWE: time step: 24, sim. time: 1min 16s 945ms, dt: 3s 327ms 616µs, cells: 4766
+[97m(r0,t0)  SWE: time step: 25, sim. time: 1min 20s 273ms, dt: 3s 327ms 616µs, cells: 4753
+[97m(r0,t0)  SWE: time step: 26, sim. time: 1min 23s 600ms, dt: 3s 327ms 616µs, cells: 4771
+[97m(r0,t0)  SWE: time step: 27, sim. time: 1min 26s 928ms, dt: 3s 327ms 617µs, cells: 4767
+[97m(r0,t0)  SWE: time step: 28, sim. time: 1min 30s 256ms, dt: 3s 327ms 617µs, cells: 4794
+[97m(r0,t0)  SWE: time step: 29, sim. time: 1min 33s 583ms, dt: 3s 327ms 617µs, cells: 4812
+[97m(r0,t0)  SWE: time step: 30, sim. time: 1min 36s 911ms, dt: 3s 327ms 617µs, cells: 4815
+[97m(r0,t0)  SWE: time step: 31, sim. time: 1min 40s 238ms, dt: 3s 339ms 818µs, cells: 4830
+[97m(r0,t0)  SWE: time step: 32, sim. time: 1min 43s 578ms, dt: 3s 339ms 818µs, cells: 4850
+[97m(r0,t0)  SWE: time step: 33, sim. time: 1min 46s 918ms, dt: 3s 339ms 819µs, cells: 4850
+[97m(r0,t0)  SWE: time step: 34, sim. time: 1min 50s 258ms, dt: 3s 339ms 820µs, cells: 4851
+[97m(r0,t0)  SWE: time step: 35, sim. time: 1min 53s 598ms, dt: 3s 339ms 820µs, cells: 4856
+[97m(r0,t0)  SWE: time step: 36, sim. time: 1min 56s 938ms, dt: 3s 339ms 821µs, cells: 4870
+[97m(r0,t0)  SWE: time step: 37, sim. time: 2min 277ms 850µs, dt: 3s 339ms 821µs, cells: 4881
+[97m(r0,t0)  SWE: output step: 1
+[97m(r0,t0)  SWE: output step: 1
+[97m(r0,t0)  SWE: time step: 38, sim. time: 2min 3s 617ms, dt: 3s 339ms 822µs, cells: 4869
+[97m(r0,t0)  SWE: time step: 39, sim. time: 2min 6s 957ms, dt: 3s 339ms 822µs, cells: 4877
+[97m(r0,t0)  SWE: time step: 40, sim. time: 2min 10s 297ms, dt: 3s 339ms 822µs, cells: 4876
+[97m(r0,t0)  SWE: time step: 41, sim. time: 2min 13s 637ms, dt: 3s 341ms 442µs, cells: 4895
+[97m(r0,t0)  SWE: time step: 42, sim. time: 2min 16s 978ms, dt: 3s 341ms 441µs, cells: 4905
+[97m(r0,t0)  SWE: time step: 43, sim. time: 2min 20s 320ms, dt: 3s 341ms 441µs, cells: 4916
+[97m(r0,t0)  SWE: time step: 44, sim. time: 2min 23s 661ms, dt: 3s 219ms 187µs, cells: 4935
+[97m(r0,t0)  SWE: time step: 45, sim. time: 2min 26s 880ms, dt: 3s 219ms 188µs, cells: 4932
+[97m(r0,t0)  SWE: time step: 46, sim. time: 2min 30s 99ms, dt: 3s 219ms 188µs, cells: 4950
+[97m(r0,t0)  SWE: time step: 47, sim. time: 2min 33s 319ms, dt: 3s 219ms 189µs, cells: 4964
+[97m(r0,t0)  SWE: time step: 48, sim. time: 2min 36s 538ms, dt: 3s 219ms 189µs, cells: 4978
+[97m(r0,t0)  SWE: time step: 49, sim. time: 2min 39s 757ms, dt: 3s 219ms 189µs, cells: 4994
+[97m(r0,t0)  SWE: time step: 50, sim. time: 2min 42s 976ms, dt: 3s 219ms 189µs, cells: 5019
+[97m(r0,t0)  SWE: time step: 51, sim. time: 2min 46s 195ms, dt: 3s 219ms 190µs, cells: 5050
+[97m(r0,t0)  SWE: time step: 52, sim. time: 2min 49s 414ms, dt: 3s 219ms 190µs, cells: 5053
+[97m(r0,t0)  SWE: time step: 53, sim. time: 2min 52s 634ms, dt: 3s 219ms 190µs, cells: 5081
+[97m(r0,t0)  SWE: time step: 54, sim. time: 2min 55s 853ms, dt: 3s 219ms 190µs, cells: 5081
+[97m(r0,t0)  SWE: time step: 55, sim. time: 2min 59s 72ms, dt: 3s 219ms 190µs, cells: 5102
+[97m(r0,t0)  SWE: time step: 56, sim. time: 3min 2s 291ms, dt: 3s 219ms 190µs, cells: 5102
+[97m(r0,t0)  SWE: time step: 57, sim. time: 3min 5s 510ms, dt: 3s 341ms 439µs, cells: 5106
+[97m(r0,t0)  SWE: time step: 58, sim. time: 3min 8s 852ms, dt: 3s 341ms 438µs, cells: 5104
+[97m(r0,t0)  SWE: time step: 59, sim. time: 3min 12s 193ms, dt: 3s 341ms 438µs, cells: 5127
+[97m(r0,t0)  SWE: time step: 60, sim. time: 3min 15s 535ms, dt: 3s 341ms 438µs, cells: 5120
+[97m(r0,t0)  SWE: time step: 61, sim. time: 3min 18s 876ms, dt: 3s 341ms 438µs, cells: 5121
+[97m(r0,t0)  SWE: time step: 62, sim. time: 3min 22s 218ms, dt: 3s 341ms 438µs, cells: 5116
+[97m(r0,t0)  SWE: time step: 63, sim. time: 3min 25s 559ms, dt: 3s 341ms 437µs, cells: 5130
+[97m(r0,t0)  SWE: time step: 64, sim. time: 3min 28s 900ms, dt: 3s 341ms 437µs, cells: 5158
+[97m(r0,t0)  SWE: time step: 65, sim. time: 3min 32s 242ms, dt: 3s 341ms 437µs, cells: 5155
+[97m(r0,t0)  SWE: time step: 66, sim. time: 3min 35s 583ms, dt: 3s 341ms 437µs, cells: 5183
+[97m(r0,t0)  SWE: time step: 67, sim. time: 3min 38s 925ms, dt: 3s 341ms 436µs, cells: 5200
+[97m(r0,t0)  SWE: time step: 68, sim. time: 3min 42s 266ms, dt: 3s 341ms 436µs, cells: 5206
+[97m(r0,t0)  SWE: time step: 69, sim. time: 3min 45s 608ms, dt: 3s 341ms 436µs, cells: 5223
+[97m(r0,t0)  SWE: time step: 70, sim. time: 3min 48s 949ms, dt: 3s 341ms 436µs, cells: 5228
+[97m(r0,t0)  SWE: time step: 71, sim. time: 3min 52s 291ms, dt: 3s 341ms 435µs, cells: 5238
+[97m(r0,t0)  SWE: time step: 72, sim. time: 3min 55s 632ms, dt: 3s 341ms 435µs, cells: 5247
+[97m(r0,t0)  SWE: time step: 73, sim. time: 3min 58s 973ms, dt: 3s 341ms 435µs, cells: 5265
+[97m(r0,t0)  SWE: time step: 74, sim. time: 4min 2s 315ms, dt: 3s 341ms 435µs, cells: 5270
+[97m(r0,t0)  SWE: output step: 2
+[97m(r0,t0)  SWE: output step: 2
+[97m(r0,t0)  SWE: time step: 75, sim. time: 4min 5s 656ms, dt: 3s 341ms 434µs, cells: 5279
+[97m(r0,t0)  SWE: time step: 76, sim. time: 4min 8s 998ms, dt: 3s 341ms 434µs, cells: 5278
+[97m(r0,t0)  SWE: time step: 77, sim. time: 4min 12s 339ms, dt: 3s 341ms 434µs, cells: 5302
+[97m(r0,t0)  SWE: time step: 78, sim. time: 4min 15s 681ms, dt: 3s 341ms 433µs, cells: 5306
+[97m(r0,t0)  SWE: time step: 79, sim. time: 4min 19s 22ms, dt: 3s 341ms 433µs, cells: 5317
+[97m(r0,t0)  SWE: time step: 80, sim. time: 4min 22s 363ms, dt: 3s 341ms 433µs, cells: 5315
+[97m(r0,t0)  SWE: time step: 81, sim. time: 4min 25s 705ms, dt: 3s 341ms 432µs, cells: 5333
+[97m(r0,t0)  SWE: time step: 82, sim. time: 4min 29s 46ms, dt: 3s 341ms 432µs, cells: 5326
+[97m(r0,t0)  SWE: time step: 83, sim. time: 4min 32s 388ms, dt: 3s 341ms 432µs, cells: 5346
+[97m(r0,t0)  SWE: time step: 84, sim. time: 4min 35s 729ms, dt: 3s 341ms 431µs, cells: 5378
+[97m(r0,t0)  SWE: time step: 85, sim. time: 4min 39s 71ms, dt: 3s 341ms 431µs, cells: 5388
+[97m(r0,t0)  SWE: time step: 86, sim. time: 4min 42s 412ms, dt: 3s 341ms 430µs, cells: 5408
+[97m(r0,t0)  SWE: time step: 87, sim. time: 4min 45s 753ms, dt: 3s 341ms 430µs, cells: 5427
+[97m(r0,t0)  SWE: time step: 88, sim. time: 4min 49s 95ms, dt: 3s 341ms 430µs, cells: 5437
+[97m(r0,t0)  SWE: time step: 89, sim. time: 4min 52s 436ms, dt: 3s 341ms 429µs, cells: 5459
+[97m(r0,t0)  SWE: time step: 90, sim. time: 4min 55s 778ms, dt: 3s 341ms 429µs, cells: 5473
+[97m(r0,t0)  SWE: time step: 91, sim. time: 4min 59s 119ms, dt: 3s 341ms 428µs, cells: 5486
+[97m(r0,t0)  SWE: time step: 92, sim. time: 5min 2s 461ms, dt: 3s 341ms 428µs, cells: 5485
+[97m(r0,t0)  SWE: time step: 93, sim. time: 5min 5s 802ms, dt: 3s 341ms 427µs, cells: 5496
+[97m(r0,t0)  SWE: time step: 94, sim. time: 5min 9s 143ms, dt: 3s 341ms 427µs, cells: 5512
+[97m(r0,t0)  SWE: time step: 95, sim. time: 5min 12s 485ms, dt: 3s 341ms 426µs, cells: 5512
+[97m(r0,t0)  SWE: time step: 96, sim. time: 5min 15s 826ms, dt: 3s 341ms 425µs, cells: 5529
+[97m(r0,t0)  SWE: time step: 97, sim. time: 5min 19s 168ms, dt: 3s 341ms 425µs, cells: 5536
+[97m(r0,t0)  SWE: time step: 98, sim. time: 5min 22s 509ms, dt: 3s 341ms 424µs, cells: 5551
+[97m(r0,t0)  SWE: time step: 99, sim. time: 5min 25s 851ms, dt: 3s 341ms 423µs, cells: 5576
+[97m(r0,t0)  SWE: time step: 100, sim. time: 5min 29s 192ms, dt: 3s 341ms 423µs, cells: 5603
+[97m(r0,t0)  SWE: time step: 101, sim. time: 5min 32s 533ms, dt: 3s 341ms 422µs, cells: 5606
+[97m(r0,t0)  SWE: time step: 102, sim. time: 5min 35s 875ms, dt: 3s 341ms 421µs, cells: 5623
+[97m(r0,t0)  SWE: time step: 103, sim. time: 5min 39s 216ms, dt: 3s 341ms 421µs, cells: 5639
+[97m(r0,t0)  SWE: time step: 104, sim. time: 5min 42s 558ms, dt: 3s 341ms 420µs, cells: 5648
+[97m(r0,t0)  SWE: time step: 105, sim. time: 5min 45s 899ms, dt: 3s 341ms 419µs, cells: 5669
+[97m(r0,t0)  SWE: time step: 106, sim. time: 5min 49s 241ms, dt: 3s 341ms 419µs, cells: 5694
+[97m(r0,t0)  SWE: time step: 107, sim. time: 5min 52s 582ms, dt: 3s 341ms 418µs, cells: 5714
+[97m(r0,t0)  SWE: time step: 108, sim. time: 5min 55s 923ms, dt: 3s 341ms 417µs, cells: 5721
+[97m(r0,t0)  SWE: time step: 109, sim. time: 5min 59s 265ms, dt: 3s 341ms 416µs, cells: 5736
+[97m(r0,t0)  SWE: time step: 110, sim. time: 6min 2s 606ms, dt: 3s 341ms 415µs, cells: 5756
+[97m(r0,t0)  SWE: output step: 3
+[97m(r0,t0)  SWE: output step: 3
+[97m(r0,t0)  SWE: time step: 111, sim. time: 6min 5s 948ms, dt: 3s 341ms 415µs, cells: 5768
+[97m(r0,t0)  SWE: time step: 112, sim. time: 6min 9s 289ms, dt: 3s 341ms 414µs, cells: 5784
+[97m(r0,t0)  SWE: time step: 113, sim. time: 6min 12s 630ms, dt: 3s 341ms 413µs, cells: 5798
+[97m(r0,t0)  SWE: time step: 114, sim. time: 6min 15s 972ms, dt: 3s 341ms 412µs, cells: 5805
+[97m(r0,t0)  SWE: time step: 115, sim. time: 6min 19s 313ms, dt: 3s 341ms 412µs, cells: 5824
+[97m(r0,t0)  SWE: time step: 116, sim. time: 6min 22s 655ms, dt: 3s 341ms 411µs, cells: 5834
+[97m(r0,t0)  SWE: time step: 117, sim. time: 6min 25s 996ms, dt: 3s 341ms 410µs, cells: 5850
+[97m(r0,t0)  SWE: time step: 118, sim. time: 6min 29s 338ms, dt: 3s 341ms 409µs, cells: 5871
+[97m(r0,t0)  SWE: time step: 119, sim. time: 6min 32s 679ms, dt: 3s 341ms 409µs, cells: 5890
+[97m(r0,t0)  SWE: time step: 120, sim. time: 6min 36s 20ms, dt: 3s 341ms 408µs, cells: 5909
+[97m(r0,t0)  SWE: time step: 121, sim. time: 6min 39s 362ms, dt: 3s 341ms 407µs, cells: 5912
+[97m(r0,t0)  SWE: time step: 122, sim. time: 6min 42s 703ms, dt: 3s 341ms 406µs, cells: 5926
+[97m(r0,t0)  SWE: time step: 123, sim. time: 6min 46s 45ms, dt: 3s 341ms 406µs, cells: 5932
+[97m(r0,t0)  SWE: time step: 124, sim. time: 6min 49s 386ms, dt: 3s 341ms 405µs, cells: 5960
+[97m(r0,t0)  SWE: time step: 125, sim. time: 6min 52s 727ms, dt: 3s 341ms 404µs, cells: 5972
+[97m(r0,t0)  SWE: time step: 126, sim. time: 6min 56s 69ms, dt: 3s 341ms 404µs, cells: 5989
+[97m(r0,t0)  SWE: time step: 127, sim. time: 6min 59s 410ms, dt: 3s 341ms 403µs, cells: 6010
+[97m(r0,t0)  SWE: time step: 128, sim. time: 7min 2s 752ms, dt: 3s 341ms 402µs, cells: 6028
+[97m(r0,t0)  SWE: time step: 129, sim. time: 7min 6s 93ms, dt: 3s 341ms 402µs, cells: 6038
+[97m(r0,t0)  SWE: time step: 130, sim. time: 7min 9s 434ms, dt: 3s 341ms 401µs, cells: 6064
+[97m(r0,t0)  SWE: time step: 131, sim. time: 7min 12s 776ms, dt: 3s 341ms 400µs, cells: 6078
+[97m(r0,t0)  SWE: time step: 132, sim. time: 7min 16s 117ms, dt: 3s 341ms 400µs, cells: 6098
+[97m(r0,t0)  SWE: time step: 133, sim. time: 7min 19s 459ms, dt: 3s 341ms 399µs, cells: 6109
+[97m(r0,t0)  SWE: time step: 134, sim. time: 7min 22s 800ms, dt: 3s 341ms 399µs, cells: 6122
+[97m(r0,t0)  SWE: time step: 135, sim. time: 7min 26s 141ms, dt: 3s 341ms 398µs, cells: 6127
+[97m(r0,t0)  SWE: time step: 136, sim. time: 7min 29s 483ms, dt: 3s 339ms 806µs, cells: 6158
+[97m(r0,t0)  SWE: time step: 137, sim. time: 7min 32s 823ms, dt: 3s 339ms 805µs, cells: 6172
+[97m(r0,t0)  SWE: time step: 138, sim. time: 7min 36s 162ms, dt: 3s 327ms 603µs, cells: 6199
+[97m(r0,t0)  SWE: time step: 139, sim. time: 7min 39s 490ms, dt: 3s 327ms 603µs, cells: 6207
+[97m(r0,t0)  SWE: time step: 140, sim. time: 7min 42s 818ms, dt: 3s 327ms 603µs, cells: 6236
+[97m(r0,t0)  SWE: time step: 141, sim. time: 7min 46s 145ms, dt: 3s 327ms 193µs, cells: 6251
+[97m(r0,t0)  SWE: time step: 142, sim. time: 7min 49s 472ms, dt: 3s 327ms 192µs, cells: 6264
+[97m(r0,t0)  SWE: time step: 143, sim. time: 7min 52s 800ms, dt: 3s 327ms 192µs, cells: 6281
+[97m(r0,t0)  SWE: time step: 144, sim. time: 7min 56s 127ms, dt: 3s 327ms 191µs, cells: 6296
+[97m(r0,t0)  SWE: time step: 145, sim. time: 7min 59s 454ms, dt: 3s 327ms 191µs, cells: 6313
+[97m(r0,t0)  SWE: time step: 146, sim. time: 8min 2s 781ms, dt: 3s 327ms 190µs, cells: 6329
+[97m(r0,t0)  SWE: output step: 4
+[97m(r0,t0)  SWE: output step: 4
+[97m(r0,t0)  SWE: time step: 147, sim. time: 8min 6s 108ms, dt: 3s 327ms 189µs, cells: 6345
+[97m(r0,t0)  SWE: time step: 148, sim. time: 8min 9s 436ms, dt: 3s 327ms 189µs, cells: 6358
+[97m(r0,t0)  SWE: time step: 149, sim. time: 8min 12s 763ms, dt: 3s 327ms 188µs, cells: 6368
+[97m(r0,t0)  SWE: time step: 150, sim. time: 8min 16s 90ms, dt: 3s 327ms 187µs, cells: 6383
+[97m(r0,t0)  SWE: time step: 151, sim. time: 8min 19s 417ms, dt: 3s 327ms 187µs, cells: 6403
+[97m(r0,t0)  SWE: time step: 152, sim. time: 8min 22s 744ms, dt: 3s 219ms 183µs, cells: 6425
+[97m(r0,t0)  SWE: time step: 153, sim. time: 8min 25s 964ms, dt: 3s 219ms 182µs, cells: 6439
+[97m(r0,t0)  SWE: time step: 154, sim. time: 8min 29s 183ms, dt: 3s 219ms 182µs, cells: 6455
+[97m(r0,t0)  SWE: time step: 155, sim. time: 8min 32s 402ms, dt: 3s 219ms 181µs, cells: 6476
+[97m(r0,t0)  SWE: time step: 156, sim. time: 8min 35s 621ms, dt: 3s 219ms 181µs, cells: 6474
+[97m(r0,t0)  SWE: time step: 157, sim. time: 8min 38s 840ms, dt: 3s 219ms 181µs, cells: 6500
+[97m(r0,t0)  SWE: time step: 158, sim. time: 8min 42s 59ms, dt: 3s 219ms 180µs, cells: 6516
+[97m(r0,t0)  SWE: time step: 159, sim. time: 8min 45s 279ms, dt: 3s 219ms 180µs, cells: 6530
+[97m(r0,t0)  SWE: time step: 160, sim. time: 8min 48s 498ms, dt: 3s 219ms 179µs, cells: 6554
+[97m(r0,t0)  SWE: time step: 161, sim. time: 8min 51s 717ms, dt: 3s 219ms 179µs, cells: 6582
+[97m(r0,t0)  SWE: time step: 162, sim. time: 8min 54s 936ms, dt: 3s 219ms 179µs, cells: 6607
+[97m(r0,t0)  SWE: time step: 163, sim. time: 8min 58s 155ms, dt: 3s 219ms 179µs, cells: 6620
+[97m(r0,t0)  SWE: time step: 164, sim. time: 9min 1s 375ms, dt: 3s 219ms 178µs, cells: 6638
+[97m(r0,t0)  SWE: time step: 165, sim. time: 9min 4s 594ms, dt: 3s 219ms 178µs, cells: 6652
+[97m(r0,t0)  SWE: time step: 166, sim. time: 9min 7s 813ms, dt: 3s 219ms 178µs, cells: 6656
+[97m(r0,t0)  SWE: time step: 167, sim. time: 9min 11s 32ms, dt: 3s 219ms 177µs, cells: 6673
+[97m(r0,t0)  SWE: time step: 168, sim. time: 9min 14s 251ms, dt: 3s 219ms 177µs, cells: 6691
+[97m(r0,t0)  SWE: time step: 169, sim. time: 9min 17s 470ms, dt: 3s 219ms 176µs, cells: 6706
+[97m(r0,t0)  SWE: time step: 170, sim. time: 9min 20s 690ms, dt: 3s 219ms 176µs, cells: 6733
+[97m(r0,t0)  SWE: time step: 171, sim. time: 9min 23s 909ms, dt: 3s 219ms 176µs, cells: 6755
+[97m(r0,t0)  SWE: time step: 172, sim. time: 9min 27s 128ms, dt: 3s 219ms 175µs, cells: 6766
+[97m(r0,t0)  SWE: time step: 173, sim. time: 9min 30s 347ms, dt: 3s 219ms 175µs, cells: 6770
+[97m(r0,t0)  SWE: time step: 174, sim. time: 9min 33s 566ms, dt: 3s 219ms 174µs, cells: 6794
+[97m(r0,t0)  SWE: time step: 175, sim. time: 9min 36s 785ms, dt: 3s 219ms 174µs, cells: 6809
+[97m(r0,t0)  SWE: time step: 176, sim. time: 9min 40s 5ms, dt: 3s 219ms 173µs, cells: 6822
+[97m(r0,t0)  SWE: time step: 177, sim. time: 9min 43s 224ms, dt: 3s 219ms 173µs, cells: 6835
+[97m(r0,t0)  SWE: time step: 178, sim. time: 9min 46s 443ms, dt: 3s 219ms 172µs, cells: 6865
+[97m(r0,t0)  SWE: time step: 179, sim. time: 9min 49s 662ms, dt: 3s 219ms 172µs, cells: 6882
+[97m(r0,t0)  SWE: time step: 180, sim. time: 9min 52s 881ms, dt: 3s 219ms 171µs, cells: 6901
+[97m(r0,t0)  SWE: time step: 181, sim. time: 9min 56s 101ms, dt: 3s 219ms 171µs, cells: 6921
+[97m(r0,t0)  SWE: time step: 182, sim. time: 9min 59s 320ms, dt: 3s 219ms 170µs, cells: 6936
+[97m(r0,t0)  SWE: time step: 183, sim. time: 10min 2s 539ms, dt: 3s 183ms 831µs, cells: 6967
+[97m(r0,t0)  SWE: output step: 5
+[97m(r0,t0)  SWE: output step: 5
+[97m(r0,t0)  SWE: time step: 184, sim. time: 10min 5s 723ms, dt: 3s 183ms 830µs, cells: 6987
+[97m(r0,t0)  SWE: time step: 185, sim. time: 10min 8s 907ms, dt: 3s 183ms 830µs, cells: 7013
+[97m(r0,t0)  SWE: time step: 186, sim. time: 10min 12s 90ms, dt: 3s 183ms 829µs, cells: 7030
+[97m(r0,t0)  SWE: time step: 187, sim. time: 10min 15s 274ms, dt: 3s 183ms 828µs, cells: 7053
+[97m(r0,t0)  SWE: time step: 188, sim. time: 10min 18s 458ms, dt: 3s 183ms 828µs, cells: 7071
+[97m(r0,t0)  SWE: time step: 189, sim. time: 10min 21s 642ms, dt: 3s 183ms 827µs, cells: 7080
+[97m(r0,t0)  SWE: time step: 190, sim. time: 10min 24s 826ms, dt: 3s 183ms 826µs, cells: 7115
+[97m(r0,t0)  SWE: time step: 191, sim. time: 10min 28s 9ms, dt: 3s 183ms 825µs, cells: 7132
+[97m(r0,t0)  SWE: time step: 192, sim. time: 10min 31s 193ms, dt: 3s 183ms 824µs, cells: 7151
+[97m(r0,t0)  SWE: time step: 193, sim. time: 10min 34s 377ms, dt: 3s 183ms 824µs, cells: 7175
+[97m(r0,t0)  SWE: time step: 194, sim. time: 10min 37s 561ms, dt: 3s 183ms 823µs, cells: 7191
+[97m(r0,t0)  SWE: time step: 195, sim. time: 10min 40s 745ms, dt: 3s 183ms 822µs, cells: 7198
+[97m(r0,t0)  SWE: time step: 196, sim. time: 10min 43s 929ms, dt: 3s 183ms 821µs, cells: 7233
+[97m(r0,t0)  SWE: time step: 197, sim. time: 10min 47s 112ms, dt: 3s 183ms 820µs, cells: 7262
+[97m(r0,t0)  SWE: time step: 198, sim. time: 10min 50s 296ms, dt: 3s 183ms 820µs, cells: 7284
+[97m(r0,t0)  SWE: time step: 199, sim. time: 10min 53s 480ms, dt: 3s 183ms 819µs, cells: 7300
+[97m(r0,t0)  SWE: time step: 200, sim. time: 10min 56s 664ms, dt: 3s 183ms 818µs, cells: 7324
+[97m(r0,t0)  SWE: time step: 201, sim. time: 10min 59s 848ms, dt: 3s 183ms 817µs, cells: 7335
+[97m(r0,t0)  SWE: time step: 202, sim. time: 11min 3s 32ms, dt: 3s 183ms 816µs, cells: 7345
+[97m(r0,t0)  SWE: time step: 203, sim. time: 11min 6s 215ms, dt: 3s 183ms 816µs, cells: 7369
+[97m(r0,t0)  SWE: time step: 204, sim. time: 11min 9s 399ms, dt: 3s 183ms 815µs, cells: 7390
+[97m(r0,t0)  SWE: time step: 205, sim. time: 11min 12s 583ms, dt: 3s 183ms 814µs, cells: 7405
+[97m(r0,t0)  SWE: time step: 206, sim. time: 11min 15s 767ms, dt: 3s 183ms 813µs, cells: 7421
+[97m(r0,t0)  SWE: time step: 207, sim. time: 11min 18s 951ms, dt: 3s 183ms 812µs, cells: 7432
+[97m(r0,t0)  SWE: time step: 208, sim. time: 11min 22s 134ms, dt: 3s 183ms 811µs, cells: 7448
+[97m(r0,t0)  SWE: time step: 209, sim. time: 11min 25s 318ms, dt: 3s 183ms 810µs, cells: 7474
+[97m(r0,t0)  SWE: time step: 210, sim. time: 11min 28s 502ms, dt: 3s 183ms 809µs, cells: 7500
+[97m(r0,t0)  SWE: time step: 211, sim. time: 11min 31s 686ms, dt: 3s 183ms 808µs, cells: 7525
+[97m(r0,t0)  SWE: time step: 212, sim. time: 11min 34s 870ms, dt: 3s 183ms 807µs, cells: 7539
+[97m(r0,t0)  SWE: time step: 213, sim. time: 11min 38s 53ms, dt: 3s 183ms 807µs, cells: 7570
+[97m(r0,t0)  SWE: time step: 214, sim. time: 11min 41s 237ms, dt: 3s 183ms 806µs, cells: 7594
+[97m(r0,t0)  SWE: time step: 215, sim. time: 11min 44s 421ms, dt: 3s 183ms 805µs, cells: 7611
+[97m(r0,t0)  SWE: time step: 216, sim. time: 11min 47s 605ms, dt: 3s 183ms 804µs, cells: 7616
+[97m(r0,t0)  SWE: time step: 217, sim. time: 11min 50s 789ms, dt: 3s 183ms 803µs, cells: 7635
+[97m(r0,t0)  SWE: time step: 218, sim. time: 11min 53s 972ms, dt: 3s 174ms 218µs, cells: 7649
+[97m(r0,t0)  SWE: time step: 219, sim. time: 11min 57s 147ms, dt: 3s 174ms 218µs, cells: 7676
+[97m(r0,t0)  SWE: time step: 220, sim. time: 12min 321ms 414µs, dt: 3s 174ms 217µs, cells: 7703
+[97m(r0,t0)  SWE: output step: 6
+[97m(r0,t0)  SWE: output step: 6
+[97m(r0,t0)  SWE: time step: 221, sim. time: 12min 3s 495ms, dt: 3s 174ms 217µs, cells: 7728
+[97m(r0,t0)  SWE: time step: 222, sim. time: 12min 6s 669ms, dt: 3s 174ms 217µs, cells: 7749
+[97m(r0,t0)  SWE: time step: 223, sim. time: 12min 9s 844ms, dt: 3s 174ms 216µs, cells: 7793
+[97m(r0,t0)  SWE: time step: 224, sim. time: 12min 13s 18ms, dt: 3s 170ms 145µs, cells: 7823
+[97m(r0,t0)  SWE: time step: 225, sim. time: 12min 16s 188ms, dt: 3s 170ms 145µs, cells: 7841
+[97m(r0,t0)  SWE: time step: 226, sim. time: 12min 19s 358ms, dt: 3s 170ms 144µs, cells: 7866
+[97m(r0,t0)  SWE: time step: 227, sim. time: 12min 22s 528ms, dt: 3s 170ms 144µs, cells: 7891
+[97m(r0,t0)  SWE: time step: 228, sim. time: 12min 25s 698ms, dt: 3s 170ms 144µs, cells: 7915
+[97m(r0,t0)  SWE: time step: 229, sim. time: 12min 28s 869ms, dt: 3s 170ms 143µs, cells: 7930
+[97m(r0,t0)  SWE: time step: 230, sim. time: 12min 32s 39ms, dt: 3s 170ms 143µs, cells: 7946
+[97m(r0,t0)  SWE: time step: 231, sim. time: 12min 35s 209ms, dt: 3s 170ms 143µs, cells: 7960
+[97m(r0,t0)  SWE: time step: 232, sim. time: 12min 38s 379ms, dt: 3s 170ms 143µs, cells: 7992
+[97m(r0,t0)  SWE: time step: 233, sim. time: 12min 41s 549ms, dt: 3s 170ms 142µs, cells: 8008
+[97m(r0,t0)  SWE: time step: 234, sim. time: 12min 44s 719ms, dt: 3s 170ms 142µs, cells: 8035
+[97m(r0,t0)  SWE: time step: 235, sim. time: 12min 47s 889ms, dt: 3s 170ms 142µs, cells: 8046
+[97m(r0,t0)  SWE: time step: 236, sim. time: 12min 51s 60ms, dt: 3s 170ms 141µs, cells: 8062
+[97m(r0,t0)  SWE: time step: 237, sim. time: 12min 54s 230ms, dt: 3s 170ms 141µs, cells: 8086
+[97m(r0,t0)  SWE: time step: 238, sim. time: 12min 57s 400ms, dt: 3s 170ms 140µs, cells: 8124
+[97m(r0,t0)  SWE: time step: 239, sim. time: 13min 570ms 432µs, dt: 3s 170ms 140µs, cells: 8148
+[97m(r0,t0)  SWE: time step: 240, sim. time: 13min 3s 740ms, dt: 3s 170ms 140µs, cells: 8167
+[97m(r0,t0)  SWE: time step: 241, sim. time: 13min 6s 910ms, dt: 3s 170ms 139µs, cells: 8181
+[97m(r0,t0)  SWE: time step: 242, sim. time: 13min 10s 80ms, dt: 3s 170ms 139µs, cells: 8200
+[97m(r0,t0)  SWE: time step: 243, sim. time: 13min 13s 250ms, dt: 3s 170ms 139µs, cells: 8223
+[97m(r0,t0)  SWE: time step: 244, sim. time: 13min 16s 421ms, dt: 3s 170ms 139µs, cells: 8243
+[97m(r0,t0)  SWE: time step: 245, sim. time: 13min 19s 591ms, dt: 3s 170ms 138µs, cells: 8258
+[97m(r0,t0)  SWE: time step: 246, sim. time: 13min 22s 761ms, dt: 3s 170ms 138µs, cells: 8291
+[97m(r0,t0)  SWE: time step: 247, sim. time: 13min 25s 931ms, dt: 3s 170ms 138µs, cells: 8310
+[97m(r0,t0)  SWE: time step: 248, sim. time: 13min 29s 101ms, dt: 3s 170ms 137µs, cells: 8333
+[97m(r0,t0)  SWE: time step: 249, sim. time: 13min 32s 271ms, dt: 3s 170ms 137µs, cells: 8362
+[97m(r0,t0)  SWE: time step: 250, sim. time: 13min 35s 441ms, dt: 3s 170ms 137µs, cells: 8384
+[97m(r0,t0)  SWE: time step: 251, sim. time: 13min 38s 612ms, dt: 3s 170ms 136µs, cells: 8401
+[97m(r0,t0)  SWE: time step: 252, sim. time: 13min 41s 782ms, dt: 3s 170ms 136µs, cells: 8425
+[97m(r0,t0)  SWE: time step: 253, sim. time: 13min 44s 952ms, dt: 3s 170ms 136µs, cells: 8439
+[97m(r0,t0)  SWE: time step: 254, sim. time: 13min 48s 122ms, dt: 3s 170ms 136µs, cells: 8458
+[97m(r0,t0)  SWE: time step: 255, sim. time: 13min 51s 292ms, dt: 3s 170ms 135µs, cells: 8480
+[97m(r0,t0)  SWE: time step: 256, sim. time: 13min 54s 462ms, dt: 3s 170ms 135µs, cells: 8503
+[97m(r0,t0)  SWE: time step: 257, sim. time: 13min 57s 632ms, dt: 3s 170ms 135µs, cells: 8519
+[97m(r0,t0)  SWE: time step: 258, sim. time: 14min 803ms 51µs, dt: 3s 170ms 134µs, cells: 8546
+[97m(r0,t0)  SWE: output step: 7
+[97m(r0,t0)  SWE: output step: 7
+[97m(r0,t0)  SWE: time step: 259, sim. time: 14min 3s 973ms, dt: 3s 169ms 17µs, cells: 8568
+[97m(r0,t0)  SWE: time step: 260, sim. time: 14min 7s 142ms, dt: 3s 169ms 17µs, cells: 8595
+[97m(r0,t0)  SWE: time step: 261, sim. time: 14min 10s 311ms, dt: 3s 169ms 16µs, cells: 8618
+[97m(r0,t0)  SWE: time step: 262, sim. time: 14min 13s 480ms, dt: 3s 169ms 16µs, cells: 8634
+[97m(r0,t0)  SWE: time step: 263, sim. time: 14min 16s 649ms, dt: 3s 169ms 16µs, cells: 8652
+[97m(r0,t0)  SWE: time step: 264, sim. time: 14min 19s 818ms, dt: 3s 169ms 15µs, cells: 8674
+[97m(r0,t0)  SWE: time step: 265, sim. time: 14min 22s 987ms, dt: 3s 169ms 15µs, cells: 8702
+[97m(r0,t0)  SWE: time step: 266, sim. time: 14min 26s 156ms, dt: 3s 169ms 15µs, cells: 8725
+[97m(r0,t0)  SWE: time step: 267, sim. time: 14min 29s 325ms, dt: 3s 169ms 14µs, cells: 8744
+[97m(r0,t0)  SWE: time step: 268, sim. time: 14min 32s 494ms, dt: 3s 169ms 14µs, cells: 8770
+[97m(r0,t0)  SWE: time step: 269, sim. time: 14min 35s 663ms, dt: 3s 169ms 14µs, cells: 8790
+[97m(r0,t0)  SWE: time step: 270, sim. time: 14min 38s 832ms, dt: 3s 169ms 13µs, cells: 8820
+[97m(r0,t0)  SWE: time step: 271, sim. time: 14min 42s 1ms, dt: 3s 169ms 13µs, cells: 8837
+[97m(r0,t0)  SWE: time step: 272, sim. time: 14min 45s 170ms, dt: 3s 169ms 13µs, cells: 8861
+[97m(r0,t0)  SWE: time step: 273, sim. time: 14min 48s 339ms, dt: 3s 169ms 13µs, cells: 8891
+[97m(r0,t0)  SWE: time step: 274, sim. time: 14min 51s 508ms, dt: 3s 169ms 12µs, cells: 8903
+[97m(r0,t0)  SWE: time step: 275, sim. time: 14min 54s 677ms, dt: 3s 169ms 12µs, cells: 8916
+[97m(r0,t0)  SWE: time step: 276, sim. time: 14min 57s 846ms, dt: 3s 169ms 12µs, cells: 8943
+[97m(r0,t0)  SWE: time step: 277, sim. time: 15min 1s 15ms, dt: 3s 169ms 11µs, cells: 8961
+[97m(r0,t0)  SWE: time step: 278, sim. time: 15min 4s 184ms, dt: 3s 169ms 11µs, cells: 8978
+[97m(r0,t0)  SWE: time step: 279, sim. time: 15min 7s 353ms, dt: 3s 169ms 11µs, cells: 9013
+[97m(r0,t0)  SWE: time step: 280, sim. time: 15min 10s 522ms, dt: 3s 169ms 11µs, cells: 9028
+[97m(r0,t0)  SWE: time step: 281, sim. time: 15min 13s 691ms, dt: 3s 169ms 10µs, cells: 9038
+[97m(r0,t0)  SWE: time step: 282, sim. time: 15min 16s 860ms, dt: 3s 169ms 10µs, cells: 9062
+[97m(r0,t0)  SWE: time step: 283, sim. time: 15min 20s 29ms, dt: 3s 169ms 10µs, cells: 9082
+[97m(r0,t0)  SWE: time step: 284, sim. time: 15min 23s 198ms, dt: 3s 169ms 10µs, cells: 9102
+[97m(r0,t0)  SWE: time step: 285, sim. time: 15min 26s 367ms, dt: 3s 169ms 9µs, cells: 9130
+[97m(r0,t0)  SWE: time step: 286, sim. time: 15min 29s 536ms, dt: 3s 169ms 9µs, cells: 9166
+[97m(r0,t0)  SWE: time step: 287, sim. time: 15min 32s 705ms, dt: 3s 169ms 9µs, cells: 9175
+[97m(r0,t0)  SWE: time step: 288, sim. time: 15min 35s 874ms, dt: 3s 169ms 9µs, cells: 9189
+[97m(r0,t0)  SWE: time step: 289, sim. time: 15min 39s 43ms, dt: 3s 169ms 8µs, cells: 9206
+[97m(r0,t0)  SWE: time step: 290, sim. time: 15min 42s 212ms, dt: 3s 169ms 8µs, cells: 9231
+[97m(r0,t0)  SWE: time step: 291, sim. time: 15min 45s 381ms, dt: 3s 169ms 8µs, cells: 9256
+[97m(r0,t0)  SWE: time step: 292, sim. time: 15min 48s 550ms, dt: 3s 169ms 8µs, cells: 9287
+[97m(r0,t0)  SWE: time step: 293, sim. time: 15min 51s 719ms, dt: 3s 169ms 7µs, cells: 9305
+[97m(r0,t0)  SWE: time step: 294, sim. time: 15min 54s 888ms, dt: 3s 169ms 7µs, cells: 9336
+[97m(r0,t0)  SWE: time step: 295, sim. time: 15min 58s 57ms, dt: 3s 169ms 7µs, cells: 9353
+[97m(r0,t0)  SWE: time step: 296, sim. time: 16min 1s 226ms, dt: 3s 169ms 7µs, cells: 9375
+[97m(r0,t0)  SWE: output step: 8
+[97m(r0,t0)  SWE: output step: 8
+[97m(r0,t0)  SWE: time step: 297, sim. time: 16min 4s 395ms, dt: 3s 169ms 6µs, cells: 9390
+[97m(r0,t0)  SWE: time step: 298, sim. time: 16min 7s 564ms, dt: 3s 169ms 6µs, cells: 9408
+[97m(r0,t0)  SWE: time step: 299, sim. time: 16min 10s 733ms, dt: 3s 169ms 6µs, cells: 9440
+[97m(r0,t0)  SWE: time step: 300, sim. time: 16min 13s 902ms, dt: 3s 169ms 6µs, cells: 9470
+[97m(r0,t0)  SWE: time step: 301, sim. time: 16min 17s 71ms, dt: 3s 169ms 5µs, cells: 9503
+[97m(r0,t0)  SWE: time step: 302, sim. time: 16min 20s 240ms, dt: 3s 169ms 5µs, cells: 9529
+[97m(r0,t0)  SWE: time step: 303, sim. time: 16min 23s 409ms, dt: 3s 169ms 5µs, cells: 9553
+[97m(r0,t0)  SWE: time step: 304, sim. time: 16min 26s 578ms, dt: 3s 169ms 5µs, cells: 9572
+[97m(r0,t0)  SWE: time step: 305, sim. time: 16min 29s 747ms, dt: 3s 169ms 4µs, cells: 9594
+[97m(r0,t0)  SWE: time step: 306, sim. time: 16min 32s 916ms, dt: 3s 169ms 4µs, cells: 9616
+[97m(r0,t0)  SWE: time step: 307, sim. time: 16min 36s 85ms, dt: 3s 169ms 4µs, cells: 9634
+[97m(r0,t0)  SWE: time step: 308, sim. time: 16min 39s 254ms, dt: 3s 169ms 4µs, cells: 9654
+[97m(r0,t0)  SWE: time step: 309, sim. time: 16min 42s 423ms, dt: 3s 169ms 3µs, cells: 9679
+[97m(r0,t0)  SWE: time step: 310, sim. time: 16min 45s 592ms, dt: 3s 169ms 3µs, cells: 9696
+[97m(r0,t0)  SWE: time step: 311, sim. time: 16min 48s 761ms, dt: 3s 169ms 3µs, cells: 9712
+[97m(r0,t0)  SWE: time step: 312, sim. time: 16min 51s 930ms, dt: 3s 169ms 3µs, cells: 9734
+[97m(r0,t0)  SWE: time step: 313, sim. time: 16min 55s 99ms, dt: 3s 169ms 3µs, cells: 9769
+[97m(r0,t0)  SWE: time step: 314, sim. time: 16min 58s 268ms, dt: 3s 169ms 2µs, cells: 9796
+[97m(r0,t0)  SWE: time step: 315, sim. time: 17min 1s 437ms, dt: 3s 169ms 2µs, cells: 9828
+[97m(r0,t0)  SWE: time step: 316, sim. time: 17min 4s 606ms, dt: 3s 169ms 2µs, cells: 9859
+[97m(r0,t0)  SWE: time step: 317, sim. time: 17min 7s 775ms, dt: 3s 169ms 2µs, cells: 9884
+[97m(r0,t0)  SWE: time step: 318, sim. time: 17min 10s 944ms, dt: 3s 169ms 2µs, cells: 9912
+[97m(r0,t0)  SWE: time step: 319, sim. time: 17min 14s 113ms, dt: 3s 169ms 1µs, cells: 9943
+[97m(r0,t0)  SWE: time step: 320, sim. time: 17min 17s 282ms, dt: 3s 169ms 1µs, cells: 9967
+[97m(r0,t0)  SWE: time step: 321, sim. time: 17min 20s 451ms, dt: 3s 169ms 1µs, cells: 9990
+[97m(r0,t0)  SWE: time step: 322, sim. time: 17min 23s 620ms, dt: 3s 169ms 1µs, cells: 10017
+[97m(r0,t0)  SWE: time step: 323, sim. time: 17min 26s 789ms, dt: 3s 169ms 1µs, cells: 10038
+[97m(r0,t0)  SWE: time step: 324, sim. time: 17min 29s 958ms, dt: 3s 155ms 924µs, cells: 10063
+[97m(r0,t0)  SWE: time step: 325, sim. time: 17min 33s 114ms, dt: 3s 155ms 923µs, cells: 10084
+[97m(r0,t0)  SWE: time step: 326, sim. time: 17min 36s 270ms, dt: 3s 155ms 923µs, cells: 10105
+[97m(r0,t0)  SWE: time step: 327, sim. time: 17min 39s 426ms, dt: 3s 155ms 923µs, cells: 10128
+[97m(r0,t0)  SWE: time step: 328, sim. time: 17min 42s 582ms, dt: 3s 155ms 922µs, cells: 10157
+[97m(r0,t0)  SWE: time step: 329, sim. time: 17min 45s 738ms, dt: 3s 155ms 922µs, cells: 10179
+[97m(r0,t0)  SWE: time step: 330, sim. time: 17min 48s 894ms, dt: 3s 155ms 922µs, cells: 10194
+[97m(r0,t0)  SWE: time step: 331, sim. time: 17min 52s 50ms, dt: 3s 155ms 922µs, cells: 10221
+[97m(r0,t0)  SWE: time step: 332, sim. time: 17min 55s 206ms, dt: 3s 155ms 921µs, cells: 10247
+[97m(r0,t0)  SWE: time step: 333, sim. time: 17min 58s 362ms, dt: 3s 155ms 921µs, cells: 10277
+[97m(r0,t0)  SWE: time step: 334, sim. time: 18min 1s 517ms, dt: 3s 155ms 921µs, cells: 10314
+[97m(r0,t0)  SWE: output step: 9
+[97m(r0,t0)  SWE: output step: 9
+[97m(r0,t0)  SWE: time step: 335, sim. time: 18min 4s 673ms, dt: 3s 155ms 921µs, cells: 10343
+[97m(r0,t0)  SWE: time step: 336, sim. time: 18min 7s 829ms, dt: 3s 155ms 920µs, cells: 10364
+[97m(r0,t0)  SWE: time step: 337, sim. time: 18min 10s 985ms, dt: 3s 155ms 920µs, cells: 10388
+[97m(r0,t0)  SWE: time step: 338, sim. time: 18min 14s 141ms, dt: 3s 155ms 920µs, cells: 10414
+[97m(r0,t0)  SWE: time step: 339, sim. time: 18min 17s 297ms, dt: 3s 155ms 920µs, cells: 10438
+[97m(r0,t0)  SWE: time step: 340, sim. time: 18min 20s 453ms, dt: 3s 155ms 919µs, cells: 10450
+[97m(r0,t0)  SWE: time step: 341, sim. time: 18min 23s 609ms, dt: 3s 155ms 919µs, cells: 10470
+[97m(r0,t0)  SWE: time step: 342, sim. time: 18min 26s 765ms, dt: 3s 155ms 919µs, cells: 10502
+[97m(r0,t0)  SWE: time step: 343, sim. time: 18min 29s 921ms, dt: 3s 155ms 919µs, cells: 10541
+[97m(r0,t0)  SWE: time step: 344, sim. time: 18min 33s 77ms, dt: 3s 155ms 918µs, cells: 10564
+[97m(r0,t0)  SWE: time step: 345, sim. time: 18min 36s 233ms, dt: 3s 155ms 918µs, cells: 10594
+[97m(r0,t0)  SWE: time step: 346, sim. time: 18min 39s 389ms, dt: 3s 155ms 918µs, cells: 10624
+[97m(r0,t0)  SWE: time step: 347, sim. time: 18min 42s 544ms, dt: 3s 155ms 918µs, cells: 10652
+[97m(r0,t0)  SWE: time step: 348, sim. time: 18min 45s 700ms, dt: 3s 155ms 917µs, cells: 10691
+[97m(r0,t0)  SWE: time step: 349, sim. time: 18min 48s 856ms, dt: 3s 155ms 917µs, cells: 10712
+[97m(r0,t0)  SWE: time step: 350, sim. time: 18min 52s 12ms, dt: 3s 155ms 917µs, cells: 10726
+[97m(r0,t0)  SWE: time step: 351, sim. time: 18min 55s 168ms, dt: 3s 155ms 917µs, cells: 10757
+[97m(r0,t0)  SWE: time step: 352, sim. time: 18min 58s 324ms, dt: 3s 155ms 917µs, cells: 10782
+[97m(r0,t0)  SWE: time step: 353, sim. time: 19min 1s 480ms, dt: 3s 155ms 916µs, cells: 10805
+[97m(r0,t0)  SWE: time step: 354, sim. time: 19min 4s 636ms, dt: 3s 155ms 916µs, cells: 10840
+[97m(r0,t0)  SWE: time step: 355, sim. time: 19min 7s 792ms, dt: 3s 155ms 916µs, cells: 10875
+[97m(r0,t0)  SWE: time step: 356, sim. time: 19min 10s 948ms, dt: 3s 155ms 916µs, cells: 10898
+[97m(r0,t0)  SWE: time step: 357, sim. time: 19min 14s 104ms, dt: 3s 155ms 915µs, cells: 10915
+[97m(r0,t0)  SWE: time step: 358, sim. time: 19min 17s 260ms, dt: 3s 155ms 915µs, cells: 10946
+[97m(r0,t0)  SWE: time step: 359, sim. time: 19min 20s 415ms, dt: 3s 155ms 915µs, cells: 10976
+[97m(r0,t0)  SWE: time step: 360, sim. time: 19min 23s 571ms, dt: 3s 155ms 915µs, cells: 11004
+[97m(r0,t0)  SWE: time step: 361, sim. time: 19min 26s 727ms, dt: 3s 155ms 915µs, cells: 11024
+[97m(r0,t0)  SWE: time step: 362, sim. time: 19min 29s 883ms, dt: 3s 155ms 914µs, cells: 11057
+[97m(r0,t0)  SWE: time step: 363, sim. time: 19min 33s 39ms, dt: 3s 155ms 914µs, cells: 11079
+[97m(r0,t0)  SWE: time step: 364, sim. time: 19min 36s 195ms, dt: 3s 155ms 914µs, cells: 11105
+[97m(r0,t0)  SWE: time step: 365, sim. time: 19min 39s 351ms, dt: 3s 155ms 914µs, cells: 11132
+[97m(r0,t0)  SWE: time step: 366, sim. time: 19min 42s 507ms, dt: 3s 155ms 913µs, cells: 11159
+[97m(r0,t0)  SWE: time step: 367, sim. time: 19min 45s 663ms, dt: 3s 155ms 913µs, cells: 11187
+[97m(r0,t0)  SWE: time step: 368, sim. time: 19min 48s 819ms, dt: 3s 155ms 913µs, cells: 11224
+[97m(r0,t0)  SWE: time step: 369, sim. time: 19min 51s 975ms, dt: 3s 155ms 913µs, cells: 11253
+[97m(r0,t0)  SWE: time step: 370, sim. time: 19min 55s 130ms, dt: 3s 155ms 913µs, cells: 11275
+[97m(r0,t0)  SWE: time step: 371, sim. time: 19min 58s 286ms, dt: 3s 155ms 913µs, cells: 11304
+[97m(r0,t0)  SWE: time step: 372, sim. time: 20min 1s 442ms, dt: 3s 155ms 912µs, cells: 11336
+[97m(r0,t0)  SWE: output step: 10
+[97m(r0,t0)  SWE: output step: 10
+[97m(r0,t0)  SWE: time step: 373, sim. time: 20min 4s 598ms, dt: 3s 155ms 912µs, cells: 11355
+[97m(r0,t0)  SWE: time step: 374, sim. time: 20min 7s 754ms, dt: 3s 155ms 912µs, cells: 11372
+[97m(r0,t0)  SWE: time step: 375, sim. time: 20min 10s 910ms, dt: 3s 155ms 912µs, cells: 11388
+[97m(r0,t0)  SWE: time step: 376, sim. time: 20min 14s 66ms, dt: 3s 155ms 912µs, cells: 11411
+[97m(r0,t0)  SWE: time step: 377, sim. time: 20min 17s 222ms, dt: 3s 155ms 911µs, cells: 11453
+[97m(r0,t0)  SWE: time step: 378, sim. time: 20min 20s 378ms, dt: 3s 155ms 911µs, cells: 11484
+[97m(r0,t0)  SWE: time step: 379, sim. time: 20min 23s 534ms, dt: 3s 155ms 911µs, cells: 11506
+[97m(r0,t0)  SWE: time step: 380, sim. time: 20min 26s 690ms, dt: 3s 155ms 911µs, cells: 11529
+[97m(r0,t0)  SWE: time step: 381, sim. time: 20min 29s 846ms, dt: 3s 155ms 911µs, cells: 11550
+[97m(r0,t0)  SWE: time step: 382, sim. time: 20min 33s 1ms, dt: 3s 155ms 910µs, cells: 11574
+[97m(r0,t0)  SWE: time step: 383, sim. time: 20min 36s 157ms, dt: 3s 155ms 910µs, cells: 11600
+[97m(r0,t0)  SWE: time step: 384, sim. time: 20min 39s 313ms, dt: 3s 155ms 910µs, cells: 11626
+[97m(r0,t0)  SWE: time step: 385, sim. time: 20min 42s 469ms, dt: 3s 155ms 910µs, cells: 11637
+[97m(r0,t0)  SWE: time step: 386, sim. time: 20min 45s 625ms, dt: 3s 155ms 910µs, cells: 11657
+[97m(r0,t0)  SWE: time step: 387, sim. time: 20min 48s 781ms, dt: 3s 155ms 910µs, cells: 11684
+[97m(r0,t0)  SWE: time step: 388, sim. time: 20min 51s 937ms, dt: 3s 155ms 909µs, cells: 11726
+[97m(r0,t0)  SWE: time step: 389, sim. time: 20min 55s 93ms, dt: 3s 155ms 909µs, cells: 11749
+[97m(r0,t0)  SWE: time step: 390, sim. time: 20min 58s 249ms, dt: 3s 155ms 909µs, cells: 11773
+[97m(r0,t0)  SWE: time step: 391, sim. time: 21min 1s 405ms, dt: 3s 155ms 909µs, cells: 11800
+[97m(r0,t0)  SWE: time step: 392, sim. time: 21min 4s 561ms, dt: 3s 155ms 909µs, cells: 11844
+[97m(r0,t0)  SWE: time step: 393, sim. time: 21min 7s 716ms, dt: 3s 155ms 908µs, cells: 11872
+[97m(r0,t0)  SWE: time step: 394, sim. time: 21min 10s 872ms, dt: 3s 155ms 908µs, cells: 11896
+[97m(r0,t0)  SWE: time step: 395, sim. time: 21min 14s 28ms, dt: 3s 155ms 908µs, cells: 11920
+[97m(r0,t0)  SWE: time step: 396, sim. time: 21min 17s 184ms, dt: 3s 155ms 908µs, cells: 11942
+[97m(r0,t0)  SWE: time step: 397, sim. time: 21min 20s 340ms, dt: 3s 155ms 908µs, cells: 11967
+[97m(r0,t0)  SWE: time step: 398, sim. time: 21min 23s 496ms, dt: 3s 155ms 907µs, cells: 11981
+[97m(r0,t0)  SWE: time step: 399, sim. time: 21min 26s 652ms, dt: 3s 155ms 907µs, cells: 12010
+[97m(r0,t0)  SWE: time step: 400, sim. time: 21min 29s 808ms, dt: 3s 155ms 907µs, cells: 12037
+[97m(r0,t0)  SWE: time step: 401, sim. time: 21min 32s 964ms, dt: 3s 155ms 907µs, cells: 12055
+[97m(r0,t0)  SWE: time step: 402, sim. time: 21min 36s 120ms, dt: 3s 155ms 907µs, cells: 12067
+[97m(r0,t0)  SWE: time step: 403, sim. time: 21min 39s 276ms, dt: 3s 155ms 907µs, cells: 12091
+[97m(r0,t0)  SWE: time step: 404, sim. time: 21min 42s 431ms, dt: 3s 155ms 906µs, cells: 12124
+[97m(r0,t0)  SWE: time step: 405, sim. time: 21min 45s 587ms, dt: 3s 155ms 906µs, cells: 12164
+[97m(r0,t0)  SWE: time step: 406, sim. time: 21min 48s 743ms, dt: 3s 155ms 906µs, cells: 12180
+[97m(r0,t0)  SWE: time step: 407, sim. time: 21min 51s 899ms, dt: 3s 155ms 906µs, cells: 12202
+[97m(r0,t0)  SWE: time step: 408, sim. time: 21min 55s 55ms, dt: 3s 155ms 906µs, cells: 12235
+[97m(r0,t0)  SWE: time step: 409, sim. time: 21min 58s 211ms, dt: 3s 155ms 906µs, cells: 12259
+[97m(r0,t0)  SWE: time step: 410, sim. time: 22min 1s 367ms, dt: 3s 155ms 905µs, cells: 12292
+[97m(r0,t0)  SWE: output step: 11
+[97m(r0,t0)  SWE: output step: 11
+[97m(r0,t0)  SWE: time step: 411, sim. time: 22min 4s 523ms, dt: 3s 155ms 905µs, cells: 12324
+[97m(r0,t0)  SWE: time step: 412, sim. time: 22min 7s 679ms, dt: 3s 155ms 905µs, cells: 12348
+[97m(r0,t0)  SWE: time step: 413, sim. time: 22min 10s 835ms, dt: 3s 155ms 905µs, cells: 12362
+[97m(r0,t0)  SWE: time step: 414, sim. time: 22min 13s 990ms, dt: 3s 155ms 905µs, cells: 12376
+[97m(r0,t0)  SWE: time step: 415, sim. time: 22min 17s 146ms, dt: 3s 155ms 905µs, cells: 12408
+[97m(r0,t0)  SWE: time step: 416, sim. time: 22min 20s 302ms, dt: 3s 155ms 905µs, cells: 12437
+[97m(r0,t0)  SWE: time step: 417, sim. time: 22min 23s 458ms, dt: 3s 155ms 904µs, cells: 12466
+[97m(r0,t0)  SWE: time step: 418, sim. time: 22min 26s 614ms, dt: 3s 155ms 904µs, cells: 12498
+[97m(r0,t0)  SWE: time step: 419, sim. time: 22min 29s 770ms, dt: 3s 155ms 904µs, cells: 12517
+[97m(r0,t0)  SWE: time step: 420, sim. time: 22min 32s 926ms, dt: 3s 155ms 904µs, cells: 12562
+[97m(r0,t0)  SWE: time step: 421, sim. time: 22min 36s 82ms, dt: 3s 155ms 904µs, cells: 12578
+[97m(r0,t0)  SWE: time step: 422, sim. time: 22min 39s 238ms, dt: 3s 155ms 904µs, cells: 12617
+[97m(r0,t0)  SWE: time step: 423, sim. time: 22min 42s 394ms, dt: 3s 155ms 903µs, cells: 12642
+[97m(r0,t0)  SWE: time step: 424, sim. time: 22min 45s 550ms, dt: 3s 155ms 903µs, cells: 12659
+[97m(r0,t0)  SWE: time step: 425, sim. time: 22min 48s 705ms, dt: 3s 155ms 903µs, cells: 12669
+[97m(r0,t0)  SWE: time step: 426, sim. time: 22min 51s 861ms, dt: 3s 155ms 903µs, cells: 12701
+[97m(r0,t0)  SWE: time step: 427, sim. time: 22min 55s 17ms, dt: 3s 155ms 903µs, cells: 12717
+[97m(r0,t0)  SWE: time step: 428, sim. time: 22min 58s 173ms, dt: 3s 155ms 903µs, cells: 12753
+[97m(r0,t0)  SWE: time step: 429, sim. time: 23min 1s 329ms, dt: 3s 155ms 903µs, cells: 12785
+[97m(r0,t0)  SWE: time step: 430, sim. time: 23min 4s 485ms, dt: 3s 155ms 902µs, cells: 12802
+[97m(r0,t0)  SWE: time step: 431, sim. time: 23min 7s 641ms, dt: 3s 155ms 902µs, cells: 12826
+[97m(r0,t0)  SWE: time step: 432, sim. time: 23min 10s 797ms, dt: 3s 155ms 902µs, cells: 12843
+[97m(r0,t0)  SWE: time step: 433, sim. time: 23min 13s 953ms, dt: 3s 155ms 902µs, cells: 12864
+[97m(r0,t0)  SWE: time step: 434, sim. time: 23min 17s 109ms, dt: 3s 155ms 902µs, cells: 12890
+[97m(r0,t0)  SWE: time step: 435, sim. time: 23min 20s 264ms, dt: 3s 155ms 902µs, cells: 12913
+[97m(r0,t0)  SWE: time step: 436, sim. time: 23min 23s 420ms, dt: 3s 155ms 901µs, cells: 12927
+[97m(r0,t0)  SWE: time step: 437, sim. time: 23min 26s 576ms, dt: 3s 155ms 901µs, cells: 12955
+[97m(r0,t0)  SWE: time step: 438, sim. time: 23min 29s 732ms, dt: 3s 155ms 901µs, cells: 12969
+[97m(r0,t0)  SWE: time step: 439, sim. time: 23min 32s 888ms, dt: 3s 155ms 901µs, cells: 13001
+[97m(r0,t0)  SWE: time step: 440, sim. time: 23min 36s 44ms, dt: 3s 155ms 901µs, cells: 13019
+[97m(r0,t0)  SWE: time step: 441, sim. time: 23min 39s 200ms, dt: 3s 155ms 901µs, cells: 13052
+[97m(r0,t0)  SWE: time step: 442, sim. time: 23min 42s 356ms, dt: 3s 155ms 900µs, cells: 13077
+[97m(r0,t0)  SWE: time step: 443, sim. time: 23min 45s 512ms, dt: 3s 155ms 900µs, cells: 13098
+[97m(r0,t0)  SWE: time step: 444, sim. time: 23min 48s 668ms, dt: 3s 155ms 900µs, cells: 13117
+[97m(r0,t0)  SWE: time step: 445, sim. time: 23min 51s 823ms, dt: 3s 155ms 900µs, cells: 13130
+[97m(r0,t0)  SWE: time step: 446, sim. time: 23min 54s 979ms, dt: 3s 155ms 900µs, cells: 13149
+[97m(r0,t0)  SWE: time step: 447, sim. time: 23min 58s 135ms, dt: 3s 155ms 899µs, cells: 13184
+[97m(r0,t0)  SWE: time step: 448, sim. time: 24min 1s 291ms, dt: 3s 155ms 899µs, cells: 13210
+[97m(r0,t0)  SWE: output step: 12
+[97m(r0,t0)  SWE: output step: 12
+[97m(r0,t0)  SWE: time step: 449, sim. time: 24min 4s 447ms, dt: 3s 155ms 899µs, cells: 13240
+[97m(r0,t0)  SWE: time step: 450, sim. time: 24min 7s 603ms, dt: 3s 155ms 899µs, cells: 13273
+[97m(r0,t0)  SWE: time step: 451, sim. time: 24min 10s 759ms, dt: 3s 155ms 899µs, cells: 13281
+[97m(r0,t0)  SWE: time step: 452, sim. time: 24min 13s 915ms, dt: 3s 155ms 898µs, cells: 13308
+[97m(r0,t0)  SWE: time step: 453, sim. time: 24min 17s 71ms, dt: 3s 155ms 898µs, cells: 13326
+[97m(r0,t0)  SWE: time step: 454, sim. time: 24min 20s 227ms, dt: 3s 155ms 898µs, cells: 13337
+[97m(r0,t0)  SWE: time step: 455, sim. time: 24min 23s 382ms, dt: 3s 155ms 898µs, cells: 13349
+[97m(r0,t0)  SWE: time step: 456, sim. time: 24min 26s 538ms, dt: 3s 155ms 898µs, cells: 13371
+[97m(r0,t0)  SWE: time step: 457, sim. time: 24min 29s 694ms, dt: 3s 155ms 897µs, cells: 13399
+[97m(r0,t0)  SWE: time step: 458, sim. time: 24min 32s 850ms, dt: 3s 155ms 897µs, cells: 13423
+[97m(r0,t0)  SWE: time step: 459, sim. time: 24min 36s 6ms, dt: 3s 155ms 897µs, cells: 13450
+[97m(r0,t0)  SWE: time step: 460, sim. time: 24min 39s 162ms, dt: 3s 155ms 897µs, cells: 13479
+[97m(r0,t0)  SWE: time step: 461, sim. time: 24min 42s 318ms, dt: 3s 155ms 896µs, cells: 13507
+[97m(r0,t0)  SWE: time step: 462, sim. time: 24min 45s 474ms, dt: 3s 155ms 896µs, cells: 13538
+[97m(r0,t0)  SWE: time step: 463, sim. time: 24min 48s 630ms, dt: 3s 155ms 896µs, cells: 13556
+[97m(r0,t0)  SWE: time step: 464, sim. time: 24min 51s 786ms, dt: 3s 155ms 896µs, cells: 13580
+[97m(r0,t0)  SWE: time step: 465, sim. time: 24min 54s 941ms, dt: 3s 155ms 895µs, cells: 13592
+[97m(r0,t0)  SWE: time step: 466, sim. time: 24min 58s 97ms, dt: 3s 155ms 895µs, cells: 13621
+[97m(r0,t0)  SWE: time step: 467, sim. time: 25min 1s 253ms, dt: 3s 155ms 895µs, cells: 13641
+[97m(r0,t0)  SWE: time step: 468, sim. time: 25min 4s 409ms, dt: 3s 155ms 895µs, cells: 13671
+[97m(r0,t0)  SWE: time step: 469, sim. time: 25min 7s 565ms, dt: 3s 155ms 894µs, cells: 13694
+[97m(r0,t0)  SWE: time step: 470, sim. time: 25min 10s 721ms, dt: 3s 155ms 894µs, cells: 13728
+[97m(r0,t0)  SWE: time step: 471, sim. time: 25min 13s 877ms, dt: 3s 155ms 894µs, cells: 13742
+[97m(r0,t0)  SWE: time step: 472, sim. time: 25min 17s 33ms, dt: 3s 155ms 894µs, cells: 13762
+[97m(r0,t0)  SWE: time step: 473, sim. time: 25min 20s 189ms, dt: 3s 155ms 893µs, cells: 13784
+[97m(r0,t0)  SWE: time step: 474, sim. time: 25min 23s 345ms, dt: 3s 155ms 893µs, cells: 13811
+[97m(r0,t0)  SWE: time step: 475, sim. time: 25min 26s 500ms, dt: 3s 155ms 893µs, cells: 13824
+[97m(r0,t0)  SWE: time step: 476, sim. time: 25min 29s 656ms, dt: 3s 155ms 893µs, cells: 13839
+[97m(r0,t0)  SWE: time step: 477, sim. time: 25min 32s 812ms, dt: 3s 155ms 892µs, cells: 13854
+[97m(r0,t0)  SWE: time step: 478, sim. time: 25min 35s 968ms, dt: 3s 155ms 892µs, cells: 13889
+[97m(r0,t0)  SWE: time step: 479, sim. time: 25min 39s 124ms, dt: 3s 155ms 892µs, cells: 13916
+[97m(r0,t0)  SWE: time step: 480, sim. time: 25min 42s 280ms, dt: 3s 155ms 892µs, cells: 13936
+[97m(r0,t0)  SWE: time step: 481, sim. time: 25min 45s 436ms, dt: 3s 155ms 891µs, cells: 13949
+[97m(r0,t0)  SWE: time step: 482, sim. time: 25min 48s 592ms, dt: 3s 155ms 891µs, cells: 13984
+[97m(r0,t0)  SWE: time step: 483, sim. time: 25min 51s 748ms, dt: 3s 155ms 891µs, cells: 14012
+[97m(r0,t0)  SWE: time step: 484, sim. time: 25min 54s 903ms, dt: 3s 155ms 890µs, cells: 14056
+[97m(r0,t0)  SWE: time step: 485, sim. time: 25min 58s 59ms, dt: 3s 155ms 890µs, cells: 14072
+[97m(r0,t0)  SWE: time step: 486, sim. time: 26min 1s 215ms, dt: 3s 155ms 890µs, cells: 14090
+[97m(r0,t0)  SWE: output step: 13
+[97m(r0,t0)  SWE: output step: 13
+[97m(r0,t0)  SWE: time step: 487, sim. time: 26min 4s 371ms, dt: 3s 155ms 890µs, cells: 14112
+[97m(r0,t0)  SWE: time step: 488, sim. time: 26min 7s 527ms, dt: 3s 155ms 889µs, cells: 14142
+[97m(r0,t0)  SWE: time step: 489, sim. time: 26min 10s 683ms, dt: 3s 155ms 889µs, cells: 14175
+[97m(r0,t0)  SWE: time step: 490, sim. time: 26min 13s 839ms, dt: 3s 155ms 889µs, cells: 14187
+[97m(r0,t0)  SWE: time step: 491, sim. time: 26min 16s 995ms, dt: 3s 155ms 888µs, cells: 14195
+[97m(r0,t0)  SWE: time step: 492, sim. time: 26min 20s 151ms, dt: 3s 155ms 888µs, cells: 14223
+[97m(r0,t0)  SWE: time step: 493, sim. time: 26min 23s 306ms, dt: 3s 155ms 888µs, cells: 14263
+[97m(r0,t0)  SWE: time step: 494, sim. time: 26min 26s 462ms, dt: 3s 155ms 888µs, cells: 14287
+[97m(r0,t0)  SWE: time step: 495, sim. time: 26min 29s 618ms, dt: 3s 155ms 887µs, cells: 14313
+[97m(r0,t0)  SWE: time step: 496, sim. time: 26min 32s 774ms, dt: 3s 155ms 887µs, cells: 14332
+[97m(r0,t0)  SWE: time step: 497, sim. time: 26min 35s 930ms, dt: 3s 155ms 887µs, cells: 14353
+[97m(r0,t0)  SWE: time step: 498, sim. time: 26min 39s 86ms, dt: 3s 155ms 886µs, cells: 14363
+[97m(r0,t0)  SWE: time step: 499, sim. time: 26min 42s 242ms, dt: 3s 155ms 886µs, cells: 14398
+[97m(r0,t0)  SWE: time step: 500, sim. time: 26min 45s 398ms, dt: 3s 155ms 886µs, cells: 14428
+[97m(r0,t0)  SWE: time step: 501, sim. time: 26min 48s 554ms, dt: 3s 155ms 885µs, cells: 14457
+[97m(r0,t0)  SWE: time step: 502, sim. time: 26min 51s 709ms, dt: 3s 155ms 885µs, cells: 14475
+[97m(r0,t0)  SWE: time step: 503, sim. time: 26min 54s 865ms, dt: 3s 155ms 885µs, cells: 14498
+[97m(r0,t0)  SWE: time step: 504, sim. time: 26min 58s 21ms, dt: 3s 155ms 884µs, cells: 14524
+[97m(r0,t0)  SWE: time step: 505, sim. time: 27min 1s 177ms, dt: 3s 155ms 884µs, cells: 14541
+[97m(r0,t0)  SWE: time step: 506, sim. time: 27min 4s 333ms, dt: 3s 155ms 884µs, cells: 14552
+[97m(r0,t0)  SWE: time step: 507, sim. time: 27min 7s 489ms, dt: 3s 155ms 883µs, cells: 14576
+[97m(r0,t0)  SWE: time step: 508, sim. time: 27min 10s 645ms, dt: 3s 155ms 883µs, cells: 14608
+[97m(r0,t0)  SWE: time step: 509, sim. time: 27min 13s 801ms, dt: 3s 155ms 883µs, cells: 14637
+[97m(r0,t0)  SWE: time step: 510, sim. time: 27min 16s 957ms, dt: 3s 155ms 882µs, cells: 14657
+[97m(r0,t0)  SWE: time step: 511, sim. time: 27min 20s 112ms, dt: 3s 155ms 882µs, cells: 14675
+[97m(r0,t0)  SWE: time step: 512, sim. time: 27min 23s 268ms, dt: 3s 155ms 882µs, cells: 14701
+[97m(r0,t0)  SWE: time step: 513, sim. time: 27min 26s 424ms, dt: 3s 155ms 881µs, cells: 14724
+[97m(r0,t0)  SWE: time step: 514, sim. time: 27min 29s 580ms, dt: 3s 155ms 881µs, cells: 14749
+[97m(r0,t0)  SWE: time step: 515, sim. time: 27min 32s 736ms, dt: 3s 155ms 881µs, cells: 14764
+[97m(r0,t0)  SWE: time step: 516, sim. time: 27min 35s 892ms, dt: 3s 155ms 880µs, cells: 14789
+[97m(r0,t0)  SWE: time step: 517, sim. time: 27min 39s 48ms, dt: 3s 155ms 880µs, cells: 14811
+[97m(r0,t0)  SWE: time step: 518, sim. time: 27min 42s 204ms, dt: 3s 155ms 880µs, cells: 14830
+[97m(r0,t0)  SWE: time step: 519, sim. time: 27min 45s 359ms, dt: 3s 155ms 879µs, cells: 14848
+[97m(r0,t0)  SWE: time step: 520, sim. time: 27min 48s 515ms, dt: 3s 155ms 879µs, cells: 14881
+[97m(r0,t0)  SWE: time step: 521, sim. time: 27min 51s 671ms, dt: 3s 155ms 879µs, cells: 14900
+[97m(r0,t0)  SWE: time step: 522, sim. time: 27min 54s 827ms, dt: 3s 155ms 878µs, cells: 14934
+[97m(r0,t0)  SWE: time step: 523, sim. time: 27min 57s 983ms, dt: 3s 155ms 878µs, cells: 14964
+[97m(r0,t0)  SWE: time step: 524, sim. time: 28min 1s 139ms, dt: 3s 155ms 878µs, cells: 14983
+[97m(r0,t0)  SWE: output step: 14
+[97m(r0,t0)  SWE: output step: 14
+[97m(r0,t0)  SWE: time step: 525, sim. time: 28min 4s 295ms, dt: 3s 155ms 878µs, cells: 14997
+[97m(r0,t0)  SWE: time step: 526, sim. time: 28min 7s 451ms, dt: 3s 155ms 877µs, cells: 15015
+[97m(r0,t0)  SWE: time step: 527, sim. time: 28min 10s 606ms, dt: 3s 155ms 877µs, cells: 15040
+[97m(r0,t0)  SWE: time step: 528, sim. time: 28min 13s 762ms, dt: 3s 155ms 877µs, cells: 15069
+[97m(r0,t0)  SWE: time step: 529, sim. time: 28min 16s 918ms, dt: 3s 155ms 876µs, cells: 15097
+[97m(r0,t0)  SWE: time step: 530, sim. time: 28min 20s 74ms, dt: 3s 155ms 876µs, cells: 15117
+[97m(r0,t0)  SWE: time step: 531, sim. time: 28min 23s 230ms, dt: 3s 155ms 876µs, cells: 15145
+[97m(r0,t0)  SWE: time step: 532, sim. time: 28min 26s 386ms, dt: 3s 155ms 875µs, cells: 15172
+[97m(r0,t0)  SWE: time step: 533, sim. time: 28min 29s 542ms, dt: 3s 155ms 875µs, cells: 15188
+[97m(r0,t0)  SWE: time step: 534, sim. time: 28min 32s 698ms, dt: 3s 155ms 875µs, cells: 15225
+[97m(r0,t0)  SWE: time step: 535, sim. time: 28min 35s 853ms, dt: 3s 155ms 874µs, cells: 15252
+[97m(r0,t0)  SWE: time step: 536, sim. time: 28min 39s 9ms, dt: 3s 155ms 874µs, cells: 15286
+[97m(r0,t0)  SWE: time step: 537, sim. time: 28min 42s 165ms, dt: 3s 155ms 874µs, cells: 15314
+[97m(r0,t0)  SWE: time step: 538, sim. time: 28min 45s 321ms, dt: 3s 155ms 873µs, cells: 15350
+[97m(r0,t0)  SWE: time step: 539, sim. time: 28min 48s 477ms, dt: 3s 155ms 873µs, cells: 15375
+[97m(r0,t0)  SWE: time step: 540, sim. time: 28min 51s 633ms, dt: 3s 155ms 873µs, cells: 15384
+[97m(r0,t0)  SWE: time step: 541, sim. time: 28min 54s 789ms, dt: 3s 155ms 872µs, cells: 15398
+[97m(r0,t0)  SWE: time step: 542, sim. time: 28min 57s 945ms, dt: 3s 155ms 872µs, cells: 15434
+[97m(r0,t0)  SWE: time step: 543, sim. time: 29min 1s 100ms, dt: 3s 155ms 872µs, cells: 15454
+[97m(r0,t0)  SWE: time step: 544, sim. time: 29min 4s 256ms, dt: 3s 155ms 872µs, cells: 15480
+[97m(r0,t0)  SWE: time step: 545, sim. time: 29min 7s 412ms, dt: 3s 155ms 871µs, cells: 15508
+[97m(r0,t0)  SWE: time step: 546, sim. time: 29min 10s 568ms, dt: 3s 155ms 871µs, cells: 15537
+[97m(r0,t0)  SWE: time step: 547, sim. time: 29min 13s 724ms, dt: 3s 155ms 871µs, cells: 15551
+[97m(r0,t0)  SWE: time step: 548, sim. time: 29min 16s 880ms, dt: 3s 155ms 870µs, cells: 15560
+[97m(r0,t0)  SWE: time step: 549, sim. time: 29min 20s 36ms, dt: 3s 155ms 870µs, cells: 15597
+[97m(r0,t0)  SWE: time step: 550, sim. time: 29min 23s 192ms, dt: 3s 155ms 870µs, cells: 15624
+[97m(r0,t0)  SWE: time step: 551, sim. time: 29min 26s 347ms, dt: 3s 155ms 870µs, cells: 15647
+[97m(r0,t0)  SWE: time step: 552, sim. time: 29min 29s 503ms, dt: 3s 155ms 869µs, cells: 15660
+[97m(r0,t0)  SWE: time step: 553, sim. time: 29min 32s 659ms, dt: 3s 155ms 869µs, cells: 15672
+[97m(r0,t0)  SWE: time step: 554, sim. time: 29min 35s 815ms, dt: 3s 155ms 869µs, cells: 15688
+[97m(r0,t0)  SWE: time step: 555, sim. time: 29min 38s 971ms, dt: 3s 155ms 868µs, cells: 15715
+[97m(r0,t0)  SWE: time step: 556, sim. time: 29min 42s 127ms, dt: 3s 155ms 868µs, cells: 15739
+[97m(r0,t0)  SWE: time step: 557, sim. time: 29min 45s 283ms, dt: 3s 155ms 868µs, cells: 15745
+[97m(r0,t0)  SWE: time step: 558, sim. time: 29min 48s 439ms, dt: 3s 155ms 868µs, cells: 15761
+[97m(r0,t0)  SWE: time step: 559, sim. time: 29min 51s 594ms, dt: 3s 155ms 867µs, cells: 15791
+[97m(r0,t0)  SWE: time step: 560, sim. time: 29min 54s 750ms, dt: 3s 155ms 867µs, cells: 15817
+[97m(r0,t0)  SWE: time step: 561, sim. time: 29min 57s 906ms, dt: 3s 155ms 867µs, cells: 15836
+[97m(r0,t0)  SWE: time step: 562, sim. time: 30min 1s 62ms, dt: 3s 155ms 867µs, cells: 15859
+[97m(r0,t0)  SWE: output step: 15
+[97m(r0,t0)  SWE: output step: 15
+[97m(r0,t0)  SWE: time step: 563, sim. time: 30min 4s 218ms, dt: 3s 155ms 866µs, cells: 15894
+[97m(r0,t0)  SWE: time step: 564, sim. time: 30min 7s 374ms, dt: 3s 155ms 866µs, cells: 15912
+[97m(r0,t0)  SWE: time step: 565, sim. time: 30min 10s 530ms, dt: 3s 155ms 866µs, cells: 15941
+[97m(r0,t0)  SWE: time step: 566, sim. time: 30min 13s 685ms, dt: 3s 155ms 866µs, cells: 15974
+[97m(r0,t0)  SWE: time step: 567, sim. time: 30min 16s 841ms, dt: 3s 155ms 865µs, cells: 15986
+[97m(r0,t0)  SWE: time step: 568, sim. time: 30min 19s 997ms, dt: 3s 155ms 865µs, cells: 16004
+[97m(r0,t0)  SWE: time step: 569, sim. time: 30min 23s 153ms, dt: 3s 155ms 865µs, cells: 16041
+[97m(r0,t0)  SWE: time step: 570, sim. time: 30min 26s 309ms, dt: 3s 155ms 865µs, cells: 16052
+[97m(r0,t0)  SWE: time step: 571, sim. time: 30min 29s 465ms, dt: 3s 155ms 864µs, cells: 16082
+[97m(r0,t0)  SWE: time step: 572, sim. time: 30min 32s 621ms, dt: 3s 155ms 864µs, cells: 16120
+[97m(r0,t0)  SWE: time step: 573, sim. time: 30min 35s 777ms, dt: 3s 155ms 864µs, cells: 16146
+[97m(r0,t0)  SWE: time step: 574, sim. time: 30min 38s 932ms, dt: 3s 155ms 864µs, cells: 16175
+[97m(r0,t0)  SWE: time step: 575, sim. time: 30min 42s 88ms, dt: 3s 155ms 863µs, cells: 16211
+[97m(r0,t0)  SWE: time step: 576, sim. time: 30min 45s 244ms, dt: 3s 155ms 863µs, cells: 16231
+[97m(r0,t0)  SWE: time step: 577, sim. time: 30min 48s 400ms, dt: 3s 155ms 863µs, cells: 16241
+[97m(r0,t0)  SWE: time step: 578, sim. time: 30min 51s 556ms, dt: 3s 155ms 863µs, cells: 16253
+[97m(r0,t0)  SWE: time step: 579, sim. time: 30min 54s 712ms, dt: 3s 155ms 862µs, cells: 16271
+[97m(r0,t0)  SWE: time step: 580, sim. time: 30min 57s 868ms, dt: 3s 155ms 862µs, cells: 16302
+[97m(r0,t0)  SWE: time step: 581, sim. time: 31min 1s 23ms, dt: 3s 155ms 862µs, cells: 16324
+[97m(r0,t0)  SWE: time step: 582, sim. time: 31min 4s 179ms, dt: 3s 155ms 862µs, cells: 16328
+[97m(r0,t0)  SWE: time step: 583, sim. time: 31min 7s 335ms, dt: 3s 125ms 308µs, cells: 16357
+[97m(r0,t0)  SWE: time step: 584, sim. time: 31min 10s 460ms, dt: 3s 125ms 308µs, cells: 16375
+[97m(r0,t0)  SWE: time step: 585, sim. time: 31min 13s 586ms, dt: 3s 125ms 308µs, cells: 16412
+[97m(r0,t0)  SWE: time step: 586, sim. time: 31min 16s 711ms, dt: 3s 125ms 308µs, cells: 16453
+[97m(r0,t0)  SWE: time step: 587, sim. time: 31min 19s 836ms, dt: 3s 125ms 307µs, cells: 16486
+[97m(r0,t0)  SWE: time step: 588, sim. time: 31min 22s 962ms, dt: 3s 125ms 307µs, cells: 16517
+[97m(r0,t0)  SWE: time step: 589, sim. time: 31min 26s 87ms, dt: 3s 125ms 307µs, cells: 16547
+[97m(r0,t0)  SWE: time step: 590, sim. time: 31min 29s 212ms, dt: 3s 125ms 307µs, cells: 16563
+[97m(r0,t0)  SWE: time step: 591, sim. time: 31min 32s 338ms, dt: 3s 125ms 306µs, cells: 16581
+[97m(r0,t0)  SWE: time step: 592, sim. time: 31min 35s 463ms, dt: 3s 125ms 306µs, cells: 16603
+[97m(r0,t0)  SWE: time step: 593, sim. time: 31min 38s 588ms, dt: 3s 125ms 306µs, cells: 16623
+[97m(r0,t0)  SWE: time step: 594, sim. time: 31min 41s 714ms, dt: 3s 125ms 306µs, cells: 16655
+[97m(r0,t0)  SWE: time step: 595, sim. time: 31min 44s 839ms, dt: 3s 125ms 306µs, cells: 16672
+[97m(r0,t0)  SWE: time step: 596, sim. time: 31min 47s 964ms, dt: 3s 125ms 305µs, cells: 16687
+[97m(r0,t0)  SWE: time step: 597, sim. time: 31min 51s 89ms, dt: 3s 125ms 305µs, cells: 16703
+[97m(r0,t0)  SWE: time step: 598, sim. time: 31min 54s 215ms, dt: 3s 125ms 305µs, cells: 16729
+[97m(r0,t0)  SWE: time step: 599, sim. time: 31min 57s 340ms, dt: 3s 125ms 305µs, cells: 16756
+[97m(r0,t0)  SWE: time step: 600, sim. time: 32min 465ms 871µs, dt: 3s 125ms 305µs, cells: 16786
+[97m(r0,t0)  SWE: output step: 16
+[97m(r0,t0)  SWE: output step: 16
+[97m(r0,t0)  SWE: time step: 601, sim. time: 32min 3s 591ms, dt: 3s 125ms 304µs, cells: 16820
+[97m(r0,t0)  SWE: time step: 602, sim. time: 32min 6s 716ms, dt: 3s 125ms 304µs, cells: 16847
+[97m(r0,t0)  SWE: time step: 603, sim. time: 32min 9s 841ms, dt: 3s 125ms 304µs, cells: 16867
+[97m(r0,t0)  SWE: time step: 604, sim. time: 32min 12s 967ms, dt: 3s 125ms 304µs, cells: 16874
+[97m(r0,t0)  SWE: time step: 605, sim. time: 32min 16s 92ms, dt: 3s 125ms 304µs, cells: 16887
+[97m(r0,t0)  SWE: time step: 606, sim. time: 32min 19s 217ms, dt: 3s 125ms 303µs, cells: 16912
+[97m(r0,t0)  SWE: time step: 607, sim. time: 32min 22s 343ms, dt: 3s 125ms 303µs, cells: 16944
+[97m(r0,t0)  SWE: time step: 608, sim. time: 32min 25s 468ms, dt: 3s 125ms 303µs, cells: 16967
+[97m(r0,t0)  SWE: time step: 609, sim. time: 32min 28s 593ms, dt: 3s 125ms 303µs, cells: 16983
+[97m(r0,t0)  SWE: time step: 610, sim. time: 32min 31s 718ms, dt: 3s 125ms 303µs, cells: 17000
+[97m(r0,t0)  SWE: time step: 611, sim. time: 32min 34s 844ms, dt: 3s 125ms 302µs, cells: 17024
+[97m(r0,t0)  SWE: time step: 612, sim. time: 32min 37s 969ms, dt: 3s 125ms 302µs, cells: 17055
+[97m(r0,t0)  SWE: time step: 613, sim. time: 32min 41s 94ms, dt: 3s 125ms 302µs, cells: 17086
+[97m(r0,t0)  SWE: time step: 614, sim. time: 32min 44s 220ms, dt: 3s 125ms 302µs, cells: 17111
+[97m(r0,t0)  SWE: time step: 615, sim. time: 32min 47s 345ms, dt: 3s 125ms 301µs, cells: 17158
+[97m(r0,t0)  SWE: time step: 616, sim. time: 32min 50s 470ms, dt: 3s 125ms 301µs, cells: 17189
+[97m(r0,t0)  SWE: time step: 617, sim. time: 32min 53s 596ms, dt: 3s 125ms 301µs, cells: 17222
+[97m(r0,t0)  SWE: time step: 618, sim. time: 32min 56s 721ms, dt: 3s 125ms 301µs, cells: 17241
+[97m(r0,t0)  SWE: time step: 619, sim. time: 32min 59s 846ms, dt: 3s 125ms 300µs, cells: 17255
+[97m(r0,t0)  SWE: time step: 620, sim. time: 33min 2s 971ms, dt: 3s 125ms 300µs, cells: 17281
+[97m(r0,t0)  SWE: time step: 621, sim. time: 33min 6s 97ms, dt: 3s 125ms 300µs, cells: 17300
+[97m(r0,t0)  SWE: time step: 622, sim. time: 33min 9s 222ms, dt: 3s 125ms 300µs, cells: 17334
+[97m(r0,t0)  SWE: time step: 623, sim. time: 33min 12s 347ms, dt: 3s 125ms 299µs, cells: 17352
+[97m(r0,t0)  SWE: time step: 624, sim. time: 33min 15s 473ms, dt: 3s 125ms 299µs, cells: 17359
+[97m(r0,t0)  SWE: time step: 625, sim. time: 33min 18s 598ms, dt: 3s 125ms 299µs, cells: 17376
+[97m(r0,t0)  SWE: time step: 626, sim. time: 33min 21s 723ms, dt: 3s 125ms 299µs, cells: 17387
+[97m(r0,t0)  SWE: time step: 627, sim. time: 33min 24s 849ms, dt: 3s 125ms 298µs, cells: 17415
+[97m(r0,t0)  SWE: time step: 628, sim. time: 33min 27s 974ms, dt: 3s 125ms 298µs, cells: 17427
+[97m(r0,t0)  SWE: time step: 629, sim. time: 33min 31s 99ms, dt: 3s 125ms 298µs, cells: 17445
+[97m(r0,t0)  SWE: time step: 630, sim. time: 33min 34s 224ms, dt: 3s 125ms 298µs, cells: 17493
+[97m(r0,t0)  SWE: time step: 631, sim. time: 33min 37s 350ms, dt: 3s 125ms 297µs, cells: 17529
+[97m(r0,t0)  SWE: time step: 632, sim. time: 33min 40s 475ms, dt: 3s 125ms 297µs, cells: 17550
+[97m(r0,t0)  SWE: time step: 633, sim. time: 33min 43s 600ms, dt: 3s 125ms 297µs, cells: 17562
+[97m(r0,t0)  SWE: time step: 634, sim. time: 33min 46s 726ms, dt: 3s 125ms 297µs, cells: 17593
+[97m(r0,t0)  SWE: time step: 635, sim. time: 33min 49s 851ms, dt: 3s 125ms 297µs, cells: 17631
+[97m(r0,t0)  SWE: time step: 636, sim. time: 33min 52s 976ms, dt: 3s 125ms 296µs, cells: 17649
+[97m(r0,t0)  SWE: time step: 637, sim. time: 33min 56s 102ms, dt: 3s 125ms 296µs, cells: 17649
+[97m(r0,t0)  SWE: time step: 638, sim. time: 33min 59s 227ms, dt: 3s 125ms 296µs, cells: 17689
+[97m(r0,t0)  SWE: time step: 639, sim. time: 34min 2s 352ms, dt: 3s 125ms 296µs, cells: 17710
+[97m(r0,t0)  SWE: output step: 17
+[97m(r0,t0)  SWE: output step: 17
+[97m(r0,t0)  SWE: time step: 640, sim. time: 34min 5s 477ms, dt: 3s 125ms 295µs, cells: 17728
+[97m(r0,t0)  SWE: time step: 641, sim. time: 34min 8s 603ms, dt: 3s 125ms 295µs, cells: 17750
+[97m(r0,t0)  SWE: time step: 642, sim. time: 34min 11s 728ms, dt: 3s 125ms 295µs, cells: 17766
+[97m(r0,t0)  SWE: time step: 643, sim. time: 34min 14s 853ms, dt: 3s 125ms 295µs, cells: 17782
+[97m(r0,t0)  SWE: time step: 644, sim. time: 34min 17s 979ms, dt: 3s 125ms 294µs, cells: 17816
+[97m(r0,t0)  SWE: time step: 645, sim. time: 34min 21s 104ms, dt: 3s 125ms 294µs, cells: 17831
+[97m(r0,t0)  SWE: time step: 646, sim. time: 34min 24s 229ms, dt: 3s 125ms 294µs, cells: 17869
+[97m(r0,t0)  SWE: time step: 647, sim. time: 34min 27s 354ms, dt: 3s 125ms 294µs, cells: 17891
+[97m(r0,t0)  SWE: time step: 648, sim. time: 34min 30s 480ms, dt: 3s 125ms 293µs, cells: 17908
+[97m(r0,t0)  SWE: time step: 649, sim. time: 34min 33s 605ms, dt: 3s 125ms 293µs, cells: 17935
+[97m(r0,t0)  SWE: time step: 650, sim. time: 34min 36s 730ms, dt: 3s 125ms 293µs, cells: 17953
+[97m(r0,t0)  SWE: time step: 651, sim. time: 34min 39s 856ms, dt: 3s 125ms 293µs, cells: 17971
+[97m(r0,t0)  SWE: time step: 652, sim. time: 34min 42s 981ms, dt: 3s 125ms 292µs, cells: 17985
+[97m(r0,t0)  SWE: time step: 653, sim. time: 34min 46s 106ms, dt: 3s 125ms 292µs, cells: 17997
+[97m(r0,t0)  SWE: time step: 654, sim. time: 34min 49s 232ms, dt: 3s 114ms 413µs, cells: 18023
+[97m(r0,t0)  SWE: time step: 655, sim. time: 34min 52s 346ms, dt: 3s 114ms 413µs, cells: 18047
+[97m(r0,t0)  SWE: time step: 656, sim. time: 34min 55s 460ms, dt: 3s 114ms 413µs, cells: 18075
+[97m(r0,t0)  SWE: time step: 657, sim. time: 34min 58s 575ms, dt: 3s 114ms 413µs, cells: 18094
+[97m(r0,t0)  SWE: time step: 658, sim. time: 35min 1s 689ms, dt: 3s 114ms 412µs, cells: 18120
+[97m(r0,t0)  SWE: time step: 659, sim. time: 35min 4s 804ms, dt: 3s 114ms 412µs, cells: 18146
+[97m(r0,t0)  SWE: time step: 660, sim. time: 35min 7s 918ms, dt: 3s 114ms 412µs, cells: 18155
+[97m(r0,t0)  SWE: time step: 661, sim. time: 35min 11s 32ms, dt: 3s 114ms 412µs, cells: 18177
+[97m(r0,t0)  SWE: time step: 662, sim. time: 35min 14s 147ms, dt: 3s 114ms 412µs, cells: 18202
+[97m(r0,t0)  SWE: time step: 663, sim. time: 35min 17s 261ms, dt: 3s 114ms 411µs, cells: 18252
+[97m(r0,t0)  SWE: time step: 664, sim. time: 35min 20s 376ms, dt: 3s 114ms 411µs, cells: 18256
+[97m(r0,t0)  SWE: time step: 665, sim. time: 35min 23s 490ms, dt: 3s 114ms 411µs, cells: 18277
+[97m(r0,t0)  SWE: time step: 666, sim. time: 35min 26s 604ms, dt: 3s 114ms 411µs, cells: 18291
+[97m(r0,t0)  SWE: time step: 667, sim. time: 35min 29s 719ms, dt: 3s 114ms 411µs, cells: 18295
+[97m(r0,t0)  SWE: time step: 668, sim. time: 35min 32s 833ms, dt: 3s 114ms 410µs, cells: 18317
+[97m(r0,t0)  SWE: time step: 669, sim. time: 35min 35s 948ms, dt: 3s 114ms 410µs, cells: 18336
+[97m(r0,t0)  SWE: time step: 670, sim. time: 35min 39s 62ms, dt: 3s 114ms 410µs, cells: 18357
+[97m(r0,t0)  SWE: time step: 671, sim. time: 35min 42s 177ms, dt: 3s 114ms 410µs, cells: 18383
+[97m(r0,t0)  SWE: time step: 672, sim. time: 35min 45s 291ms, dt: 3s 114ms 410µs, cells: 18418
+[97m(r0,t0)  SWE: time step: 673, sim. time: 35min 48s 405ms, dt: 3s 114ms 409µs, cells: 18440
+[97m(r0,t0)  SWE: time step: 674, sim. time: 35min 51s 520ms, dt: 3s 114ms 409µs, cells: 18451
+[97m(r0,t0)  SWE: time step: 675, sim. time: 35min 54s 634ms, dt: 3s 114ms 409µs, cells: 18460
+[97m(r0,t0)  SWE: time step: 676, sim. time: 35min 57s 749ms, dt: 3s 114ms 409µs, cells: 18472
+[97m(r0,t0)  SWE: time step: 677, sim. time: 36min 863ms 482µs, dt: 3s 114ms 409µs, cells: 18475
+[97m(r0,t0)  SWE: output step: 18
+[97m(r0,t0)  SWE: output step: 18
+[97m(r0,t0)  SWE: time step: 678, sim. time: 36min 3s 977ms, dt: 3s 114ms 408µs, cells: 18496
+[97m(r0,t0)  SWE: time step: 679, sim. time: 36min 7s 92ms, dt: 3s 114ms 408µs, cells: 18512
+[97m(r0,t0)  SWE: time step: 680, sim. time: 36min 10s 206ms, dt: 3s 114ms 408µs, cells: 18534
+[97m(r0,t0)  SWE: time step: 681, sim. time: 36min 13s 321ms, dt: 3s 114ms 408µs, cells: 18540
+[97m(r0,t0)  SWE: time step: 682, sim. time: 36min 16s 435ms, dt: 3s 114ms 408µs, cells: 18563
+[97m(r0,t0)  SWE: time step: 683, sim. time: 36min 19s 549ms, dt: 3s 114ms 407µs, cells: 18590
+[97m(r0,t0)  SWE: time step: 684, sim. time: 36min 22s 664ms, dt: 3s 114ms 407µs, cells: 18610
+[97m(r0,t0)  SWE: time step: 685, sim. time: 36min 25s 778ms, dt: 3s 114ms 407µs, cells: 18627
+[97m(r0,t0)  SWE: time step: 686, sim. time: 36min 28s 893ms, dt: 3s 114ms 407µs, cells: 18656
+[97m(r0,t0)  SWE: time step: 687, sim. time: 36min 32s 7ms, dt: 3s 114ms 406µs, cells: 18663
+[97m(r0,t0)  SWE: time step: 688, sim. time: 36min 35s 121ms, dt: 3s 114ms 406µs, cells: 18693
+[97m(r0,t0)  SWE: time step: 689, sim. time: 36min 38s 236ms, dt: 3s 114ms 406µs, cells: 18730
+[97m(r0,t0)  SWE: time step: 690, sim. time: 36min 41s 350ms, dt: 3s 114ms 406µs, cells: 18742
+[97m(r0,t0)  SWE: time step: 691, sim. time: 36min 44s 465ms, dt: 3s 114ms 406µs, cells: 18772
+[97m(r0,t0)  SWE: time step: 692, sim. time: 36min 47s 579ms, dt: 3s 114ms 405µs, cells: 18805
+[97m(r0,t0)  SWE: time step: 693, sim. time: 36min 50s 694ms, dt: 3s 114ms 405µs, cells: 18834
+[97m(r0,t0)  SWE: time step: 694, sim. time: 36min 53s 808ms, dt: 3s 114ms 405µs, cells: 18854
+[97m(r0,t0)  SWE: time step: 695, sim. time: 36min 56s 922ms, dt: 3s 114ms 405µs, cells: 18871
+[97m(r0,t0)  SWE: time step: 696, sim. time: 37min 37ms 218µs, dt: 3s 114ms 404µs, cells: 18886
+[97m(r0,t0)  SWE: time step: 697, sim. time: 37min 3s 151ms, dt: 3s 114ms 404µs, cells: 18902
+[97m(r0,t0)  SWE: time step: 698, sim. time: 37min 6s 266ms, dt: 3s 114ms 404µs, cells: 18928
+[97m(r0,t0)  SWE: time step: 699, sim. time: 37min 9s 380ms, dt: 3s 114ms 404µs, cells: 18946
+[97m(r0,t0)  SWE: time step: 700, sim. time: 37min 12s 494ms, dt: 3s 114ms 403µs, cells: 18984
+[97m(r0,t0)  SWE: time step: 701, sim. time: 37min 15s 609ms, dt: 3s 114ms 403µs, cells: 18989
+[97m(r0,t0)  SWE: time step: 702, sim. time: 37min 18s 723ms, dt: 3s 114ms 403µs, cells: 19021
+[97m(r0,t0)  SWE: time step: 703, sim. time: 37min 21s 838ms, dt: 3s 114ms 403µs, cells: 19052
+[97m(r0,t0)  SWE: time step: 704, sim. time: 37min 24s 952ms, dt: 3s 114ms 403µs, cells: 19058
+[97m(r0,t0)  SWE: time step: 705, sim. time: 37min 28s 66ms, dt: 3s 114ms 402µs, cells: 19073
+[97m(r0,t0)  SWE: time step: 706, sim. time: 37min 31s 181ms, dt: 3s 114ms 402µs, cells: 19106
+[97m(r0,t0)  SWE: time step: 707, sim. time: 37min 34s 295ms, dt: 3s 114ms 402µs, cells: 19130
+[97m(r0,t0)  SWE: time step: 708, sim. time: 37min 37s 410ms, dt: 3s 114ms 402µs, cells: 19149
+[97m(r0,t0)  SWE: time step: 709, sim. time: 37min 40s 524ms, dt: 3s 114ms 401µs, cells: 19154
+[97m(r0,t0)  SWE: time step: 710, sim. time: 37min 43s 638ms, dt: 3s 114ms 401µs, cells: 19187
+[97m(r0,t0)  SWE: time step: 711, sim. time: 37min 46s 753ms, dt: 3s 114ms 401µs, cells: 19211
+[97m(r0,t0)  SWE: time step: 712, sim. time: 37min 49s 867ms, dt: 3s 114ms 401µs, cells: 19238
+[97m(r0,t0)  SWE: time step: 713, sim. time: 37min 52s 982ms, dt: 3s 114ms 400µs, cells: 19246
+[97m(r0,t0)  SWE: time step: 714, sim. time: 37min 56s 96ms, dt: 3s 114ms 400µs, cells: 19252
+[97m(r0,t0)  SWE: time step: 715, sim. time: 37min 59s 210ms, dt: 3s 114ms 400µs, cells: 19277
+[97m(r0,t0)  SWE: time step: 716, sim. time: 38min 2s 325ms, dt: 3s 114ms 400µs, cells: 19304
+[97m(r0,t0)  SWE: output step: 19
+[97m(r0,t0)  SWE: output step: 19
+[97m(r0,t0)  SWE: time step: 717, sim. time: 38min 5s 439ms, dt: 3s 114ms 399µs, cells: 19331
+[97m(r0,t0)  SWE: time step: 718, sim. time: 38min 8s 554ms, dt: 3s 114ms 399µs, cells: 19351
+[97m(r0,t0)  SWE: time step: 719, sim. time: 38min 11s 668ms, dt: 3s 114ms 399µs, cells: 19385
+[97m(r0,t0)  SWE: time step: 720, sim. time: 38min 14s 782ms, dt: 3s 114ms 399µs, cells: 19419
+[97m(r0,t0)  SWE: time step: 721, sim. time: 38min 17s 897ms, dt: 3s 114ms 399µs, cells: 19452
+[97m(r0,t0)  SWE: time step: 722, sim. time: 38min 21s 11ms, dt: 3s 114ms 398µs, cells: 19477
+[97m(r0,t0)  SWE: time step: 723, sim. time: 38min 24s 126ms, dt: 3s 95ms 363µs, cells: 19483
+[97m(r0,t0)  SWE: time step: 724, sim. time: 38min 27s 221ms, dt: 3s 95ms 362µs, cells: 19496
+[97m(r0,t0)  SWE: time step: 725, sim. time: 38min 30s 316ms, dt: 3s 95ms 362µs, cells: 19505
+[97m(r0,t0)  SWE: time step: 726, sim. time: 38min 33s 412ms, dt: 3s 95ms 361µs, cells: 19529
+[97m(r0,t0)  SWE: time step: 727, sim. time: 38min 36s 507ms, dt: 3s 95ms 361µs, cells: 19563
+[97m(r0,t0)  SWE: time step: 728, sim. time: 38min 39s 602ms, dt: 3s 95ms 361µs, cells: 19597
+[97m(r0,t0)  SWE: time step: 729, sim. time: 38min 42s 698ms, dt: 3s 95ms 361µs, cells: 19613
+[97m(r0,t0)  SWE: time step: 730, sim. time: 38min 45s 793ms, dt: 3s 95ms 360µs, cells: 19624
+[97m(r0,t0)  SWE: time step: 731, sim. time: 38min 48s 888ms, dt: 3s 95ms 360µs, cells: 19632
+[97m(r0,t0)  SWE: time step: 732, sim. time: 38min 51s 984ms, dt: 3s 95ms 360µs, cells: 19652
+[97m(r0,t0)  SWE: time step: 733, sim. time: 38min 55s 79ms, dt: 3s 95ms 360µs, cells: 19679
+[97m(r0,t0)  SWE: time step: 734, sim. time: 38min 58s 175ms, dt: 3s 95ms 360µs, cells: 19683
+[97m(r0,t0)  SWE: time step: 735, sim. time: 39min 1s 270ms, dt: 3s 95ms 359µs, cells: 19706
+[97m(r0,t0)  SWE: time step: 736, sim. time: 39min 4s 365ms, dt: 3s 95ms 359µs, cells: 19719
+[97m(r0,t0)  SWE: time step: 737, sim. time: 39min 7s 461ms, dt: 3s 95ms 359µs, cells: 19739
+[97m(r0,t0)  SWE: time step: 738, sim. time: 39min 10s 556ms, dt: 3s 95ms 359µs, cells: 19773
+[97m(r0,t0)  SWE: time step: 739, sim. time: 39min 13s 651ms, dt: 3s 95ms 359µs, cells: 19793
+[97m(r0,t0)  Rank            1  [STATUS            2 ]: MPI_Probe_adapt    4.3869018554687500E-005  seconds
+ SWE: time step: 740, sim. time: 39min 16s 747ms, dt: 3s 95ms 359µs, cells: 19808
+ Rank            0  [STATUS            2 ]: MPI_Probe_adapt    2.2649765014648438E-005  seconds
+[97m(r0,t0)  SWE: time step: 741, sim. time: 39min 19s 842ms, dt: 3s 95ms 358µs, cells: 19831
+[97m(r0,t0)  SWE: time step: 742, sim. time: 39min 22s 937ms, dt: 3s 95ms 358µs, cells: 19857
+[97m(r0,t0)  SWE: time step: 743, sim. time: 39min 26s 33ms, dt: 3s 95ms 358µs, cells: 19879
+[97m(r0,t0)  SWE: time step: 744, sim. time: 39min 29s 128ms, dt: 3s 95ms 358µs, cells: 19900
+[97m(r0,t0)  SWE: time step: 745, sim. time: 39min 32s 223ms, dt: 3s 95ms 358µs, cells: 19920
+[97m(r0,t0)  SWE: time step: 746, sim. time: 39min 35s 319ms, dt: 3s 95ms 357µs, cells: 19945
+[97m(r0,t0)  SWE: time step: 747, sim. time: 39min 38s 414ms, dt: 3s 95ms 357µs, cells: 19969
+[97m(r0,t0)  SWE: time step: 748, sim. time: 39min 41s 510ms, dt: 3s 95ms 357µs, cells: 19982
+[97m(r0,t0)  SWE: time step: 749, sim. time: 39min 44s 605ms, dt: 3s 95ms 357µs, cells: 20001
+[97m(r0,t0)  SWE: time step: 750, sim. time: 39min 47s 700ms, dt: 3s 95ms 357µs, cells: 20026
+[97m(r0,t0)  SWE: time step: 751, sim. time: 39min 50s 796ms, dt: 3s 95ms 356µs, cells: 20033
+[97m(r0,t0)  SWE: time step: 752, sim. time: 39min 53s 891ms, dt: 3s 95ms 356µs, cells: 20055
+[97m(r0,t0)  SWE: time step: 753, sim. time: 39min 56s 986ms, dt: 3s 95ms 356µs, cells: 20085
+[97m(r0,t0)  SWE: time step: 754, sim. time: 40min 82ms 211µs, dt: 3s 95ms 356µs, cells: 20108
+[97m(r0,t0)  SWE: output step: 20
+[97m(r0,t0)  SWE: output step: 20
+[97m(r0,t0)  SWE: time step: 755, sim. time: 40min 3s 177ms, dt: 3s 95ms 356µs, cells: 20123
+[97m(r0,t0)  SWE: time step: 756, sim. time: 40min 6s 272ms, dt: 3s 95ms 355µs, cells: 20150
+[97m(r0,t0)  SWE: time step: 757, sim. time: 40min 9s 368ms, dt: 3s 95ms 355µs, cells: 20165
+[97m(r0,t0)  SWE: time step: 758, sim. time: 40min 12s 463ms, dt: 3s 95ms 355µs, cells: 20192
+[97m(r0,t0)  SWE: time step: 759, sim. time: 40min 15s 558ms, dt: 3s 95ms 355µs, cells: 20218
+[97m(r0,t0)  SWE: time step: 760, sim. time: 40min 18s 654ms, dt: 3s 95ms 354µs, cells: 20239
+[97m(r0,t0)  SWE: time step: 761, sim. time: 40min 21s 749ms, dt: 3s 95ms 354µs, cells: 20250
+[97m(r0,t0)  SWE: time step: 762, sim. time: 40min 24s 845ms, dt: 3s 95ms 354µs, cells: 20264
+[97m(r0,t0)  SWE: time step: 763, sim. time: 40min 27s 940ms, dt: 3s 95ms 354µs, cells: 20278
+[97m(r0,t0)  SWE: time step: 764, sim. time: 40min 31s 35ms, dt: 3s 95ms 354µs, cells: 20298
+[97m(r0,t0)  SWE: time step: 765, sim. time: 40min 34s 131ms, dt: 3s 95ms 353µs, cells: 20320
+[97m(r0,t0)  SWE: time step: 766, sim. time: 40min 37s 226ms, dt: 3s 95ms 353µs, cells: 20329
+[97m(r0,t0)  SWE: time step: 767, sim. time: 40min 40s 321ms, dt: 3s 95ms 353µs, cells: 20352
+[97m(r0,t0)  SWE: time step: 768, sim. time: 40min 43s 417ms, dt: 3s 95ms 353µs, cells: 20380
+[97m(r0,t0)  SWE: time step: 769, sim. time: 40min 46s 512ms, dt: 3s 95ms 353µs, cells: 20419
+[97m(r0,t0)  SWE: time step: 770, sim. time: 40min 49s 607ms, dt: 3s 95ms 352µs, cells: 20448
+[97m(r0,t0)  SWE: time step: 771, sim. time: 40min 52s 703ms, dt: 3s 95ms 352µs, cells: 20467
+[97m(r0,t0)  SWE: time step: 772, sim. time: 40min 55s 798ms, dt: 3s 95ms 352µs, cells: 20501
+[97m(r0,t0)  SWE: time step: 773, sim. time: 40min 58s 893ms, dt: 3s 95ms 352µs, cells: 20514
+[97m(r0,t0)  SWE: time step: 774, sim. time: 41min 1s 989ms, dt: 3s 95ms 351µs, cells: 20538
+[97m(r0,t0)  SWE: time step: 775, sim. time: 41min 5s 84ms, dt: 3s 95ms 351µs, cells: 20567
+[97m(r0,t0)  SWE: time step: 776, sim. time: 41min 8s 180ms, dt: 3s 95ms 351µs, cells: 20584
+[97m(r0,t0)  SWE: time step: 777, sim. time: 41min 11s 275ms, dt: 3s 95ms 351µs, cells: 20591
+[97m(r0,t0)  SWE: time step: 778, sim. time: 41min 14s 370ms, dt: 3s 95ms 351µs, cells: 20608
+[97m(r0,t0)  SWE: time step: 779, sim. time: 41min 17s 466ms, dt: 3s 95ms 350µs, cells: 20639
+[97m(r0,t0)  SWE: time step: 780, sim. time: 41min 20s 561ms, dt: 3s 95ms 350µs, cells: 20665
+[97m(r0,t0)  SWE: time step: 781, sim. time: 41min 23s 656ms, dt: 3s 95ms 350µs, cells: 20668
+[97m(r0,t0)  SWE: time step: 782, sim. time: 41min 26s 752ms, dt: 3s 95ms 350µs, cells: 20692
+[97m(r0,t0)  SWE: time step: 783, sim. time: 41min 29s 847ms, dt: 3s 95ms 349µs, cells: 20696
+[97m(r0,t0)  SWE: time step: 784, sim. time: 41min 32s 942ms, dt: 3s 95ms 349µs, cells: 20735
+[97m(r0,t0)  SWE: time step: 785, sim. time: 41min 36s 38ms, dt: 3s 95ms 349µs, cells: 20767
+[97m(r0,t0)  SWE: time step: 786, sim. time: 41min 39s 133ms, dt: 3s 95ms 349µs, cells: 20791
+[97m(r0,t0)  SWE: time step: 787, sim. time: 41min 42s 228ms, dt: 3s 95ms 349µs, cells: 20817
+[97m(r0,t0)  SWE: time step: 788, sim. time: 41min 45s 324ms, dt: 3s 95ms 348µs, cells: 20840
+[97m(r0,t0)  SWE: time step: 789, sim. time: 41min 48s 419ms, dt: 3s 95ms 348µs, cells: 20857
+[97m(r0,t0)  SWE: time step: 790, sim. time: 41min 51s 514ms, dt: 3s 95ms 348µs, cells: 20890
+[97m(r0,t0)  SWE: time step: 791, sim. time: 41min 54s 610ms, dt: 3s 95ms 348µs, cells: 20919
+[97m(r0,t0)  SWE: time step: 792, sim. time: 41min 57s 705ms, dt: 3s 95ms 347µs, cells: 20927
+[97m(r0,t0)  SWE: time step: 793, sim. time: 42min 800ms 945µs, dt: 3s 95ms 347µs, cells: 20951
+[97m(r0,t0)  SWE: output step: 21
+[97m(r0,t0)  SWE: output step: 21
+[97m(r0,t0)  SWE: time step: 794, sim. time: 42min 3s 896ms, dt: 3s 95ms 347µs, cells: 20976
+[97m(r0,t0)  SWE: time step: 795, sim. time: 42min 6s 991ms, dt: 3s 95ms 347µs, cells: 20998
+[97m(r0,t0)  SWE: time step: 796, sim. time: 42min 10s 86ms, dt: 3s 95ms 347µs, cells: 21022
+[97m(r0,t0)  SWE: time step: 797, sim. time: 42min 13s 182ms, dt: 3s 95ms 346µs, cells: 21035
+[97m(r0,t0)  SWE: time step: 798, sim. time: 42min 16s 277ms, dt: 3s 95ms 346µs, cells: 21055
+[97m(r0,t0)  SWE: time step: 799, sim. time: 42min 19s 373ms, dt: 3s 95ms 346µs, cells: 21078
+[97m(r0,t0)  SWE: time step: 800, sim. time: 42min 22s 468ms, dt: 3s 95ms 346µs, cells: 21087
+[97m(r0,t0)  SWE: time step: 801, sim. time: 42min 25s 563ms, dt: 3s 95ms 346µs, cells: 21103
+[97m(r0,t0)  SWE: time step: 802, sim. time: 42min 28s 659ms, dt: 3s 95ms 345µs, cells: 21118
+[97m(r0,t0)  SWE: time step: 803, sim. time: 42min 31s 754ms, dt: 3s 95ms 345µs, cells: 21142
+[97m(r0,t0)  SWE: time step: 804, sim. time: 42min 34s 849ms, dt: 3s 95ms 345µs, cells: 21143
+[97m(r0,t0)  SWE: time step: 805, sim. time: 42min 37s 945ms, dt: 3s 95ms 345µs, cells: 21168
+[97m(r0,t0)  SWE: time step: 806, sim. time: 42min 41s 40ms, dt: 3s 95ms 345µs, cells: 21184
+[97m(r0,t0)  SWE: time step: 807, sim. time: 42min 44s 135ms, dt: 3s 95ms 344µs, cells: 21194
+[97m(r0,t0)  SWE: time step: 808, sim. time: 42min 47s 231ms, dt: 3s 95ms 344µs, cells: 21222
+[97m(r0,t0)  SWE: time step: 809, sim. time: 42min 50s 326ms, dt: 3s 95ms 344µs, cells: 21226
+[97m(r0,t0)  SWE: time step: 810, sim. time: 42min 53s 421ms, dt: 3s 95ms 344µs, cells: 21255
+[97m(r0,t0)  SWE: time step: 811, sim. time: 42min 56s 517ms, dt: 3s 95ms 343µs, cells: 21271
+[97m(r0,t0)  SWE: time step: 812, sim. time: 42min 59s 612ms, dt: 3s 95ms 343µs, cells: 21295
+[97m(r0,t0)  SWE: time step: 813, sim. time: 43min 2s 707ms, dt: 3s 95ms 343µs, cells: 21324
+[97m(r0,t0)  SWE: time step: 814, sim. time: 43min 5s 803ms, dt: 3s 95ms 343µs, cells: 21345
+[97m(r0,t0)  SWE: time step: 815, sim. time: 43min 8s 898ms, dt: 3s 95ms 343µs, cells: 21366
+[97m(r0,t0)  SWE: time step: 816, sim. time: 43min 11s 993ms, dt: 3s 95ms 342µs, cells: 21383
+[97m(r0,t0)  SWE: time step: 817, sim. time: 43min 15s 89ms, dt: 3s 95ms 342µs, cells: 21383
+[97m(r0,t0)  SWE: time step: 818, sim. time: 43min 18s 184ms, dt: 3s 95ms 342µs, cells: 21402
+[97m(r0,t0)  SWE: time step: 819, sim. time: 43min 21s 279ms, dt: 3s 95ms 342µs, cells: 21424
+[97m(r0,t0)  SWE: time step: 820, sim. time: 43min 24s 375ms, dt: 3s 95ms 342µs, cells: 21433
+[97m(r0,t0)  SWE: time step: 821, sim. time: 43min 27s 470ms, dt: 3s 95ms 341µs, cells: 21461
+[97m(r0,t0)  SWE: time step: 822, sim. time: 43min 30s 565ms, dt: 3s 95ms 341µs, cells: 21501
+[97m(r0,t0)  SWE: time step: 823, sim. time: 43min 33s 661ms, dt: 3s 95ms 341µs, cells: 21528
+[97m(r0,t0)  SWE: time step: 824, sim. time: 43min 36s 756ms, dt: 3s 95ms 341µs, cells: 21554
+[97m(r0,t0)  SWE: time step: 825, sim. time: 43min 39s 851ms, dt: 3s 95ms 341µs, cells: 21597
+[97m(r0,t0)  SWE: time step: 826, sim. time: 43min 42s 947ms, dt: 3s 95ms 340µs, cells: 21621
+[97m(r0,t0)  SWE: time step: 827, sim. time: 43min 46s 42ms, dt: 3s 95ms 340µs, cells: 21636
+[97m(r0,t0)  SWE: time step: 828, sim. time: 43min 49s 137ms, dt: 3s 95ms 340µs, cells: 21663
+[97m(r0,t0)  SWE: time step: 829, sim. time: 43min 52s 233ms, dt: 3s 95ms 340µs, cells: 21678
+[97m(r0,t0)  SWE: time step: 830, sim. time: 43min 55s 328ms, dt: 3s 95ms 340µs, cells: 21704
+[97m(r0,t0)  SWE: time step: 831, sim. time: 43min 58s 424ms, dt: 3s 95ms 339µs, cells: 21731
+[97m(r0,t0)  SWE: time step: 832, sim. time: 44min 1s 519ms, dt: 3s 95ms 339µs, cells: 21750
+[97m(r0,t0)  SWE: output step: 22
+[97m(r0,t0)  SWE: output step: 22
+[97m(r0,t0)  SWE: time step: 833, sim. time: 44min 4s 614ms, dt: 3s 95ms 339µs, cells: 21779
+[97m(r0,t0)  SWE: time step: 834, sim. time: 44min 7s 710ms, dt: 3s 95ms 339µs, cells: 21786
+[97m(r0,t0)  SWE: time step: 835, sim. time: 44min 10s 805ms, dt: 3s 95ms 339µs, cells: 21795
+[97m(r0,t0)  SWE: time step: 836, sim. time: 44min 13s 900ms, dt: 3s 95ms 339µs, cells: 21791
+[97m(r0,t0)  SWE: time step: 837, sim. time: 44min 16s 996ms, dt: 3s 95ms 338µs, cells: 21819
+[97m(r0,t0)  SWE: time step: 838, sim. time: 44min 20s 91ms, dt: 3s 95ms 338µs, cells: 21856
+[97m(r0,t0)  SWE: time step: 839, sim. time: 44min 23s 186ms, dt: 3s 95ms 338µs, cells: 21884
+[97m(r0,t0)  SWE: time step: 840, sim. time: 44min 26s 282ms, dt: 3s 95ms 338µs, cells: 21920
+[97m(r0,t0)  SWE: time step: 841, sim. time: 44min 29s 377ms, dt: 3s 95ms 338µs, cells: 21945
+[97m(r0,t0)  SWE: time step: 842, sim. time: 44min 32s 472ms, dt: 3s 95ms 337µs, cells: 21977
+[97m(r0,t0)  SWE: time step: 843, sim. time: 44min 35s 568ms, dt: 3s 95ms 337µs, cells: 21984
+[97m(r0,t0)  SWE: time step: 844, sim. time: 44min 38s 663ms, dt: 3s 95ms 337µs, cells: 22009
+[97m(r0,t0)  SWE: time step: 845, sim. time: 44min 41s 758ms, dt: 3s 95ms 337µs, cells: 22044
+[97m(r0,t0)  SWE: time step: 846, sim. time: 44min 44s 854ms, dt: 3s 95ms 337µs, cells: 22063
+[97m(r0,t0)  SWE: time step: 847, sim. time: 44min 47s 949ms, dt: 3s 95ms 337µs, cells: 22069
+[97m(r0,t0)  SWE: time step: 848, sim. time: 44min 51s 44ms, dt: 3s 95ms 336µs, cells: 22075
+[97m(r0,t0)  SWE: time step: 849, sim. time: 44min 54s 140ms, dt: 3s 95ms 336µs, cells: 22074
+[97m(r0,t0)  SWE: time step: 850, sim. time: 44min 57s 235ms, dt: 3s 95ms 336µs, cells: 22106
+[97m(r0,t0)  SWE: time step: 851, sim. time: 45min 330ms 777µs, dt: 3s 95ms 336µs, cells: 22124
+[97m(r0,t0)  SWE: time step: 852, sim. time: 45min 3s 426ms, dt: 3s 95ms 336µs, cells: 22156
+[97m(r0,t0)  SWE: time step: 853, sim. time: 45min 6s 521ms, dt: 3s 95ms 336µs, cells: 22194
+[97m(r0,t0)  SWE: time step: 854, sim. time: 45min 9s 616ms, dt: 3s 95ms 336µs, cells: 22237
+[97m(r0,t0)  SWE: time step: 855, sim. time: 45min 12s 712ms, dt: 3s 95ms 335µs, cells: 22261
+[97m(r0,t0)  SWE: time step: 856, sim. time: 45min 15s 807ms, dt: 3s 95ms 335µs, cells: 22275
+[97m(r0,t0)  SWE: time step: 857, sim. time: 45min 18s 902ms, dt: 3s 95ms 335µs, cells: 22291
+[97m(r0,t0)  SWE: time step: 858, sim. time: 45min 21s 998ms, dt: 3s 95ms 335µs, cells: 22304
+[97m(r0,t0)  SWE: time step: 859, sim. time: 45min 25s 93ms, dt: 3s 95ms 335µs, cells: 22325
+[97m(r0,t0)  SWE: time step: 860, sim. time: 45min 28s 188ms, dt: 3s 95ms 335µs, cells: 22348
+[97m(r0,t0)  SWE: time step: 861, sim. time: 45min 31s 284ms, dt: 3s 95ms 335µs, cells: 22382
+[97m(r0,t0)  SWE: time step: 862, sim. time: 45min 34s 379ms, dt: 3s 95ms 334µs, cells: 22405
+[97m(r0,t0)  SWE: time step: 863, sim. time: 45min 37s 474ms, dt: 3s 95ms 334µs, cells: 22450
+[97m(r0,t0)  SWE: time step: 864, sim. time: 45min 40s 570ms, dt: 3s 95ms 334µs, cells: 22466
+[97m(r0,t0)  SWE: time step: 865, sim. time: 45min 43s 665ms, dt: 3s 95ms 334µs, cells: 22470
+[97m(r0,t0)  SWE: time step: 866, sim. time: 45min 46s 760ms, dt: 3s 95ms 334µs, cells: 22472
+[97m(r0,t0)  SWE: time step: 867, sim. time: 45min 49s 856ms, dt: 3s 95ms 334µs, cells: 22484
+[97m(r0,t0)  SWE: time step: 868, sim. time: 45min 52s 951ms, dt: 3s 95ms 334µs, cells: 22496
+[97m(r0,t0)  SWE: time step: 869, sim. time: 45min 56s 46ms, dt: 3s 95ms 334µs, cells: 22528
+[97m(r0,t0)  SWE: time step: 870, sim. time: 45min 59s 142ms, dt: 3s 95ms 333µs, cells: 22548
+[97m(r0,t0)  SWE: time step: 871, sim. time: 46min 2s 237ms, dt: 3s 95ms 333µs, cells: 22570
+[97m(r0,t0)  SWE: output step: 23
+[97m(r0,t0)  SWE: output step: 23
+[97m(r0,t0)  SWE: time step: 872, sim. time: 46min 5s 332ms, dt: 3s 95ms 333µs, cells: 22603
+[97m(r0,t0)  SWE: time step: 873, sim. time: 46min 8s 428ms, dt: 3s 95ms 333µs, cells: 22614
+[97m(r0,t0)  SWE: time step: 874, sim. time: 46min 11s 523ms, dt: 3s 95ms 333µs, cells: 22620
+[97m(r0,t0)  SWE: time step: 875, sim. time: 46min 14s 618ms, dt: 3s 95ms 333µs, cells: 22653
+[97m(r0,t0)  SWE: time step: 876, sim. time: 46min 17s 714ms, dt: 3s 95ms 333µs, cells: 22679
+[97m(r0,t0)  SWE: time step: 877, sim. time: 46min 20s 809ms, dt: 3s 95ms 333µs, cells: 22709
+[97m(r0,t0)  SWE: time step: 878, sim. time: 46min 23s 904ms, dt: 3s 95ms 333µs, cells: 22725
+[97m(r0,t0)  SWE: time step: 879, sim. time: 46min 27s 149µs, dt: 3s 95ms 333µs, cells: 22757
+[97m(r0,t0)  SWE: time step: 880, sim. time: 46min 30s 95ms, dt: 3s 95ms 333µs, cells: 22783
+[97m(r0,t0)  SWE: time step: 881, sim. time: 46min 33s 190ms, dt: 3s 95ms 333µs, cells: 22795
+[97m(r0,t0)  SWE: time step: 882, sim. time: 46min 36s 286ms, dt: 3s 103ms 940µs, cells: 22823
+[97m(r0,t0)  SWE: time step: 883, sim. time: 46min 39s 390ms, dt: 3s 103ms 939µs, cells: 22854
+[97m(r0,t0)  SWE: time step: 884, sim. time: 46min 42s 494ms, dt: 3s 103ms 939µs, cells: 22880
+[97m(r0,t0)  SWE: time step: 885, sim. time: 46min 45s 597ms, dt: 3s 103ms 939µs, cells: 22903
+[97m(r0,t0)  SWE: time step: 886, sim. time: 46min 48s 701ms, dt: 3s 103ms 939µs, cells: 22926
+[97m(r0,t0)  SWE: time step: 887, sim. time: 46min 51s 805ms, dt: 3s 103ms 939µs, cells: 22951
+[97m(r0,t0)  SWE: time step: 888, sim. time: 46min 54s 909ms, dt: 3s 103ms 939µs, cells: 22958
+[97m(r0,t0)  SWE: time step: 889, sim. time: 46min 58s 13ms, dt: 3s 103ms 939µs, cells: 22970
+[97m(r0,t0)  SWE: time step: 890, sim. time: 47min 1s 117ms, dt: 3s 103ms 938µs, cells: 22979
+[97m(r0,t0)  SWE: time step: 891, sim. time: 47min 4s 221ms, dt: 3s 103ms 938µs, cells: 23009
+[97m(r0,t0)  SWE: time step: 892, sim. time: 47min 7s 325ms, dt: 3s 103ms 938µs, cells: 23023
+[97m(r0,t0)  SWE: time step: 893, sim. time: 47min 10s 429ms, dt: 3s 103ms 938µs, cells: 23031
+[97m(r0,t0)  SWE: time step: 894, sim. time: 47min 13s 533ms, dt: 3s 103ms 938µs, cells: 23032
+[97m(r0,t0)  SWE: time step: 895, sim. time: 47min 16s 637ms, dt: 3s 103ms 938µs, cells: 23068
+[97m(r0,t0)  SWE: time step: 896, sim. time: 47min 19s 741ms, dt: 3s 103ms 938µs, cells: 23082
+[97m(r0,t0)  SWE: time step: 897, sim. time: 47min 22s 845ms, dt: 3s 103ms 938µs, cells: 23082
+[97m(r0,t0)  SWE: time step: 898, sim. time: 47min 25s 949ms, dt: 3s 103ms 937µs, cells: 23103
+[97m(r0,t0)  SWE: time step: 899, sim. time: 47min 29s 53ms, dt: 3s 103ms 937µs, cells: 23139
+[97m(r0,t0)  SWE: time step: 900, sim. time: 47min 32s 157ms, dt: 3s 103ms 937µs, cells: 23155
+[97m(r0,t0)  SWE: time step: 901, sim. time: 47min 35s 260ms, dt: 3s 103ms 937µs, cells: 23174
+[97m(r0,t0)  SWE: time step: 902, sim. time: 47min 38s 364ms, dt: 3s 103ms 937µs, cells: 23196
+[97m(r0,t0)  SWE: time step: 903, sim. time: 47min 41s 468ms, dt: 3s 103ms 937µs, cells: 23222
+[97m(r0,t0)  SWE: time step: 904, sim. time: 47min 44s 572ms, dt: 3s 103ms 937µs, cells: 23225
+[97m(r0,t0)  SWE: time step: 905, sim. time: 47min 47s 676ms, dt: 3s 103ms 937µs, cells: 23245
+[97m(r0,t0)  SWE: time step: 906, sim. time: 47min 50s 780ms, dt: 3s 103ms 937µs, cells: 23275
+[97m(r0,t0)  SWE: time step: 907, sim. time: 47min 53s 884ms, dt: 3s 119ms 420µs, cells: 23276
+[97m(r0,t0)  SWE: time step: 908, sim. time: 47min 57s 4ms, dt: 3s 119ms 420µs, cells: 23316
+[97m(r0,t0)  SWE: time step: 909, sim. time: 48min 123ms 451µs, dt: 3s 119ms 420µs, cells: 23325
+[97m(r0,t0)  SWE: output step: 24
+[97m(r0,t0)  SWE: output step: 24
+[97m(r0,t0)  SWE: time step: 910, sim. time: 48min 3s 242ms, dt: 3s 119ms 421µs, cells: 23331
+[97m(r0,t0)  SWE: time step: 911, sim. time: 48min 6s 362ms, dt: 3s 119ms 421µs, cells: 23331
+[97m(r0,t0)  SWE: time step: 912, sim. time: 48min 9s 481ms, dt: 3s 119ms 422µs, cells: 23359
+[97m(r0,t0)  SWE: time step: 913, sim. time: 48min 12s 601ms, dt: 3s 119ms 422µs, cells: 23374
+[97m(r0,t0)  SWE: time step: 914, sim. time: 48min 15s 720ms, dt: 3s 119ms 422µs, cells: 23402
+[97m(r0,t0)  SWE: time step: 915, sim. time: 48min 18s 839ms, dt: 3s 119ms 423µs, cells: 23401
+[97m(r0,t0)  SWE: time step: 916, sim. time: 48min 21s 959ms, dt: 3s 119ms 423µs, cells: 23435
+[97m(r0,t0)  SWE: time step: 917, sim. time: 48min 25s 78ms, dt: 3s 119ms 424µs, cells: 23469
+[97m(r0,t0)  SWE: time step: 918, sim. time: 48min 28s 198ms, dt: 3s 119ms 424µs, cells: 23487
+[97m(r0,t0)  SWE: time step: 919, sim. time: 48min 31s 317ms, dt: 3s 119ms 424µs, cells: 23482
+[97m(r0,t0)  SWE: time step: 920, sim. time: 48min 34s 437ms, dt: 3s 114ms 393µs, cells: 23517
+[97m(r0,t0)  SWE: time step: 921, sim. time: 48min 37s 551ms, dt: 3s 114ms 393µs, cells: 23544
+[97m(r0,t0)  SWE: time step: 922, sim. time: 48min 40s 665ms, dt: 3s 114ms 393µs, cells: 23566
+[97m(r0,t0)  SWE: time step: 923, sim. time: 48min 43s 780ms, dt: 3s 114ms 393µs, cells: 23602
+[97m(r0,t0)  SWE: time step: 924, sim. time: 48min 46s 894ms, dt: 3s 114ms 393µs, cells: 23601
+[97m(r0,t0)  SWE: time step: 925, sim. time: 48min 50s 9ms, dt: 3s 114ms 394µs, cells: 23624
+[97m(r0,t0)  SWE: time step: 926, sim. time: 48min 53s 123ms, dt: 3s 114ms 394µs, cells: 23640
+[97m(r0,t0)  SWE: time step: 927, sim. time: 48min 56s 237ms, dt: 3s 114ms 394µs, cells: 23681
+[97m(r0,t0)  SWE: time step: 928, sim. time: 48min 59s 352ms, dt: 3s 114ms 395µs, cells: 23714
+[97m(r0,t0)  SWE: time step: 929, sim. time: 49min 2s 466ms, dt: 3s 114ms 395µs, cells: 23734
+[97m(r0,t0)  SWE: time step: 930, sim. time: 49min 5s 581ms, dt: 3s 114ms 396µs, cells: 23741
+[97m(r0,t0)  SWE: time step: 931, sim. time: 49min 8s 695ms, dt: 3s 114ms 396µs, cells: 23756
+[97m(r0,t0)  SWE: time step: 932, sim. time: 49min 11s 809ms, dt: 3s 114ms 397µs, cells: 23771
+[97m(r0,t0)  SWE: time step: 933, sim. time: 49min 14s 924ms, dt: 3s 114ms 397µs, cells: 23823
+[97m(r0,t0)  SWE: time step: 934, sim. time: 49min 18s 38ms, dt: 3s 114ms 397µs, cells: 23858
+[97m(r0,t0)  SWE: time step: 935, sim. time: 49min 21s 153ms, dt: 3s 114ms 398µs, cells: 23906
+[97m(r0,t0)  SWE: time step: 936, sim. time: 49min 24s 267ms, dt: 3s 114ms 398µs, cells: 23922
+[97m(r0,t0)  SWE: time step: 937, sim. time: 49min 27s 381ms, dt: 3s 114ms 399µs, cells: 23931
+[97m(r0,t0)  SWE: time step: 938, sim. time: 49min 30s 496ms, dt: 3s 114ms 399µs, cells: 23946
+[97m(r0,t0)  SWE: time step: 939, sim. time: 49min 33s 610ms, dt: 3s 114ms 399µs, cells: 23961
+[97m(r0,t0)  SWE: time step: 940, sim. time: 49min 36s 725ms, dt: 3s 114ms 400µs, cells: 23977
+[97m(r0,t0)  SWE: time step: 941, sim. time: 49min 39s 839ms, dt: 3s 114ms 400µs, cells: 23998
+[97m(r0,t0)  SWE: time step: 942, sim. time: 49min 42s 953ms, dt: 3s 114ms 401µs, cells: 24033
+[97m(r0,t0)  SWE: time step: 943, sim. time: 49min 46s 68ms, dt: 3s 114ms 401µs, cells: 24032
+[97m(r0,t0)  SWE: time step: 944, sim. time: 49min 49s 182ms, dt: 3s 114ms 401µs, cells: 24083
+[97m(r0,t0)  SWE: time step: 945, sim. time: 49min 52s 297ms, dt: 3s 114ms 402µs, cells: 24079
+[97m(r0,t0)  SWE: time step: 946, sim. time: 49min 55s 411ms, dt: 3s 114ms 402µs, cells: 24103
+[97m(r0,t0)  SWE: time step: 947, sim. time: 49min 58s 525ms, dt: 3s 114ms 403µs, cells: 24112
+[97m(r0,t0)  SWE: time step: 948, sim. time: 50min 1s 640ms, dt: 3s 114ms 403µs, cells: 24157
+[97m(r0,t0)  SWE: output step: 25
+[97m(r0,t0)  SWE: output step: 25
+[97m(r0,t0)  SWE: time step: 949, sim. time: 50min 4s 754ms, dt: 3s 114ms 403µs, cells: 24180
+[97m(r0,t0)  SWE: time step: 950, sim. time: 50min 7s 869ms, dt: 3s 114ms 404µs, cells: 24197
+[97m(r0,t0)  SWE: time step: 951, sim. time: 50min 10s 983ms, dt: 3s 114ms 404µs, cells: 24216
+[97m(r0,t0)  SWE: time step: 952, sim. time: 50min 14s 97ms, dt: 3s 114ms 405µs, cells: 24242
+[97m(r0,t0)  SWE: time step: 953, sim. time: 50min 17s 212ms, dt: 3s 114ms 405µs, cells: 24281
+[97m(r0,t0)  SWE: time step: 954, sim. time: 50min 20s 326ms, dt: 3s 114ms 406µs, cells: 24303
+[97m(r0,t0)  SWE: time step: 955, sim. time: 50min 23s 441ms, dt: 3s 114ms 406µs, cells: 24326
+[97m(r0,t0)  SWE: time step: 956, sim. time: 50min 26s 555ms, dt: 3s 114ms 406µs, cells: 24356
+[97m(r0,t0)  SWE: time step: 957, sim. time: 50min 29s 669ms, dt: 3s 114ms 407µs, cells: 24386
+[97m(r0,t0)  SWE: time step: 958, sim. time: 50min 32s 784ms, dt: 3s 114ms 407µs, cells: 24419
+[97m(r0,t0)  SWE: time step: 959, sim. time: 50min 35s 898ms, dt: 3s 114ms 408µs, cells: 24461
+[97m(r0,t0)  SWE: time step: 960, sim. time: 50min 39s 13ms, dt: 3s 114ms 408µs, cells: 24473
+[97m(r0,t0)  SWE: time step: 961, sim. time: 50min 42s 127ms, dt: 3s 114ms 408µs, cells: 24484
+[97m(r0,t0)  SWE: time step: 962, sim. time: 50min 45s 241ms, dt: 3s 114ms 409µs, cells: 24501
+[97m(r0,t0)  SWE: time step: 963, sim. time: 50min 48s 356ms, dt: 3s 114ms 409µs, cells: 24526
+[97m(r0,t0)  SWE: time step: 964, sim. time: 50min 51s 470ms, dt: 3s 114ms 410µs, cells: 24537
+[97m(r0,t0)  SWE: time step: 965, sim. time: 50min 54s 585ms, dt: 3s 114ms 410µs, cells: 24573
+[97m(r0,t0)  SWE: time step: 966, sim. time: 50min 57s 699ms, dt: 3s 114ms 410µs, cells: 24583
+[97m(r0,t0)  SWE: time step: 967, sim. time: 51min 813ms 977µs, dt: 3s 114ms 411µs, cells: 24614
+[97m(r0,t0)  SWE: time step: 968, sim. time: 51min 3s 928ms, dt: 3s 114ms 411µs, cells: 24655
+[97m(r0,t0)  SWE: time step: 969, sim. time: 51min 7s 42ms, dt: 3s 114ms 412µs, cells: 24680
+[97m(r0,t0)  SWE: time step: 970, sim. time: 51min 10s 157ms, dt: 3s 114ms 412µs, cells: 24712
+[97m(r0,t0)  SWE: time step: 971, sim. time: 51min 13s 271ms, dt: 3s 114ms 412µs, cells: 24717
+[97m(r0,t0)  SWE: time step: 972, sim. time: 51min 16s 386ms, dt: 3s 114ms 413µs, cells: 24742
+[97m(r0,t0)  SWE: time step: 973, sim. time: 51min 19s 500ms, dt: 3s 114ms 413µs, cells: 24784
+[97m(r0,t0)  SWE: time step: 974, sim. time: 51min 22s 614ms, dt: 3s 114ms 414µs, cells: 24791
+[97m(r0,t0)  SWE: time step: 975, sim. time: 51min 25s 729ms, dt: 3s 108ms 736µs, cells: 24806
+[97m(r0,t0)  SWE: time step: 976, sim. time: 51min 28s 838ms, dt: 3s 108ms 736µs, cells: 24832
+[97m(r0,t0)  SWE: time step: 977, sim. time: 51min 31s 946ms, dt: 3s 98ms 997µs, cells: 24849
+[97m(r0,t0)  SWE: time step: 978, sim. time: 51min 35s 45ms, dt: 3s 98ms 996µs, cells: 24862
+[97m(r0,t0)  SWE: time step: 979, sim. time: 51min 38s 144ms, dt: 3s 98ms 996µs, cells: 24898
+[97m(r0,t0)  SWE: time step: 980, sim. time: 51min 41s 243ms, dt: 3s 98ms 996µs, cells: 24908
+[97m(r0,t0)  SWE: time step: 981, sim. time: 51min 44s 342ms, dt: 3s 98ms 996µs, cells: 24929
+[97m(r0,t0)  SWE: time step: 982, sim. time: 51min 47s 441ms, dt: 3s 98ms 995µs, cells: 24951
+[97m(r0,t0)  SWE: time step: 983, sim. time: 51min 50s 540ms, dt: 3s 98ms 995µs, cells: 24971
+[97m(r0,t0)  SWE: time step: 984, sim. time: 51min 53s 639ms, dt: 3s 98ms 995µs, cells: 24999
+[97m(r0,t0)  SWE: time step: 985, sim. time: 51min 56s 738ms, dt: 3s 98ms 995µs, cells: 25015
+[97m(r0,t0)  SWE: time step: 986, sim. time: 51min 59s 837ms, dt: 3s 98ms 994µs, cells: 25031
+[97m(r0,t0)  SWE: time step: 987, sim. time: 52min 2s 936ms, dt: 3s 98ms 994µs, cells: 25055
+[97m(r0,t0)  SWE: output step: 26
+[97m(r0,t0)  SWE: output step: 26
+[97m(r0,t0)  SWE: time step: 988, sim. time: 52min 6s 35ms, dt: 3s 98ms 994µs, cells: 25089
+[97m(r0,t0)  SWE: time step: 989, sim. time: 52min 9s 134ms, dt: 3s 98ms 994µs, cells: 25125
+[97m(r0,t0)  SWE: time step: 990, sim. time: 52min 12s 233ms, dt: 3s 98ms 994µs, cells: 25138
+[97m(r0,t0)  SWE: time step: 991, sim. time: 52min 15s 332ms, dt: 3s 98ms 994µs, cells: 25168
+[97m(r0,t0)  SWE: time step: 992, sim. time: 52min 18s 431ms, dt: 3s 98ms 993µs, cells: 25192
+[97m(r0,t0)  SWE: time step: 993, sim. time: 52min 21s 530ms, dt: 3s 98ms 993µs, cells: 25243
+[97m(r0,t0)  SWE: time step: 994, sim. time: 52min 24s 629ms, dt: 3s 98ms 993µs, cells: 25261
+[97m(r0,t0)  SWE: time step: 995, sim. time: 52min 27s 728ms, dt: 3s 98ms 993µs, cells: 25272
+[97m(r0,t0)  SWE: time step: 996, sim. time: 52min 30s 827ms, dt: 3s 98ms 993µs, cells: 25309
+[97m(r0,t0)  SWE: time step: 997, sim. time: 52min 33s 926ms, dt: 3s 98ms 992µs, cells: 25330
+[97m(r0,t0)  SWE: time step: 998, sim. time: 52min 37s 25ms, dt: 3s 98ms 992µs, cells: 25349
+[97m(r0,t0)  SWE: time step: 999, sim. time: 52min 40s 124ms, dt: 3s 98ms 992µs, cells: 25386
+[97m(r0,t0)  SWE: time step: 1000, sim. time: 52min 43s 223ms, dt: 3s 98ms 992µs, cells: 25404
+[97m(r0,t0)  SWE: time step: 1001, sim. time: 52min 46s 322ms, dt: 3s 98ms 992µs, cells: 25417
+[97m(r0,t0)  SWE: time step: 1002, sim. time: 52min 49s 421ms, dt: 3s 98ms 991µs, cells: 25435
+[97m(r0,t0)  SWE: time step: 1003, sim. time: 52min 52s 520ms, dt: 3s 98ms 991µs, cells: 25460
+[97m(r0,t0)  SWE: time step: 1004, sim. time: 52min 55s 619ms, dt: 3s 98ms 991µs, cells: 25475
+[97m(r0,t0)  SWE: time step: 1005, sim. time: 52min 58s 718ms, dt: 3s 95ms 348µs, cells: 25485
+[97m(r0,t0)  SWE: time step: 1006, sim. time: 53min 1s 813ms, dt: 3s 95ms 349µs, cells: 25511
+[97m(r0,t0)  SWE: time step: 1007, sim. time: 53min 4s 909ms, dt: 3s 95ms 350µs, cells: 25522
+[97m(r0,t0)  SWE: time step: 1008, sim. time: 53min 8s 4ms, dt: 3s 95ms 351µs, cells: 25543
+[97m(r0,t0)  SWE: time step: 1009, sim. time: 53min 11s 99ms, dt: 3s 95ms 351µs, cells: 25567
+[97m(r0,t0)  SWE: time step: 1010, sim. time: 53min 14s 195ms, dt: 3s 95ms 352µs, cells: 25619
+[97m(r0,t0)  SWE: time step: 1011, sim. time: 53min 17s 290ms, dt: 3s 95ms 352µs, cells: 25670
+[97m(r0,t0)  SWE: time step: 1012, sim. time: 53min 20s 386ms, dt: 3s 95ms 353µs, cells: 25687
+[97m(r0,t0)  SWE: time step: 1013, sim. time: 53min 23s 481ms, dt: 3s 95ms 353µs, cells: 25732
+[97m(r0,t0)  SWE: time step: 1014, sim. time: 53min 26s 576ms, dt: 3s 95ms 353µs, cells: 25759
+[97m(r0,t0)  SWE: time step: 1015, sim. time: 53min 29s 672ms, dt: 3s 95ms 354µs, cells: 25789
+[97m(r0,t0)  SWE: time step: 1016, sim. time: 53min 32s 767ms, dt: 3s 95ms 354µs, cells: 25799
+[97m(r0,t0)  SWE: time step: 1017, sim. time: 53min 35s 862ms, dt: 3s 95ms 354µs, cells: 25808
+[97m(r0,t0)  SWE: time step: 1018, sim. time: 53min 38s 958ms, dt: 3s 95ms 355µs, cells: 25809
+[97m(r0,t0)  SWE: time step: 1019, sim. time: 53min 42s 53ms, dt: 3s 95ms 355µs, cells: 25826
+[97m(r0,t0)  SWE: time step: 1020, sim. time: 53min 45s 148ms, dt: 3s 95ms 356µs, cells: 25859
+[97m(r0,t0)  SWE: time step: 1021, sim. time: 53min 48s 244ms, dt: 3s 95ms 356µs, cells: 25879
+[97m(r0,t0)  SWE: time step: 1022, sim. time: 53min 51s 339ms, dt: 3s 95ms 356µs, cells: 25907
+[97m(r0,t0)  SWE: time step: 1023, sim. time: 53min 54s 434ms, dt: 3s 95ms 357µs, cells: 25904
+[97m(r0,t0)  SWE: time step: 1024, sim. time: 53min 57s 530ms, dt: 3s 95ms 357µs, cells: 25913
+[97m(r0,t0)  SWE: time step: 1025, sim. time: 54min 625ms 667µs, dt: 3s 95ms 357µs, cells: 25953
+[97m(r0,t0)  SWE: output step: 27
+[97m(r0,t0)  SWE: output step: 27
+[97m(r0,t0)  SWE: time step: 1026, sim. time: 54min 3s 721ms, dt: 3s 95ms 358µs, cells: 25992
+[97m(r0,t0)  SWE: time step: 1027, sim. time: 54min 6s 816ms, dt: 3s 95ms 358µs, cells: 25992
+[97m(r0,t0)  SWE: time step: 1028, sim. time: 54min 9s 911ms, dt: 3s 95ms 359µs, cells: 26021
+[97m(r0,t0)  SWE: time step: 1029, sim. time: 54min 13s 7ms, dt: 3s 95ms 359µs, cells: 26049
+[97m(r0,t0)  SWE: time step: 1030, sim. time: 54min 16s 102ms, dt: 3s 95ms 359µs, cells: 26077
+[97m(r0,t0)  SWE: time step: 1031, sim. time: 54min 19s 197ms, dt: 3s 95ms 360µs, cells: 26116
+[97m(r0,t0)  SWE: time step: 1032, sim. time: 54min 22s 293ms, dt: 3s 95ms 360µs, cells: 26132
+[97m(r0,t0)  SWE: time step: 1033, sim. time: 54min 25s 388ms, dt: 3s 95ms 361µs, cells: 26160
+[97m(r0,t0)  SWE: time step: 1034, sim. time: 54min 28s 483ms, dt: 3s 95ms 361µs, cells: 26156
+[97m(r0,t0)  SWE: time step: 1035, sim. time: 54min 31s 579ms, dt: 3s 95ms 361µs, cells: 26170
+[97m(r0,t0)  SWE: time step: 1036, sim. time: 54min 34s 674ms, dt: 3s 95ms 362µs, cells: 26187
+[97m(r0,t0)  SWE: time step: 1037, sim. time: 54min 37s 769ms, dt: 3s 95ms 362µs, cells: 26220
+[97m(r0,t0)  SWE: time step: 1038, sim. time: 54min 40s 865ms, dt: 3s 95ms 363µs, cells: 26262
+[97m(r0,t0)  SWE: time step: 1039, sim. time: 54min 43s 960ms, dt: 3s 95ms 363µs, cells: 26295
+[97m(r0,t0)  SWE: time step: 1040, sim. time: 54min 47s 56ms, dt: 3s 95ms 363µs, cells: 26313
+[97m(r0,t0)  SWE: time step: 1041, sim. time: 54min 50s 151ms, dt: 3s 95ms 364µs, cells: 26337
+[97m(r0,t0)  SWE: time step: 1042, sim. time: 54min 53s 246ms, dt: 3s 95ms 364µs, cells: 26361
+[97m(r0,t0)  SWE: time step: 1043, sim. time: 54min 56s 342ms, dt: 3s 95ms 365µs, cells: 26372
+[97m(r0,t0)  SWE: time step: 1044, sim. time: 54min 59s 437ms, dt: 3s 95ms 365µs, cells: 26410
+[97m(r0,t0)  SWE: time step: 1045, sim. time: 55min 2s 532ms, dt: 3s 95ms 365µs, cells: 26404
+[97m(r0,t0)  SWE: time step: 1046, sim. time: 55min 5s 628ms, dt: 3s 95ms 366µs, cells: 26420
+[97m(r0,t0)  SWE: time step: 1047, sim. time: 55min 8s 723ms, dt: 3s 95ms 366µs, cells: 26444
+[97m(r0,t0)  SWE: time step: 1048, sim. time: 55min 11s 819ms, dt: 3s 95ms 367µs, cells: 26473
+[97m(r0,t0)  SWE: time step: 1049, sim. time: 55min 14s 914ms, dt: 3s 95ms 367µs, cells: 26479
+[97m(r0,t0)  SWE: time step: 1050, sim. time: 55min 18s 9ms, dt: 3s 95ms 367µs, cells: 26503
+[97m(r0,t0)  SWE: time step: 1051, sim. time: 55min 21s 105ms, dt: 3s 95ms 368µs, cells: 26515
+[97m(r0,t0)  SWE: time step: 1052, sim. time: 55min 24s 200ms, dt: 3s 95ms 368µs, cells: 26529
+[97m(r0,t0)  SWE: time step: 1053, sim. time: 55min 27s 295ms, dt: 3s 95ms 369µs, cells: 26533
+[97m(r0,t0)  SWE: time step: 1054, sim. time: 55min 30s 391ms, dt: 3s 95ms 369µs, cells: 26572
+[97m(r0,t0)  SWE: time step: 1055, sim. time: 55min 33s 486ms, dt: 3s 95ms 369µs, cells: 26592
+[97m(r0,t0)  SWE: time step: 1056, sim. time: 55min 36s 581ms, dt: 3s 95ms 370µs, cells: 26621
+[97m(r0,t0)  SWE: time step: 1057, sim. time: 55min 39s 677ms, dt: 3s 95ms 370µs, cells: 26630
+[97m(r0,t0)  SWE: time step: 1058, sim. time: 55min 42s 772ms, dt: 3s 95ms 371µs, cells: 26659
+[97m(r0,t0)  SWE: time step: 1059, sim. time: 55min 45s 868ms, dt: 3s 95ms 371µs, cells: 26684
+[97m(r0,t0)  SWE: time step: 1060, sim. time: 55min 48s 963ms, dt: 3s 95ms 371µs, cells: 26703
+[97m(r0,t0)  SWE: time step: 1061, sim. time: 55min 52s 58ms, dt: 3s 95ms 372µs, cells: 26733
+[97m(r0,t0)  SWE: time step: 1062, sim. time: 55min 55s 154ms, dt: 3s 95ms 372µs, cells: 26758
+[97m(r0,t0)  SWE: time step: 1063, sim. time: 55min 58s 249ms, dt: 3s 95ms 373µs, cells: 26785
+[97m(r0,t0)  SWE: time step: 1064, sim. time: 56min 1s 344ms, dt: 3s 95ms 373µs, cells: 26815
+[97m(r0,t0)  SWE: output step: 28
+[97m(r0,t0)  SWE: output step: 28
+[97m(r0,t0)  SWE: time step: 1065, sim. time: 56min 4s 440ms, dt: 3s 95ms 373µs, cells: 26833
+[97m(r0,t0)  SWE: time step: 1066, sim. time: 56min 7s 535ms, dt: 3s 95ms 374µs, cells: 26855
+[97m(r0,t0)  SWE: time step: 1067, sim. time: 56min 10s 631ms, dt: 3s 95ms 374µs, cells: 26875
+[97m(r0,t0)  SWE: time step: 1068, sim. time: 56min 13s 726ms, dt: 3s 95ms 375µs, cells: 26877
+[97m(r0,t0)  SWE: time step: 1069, sim. time: 56min 16s 821ms, dt: 3s 95ms 375µs, cells: 26872
+[97m(r0,t0)  SWE: time step: 1070, sim. time: 56min 19s 917ms, dt: 3s 95ms 375µs, cells: 26908
+[97m(r0,t0)  SWE: time step: 1071, sim. time: 56min 23s 12ms, dt: 3s 95ms 376µs, cells: 26913
+[97m(r0,t0)  SWE: time step: 1072, sim. time: 56min 26s 107ms, dt: 3s 95ms 376µs, cells: 26932
+[97m(r0,t0)  SWE: time step: 1073, sim. time: 56min 29s 203ms, dt: 3s 95ms 377µs, cells: 26948
+[97m(r0,t0)  SWE: time step: 1074, sim. time: 56min 32s 298ms, dt: 3s 95ms 377µs, cells: 26962
+[97m(r0,t0)  SWE: time step: 1075, sim. time: 56min 35s 394ms, dt: 3s 95ms 377µs, cells: 26976
+[97m(r0,t0)  SWE: time step: 1076, sim. time: 56min 38s 489ms, dt: 3s 95ms 378µs, cells: 27001
+[97m(r0,t0)  SWE: time step: 1077, sim. time: 56min 41s 584ms, dt: 3s 95ms 378µs, cells: 27027
+[97m(r0,t0)  SWE: time step: 1078, sim. time: 56min 44s 680ms, dt: 3s 95ms 379µs, cells: 27037
+[97m(r0,t0)  SWE: time step: 1079, sim. time: 56min 47s 775ms, dt: 3s 95ms 379µs, cells: 27040
+[97m(r0,t0)  SWE: time step: 1080, sim. time: 56min 50s 870ms, dt: 3s 95ms 379µs, cells: 27051
+[97m(r0,t0)  SWE: time step: 1081, sim. time: 56min 53s 966ms, dt: 3s 95ms 380µs, cells: 27089
+[97m(r0,t0)  SWE: time step: 1082, sim. time: 56min 57s 61ms, dt: 3s 95ms 380µs, cells: 27103
+[97m(r0,t0)  SWE: time step: 1083, sim. time: 57min 157ms 88µs, dt: 3s 95ms 381µs, cells: 27122
+[97m(r0,t0)  SWE: time step: 1084, sim. time: 57min 3s 252ms, dt: 3s 95ms 381µs, cells: 27137
+[97m(r0,t0)  SWE: time step: 1085, sim. time: 57min 6s 347ms, dt: 3s 95ms 381µs, cells: 27169
+[97m(r0,t0)  SWE: time step: 1086, sim. time: 57min 9s 443ms, dt: 3s 95ms 382µs, cells: 27191
+[97m(r0,t0)  SWE: time step: 1087, sim. time: 57min 12s 538ms, dt: 3s 95ms 382µs, cells: 27207
+[97m(r0,t0)  SWE: time step: 1088, sim. time: 57min 15s 633ms, dt: 3s 95ms 383µs, cells: 27222
+[97m(r0,t0)  SWE: time step: 1089, sim. time: 57min 18s 729ms, dt: 3s 95ms 383µs, cells: 27210
+[97m(r0,t0)  SWE: time step: 1090, sim. time: 57min 21s 824ms, dt: 3s 95ms 383µs, cells: 27224
+[97m(r0,t0)  SWE: time step: 1091, sim. time: 57min 24s 920ms, dt: 3s 95ms 384µs, cells: 27222
+[97m(r0,t0)  SWE: time step: 1092, sim. time: 57min 28s 15ms, dt: 3s 95ms 384µs, cells: 27271
+[97m(r0,t0)  SWE: time step: 1093, sim. time: 57min 31s 110ms, dt: 3s 95ms 384µs, cells: 27314
+[97m(r0,t0)  SWE: time step: 1094, sim. time: 57min 34s 206ms, dt: 3s 95ms 385µs, cells: 27322
+[97m(r0,t0)  SWE: time step: 1095, sim. time: 57min 37s 301ms, dt: 3s 95ms 385µs, cells: 27364
+[97m(r0,t0)  SWE: time step: 1096, sim. time: 57min 40s 397ms, dt: 3s 95ms 386µs, cells: 27383
+[97m(r0,t0)  SWE: time step: 1097, sim. time: 57min 43s 492ms, dt: 3s 95ms 386µs, cells: 27404
+[97m(r0,t0)  SWE: time step: 1098, sim. time: 57min 46s 587ms, dt: 3s 95ms 386µs, cells: 27436
+[97m(r0,t0)  SWE: time step: 1099, sim. time: 57min 49s 683ms, dt: 3s 95ms 387µs, cells: 27436
+[97m(r0,t0)  SWE: time step: 1100, sim. time: 57min 52s 778ms, dt: 3s 95ms 387µs, cells: 27445
+[97m(r0,t0)  SWE: time step: 1101, sim. time: 57min 55s 874ms, dt: 3s 95ms 387µs, cells: 27472
+[97m(r0,t0)  SWE: time step: 1102, sim. time: 57min 58s 969ms, dt: 3s 95ms 388µs, cells: 27506
+[97m(r0,t0)  SWE: time step: 1103, sim. time: 58min 2s 64ms, dt: 3s 95ms 388µs, cells: 27545
+[97m(r0,t0)  SWE: output step: 29
+[97m(r0,t0)  SWE: output step: 29
+[97m(r0,t0)  SWE: time step: 1104, sim. time: 58min 5s 160ms, dt: 3s 95ms 388µs, cells: 27568
+[97m(r0,t0)  SWE: time step: 1105, sim. time: 58min 8s 255ms, dt: 3s 95ms 389µs, cells: 27588
+ Rank            0  [STATUS            2 ]: MPI_Probe_adapt    1.6212463378906250E-005  seconds
+ Rank            1  [STATUS            2 ]: MPI_Probe_adapt    3.0279159545898438E-005  seconds
+[97m(r0,t0)  SWE: time step: 1106, sim. time: 58min 11s 350ms, dt: 3s 95ms 389µs, cells: 27608
+[97m(r0,t0)  SWE: time step: 1107, sim. time: 58min 14s 446ms, dt: 3s 95ms 390µs, cells: 27635
+[97m(r0,t0)  SWE: time step: 1108, sim. time: 58min 17s 541ms, dt: 3s 95ms 390µs, cells: 27651
+[97m(r0,t0)  SWE: time step: 1109, sim. time: 58min 20s 637ms, dt: 3s 95ms 390µs, cells: 27660
+[97m(r0,t0)  SWE: time step: 1110, sim. time: 58min 23s 732ms, dt: 3s 95ms 391µs, cells: 27685
+[97m(r0,t0)  SWE: time step: 1111, sim. time: 58min 26s 827ms, dt: 3s 95ms 391µs, cells: 27695
+[97m(r0,t0)  SWE: time step: 1112, sim. time: 58min 29s 923ms, dt: 3s 95ms 391µs, cells: 27730
+[97m(r0,t0)  SWE: time step: 1113, sim. time: 58min 33s 18ms, dt: 3s 95ms 392µs, cells: 27747
+[97m(r0,t0)  SWE: time step: 1114, sim. time: 58min 36s 114ms, dt: 3s 95ms 392µs, cells: 27781
+[97m(r0,t0)  SWE: time step: 1115, sim. time: 58min 39s 209ms, dt: 3s 95ms 392µs, cells: 27771
+[97m(r0,t0)  SWE: time step: 1116, sim. time: 58min 42s 304ms, dt: 3s 95ms 393µs, cells: 27787
+[97m(r0,t0)  SWE: time step: 1117, sim. time: 58min 45s 400ms, dt: 3s 95ms 393µs, cells: 27793
+[97m(r0,t0)  SWE: time step: 1118, sim. time: 58min 48s 495ms, dt: 3s 95ms 393µs, cells: 27795
+[97m(r0,t0)  SWE: time step: 1119, sim. time: 58min 51s 591ms, dt: 3s 95ms 394µs, cells: 27828
+[97m(r0,t0)  SWE: time step: 1120, sim. time: 58min 54s 686ms, dt: 3s 95ms 394µs, cells: 27859
+[97m(r0,t0)  SWE: time step: 1121, sim. time: 58min 57s 781ms, dt: 3s 95ms 394µs, cells: 27886
+[97m(r0,t0)  SWE: time step: 1122, sim. time: 59min 877ms 226µs, dt: 3s 95ms 395µs, cells: 27899
+[97m(r0,t0)  SWE: time step: 1123, sim. time: 59min 3s 972ms, dt: 3s 95ms 395µs, cells: 27897
+[97m(r0,t0)  SWE: time step: 1124, sim. time: 59min 7s 68ms, dt: 3s 95ms 395µs, cells: 27910
+[97m(r0,t0)  SWE: time step: 1125, sim. time: 59min 10s 163ms, dt: 3s 95ms 396µs, cells: 27893
+[97m(r0,t0)  SWE: time step: 1126, sim. time: 59min 13s 258ms, dt: 3s 95ms 396µs, cells: 27901
+[97m(r0,t0)  SWE: time step: 1127, sim. time: 59min 16s 354ms, dt: 3s 95ms 396µs, cells: 27909
+[97m(r0,t0)  SWE: time step: 1128, sim. time: 59min 19s 449ms, dt: 3s 95ms 397µs, cells: 27930
+[97m(r0,t0)  SWE: time step: 1129, sim. time: 59min 22s 544ms, dt: 3s 95ms 397µs, cells: 27956
+[97m(r0,t0)  SWE: time step: 1130, sim. time: 59min 25s 640ms, dt: 3s 95ms 397µs, cells: 27954
+[97m(r0,t0)  SWE: time step: 1131, sim. time: 59min 28s 735ms, dt: 3s 95ms 397µs, cells: 27968
+[97m(r0,t0)  SWE: time step: 1132, sim. time: 59min 31s 831ms, dt: 3s 95ms 398µs, cells: 27984
+[97m(r0,t0)  SWE: time step: 1133, sim. time: 59min 34s 926ms, dt: 3s 95ms 398µs, cells: 28026
+[97m(r0,t0)  SWE: time step: 1134, sim. time: 59min 38s 21ms, dt: 3s 95ms 398µs, cells: 28056
+[97m(r0,t0)  SWE: time step: 1135, sim. time: 59min 41s 117ms, dt: 3s 95ms 399µs, cells: 28086
+[97m(r0,t0)  SWE: time step: 1136, sim. time: 59min 44s 212ms, dt: 3s 95ms 399µs, cells: 28084
+[97m(r0,t0)  SWE: time step: 1137, sim. time: 59min 47s 308ms, dt: 3s 95ms 399µs, cells: 28098
+[97m(r0,t0)  SWE: time step: 1138, sim. time: 59min 50s 403ms, dt: 3s 95ms 399µs, cells: 28097
+[97m(r0,t0)  SWE: time step: 1139, sim. time: 59min 53s 498ms, dt: 3s 95ms 400µs, cells: 28121
+	MPIDI_PG_Create: Creating a process group of size 2; name: 3.0; at rank: 0
+	MPIDI_PG_Create: Creating a process group of size 2; name: 3.0; at rank: 0
+[97m(r0,t0)  sam(oa)²: Space filling curves and Adaptive Meshes for Oceanic and Other Applications
+[97m(r0,t0)  Scenario: SWE
+[97m(r0,t0)  OpenMP: No
+[97m(r0,t0)  MPI: Yes, ranks: 2
+[97m(r0,t0)  ASAGI: Yes, without NUMA support, mode: 2: no mpi
+[97m(r0,t0)  Debug Level: 1
+[97m(r0,t0)  Assertions: No
+[97m(r0,t0)  Precision: Double
+[97m(r0,t0)  Compiler: GNU
+[97m(r0,t0)  Sections per thread: 1
+[97m(r0,t0)  Adaptivity: min depth: 0, max depth: 20, start depth: 0
+[97m(r0,t0)  Load balancing: timed load estimate:  No, split sections: Yes, serial:  No
+[97m(r0,t0)  Load balancing: cell weight: 1.00, boundary weight: .00
+[97m(r0,t0)  Scenario: max time steps: -1, max time:  1.08E+04, output step:  1.20E+02
+[97m(r0,t0)  Scenario: output directory: /home/emily/nfs/workspace/isamoa/output/swe_impi
+[97m(r0,t0)  Scenario: courant number: .950
+[97m(r0,t0)  Scenario: Flux solver: Augmented Riemann
+[97m(r0,t0)  Scenario: Input data refinement: Integrate
+[97m(r0,t0)  SWE: bathymetry file: /home/emily/nfs/workspace/samoa-data/tohoku_static/bath_2014.nc, displacement file: /home/emily/nfs/workspace/samoa-data/tohoku_static/displ.nc
+[97m(r0,t0)  SWE: dry_tolerance:  1.0E-02
+[97m(r0,t0) 
+[97m(r0,t0)  SWE: time step: 1140, sim. time: 59min 56s 594ms, dt: 3s 95ms 400µs, cells: 28119
+[97m(r0,t0)  SWE: time step: 1141, sim. time: 59min 59s 689ms, dt: 3s 95ms 400µs, cells: 28164
+[97m(r0,t0)  SWE: time step: 1142, sim. time: 1h 2s 785ms, dt: 3s 95ms 401µs, cells: 28184
+[97m(r0,t0)  SWE: output step: 30
+[97m(r0,t0)  SWE: output step: 30
+[97m(r0,t0)  SWE: time step: 1143, sim. time: 1h 5s 880ms, dt: 3s 95ms 401µs, cells: 28206
+[97m(r0,t0)  SWE: time step: 1144, sim. time: 1h 8s 975ms, dt: 3s 95ms 401µs, cells: 28205
+[97m(r0,t0)  SWE: time step: 1145, sim. time: 1h 12s 71ms, dt: 3s 95ms 401µs, cells: 28233
+[97m(r0,t0)  SWE: time step: 1146, sim. time: 1h 15s 166ms, dt: 3s 95ms 402µs, cells: 28222
+[97m(r0,t0)  SWE: time step: 1147, sim. time: 1h 18s 262ms, dt: 3s 95ms 402µs, cells: 28240
+[97m(r0,t0)  SWE: time step: 1148, sim. time: 1h 21s 357ms, dt: 3s 95ms 402µs, cells: 28247
+[97m(r0,t0)  SWE: time step: 1149, sim. time: 1h 24s 453ms, dt: 3s 95ms 402µs, cells: 28267
+[97m(r0,t0)  SWE: time step: 1150, sim. time: 1h 27s 548ms, dt: 3s 95ms 403µs, cells: 28295
+[97m(r0,t0)  SWE: time step: 1151, sim. time: 1h 30s 643ms, dt: 3s 95ms 403µs, cells: 28298
+[97m(r0,t0)  SWE: time step: 1152, sim. time: 1h 33s 739ms, dt: 3s 95ms 403µs, cells: 28289
+[97m(r0,t0)  SWE: time step: 1153, sim. time: 1h 36s 834ms, dt: 3s 95ms 403µs, cells: 28315
+[97m(r0,t0)  SWE: time step: 1154, sim. time: 1h 39s 930ms, dt: 3s 95ms 403µs, cells: 28356
+[97m(r0,t0)  SWE: time step: 1155, sim. time: 1h 43s 25ms, dt: 3s 95ms 404µs, cells: 28354
+[97m(r0,t0)  SWE: time step: 1156, sim. time: 1h 46s 120ms, dt: 3s 95ms 404µs, cells: 28363
+[97m(r0,t0)  SWE: time step: 1157, sim. time: 1h 49s 216ms, dt: 3s 95ms 404µs, cells: 28380
+[97m(r0,t0)  SWE: time step: 1158, sim. time: 1h 52s 311ms, dt: 3s 95ms 404µs, cells: 28380
+[97m(r0,t0)  SWE: time step: 1159, sim. time: 1h 55s 407ms, dt: 3s 95ms 405µs, cells: 28392
+[97m(r0,t0)  Rank            1  [STATUS            3 ]: MPI_Probe_adapt    2.3126602172851562E-005  seconds
+ SWE: loaded /home/emily/nfs/workspace/samoa-data/tohoku_static/bath_2014.nc, domain: [-500250.00, 6500250.00] x [-2500250.00, 1500250.00]
+[97m(r0,t0)  SWE:  dx: 500.00 dy: 500.00
+[97m(r0,t0)  SWE: loaded /home/emily/nfs/workspace/samoa-data/tohoku_static/displ.nc, domain: [-250000.00, 250000.00] x [-400000.00, 400000.00]
+[97m(r0,t0)  SWE:  dx: 500.00 dy: 500.00
+[97m(r0,t0)  SWE: computational domain: [-500250.00, 6500250.00] x [-5500250.00, 1500250.00]
+ Rank            0  [STATUS            3 ]: MPI_Probe_adapt    1.8358230590820312E-005  seconds
+[97m(r0,t0)  SWE: time step: 1160, sim. time: 1h 58s 502ms, dt: 3s 95ms 405µs, cells: 28414
+[97m(r0,t0)  SWE: time step: 1161, sim. time: 1h 1min 1s, dt: 3s 95ms 405µs, cells: 28411
+[97m(r0,t0)  SWE: time step: 1162, sim. time: 1h 1min 4s, dt: 3s 95ms 405µs, cells: 28420
+[97m(r0,t0)  SWE: time step: 1163, sim. time: 1h 1min 7s, dt: 3s 95ms 405µs, cells: 28433
+[97m(r0,t0)  SWE: time step: 1164, sim. time: 1h 1min 10s, dt: 3s 95ms 406µs, cells: 28431
+[97m(r0,t0)  SWE: time step: 1165, sim. time: 1h 1min 13s, dt: 3s 95ms 406µs, cells: 28419
+[97m(r0,t0)  SWE: time step: 1166, sim. time: 1h 1min 17s, dt: 3s 95ms 406µs, cells: 28426
+[97m(r0,t0)  SWE: time step: 1167, sim. time: 1h 1min 20s, dt: 3s 95ms 406µs, cells: 28464
+[97m(r0,t0)  SWE: time step: 1168, sim. time: 1h 1min 23s, dt: 3s 95ms 406µs, cells: 28480
+[97m(r0,t0)  SWE: time step: 1169, sim. time: 1h 1min 26s, dt: 3s 95ms 406µs, cells: 28513
+[97m(r0,t0)  SWE: time step: 1170, sim. time: 1h 1min 29s, dt: 3s 95ms 407µs, cells: 28518
+[97m(r0,t0)  SWE: time step: 1171, sim. time: 1h 1min 32s, dt: 3s 95ms 407µs, cells: 28525
+[97m(r0,t0)  SWE: time step: 1172, sim. time: 1h 1min 35s, dt: 3s 95ms 407µs, cells: 28522
+[97m(r0,t0)  SWE: time step: 1173, sim. time: 1h 1min 38s, dt: 3s 95ms 407µs, cells: 28537
+[97m(r0,t0)  SWE: time step: 1174, sim. time: 1h 1min 41s, dt: 3s 95ms 407µs, cells: 28553
+[97m(r0,t0)  SWE: time step: 1175, sim. time: 1h 1min 44s, dt: 3s 95ms 407µs, cells: 28558
+[97m(r0,t0)  SWE: time step: 1176, sim. time: 1h 1min 48s, dt: 3s 95ms 408µs, cells: 28595
+[97m(r0,t0)  SWE: time step: 1177, sim. time: 1h 1min 51s, dt: 3s 95ms 408µs, cells: 28599
+[97m(r0,t0)  SWE: time step: 1178, sim. time: 1h 1min 54s, dt: 3s 95ms 408µs, cells: 28600
+[97m(r0,t0)  SWE: time step: 1179, sim. time: 1h 1min 57s, dt: 3s 95ms 408µs, cells: 28602
+[97m(r0,t0)  SWE: time step: 1180, sim. time: 1h 2min 410ms, dt: 3s 95ms 408µs, cells: 28624
+[97m(r0,t0)  SWE: output step: 31
+[97m(r0,t0)  SWE: output step: 31
+[97m(r0,t0)  SWE: time step: 1181, sim. time: 1h 2min 3s, dt: 3s 95ms 408µs, cells: 28644
+[97m(r0,t0)  SWE: time step: 1182, sim. time: 1h 2min 6s, dt: 3s 95ms 408µs, cells: 28658
+[97m(r0,t0)  SWE: time step: 1183, sim. time: 1h 2min 9s, dt: 3s 95ms 409µs, cells: 28652
+[97m(r0,t0)  SWE: time step: 1184, sim. time: 1h 2min 12s, dt: 3s 95ms 409µs, cells: 28696
+[97m(r0,t0)  SWE: time step: 1185, sim. time: 1h 2min 15s, dt: 3s 95ms 409µs, cells: 28714
+[97m(r0,t0)  SWE: time step: 1186, sim. time: 1h 2min 18s, dt: 3s 95ms 409µs, cells: 28735
+[97m(r0,t0)  SWE: time step: 1187, sim. time: 1h 2min 22s, dt: 3s 95ms 409µs, cells: 28775
+[97m(r0,t0)  SWE: time step: 1188, sim. time: 1h 2min 25s, dt: 3s 95ms 409µs, cells: 28784
+[97m(r0,t0)  SWE: time step: 1189, sim. time: 1h 2min 28s, dt: 3s 95ms 409µs, cells: 28822
+[97m(r0,t0)  SWE: time step: 1190, sim. time: 1h 2min 31s, dt: 3s 95ms 409µs, cells: 28839
+[97m(r0,t0)  SWE: time step: 1191, sim. time: 1h 2min 34s, dt: 3s 95ms 409µs, cells: 28881
+[97m(r0,t0)  SWE: time step: 1192, sim. time: 1h 2min 37s, dt: 3s 95ms 410µs, cells: 28902
+[97m(r0,t0)  SWE: time step: 1193, sim. time: 1h 2min 40s, dt: 3s 95ms 410µs, cells: 28906
+[97m(r0,t0)  SWE: time step: 1194, sim. time: 1h 2min 43s, dt: 3s 95ms 410µs, cells: 28932
+[97m(r0,t0)  SWE: time step: 1195, sim. time: 1h 2min 46s, dt: 3s 95ms 410µs, cells: 28944
+[97m(r0,t0)  SWE: time step: 1196, sim. time: 1h 2min 49s, dt: 3s 95ms 410µs, cells: 28956
+[97m(r0,t0)  SWE: time step: 1197, sim. time: 1h 2min 53s, dt: 3s 95ms 410µs, cells: 28971
+[97m(r0,t0)  SWE: time step: 1198, sim. time: 1h 2min 56s, dt: 3s 104ms 10µs, cells: 28996
+[97m(r0,t0)  SWE: time step: 1199, sim. time: 1h 2min 59s, dt: 3s 104ms 10µs, cells: 28991
+[97m(r0,t0)  SWE: time step: 1200, sim. time: 1h 3min 2s, dt: 3s 104ms 10µs, cells: 29007
+[97m(r0,t0)  SWE: time step: 1201, sim. time: 1h 3min 5s, dt: 3s 104ms 10µs, cells: 29022
+[97m(r0,t0)  SWE: time step: 1202, sim. time: 1h 3min 8s, dt: 3s 104ms 10µs, cells: 29035
+[97m(r0,t0)  SWE: time step: 1203, sim. time: 1h 3min 11s, dt: 3s 104ms 11µs, cells: 29041
+[97m(r0,t0)  SWE: time step: 1204, sim. time: 1h 3min 14s, dt: 3s 104ms 11µs, cells: 29067
+[97m(r0,t0)  SWE: time step: 1205, sim. time: 1h 3min 17s, dt: 3s 104ms 11µs, cells: 29090
+[97m(r0,t0)  SWE: time step: 1206, sim. time: 1h 3min 20s, dt: 3s 104ms 11µs, cells: 29114
+[97m(r0,t0)  SWE: time step: 1207, sim. time: 1h 3min 24s, dt: 3s 104ms 11µs, cells: 29145
+[97m(r0,t0)  SWE: time step: 1208, sim. time: 1h 3min 27s, dt: 3s 104ms 11µs, cells: 29169
+[97m(r0,t0)  SWE: time step: 1209, sim. time: 1h 3min 30s, dt: 3s 104ms 12µs, cells: 29209
+[97m(r0,t0)  SWE: time step: 1210, sim. time: 1h 3min 33s, dt: 3s 104ms 12µs, cells: 29241
+[97m(r0,t0)  SWE: time step: 1211, sim. time: 1h 3min 36s, dt: 3s 104ms 12µs, cells: 29277
+[97m(r0,t0)  SWE: time step: 1212, sim. time: 1h 3min 39s, dt: 3s 104ms 12µs, cells: 29301
+[97m(r0,t0)  SWE: time step: 1213, sim. time: 1h 3min 42s, dt: 3s 98ms 977µs, cells: 29325
+[97m(r0,t0)  SWE: time step: 1214, sim. time: 1h 3min 45s, dt: 3s 98ms 977µs, cells: 29365
+[97m(r0,t0)  SWE: time step: 1215, sim. time: 1h 3min 48s, dt: 3s 98ms 978µs, cells: 29362
+[97m(r0,t0)  SWE: time step: 1216, sim. time: 1h 3min 51s, dt: 3s 98ms 978µs, cells: 29365
+[97m(r0,t0)  SWE: time step: 1217, sim. time: 1h 3min 55s, dt: 3s 98ms 978µs, cells: 29407
+[97m(r0,t0)  SWE: time step: 1218, sim. time: 1h 3min 58s, dt: 3s 98ms 978µs, cells: 29432
+[97m(r0,t0)  SWE: time step: 1219, sim. time: 1h 4min 1s, dt: 3s 98ms 979µs, cells: 29472
+[97m(r0,t0)  SWE: output step: 32
+[97m(r0,t0)  SWE: output step: 32
+[97m(r0,t0)  SWE: time step: 1220, sim. time: 1h 4min 4s, dt: 3s 98ms 979µs, cells: 29499
+[97m(r0,t0)  SWE: time step: 1221, sim. time: 1h 4min 7s, dt: 3s 98ms 979µs, cells: 29512
+[97m(r0,t0)  SWE: time step: 1222, sim. time: 1h 4min 10s, dt: 3s 98ms 979µs, cells: 29524
+[97m(r0,t0)  SWE: time step: 1223, sim. time: 1h 4min 13s, dt: 3s 98ms 980µs, cells: 29549
+[97m(r0,t0)  SWE: time step: 1224, sim. time: 1h 4min 16s, dt: 3s 98ms 980µs, cells: 29556
+[97m(r0,t0)  SWE: time step: 1225, sim. time: 1h 4min 19s, dt: 3s 98ms 980µs, cells: 29567
+[97m(r0,t0)  SWE: time step: 1226, sim. time: 1h 4min 22s, dt: 3s 98ms 980µs, cells: 29575
+[97m(r0,t0)  SWE: time step: 1227, sim. time: 1h 4min 26s, dt: 3s 98ms 981µs, cells: 29591
+[97m(r0,t0)  SWE: time step: 1228, sim. time: 1h 4min 29s, dt: 3s 98ms 981µs, cells: 29593
+[97m(r0,t0)  SWE: time step: 1229, sim. time: 1h 4min 32s, dt: 3s 98ms 981µs, cells: 29575
+[97m(r0,t0)  SWE: time step: 1230, sim. time: 1h 4min 35s, dt: 3s 98ms 981µs, cells: 29599
+[97m(r0,t0)  SWE: time step: 1231, sim. time: 1h 4min 38s, dt: 3s 98ms 981µs, cells: 29610
+[97m(r0,t0)  SWE: time step: 1232, sim. time: 1h 4min 41s, dt: 3s 98ms 982µs, cells: 29631
+[97m(r0,t0)  SWE: time step: 1233, sim. time: 1h 4min 44s, dt: 3s 98ms 982µs, cells: 29652
+[97m(r0,t0)  SWE: time step: 1234, sim. time: 1h 4min 47s, dt: 3s 98ms 982µs, cells: 29688
+[97m(r0,t0)  SWE: time step: 1235, sim. time: 1h 4min 50s, dt: 3s 98ms 982µs, cells: 29725
+[97m(r0,t0)  SWE: time step: 1236, sim. time: 1h 4min 53s, dt: 3s 98ms 983µs, cells: 29759
+[97m(r0,t0)  SWE: time step: 1237, sim. time: 1h 4min 57s, dt: 3s 98ms 983µs, cells: 29776
+[97m(r0,t0)  SWE: time step: 1238, sim. time: 1h 5min 162ms, dt: 3s 98ms 983µs, cells: 29794
+[97m(r0,t0)  SWE: time step: 1239, sim. time: 1h 5min 3s, dt: 3s 98ms 984µs, cells: 29803
+[97m(r0,t0)  SWE: time step: 1240, sim. time: 1h 5min 6s, dt: 3s 98ms 984µs, cells: 29808
+[97m(r0,t0)  SWE: time step: 1241, sim. time: 1h 5min 9s, dt: 3s 98ms 984µs, cells: 29811
+[97m(r0,t0)  SWE: time step: 1242, sim. time: 1h 5min 12s, dt: 3s 98ms 985µs, cells: 29839
+[97m(r0,t0)  SWE: time step: 1243, sim. time: 1h 5min 15s, dt: 3s 98ms 985µs, cells: 29858
+[97m(r0,t0)  SWE: time step: 1244, sim. time: 1h 5min 18s, dt: 3s 98ms 985µs, cells: 29890
+[97m(r0,t0)  SWE: time step: 1245, sim. time: 1h 5min 21s, dt: 3s 98ms 985µs, cells: 29885
+[97m(r0,t0)  SWE: time step: 1246, sim. time: 1h 5min 24s, dt: 3s 98ms 986µs, cells: 29901
+[97m(r0,t0)  SWE: time step: 1247, sim. time: 1h 5min 28s, dt: 3s 98ms 986µs, cells: 29907
+[97m(r0,t0)  SWE: time step: 1248, sim. time: 1h 5min 31s, dt: 3s 98ms 986µs, cells: 29921
+[97m(r0,t0)  SWE: time step: 1249, sim. time: 1h 5min 34s, dt: 3s 98ms 987µs, cells: 29916
+[97m(r0,t0)  SWE: time step: 1250, sim. time: 1h 5min 37s, dt: 3s 98ms 987µs, cells: 29927
+[97m(r0,t0)  SWE: time step: 1251, sim. time: 1h 5min 40s, dt: 3s 98ms 987µs, cells: 29933
+[97m(r0,t0)  SWE: time step: 1252, sim. time: 1h 5min 43s, dt: 3s 98ms 988µs, cells: 29943
+[97m(r0,t0)  SWE: time step: 1253, sim. time: 1h 5min 46s, dt: 3s 98ms 988µs, cells: 29960
+[97m(r0,t0)  SWE: time step: 1254, sim. time: 1h 5min 49s, dt: 3s 98ms 988µs, cells: 29985
+[97m(r0,t0)  SWE: time step: 1255, sim. time: 1h 5min 52s, dt: 3s 98ms 988µs, cells: 29982
+[97m(r0,t0)  SWE: time step: 1256, sim. time: 1h 5min 55s, dt: 3s 98ms 989µs, cells: 29997
+[97m(r0,t0)  SWE: time step: 1257, sim. time: 1h 5min 59s, dt: 3s 98ms 989µs, cells: 29997
+[97m(r0,t0)  SWE: time step: 1258, sim. time: 1h 6min 2s, dt: 3s 98ms 989µs, cells: 30017
+[97m(r0,t0)  SWE: output step: 33
+[97m(r0,t0)  SWE: output step: 33
+[97m(r0,t0)  SWE: time step: 1259, sim. time: 1h 6min 5s, dt: 3s 98ms 990µs, cells: 30043
+[97m(r0,t0)  SWE: time step: 1260, sim. time: 1h 6min 8s, dt: 3s 98ms 990µs, cells: 30074
+[97m(r0,t0)  SWE: time step: 1261, sim. time: 1h 6min 11s, dt: 3s 98ms 990µs, cells: 30080
+[97m(r0,t0)  SWE: time step: 1262, sim. time: 1h 6min 14s, dt: 3s 98ms 991µs, cells: 30080
+[97m(r0,t0)  SWE: time step: 1263, sim. time: 1h 6min 17s, dt: 3s 98ms 991µs, cells: 30095
+[97m(r0,t0)  SWE: time step: 1264, sim. time: 1h 6min 20s, dt: 3s 98ms 992µs, cells: 30135
+[97m(r0,t0)  SWE: time step: 1265, sim. time: 1h 6min 23s, dt: 3s 98ms 992µs, cells: 30154
+[97m(r0,t0)  SWE: time step: 1266, sim. time: 1h 6min 26s, dt: 3s 98ms 992µs, cells: 30150
+[97m(r0,t0)  SWE: time step: 1267, sim. time: 1h 6min 30s, dt: 3s 98ms 993µs, cells: 30157
+[97m(r0,t0)  SWE: time step: 1268, sim. time: 1h 6min 33s, dt: 3s 98ms 993µs, cells: 30161
+[97m(r0,t0)  SWE: time step: 1269, sim. time: 1h 6min 36s, dt: 3s 98ms 993µs, cells: 30180
+[97m(r0,t0)  SWE: time step: 1270, sim. time: 1h 6min 39s, dt: 3s 98ms 994µs, cells: 30182
+[97m(r0,t0)  SWE: time step: 1271, sim. time: 1h 6min 42s, dt: 3s 98ms 994µs, cells: 30212
+[97m(r0,t0)  SWE: time step: 1272, sim. time: 1h 6min 45s, dt: 3s 98ms 995µs, cells: 30232
+[97m(r0,t0)  SWE: time step: 1273, sim. time: 1h 6min 48s, dt: 3s 98ms 995µs, cells: 30239
+[97m(r0,t0)  SWE: time step: 1274, sim. time: 1h 6min 51s, dt: 3s 98ms 995µs, cells: 30243
+[97m(r0,t0)  SWE: time step: 1275, sim. time: 1h 6min 54s, dt: 3s 98ms 996µs, cells: 30239
+[97m(r0,t0)  SWE: time step: 1276, sim. time: 1h 6min 57s, dt: 3s 98ms 996µs, cells: 30237
+[97m(r0,t0)  SWE: time step: 1277, sim. time: 1h 7min 1s, dt: 3s 98ms 997µs, cells: 30247
+[97m(r0,t0)  SWE: time step: 1278, sim. time: 1h 7min 4s, dt: 3s 98ms 997µs, cells: 30274
+[97m(r0,t0)  SWE: time step: 1279, sim. time: 1h 7min 7s, dt: 3s 98ms 997µs, cells: 30296
+[97m(r0,t0)  SWE: time step: 1280, sim. time: 1h 7min 10s, dt: 3s 98ms 998µs, cells: 30305
+[97m(r0,t0)  SWE: time step: 1281, sim. time: 1h 7min 13s, dt: 3s 98ms 998µs, cells: 30311
+[97m(r0,t0)  SWE: time step: 1282, sim. time: 1h 7min 16s, dt: 3s 98ms 999µs, cells: 30304
+[97m(r0,t0)  SWE: time step: 1283, sim. time: 1h 7min 19s, dt: 3s 98ms 999µs, cells: 30349
+[97m(r0,t0)  SWE: time step: 1284, sim. time: 1h 7min 22s, dt: 3s 98ms 999µs, cells: 30373
+[97m(r0,t0)  SWE: time step: 1285, sim. time: 1h 7min 25s, dt: 3s 99ms 137ns, cells: 30414
+[97m(r0,t0)  SWE: time step: 1286, sim. time: 1h 7min 28s, dt: 3s 99ms 477ns, cells: 30424
+[97m(r0,t0)  SWE: time step: 1287, sim. time: 1h 7min 32s, dt: 3s 99ms 820ns, cells: 30430
+[97m(r0,t0)  SWE: time step: 1288, sim. time: 1h 7min 35s, dt: 3s 99ms 1µs, cells: 30478
+[97m(r0,t0)  SWE: time step: 1289, sim. time: 1h 7min 38s, dt: 3s 99ms 1µs, cells: 30490
+[97m(r0,t0)  SWE: time step: 1290, sim. time: 1h 7min 41s, dt: 3s 99ms 1µs, cells: 30518
+[97m(r0,t0)  SWE: time step: 1291, sim. time: 1h 7min 44s, dt: 3s 99ms 2µs, cells: 30541
+[97m(r0,t0)  SWE: time step: 1292, sim. time: 1h 7min 47s, dt: 3s 99ms 2µs, cells: 30582
+[97m(r0,t0)  SWE: time step: 1293, sim. time: 1h 7min 50s, dt: 3s 99ms 2µs, cells: 30604
+[97m(r0,t0)  SWE: time step: 1294, sim. time: 1h 7min 53s, dt: 3s 99ms 3µs, cells: 30590
+[97m(r0,t0)  SWE: time step: 1295, sim. time: 1h 7min 56s, dt: 3s 99ms 3µs, cells: 30607
+[97m(r0,t0)  SWE: time step: 1296, sim. time: 1h 7min 59s, dt: 3s 99ms 4µs, cells: 30646
+[97m(r0,t0)  SWE: time step: 1297, sim. time: 1h 8min 3s, dt: 3s 99ms 4µs, cells: 30659
+[97m(r0,t0)  SWE: output step: 34
+[97m(r0,t0)  SWE: output step: 34
+[97m(r0,t0)  SWE: time step: 1298, sim. time: 1h 8min 6s, dt: 3s 99ms 4µs, cells: 30670
+[97m(r0,t0)  SWE: time step: 1299, sim. time: 1h 8min 9s, dt: 3s 99ms 5µs, cells: 30696
+[97m(r0,t0)  SWE: time step: 1300, sim. time: 1h 8min 12s, dt: 3s 99ms 5µs, cells: 30718
+[97m(r0,t0)  SWE: time step: 1301, sim. time: 1h 8min 15s, dt: 3s 99ms 6µs, cells: 30747
+[97m(r0,t0)  SWE: time step: 1302, sim. time: 1h 8min 18s, dt: 3s 82ms 915µs, cells: 30766
+[97m(r0,t0)  SWE: time step: 1303, sim. time: 1h 8min 21s, dt: 3s 82ms 915µs, cells: 30791
+[97m(r0,t0)  SWE: time step: 1304, sim. time: 1h 8min 24s, dt: 3s 82ms 915µs, cells: 30804
+[97m(r0,t0) WARNING! Time step size was too big. dt (old):  3.083E+00, dt (CFL):  2.771E+00, maximum courant number: .854
+[97m(r0,t0)  SWE: time step: 1305, sim. time: 1h 8min 27s, dt: 2s 632ms 135µs, cells: 30815
+[97m(r0,t0)  SWE: time step: 1306, sim. time: 1h 8min 30s, dt: 3s 82ms 916µs, cells: 30798
+[97m(r0,t0)  SWE: time step: 1307, sim. time: 1h 8min 33s, dt: 3s 82ms 916µs, cells: 30789
+[97m(r0,t0) WARNING! Time step size was too big. dt (old):  3.083E+00, dt (CFL):  2.672E+00, maximum courant number: .823
+[97m(r0,t0)  SWE: time step: 1308, sim. time: 1h 8min 36s, dt: 2s 538ms 225µs, cells: 30824
+[97m(r0,t0)  SWE: time step: 1309, sim. time: 1h 8min 39s, dt: 3s 82ms 916µs, cells: 30823
+[97m(r0,t0)  SWE: time step: 1310, sim. time: 1h 8min 42s, dt: 3s 82ms 917µs, cells: 30808
+[97m(r0,t0) WARNING! Time step size was too big. dt (old):  3.083E+00, dt (CFL):  2.587E+00, maximum courant number: .797
+[97m(r0,t0)  SWE: time step: 1311, sim. time: 1h 8min 45s, dt: 2s 457ms 237µs, cells: 30817
+[97m(r0,t0)  SWE: time step: 1312, sim. time: 1h 8min 47s, dt: 3s 82ms 917µs, cells: 30801
+[97m(r0,t0)  SWE: time step: 1313, sim. time: 1h 8min 50s, dt: 3s 82ms 917µs, cells: 30836
+[97m(r0,t0) WARNING! Time step size was too big. dt (old):  3.083E+00, dt (CFL):  2.256E+00, maximum courant number: .695
+[97m(r0,t0)  SWE: time step: 1314, sim. time: 1h 8min 53s, dt: 2s 143ms 455µs, cells: 30848
+[97m(r0,t0)  SWE: time step: 1315, sim. time: 1h 8min 56s, dt: 3s 82ms 918µs, cells: 30864
+[97m(r0,t0)  SWE: time step: 1316, sim. time: 1h 8min 59s, dt: 3s 82ms 918µs, cells: 30873
+[97m(r0,t0)  SWE: time step: 1317, sim. time: 1h 9min 2s, dt: 3s 82ms 918µs, cells: 30888
+[97m(r0,t0)  SWE: time step: 1318, sim. time: 1h 9min 5s, dt: 3s 82ms 919µs, cells: 30887
+[97m(r0,t0)  SWE: time step: 1319, sim. time: 1h 9min 8s, dt: 3s 82ms 919µs, cells: 30879
+[97m(r0,t0)  SWE: time step: 1320, sim. time: 1h 9min 11s, dt: 3s 82ms 919µs, cells: 30914
+[97m(r0,t0)  SWE: time step: 1321, sim. time: 1h 9min 14s, dt: 3s 82ms 919µs, cells: 30930
+[97m(r0,t0)  SWE: time step: 1322, sim. time: 1h 9min 17s, dt: 3s 82ms 920µs, cells: 30978
+[97m(r0,t0)  SWE: time step: 1323, sim. time: 1h 9min 20s, dt: 3s 82ms 920µs, cells: 31009
+[97m(r0,t0)  SWE: time step: 1324, sim. time: 1h 9min 23s, dt: 3s 82ms 920µs, cells: 31029
+ Rank            0  [STATUS            2 ]: MPI_Probe_adapt    1.9550323486328125E-005  seconds
+ Rank            1  [STATUS            2 ]: MPI_Probe_adapt    3.5285949707031250E-005  seconds
+	MPIDI_PG_Create: Creating a process group of size 2; name: 3.0; at rank: 0
+	MPIDI_PG_Create: Creating a process group of size 2; name: ---; at rank: 0
+	MPIDI_PG_Create: Creating a process group of size 2; name: ---; at rank: 1
+	MPIDI_PG_Create: Creating a process group of size 2; name: 3.0; at rank: 1
+received an intercomm, possible pure expansion
+ Rank            1  [STATUS            3 ]: MPI_Comm_adapt_begin    24.314424753189087       seconds
+ bla bla bla
+ packet created
+received an intercomm, possible pure expansion
+ Rank            1  [STATUS            2 ]: MPI_Comm_adapt_begin    6.3151359558105469E-002  seconds
+received an intercomm, possible pure expansion
+ Rank            0  [STATUS            2 ]: MPI_Comm_adapt_begin    6.3424825668334961E-002  seconds
+ bla bla bla
+ packet created
+ bla bla bla
+ packet created
+received an intercomm, possible pure expansion
+ Rank            0  [STATUS            3 ]: MPI_Comm_adapt_begin    24.333709239959717       seconds
+ bla bla bla
+ packet created
+ packet broadcasted
+ packet broadcasted
+	MPIDI_PG_Create: Creating a process group of size 4; name: 3.0; at rank: 0
+ packet broadcasted
+ packet broadcasted
+	MPIDI_PG_Create: Creating a process group of size 4; name: 3.0; at rank: 1
+	MPIDI_PG_Create: Creating a process group of size 4; name: 3.0; at rank: 1
+	MPIDI_PG_Create: Creating a process group of size 4; name: 3.0; at rank: 0
+PMI2_Notify_adapt_commit_done
+calling PMIi_WriteSimpleCommandStr
+PMIi_WriteSimpleCommandStr: pmi2_errno: 0
+PMIi_ReadCommandExp: rc: 0, pmi2_errno: 0
+returned from PMIi_ReadCommandExp
+ Rank            0  [STATUS            3 ]: MPI_Comm_adapt_commit    5.8017730712890625E-002  seconds
+ Rank            2  [STATUS            4 ]: Total adaption time =    24.393332481384277       seconds
+ Rank            0  [STATUS            2 ]: MPI_Comm_adapt_commit    6.5193891525268555E-002  seconds
+ Rank            0  [STATUS            4 ]: Total adaption time =   0.13074445724487305       seconds
+ Rank            1  [STATUS            2 ]: MPI_Comm_adapt_commit    6.5030574798583984E-002  seconds
+ Rank            1  [STATUS            4 ]: Total adaption time =   0.13110804557800293       seconds
+ Rank            1  [STATUS            3 ]: MPI_Comm_adapt_commit    7.6711177825927734E-002  seconds
+ Rank            3  [STATUS            4 ]: Total adaption time =    24.413496255874634       seconds

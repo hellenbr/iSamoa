@@ -1,0 +1,1354 @@
+srun: 	 (srun/srun.c) init_srun
+srun: 	 (srun/srun.c) create_srun_job
+srun: calling slurm_allocate_resources_blocking in libsrun
+srun: in slurm_allocate_resources_blocking; requesting from node: EMOLATUBU16
+srun: ------------- address: 0.0.0.0; type: 4001 (REQUEST_RESOURCE_ALLOCATION)
+srun: ------------- unpacking: RESPONSE_RESOURCE_ALLOCATION
+srun: received job_id: 3
+srun: waiting for the nodes to be ready at libsrun...
+srun: ------------- address: 0.0.0.0; type: 4019 (REQUEST_JOB_READY)
+srun: ------------- unpacking: RESPONSE_JOB_READY
+srun: received job is ready message
+srun: calling launch_g_create_job_step in libsrun/allocate.c
+srun: launch_p_create_job_step in launch_slurm.c
+srun: launch_common_create_job_step in libsrun/launch.c
+srun: received 1 nodes from the allocation
+srun: ntasks is set from opt.ntasks to 2
+srun: job->ctx_params: job_id 3, user 1000, nodes 1, cpus 2, tasks 2, name samoa_swe_noomp_gnu, relative 65534
+srun: in slurm_step_ctx_create_timeout
+srun: opening the port at srun for the controller to connect back (src/api/step_ctx.c)
+srun: port: 39820; hostname: EMOLATUBU16
+srun: slurm_job_step_create 1st call at api/step_ctx.c
+srun: ------------- address: 0.0.0.0; type: 5001 (REQUEST_JOB_STEP_CREATE)
+srun: ------------- unpacking: RESPONSE_JOB_STEP_CREATE
+srun: after calling slurm_step_ctx_create_timeout at libsrun/launch.c
+srun: end of launch_common_create_job_step at libsrun/launch.c
+srun: creating the shepard process
+srun: setting the p_job reference and exitting the create_srun_job routine
+srun: 	 (srun/srun.c) slurm_step_ctx_get
+srun: 	 (srun/srun.c) task_count: 2 (after slurm_step_ctx_get)
+srun: shepard reading in srun_job.c
+srun: 	 (srun/srun.c) pre_launch_srun_job
+srun: 	 (srun/srun.c) launch_common_set_stdio_fds
+srun: creating stdin file descriptor
+srun: creating stdout file descriptor
+srun: creating stderr file descriptor
+srun: 	 (srun/srun.c) launch_g_step_launch
+srun: calling the step_launch call loaded from the plugin at libsrun
+srun: launch_p_step_launch in launch_slurm.c
+srun: first launch in launch_p_step_launch in launch_slurm.c
+srun: Entering slurm_step_launch
+srun: initializing the mpi plugin
+srun: # mpi node_cnt: 1
+srun: # mpi task_cnt: 2
+srun: # mpi node_list: 10.0.0.1
+srun: performing the prelaunch from the mpi plugin
+srun: jobid: 3; stepid: 0; nnodes: 1; ntasks: 2; adapt_status: 1542059776;
+srun: tree_info.num_children: 1
+srun: tree_sock_addr: /tmp/sock.pmi2.3.0; tree children(nnodes): 1
+srun: mpi/pmi2: srun pmi port: 38393
+srun: nodeid: 4520474; this_node: launcher; num_children: 0; kvs_seq: 1
+srun: _msg_thr_create
+srun: Entering _msg_thr_create()
+srun: TODO: need to revisit _estimate_nports in api/step_launch.c
+srun: _estimate_nports
+srun: finally starting the processes in the compute nodes...
+srun: argc: 27
+srun: argv[i]: /home/emily/nfs/workspace/isamoa/bin/samoa_swe_noomp_gnu
+srun: argv[i]: -sections
+srun: argv[i]: 1
+srun: argv[i]: -lbsplit
+srun: argv[i]: -courant
+srun: argv[i]: 0.95
+srun: argv[i]: -threads
+srun: argv[i]: 1
+srun: argv[i]: -tout
+srun: argv[i]: 120
+srun: argv[i]: -dmin
+srun: argv[i]: 0
+srun: argv[i]: -dmax
+srun: argv[i]: 20
+srun: argv[i]: -tmax
+srun: argv[i]: 10800
+srun: argv[i]: -fdispl
+srun: argv[i]: /home/emily/nfs/workspace/samoa-data/tohoku_static/displ.nc
+srun: argv[i]: -xmloutput
+srun: argv[i]: .true.
+srun: argv[i]: -stestpoints
+srun: argv[i]: "545735.266126
+srun: argv[i]: 62716.4740303,935356.566012
+srun: argv[i]: -817289.628677,1058466.21575
+srun: argv[i]: 765077.767857"
+srun: argv[i]: -output_dir
+srun: argv[i]: /home/emily/nfs/workspace/isamoa/output/swe_impi
+srun: job_step_id: 0
+srun: node count: 1
+srun: task count: 2
+srun: cpus_per_task: 1
+srun: nodes: 10.0.0.1
+srun: not user_managed_io
+srun: client_io_handler_create
+srun: cio num_tasks: 2; num_nodes: 1
+srun: initialized stdio listening socket, port 38888
+srun: _create_listensock_eio
+srun: finally launching the tasks...
+srun: _launch_tasks
+srun: Entering _launch_tasks
+srun: _print_launch_msg
+srun: launching 3.0 on host 10.0.0.1, 2 tasks: [0-1]
+srun: sending the message to the nodes involved
+srun: start_msg_tree with host_count: 1; hostlist_count(hl): 1;
+srun: route_split_hostlist_treewidth
+srun: set_span: total: 1; tree_width = 50
+srun: hostset_count: 1; tree_width: 50
+srun: name: 10.0.0.1
+srun: ROUTE: ... sublist[0] 10.0.0.1
+srun: nhl incermented: 1
+srun: after route_g_split_hostlist: hostlist_count(hl): 0; hl_count: 1
+srun: _start_msg_tree_internal
+srun: j=0; hl_count: 1
+srun: sp_hl defined
+srun: incrementing fwd_tree->p_thr_count: 0
+srun: updated (inc) fwd_tree->p_thr_count: 1
+srun: out _start_msg_tree_internal
+srun: after _start_msg_tree_internal: hostlist_count(hl): 0; hl_count: 1
+srun: getting the mutex
+srun: GOT the mutex
+srun: Tree head got back 0 looking for 1; thr_count = 1
+srun: ------------- cond wait with thr_count: 1
+srun: _fwd_tree_thread: sending message to: 10.0.0.1
+srun: _msg_thr_internal
+srun: message type in _fwd_tree_thread: 6001
+srun: timeout set to: 110000
+srun: send_msg.forward.nodelist = NULL
+srun: Tree sending to 10.0.0.1
+srun: before slurm_send_addr_recv_msgs
+srun: packing in version 15.08
+srun: packed adapt_status: 2
+srun: ------------- address: 10.0.0.1; type: 6001 (REQUEST_LAUNCH_TASKS)
+srun: ------------- unpacking: RESPONSE_SLURM_RC
+srun: AFTER slurm_send_addr_recv_msgs
+srun: ret_list set
+srun: ------------- after cond wait with thr_count: 1
+srun: Tree head got back 1
+srun: ------------- cond wait with thr_count: 1
+srun: in _destroy_tree_fwd
+srun: getting fwd_tree->tree_mutex
+srun: decrementing fwd_tree->p_thr_count: 1
+srun: updated (dec) fwd_tree->p_thr_count: 0; signal: fwd_tree->notify
+srun: releasing fwd_tree->tree_mutex
+srun: ------------- after cond wait with thr_count: 0
+srun: Tree head got back 1
+srun: processing the return codes
+srun: launch returned msg_rc=0 err=0 type=8001
+srun: calling slurm_step_launch_wait_start in the launch plugin
+srun: --- dumping proctable before slurm_step_launch_wait_start
+srun: task:0, host:(null), pid:0, executable:(null)
+srun: task:1, host:(null), pid:0, executable:(null)
+srun: out _destroy_tree_fwd
+srun: Called _listening_socket_read
+srun: _handle_io_init_msg
+srun: Activity on IO listening socket 17
+srun: Accepted IO connection: ip=10.0.0.1 sd=18
+srun: _read_io_init_msg
+srun: step_launch_clear_questionable_state
+srun: ------------- unpacking: RESPONSE_LAUNCH_TASKS
+srun: _handle_msg in api/steplaunch.c
+srun: received task launch
+srun: _launch_handler
+srun: _launch_handler: bit size: 2
+srun: _launch_handler: count of pids: 2
+srun: _launch_handler: msg->task_ids[0]=0
+srun: _launch_handler: msg->task_ids[1]=1
+srun: _launch_handler: locked
+srun: _launch_handler: setting bits in the else block
+srun: _launch_handler: done setting bits in the else block
+srun: calling the task_start callback
+srun: _task_start in launch/slurm/launch_slurm.c
+srun: marking TS_START_SUCCESS
+srun: task_state_update(taskid=0, TS_START_SUCCESS)
+srun: marking TS_START_SUCCESS
+srun: task_state_update(taskid=1, TS_START_SUCCESS)
+srun: done calling the task_start callback
+srun: _launch_handler: cond broadcast and unlocking
+srun: _cr_notify_step_launch
+srun: start successful, setting new state to running locally at srun
+srun: --- dumping proctable AFTER slurm_step_launch_wait_start
+srun: task:0, host:10.0.0.1, pid:7795, executable:(null)
+srun: task:1, host:10.0.0.1, pid:7796, executable:(null)
+srun: mpir_set_executable_names
+srun: printing process table:
+srun: task:0, host:10.0.0.1, pid:7795, executable:/home/emily/nfs/workspace/isamoa/bin/samoa_swe_noomp_gnu
+srun: task:1, host:10.0.0.1, pid:7796, executable:/home/emily/nfs/workspace/isamoa/bin/samoa_swe_noomp_gnu
+srun: slurm_step_launch_abort
+srun: forward signal 995 to job 3
+srun: start_msg_tree with host_count: 1; hostlist_count(hl): 1;
+srun: route_split_hostlist_treewidth
+srun: set_span: total: 1; tree_width = 50
+srun: hostset_count: 1; tree_width: 50
+srun: name: 10.0.0.1
+srun: ROUTE: ... sublist[0] 10.0.0.1
+srun: nhl incermented: 1
+srun: after route_g_split_hostlist: hostlist_count(hl): 0; hl_count: 1
+srun: _start_msg_tree_internal
+srun: j=0; hl_count: 1
+srun: sp_hl defined
+srun: incrementing fwd_tree->p_thr_count: 0
+srun: updated (inc) fwd_tree->p_thr_count: 1
+srun: out _start_msg_tree_internal
+srun: after _start_msg_tree_internal: hostlist_count(hl): 0; hl_count: 1
+srun: getting the mutex
+srun: GOT the mutex
+srun: Tree head got back 0 looking for 1; thr_count = 1
+srun: ------------- cond wait with thr_count: 1
+srun: _fwd_tree_thread: sending message to: 10.0.0.1
+srun: message type in _fwd_tree_thread: 6004
+srun: timeout set to: 100000
+srun: send_msg.forward.nodelist = NULL
+srun: Tree sending to 10.0.0.1
+srun: before slurm_send_addr_recv_msgs
+srun: ------------- address: 10.0.0.1; type: 6004 (REQUEST_SIGNAL_TASKS)
+slurmstepd: couldn't chdir to `/media/DATA/nfs/workspace/isamoa': No such file or directory: going to /tmp instead
+srun: ------------- unpacking: RESPONSE_SLURM_RC
+srun: AFTER slurm_send_addr_recv_msgs
+srun: ret_list set
+srun: ------------- after cond wait with thr_count: 1
+srun: Tree head got back 1
+srun: ------------- cond wait with thr_count: 1
+srun: in _destroy_tree_fwd
+srun: getting fwd_tree->tree_mutex
+srun: decrementing fwd_tree->p_thr_count: 1
+srun: updated (dec) fwd_tree->p_thr_count: 0; signal: fwd_tree->notify
+srun: releasing fwd_tree->tree_mutex
+srun: out _destroy_tree_fwd
+srun: ------------- after cond wait with thr_count: 0
+srun: Tree head got back 1
+srun: 	 (srun/srun.c) launch_g_step_wait
+srun: launch_p_step_wait at launch_slurm.c
+srun: slurm_step_launch_wait_finish
+srun: sls->abort not set
+srun: mpi/pmi2: got tree cmd: 0(TREE_CMD_KVS_FENCE)
+srun: mpi/pmi2: in _handle_kvs_fence: seq: 1; kvs_seq: 1
+srun: mpi/pmi2: in _handle_kvs_fence, from node 0(10.0.0.1) representing 1 offspring, seq=1
+srun: replaced it with node id: 0
+srun: _handle_kvs_fence: at srun:
+srun: job_info (pmi2_job_info_t) object current data:
+srun: jobid: 3
+srun: stepid: 0
+srun: nnodes: 1
+srun: nodeid: -1
+srun: ntasks: 2
+srun: ltasks: 0
+srun: adapt_status: 0
+srun: spawn_seq: 0
+srun: pmi_debugged: 0
+srun: step_nodelist: 10.0.0.1
+srun: proc_mapping: (vector,(0,1,2))
+srun: pmi_jobid: 3.0
+srun: spawner_jobid: (null)
+srun: srun: resetting kvs before temp_kvs_send: 0
+srun: temp_kvs_send in srun; step nodelist: 10.0.0.1; kvs_seq = 0
+srun: temp_kvs_send: kvs_seq incremented: 1
+srun: start_msg_tree with host_count: 1; hostlist_count(hl): 1;
+srun: route_split_hostlist_treewidth
+srun: set_span: total: 1; tree_width = 50
+srun: hostset_count: 1; tree_width: 50
+srun: name: 10.0.0.1
+srun: ROUTE: ... sublist[0] 10.0.0.1
+srun: nhl incermented: 1
+srun: after route_g_split_hostlist: hostlist_count(hl): 0; hl_count: 1
+srun: _start_msg_tree_internal
+srun: j=0; hl_count: 1
+srun: sp_hl defined
+srun: incrementing fwd_tree->p_thr_count: 0
+srun: updated (inc) fwd_tree->p_thr_count: 1
+srun: out _start_msg_tree_internal
+srun: after _start_msg_tree_internal: hostlist_count(hl): 0; hl_count: 1
+srun: _fwd_tree_thread: sending message to: 10.0.0.1
+srun: getting the mutex
+srun: GOT the mutex
+srun: Tree head got back 0 looking for 1; thr_count = 1
+srun: ------------- cond wait with thr_count: 1
+srun: message type in _fwd_tree_thread: 5029
+srun: timeout set to: 100000
+srun: send_msg.forward.nodelist = NULL
+srun: Tree sending to 10.0.0.1
+srun: before slurm_send_addr_recv_msgs
+srun: ------------- address: 10.0.0.1; type: 5029 (REQUEST_FORWARD_DATA)
+srun: ------------- unpacking: RESPONSE_SLURM_RC
+srun: AFTER slurm_send_addr_recv_msgs
+srun: ret_list set
+srun: ------------- after cond wait with thr_count: 1
+srun: Tree head got back 1
+srun: ------------- cond wait with thr_count: 1
+srun: in _destroy_tree_fwd
+srun: getting fwd_tree->tree_mutex
+srun: decrementing fwd_tree->p_thr_count: 1
+srun: updated (dec) fwd_tree->p_thr_count: 0; signal: fwd_tree->notify
+srun: releasing fwd_tree->tree_mutex
+srun: ------------- after cond wait with thr_count: 0
+srun: Tree head got back 1
+srun: nodeid: 146; this_node: launcher; num_children: 0; kvs_seq: 1
+srun: mpi/pmi2: out _handle_kvs_fence, tasks_to_wait=0, children_to_wait=0, kvs_seq=2
+srun: out _destroy_tree_fwd
+srun: ------------- unpacking: SRUN_REALLOC_MSG
+srun: ------------- srun RPC: SRUN_REALLOC_MSG (new InvasIC logic)
+srun: received realloc message
+srun: _realloc_handler at libsrun allocate.c:
+srun: _realloc_handler: job_id: 3
+srun: _realloc_handler: step_id: 0
+srun: _realloc_handler: new_tasks_to_create: 2
+srun: _realloc_handler: new_nodes_to_invade_count: 1
+srun: _realloc_handler: new_nodes_to_invade: 10.0.0.2
+srun: _realloc_handler: preexisting_tasks_to_destroy: 0
+srun: _realloc_handler: preexisting_nodes_to_retreat_from_count: 0
+srun: _realloc_handler: preexisting_nodes_to_retreat_from: (null)
+srun: _realloc_handler: new_node_allocation: 10.0.0.[1-2]
+srun: _realloc_handler: updated_process_mapping: (vector,(0,2,2))
+srun: _realloc_handler: expansion_process_mapping: (vector,(0,1,2))
+srun: _realloc_handler: node_id_count: 2
+srun: _realloc_handler: updated_node_ids[0] = -1
+srun: _realloc_handler: updated_node_ids[1] = -1
+srun: _realloc_handler: ---- SETTING UP ADAPTATION TRACKING METADATA ----
+srun: _realloc_handler: job_id: 3
+srun: _realloc_handler: step_id: 0
+srun: -------------------------------------------------
+srun: _realloc_handler: new_tasks_to_create: 2
+srun: _realloc_handler: new_nodes_to_invade_count: 1
+srun: _realloc_handler: new_nodes_to_invade: 10.0.0.2
+srun: -------------------------------------------------
+srun: _realloc_handler: preexisting_tasks_to_destroy: 0
+srun: _realloc_handler: preexisting_nodes_to_retreat_from_count: 0
+srun: _realloc_handler: preexisting_nodes_to_retreat_from: (null)
+srun: -------------------------------------------------
+srun: _realloc_handler: new_task_count: 4
+srun: _realloc_handler: new_node_count: 2
+srun: _realloc_handler: new_tasks_per_node: 2
+srun: _realloc_handler: new_node_allocation: 10.0.0.[1-2]
+srun: -------------------------------------------------
+srun: _realloc_handler: preexisting_task_count: 2
+srun: _realloc_handler: preexisting_node_count: 1
+srun: _realloc_handler: preexisting_tasks_per_node: 2
+srun: _realloc_handler: preexisting_node_allocation: 10.0.0.1
+srun: -------------------------------------------------
+srun: _realloc_handler: updated process mapping: (vector,(0,2,2))
+srun: ---- ADAPTATION TRACKING METADATA READY ----
+srun: _realloc_handler: resizing the job step metadata to match expansion size
+srun: calling launch_g_step_resize in libsrun/allocate.c
+srun: launch_p_step_resize new size: 2
+srun: _realloc_handler: emulating the operations in launch_p_step_launch
+srun: _realloc_handler: setting up metadata for launching the expansion job step
+srun: _realloc_handler: performing the prelaunch from the mpi plugin (to be updated once the mpi plugin API is extended)
+srun: _realloc_handler: ctx->launch_state->mpi_info->step_layout: node_cnt: 1; task_cnt: 2; node_list: 10.0.0.2
+srun: _realloc_handler: node_cnt: 1; task_cnt: 2; ntasks_per_node: 2;
+srun: _realloc_handler: tasks[0] = 2
+srun: id: 0
+srun: id: 1
+srun: jobid: 3; stepid: 0; nnodes: 1; ntasks: 2; adapt_status: 1542051584;
+srun: tree_info.num_children: 1
+srun: tree_sock_addr: /tmp/sock.pmi2.3.0; tree children(nnodes): 1
+srun: mpi/pmi2: srun pmi port: 42220
+srun: nodeid: 4520474; this_node: launcher; num_children: 0; kvs_seq: 1
+srun: _realloc_handler: argc: 27
+srun: argv[i]: /home/emily/nfs/workspace/isamoa/bin/samoa_swe_noomp_gnu
+srun: argv[i]: -sections
+srun: argv[i]: 1
+srun: argv[i]: -lbsplit
+srun: argv[i]: -courant
+srun: argv[i]: 0.95
+srun: argv[i]: -threads
+srun: argv[i]: 1
+srun: argv[i]: -tout
+srun: argv[i]: 120
+srun: argv[i]: -dmin
+srun: argv[i]: 0
+srun: argv[i]: -dmax
+srun: argv[i]: 20
+srun: argv[i]: -tmax
+srun: argv[i]: 10800
+srun: argv[i]: -fdispl
+srun: argv[i]: /home/emily/nfs/workspace/samoa-data/tohoku_static/displ.nc
+srun: argv[i]: -xmloutput
+srun: argv[i]: .true.
+srun: argv[i]: -stestpoints
+srun: argv[i]: "545735.266126
+srun: argv[i]: 62716.4740303,935356.566012
+srun: argv[i]: -817289.628677,1058466.21575
+srun: argv[i]: 765077.767857"
+srun: argv[i]: -output_dir
+srun: argv[i]: /home/emily/nfs/workspace/isamoa/output/swe_impi
+srun: _realloc_handler: job_step_id: 0
+srun: env[0]=LC_PAPER=en_US.UTF-8
+srun: env[1]=XDG_VTNR=7
+srun: env[2]=XDG_SESSION_ID=c2
+srun: env[3]=LC_ADDRESS=en_US.UTF-8
+srun: env[4]=CLUTTER_IM_MODULE=xim
+srun: env[5]=LC_MONETARY=en_US.UTF-8
+srun: env[6]=XDG_GREETER_DATA_DIR=/var/lib/lightdm-data/emily
+srun: env[7]=GPG_AGENT_INFO=/home/emily/.gnupg/S.gpg-agent:0:1
+srun: env[8]=SHELL=/bin/bash
+srun: env[9]=VTE_VERSION=4205
+srun: env[10]=TERM=xterm-256color
+srun: env[11]=SLURM_MPI_TYPE=pmi2
+srun: env[12]=QT_LINUX_ACCESSIBILITY_ALWAYS_ON=1
+srun: env[13]=LC_NUMERIC=en_US.UTF-8
+srun: env[14]=WINDOWID=96469002
+srun: env[15]=GNOME_KEYRING_CONTROL=
+srun: env[16]=UPSTART_SESSION=unix:abstract=/com/ubuntu/upstart-session/1000/3511
+srun: env[17]=GTK_MODULES=gail:atk-bridge:unity-gtk-module
+srun: env[18]=USER=emily
+srun: env[19]=QT_ACCESSIBILITY=1
+srun: env[20]=LC_TELEPHONE=en_US.UTF-8
+srun: env[21]=LS_COLORS=rs=0:di=01;34:ln=01;36:mh=00:pi=40;33:so=01;35:do=01;35:bd=40;33;01:cd=40;33;01:or=40;31;01:mi=00:su=37;41:sg=30;43:ca=30;41:tw=30;42:ow=34;42:st=37;44:ex=01;32:*.tar=01;31:*.tgz=01;31:*.arc=01;31:*.arj=01;31:*.taz=01;31:*.lha=01;31:*.lz4=01;31:*.lzh=01;31:*.lzma=01;31:*.tlz=01;31:*.txz=01;31:*.tzo=01;31:*.t7z=01;31:*.zip=01;31:*.z=01;31:*.Z=01;31:*.dz=01;31:*.gz=01;31:*.lrz=01;31:*.lz=01;31:*.lzo=01;31:*.xz=01;31:*.bz2=01;31:*.bz=01;31:*.tbz=01;31:*.tbz2=01;31:*.tz=01;31:*.deb=01;31:*.rpm=01;31:*.jar=01;31:*.war=01;31:*.ear=01;31:*.sar=01;31:*.rar=01;31:*.alz=01;31:*.ace=01;31:*.zoo=01;31:*.cpio=01;31:*.7z=01;31:*.rz=01;31:*.cab=01;31:*.jpg=01;35:*.jpeg=01;35:*.gif=01;35:*.bmp=01;35:*.pbm=01;35:*.pgm=01;35:*.ppm=01;35:*.tga=01;35:*.xbm=01;35:*.xpm=01;35:*.tif=01;35:*.tiff=01;35:*.png=01;35:*.svg=01;35:*.svgz=01;35:*.mng=01;35:*.pcx=01;35:*.mov=01;35:*.mpg=01;35:*.mpeg=01;35:*.m2v=01;35:*.mkv=01;35:*.webm=01;35:*.ogm=01;35:*.mp4=01;35:*.m4v=01;35:*.mp4v=01;35:*.vob=01;35:*.qt=01;35:*.nuv=01;35:*.wmv=01;35:*.asf=01;35:*.rm=01;35:*.rmvb=01;35:*.flc=01;35:*.avi=01;35:*.fli=01;35:*.flv=01;35:*.gl=01;35:*.dl=01;35:*.xcf=01;35:*.xwd=01;35:*.yuv=01;35:*.cgm=01;35:*.emf=01;35:*.ogv=01;35:*.ogx=01;35:*.aac=00;36:*.au=00;36:*.flac=00;36:*.m4a=00;36:*.mid=00;36:*.midi=00;36:*.mka=00;36:*.mp3=00;36:*.mpc=00;36:*.ogg=00;36:*.ra=00;36:*.wav=00;36:*.oga=00;36:*.opus=00;36:*.spx=00;36:*.xspf=00;36:
+srun: env[22]=LD_LIBRARY_PATH=/home/emily/nfs/install/lib:/home/emily/install/x10-2.6.0/x10.dist/stdlib/lib:/home/emily/install/x10-2.6.0/x10.dist/lib:/home/emily/workspace/bayesifsg/lib/SGpp/lib/sgpp:
+srun: env[23]=XDG_SESSION_PATH=/org/freedesktop/DisplayManager/Session0
+srun: env[24]=XDG_SEAT_PATH=/org/freedesktop/DisplayManager/Seat0
+srun: env[25]=SSH_AUTH_SOCK=/run/user/1000/keyring/ssh
+srun: env[26]=DEFAULTS_PATH=/usr/share/gconf/ubuntu.default.path
+srun: env[27]=XDG_CONFIG_DIRS=/etc/xdg/xdg-ubuntu:/usr/share/upstart/xdg:/etc/xdg
+srun: env[28]=PATH=/home/emily/nfs/install/sbin:/home/emily/nfs/install/bin:/home/emily/install/x10-2.6.0/x10.dist/bin:/home/emily/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin
+srun: env[29]=DESKTOP_SESSION=ubuntu
+srun: env[30]=QT_QPA_PLATFORMTHEME=appmenu-qt5
+srun: env[31]=QT_IM_MODULE=ibus
+srun: env[32]=LC_IDENTIFICATION=en_US.UTF-8
+srun: env[33]=JOB=gnome-session
+srun: env[34]=PWD=/media/DATA/nfs/workspace/isamoa
+srun: env[35]=XDG_SESSION_TYPE=x11
+srun: env[36]=XMODIFIERS=@im=ibus
+srun: env[37]=JAVA_HOME=/usr/lib/jvm/java-8-oracle
+srun: env[38]=LANG=en_US.UTF-8
+srun: env[39]=GNOME_KEYRING_PID=
+srun: env[40]=MANDATORY_PATH=/usr/share/gconf/ubuntu.mandatory.path
+srun: env[41]=GDM_LANG=en_US
+srun: env[42]=LC_MEASUREMENT=en_US.UTF-8
+srun: env[43]=IM_CONFIG_PHASE=1
+srun: env[44]=COMPIZ_CONFIG_PROFILE=ubuntu
+srun: env[45]=PAPERSIZE=letter
+srun: env[46]=GDMSESSION=ubuntu
+srun: env[47]=GTK2_MODULES=overlay-scrollbar
+srun: env[48]=SESSIONTYPE=gnome-session
+srun: env[49]=XDG_SEAT=seat0
+srun: env[50]=HOME=/home/emily
+srun: env[51]=SHLVL=2
+srun: env[52]=LANGUAGE=en_US
+srun: env[53]=GNOME_DESKTOP_SESSION_ID=this-is-deprecated
+srun: env[54]=UPSTART_INSTANCE=
+srun: env[55]=LOGNAME=emily
+srun: env[56]=XDG_SESSION_DESKTOP=ubuntu
+srun: env[57]=UPSTART_EVENTS=started starting
+srun: env[58]=QT4_IM_MODULE=xim
+srun: env[59]=XDG_DATA_DIRS=/usr/share/ubuntu:/usr/share/gnome:/usr/local/share/:/usr/share/:/var/lib/snapd/desktop
+srun: env[60]=DBUS_SESSION_BUS_ADDRESS=unix:abstract=/tmp/dbus-0slctEZreG
+srun: env[61]=LESSOPEN=| /usr/bin/lesspipe %s
+srun: env[62]=UPSTART_JOB=unity-settings-daemon
+srun: env[63]=INSTANCE=Unity
+srun: env[64]=DISPLAY=:0
+srun: env[65]=XDG_RUNTIME_DIR=/run/user/1000
+srun: env[66]=GTK_IM_MODULE=ibus
+srun: env[67]=XDG_CURRENT_DESKTOP=Unity
+srun: env[68]=LC_TIME=en_US.UTF-8
+srun: env[69]=LESSCLOSE=/usr/bin/lesspipe %s %s
+srun: env[70]=XAUTHORITY=/home/emily/.Xauthority
+srun: env[71]=LC_NAME=en_US.UTF-8
+srun: env[72]=_=/home/emily/nfs/install/bin/srun
+srun: env[73]=SLURM_RLIMIT_CPU=18446744073709551615
+srun: env[74]=SLURM_RLIMIT_FSIZE=18446744073709551615
+srun: env[75]=SLURM_RLIMIT_DATA=18446744073709551615
+srun: env[76]=SLURM_RLIMIT_STACK=8388608
+srun: env[77]=SLURM_RLIMIT_CORE=0
+srun: env[78]=SLURM_RLIMIT_RSS=18446744073709551615
+srun: env[79]=SLURM_RLIMIT_NPROC=63265
+srun: env[80]=SLURM_RLIMIT_NOFILE=1024
+srun: env[81]=SLURM_RLIMIT_MEMLOCK=65536
+srun: env[82]=SLURM_RLIMIT_AS=18446744073709551615
+srun: env[83]=SLURM_PRIO_PROCESS=0
+srun: env[84]=SRUN_DEBUG=3
+srun: env[85]=SLURM_UMASK=0002
+srun: env[86]=SLURM_CLUSTER_NAME=cluster
+srun: env[87]=SLURM_SUBMIT_DIR=/media/DATA/nfs/workspace/isamoa
+srun: env[88]=SLURM_SUBMIT_HOST=EMOLATUBU16
+srun: env[89]=SLURM_JOB_NAME=/home/emily/nfs/workspace/isamoa/bin/samoa_swe_noomp_gnu
+srun: env[90]=SLURM_JOB_CPUS_PER_NODE=2
+srun: env[91]=SLURM_NTASKS=2
+srun: env[92]=SLURM_NPROCS=2
+srun: env[93]=SLURM_DISTRIBUTION=block
+srun: env[94]=SLURM_JOB_ID=3
+srun: env[95]=SLURM_JOBID=3
+srun: env[96]=SLURM_STEP_ID=0
+srun: env[97]=SLURM_STEPID=0
+srun: env[98]=SLURM_NNODES=1
+srun: env[99]=SLURM_JOB_NUM_NODES=1
+srun: env[100]=SLURM_NODELIST=10.0.0.2
+srun: env[101]=SLURM_JOB_PARTITION=vbox
+srun: env[102]=SLURM_TASKS_PER_NODE=2
+srun: env[103]=SLURM_SRUN_COMM_PORT=42585
+srun: env[104]=SLURM_STEP_NODELIST=10.0.0.2
+srun: env[105]=SLURM_JOB_NODELIST=10.0.0.2
+srun: env[106]=SLURM_STEP_NUM_NODES=1
+srun: env[107]=SLURM_STEP_NUM_TASKS=2
+srun: env[108]=SLURM_STEP_TASKS_PER_NODE=2
+srun: env[109]=SLURM_STEP_LAUNCHER_PORT=42585
+srun: env[110]=SLURM_PMI2_SRUN_PORT=42220
+srun: env[111]=SLURM_PMI2_STEP_NODES=10.0.0.2
+srun: env[112]=SLURM_PMI2_PROC_MAPPING=(vector,(0,1,2))
+srun: _realloc_handler: node count: 1
+srun: _realloc_handler: task count: 2
+srun: _realloc_handler: putting "(vector,(0,2,2))" into the launch command's updated process mapping
+srun: _realloc_handler: putting "10.0.0.[1-2]" into the launch command's new node allocation
+srun: _realloc_handler: cpus_per_task: 1 (currently not controlled over the realloc message)
+srun: _realloc_handler: nodes: 10.0.0.2
+srun: launch.tasks_to_launch[0]=2
+srun: _realloc_handler: ctx->step_req->num_tasks: 2
+srun: _realloc_handler: launch.nnodes: 1
+srun: client_io_handler_create
+srun: cio num_tasks: 2; num_nodes: 1
+srun: initialized stdio listening socket, port 34106
+srun: _create_listensock_eio
+srun: _realloc_handler: all step metadata updated; launching in: 10.0.0.2
+srun: _print_launch_msg
+srun: task id: 0
+srun: task id: 1
+srun: launching 3.0 on host 10.0.0.2, 2 tasks: [0-1]
+srun: _launch_tasks in allocate.c: sending the message to the nodes involved in this launch: 10.0.0.2
+srun: start_msg_tree with host_count: 1; hostlist_count(hl): 1;
+srun: route_split_hostlist_treewidth
+srun: set_span: total: 1; tree_width = 50
+srun: hostset_count: 1; tree_width: 50
+srun: name: 10.0.0.2
+srun: ROUTE: ... sublist[0] 10.0.0.2
+srun: nhl incermented: 1
+srun: after route_g_split_hostlist: hostlist_count(hl): 0; hl_count: 1
+srun: _start_msg_tree_internal
+srun: j=0; hl_count: 1
+srun: sp_hl defined
+srun: incrementing fwd_tree->p_thr_count: 0
+srun: updated (inc) fwd_tree->p_thr_count: 1
+srun: out _start_msg_tree_internal
+srun: after _start_msg_tree_internal: hostlist_count(hl): 0; hl_count: 1
+srun: getting the mutex
+srun: GOT the mutex
+srun: Tree head got back 0 looking for 1; thr_count = 1
+srun: ------------- cond wait with thr_count: 1
+srun: _fwd_tree_thread: sending message to: 10.0.0.2
+srun: message type in _fwd_tree_thread: 6001
+srun: timeout set to: 110000
+srun: send_msg.forward.nodelist = NULL
+srun: Tree sending to 10.0.0.2
+srun: before slurm_send_addr_recv_msgs
+srun: packing in version 15.08
+srun: packed adapt_status: 3
+srun: ------------- address: 10.0.0.2; type: 6001 (REQUEST_LAUNCH_TASKS)
+srun: ------------- unpacking: RESPONSE_SLURM_RC
+srun: AFTER slurm_send_addr_recv_msgs
+srun: ret_list set
+srun: ------------- after cond wait with thr_count: 1
+srun: Tree head got back 1
+srun: ------------- cond wait with thr_count: 1
+srun: in _destroy_tree_fwd
+srun: getting fwd_tree->tree_mutex
+srun: decrementing fwd_tree->p_thr_count: 1
+srun: updated (dec) fwd_tree->p_thr_count: 0; signal: fwd_tree->notify
+srun: releasing fwd_tree->tree_mutex
+srun: ------------- after cond wait with thr_count: 0
+srun: Tree head got back 1
+srun: _launch_tasks in allocate.c: launch returned msg_rc=0 err=0 type=8001
+srun: _realloc_handler: calling slurm_step_launch_wait_start in the launch plugin
+srun: out _destroy_tree_fwd
+srun: Called _listening_socket_read
+srun: _handle_io_init_msg
+srun: Activity on IO listening socket 25
+srun: Accepted IO connection: ip=10.0.0.2 sd=26
+srun: _read_io_init_msg
+srun: step_launch_clear_questionable_state
+slurmstepd: couldn't chdir to `/media/DATA/nfs/workspace/isamoa': No such file or directory: going to /tmp instead
+srun: ------------- unpacking: RESPONSE_LAUNCH_TASKS
+srun: _handle_msg in api/steplaunch.c
+srun: received task launch
+srun: _launch_handler
+srun: _launch_handler: bit size: 2
+srun: _launch_handler: count of pids: 2
+srun: _launch_handler: msg->task_ids[0]=0
+srun: _launch_handler: msg->task_ids[1]=1
+srun: _launch_handler: locked
+srun: _launch_handler: setting bits in the else block
+srun: _launch_handler: done setting bits in the else block
+srun: calling the task_start callback
+srun: _task_start in launch/slurm/launch_slurm.c
+srun: marking TS_START_SUCCESS
+srun: task_state_update(taskid=0, TS_START_SUCCESS)
+srun: marking TS_START_SUCCESS
+srun: task_state_update(taskid=1, TS_START_SUCCESS)
+srun: done calling the task_start callback
+srun: _launch_handler: cond broadcast and unlocking
+srun: sls->abort not set
+srun: _cr_notify_step_launch
+srun: _realloc_handler: start successful, setting new state to running locally at srun
+srun: _realloc_handler: mpir_set_executable_names; SPMD?
+srun: task:0, host:10.0.0.2, pid:2619, executable:/home/emily/nfs/workspace/isamoa/bin/samoa_swe_noomp_gnu
+srun: task:1, host:10.0.0.2, pid:2620, executable:/home/emily/nfs/workspace/isamoa/bin/samoa_swe_noomp_gnu
+srun: slurm_step_launch_abort
+srun: forward signal 995 to job 3
+srun: start_msg_tree with host_count: 1; hostlist_count(hl): 1;
+srun: route_split_hostlist_treewidth
+srun: set_span: total: 1; tree_width = 50
+srun: hostset_count: 1; tree_width: 50
+srun: name: 10.0.0.2
+srun: ROUTE: ... sublist[0] 10.0.0.2
+srun: nhl incermented: 1
+srun: after route_g_split_hostlist: hostlist_count(hl): 0; hl_count: 1
+srun: _start_msg_tree_internal
+srun: j=0; hl_count: 1
+srun: sp_hl defined
+srun: incrementing fwd_tree->p_thr_count: 0
+srun: updated (inc) fwd_tree->p_thr_count: 1
+srun: out _start_msg_tree_internal
+srun: after _start_msg_tree_internal: hostlist_count(hl): 0; hl_count: 1
+srun: getting the mutex
+srun: GOT the mutex
+srun: Tree head got back 0 looking for 1; thr_count = 1
+srun: ------------- cond wait with thr_count: 1
+srun: _fwd_tree_thread: sending message to: 10.0.0.2
+srun: message type in _fwd_tree_thread: 6004
+srun: timeout set to: 100000
+srun: send_msg.forward.nodelist = NULL
+srun: Tree sending to 10.0.0.2
+srun: before slurm_send_addr_recv_msgs
+srun: ------------- address: 10.0.0.2; type: 6004 (REQUEST_SIGNAL_TASKS)
+srun: ------------- unpacking: RESPONSE_SLURM_RC
+srun: AFTER slurm_send_addr_recv_msgs
+srun: ret_list set
+srun: ------------- after cond wait with thr_count: 1
+srun: Tree head got back 1
+srun: ------------- cond wait with thr_count: 1
+srun: in _destroy_tree_fwd
+srun: getting fwd_tree->tree_mutex
+srun: decrementing fwd_tree->p_thr_count: 1
+srun: updated (dec) fwd_tree->p_thr_count: 0; signal: fwd_tree->notify
+srun: releasing fwd_tree->tree_mutex
+srun: ------------- after cond wait with thr_count: 0
+srun: Tree head got back 1
+srun: _realloc_handler: updated allocation string to: 10.0.0.[1-2]
+srun: _realloc_handler: updated step allocation string to: 10.0.0.[1-2]
+srun: _realloc_handler: updated task count to: 4
+srun: _realloc_handler: resizing the job step metadata to match expected total size after expansion
+srun: calling launch_g_step_resize in libsrun/allocate.c
+srun: launch_p_step_resize new size: 4
+srun: reallocation message handled successfully
+srun: out _destroy_tree_fwd
+srun: mpi/pmi2: got tree cmd: 0(TREE_CMD_KVS_FENCE)
+srun: mpi/pmi2: in _handle_kvs_fence: seq: 1; kvs_seq: 1
+srun: mpi/pmi2: in _handle_kvs_fence, from node 0(10.0.0.2) representing 1 offspring, seq=1
+srun: replaced it with node id: 0
+srun: _handle_kvs_fence: at srun:
+srun: job_info (pmi2_job_info_t) object current data:
+srun: jobid: 3
+srun: stepid: 0
+srun: nnodes: 1
+srun: nodeid: -1
+srun: ntasks: 2
+srun: ltasks: 0
+srun: adapt_status: 0
+srun: spawn_seq: 0
+srun: pmi_debugged: 0
+srun: step_nodelist: 10.0.0.2
+srun: proc_mapping: (vector,(0,1,2))
+srun: pmi_jobid: 3.0
+srun: spawner_jobid: (null)
+srun: srun: resetting kvs before temp_kvs_send: 0
+srun: temp_kvs_send in srun; step nodelist: 10.0.0.2; kvs_seq = 0
+srun: temp_kvs_send: kvs_seq incremented: 1
+srun: start_msg_tree with host_count: 1; hostlist_count(hl): 1;
+srun: route_split_hostlist_treewidth
+srun: set_span: total: 1; tree_width = 50
+srun: hostset_count: 1; tree_width: 50
+srun: name: 10.0.0.2
+srun: ROUTE: ... sublist[0] 10.0.0.2
+srun: nhl incermented: 1
+srun: after route_g_split_hostlist: hostlist_count(hl): 0; hl_count: 1
+srun: _start_msg_tree_internal
+srun: j=0; hl_count: 1
+srun: sp_hl defined
+srun: incrementing fwd_tree->p_thr_count: 0
+srun: updated (inc) fwd_tree->p_thr_count: 1
+srun: out _start_msg_tree_internal
+srun: after _start_msg_tree_internal: hostlist_count(hl): 0; hl_count: 1
+srun: _fwd_tree_thread: sending message to: 10.0.0.2
+srun: getting the mutex
+srun: GOT the mutex
+srun: Tree head got back 0 looking for 1; thr_count = 1
+srun: ------------- cond wait with thr_count: 1
+srun: message type in _fwd_tree_thread: 5029
+srun: timeout set to: 100000
+srun: send_msg.forward.nodelist = NULL
+srun: Tree sending to 10.0.0.2
+srun: before slurm_send_addr_recv_msgs
+srun: ------------- address: 10.0.0.2; type: 5029 (REQUEST_FORWARD_DATA)
+srun: ------------- unpacking: RESPONSE_SLURM_RC
+srun: AFTER slurm_send_addr_recv_msgs
+srun: ret_list set
+srun: ------------- after cond wait with thr_count: 1
+srun: Tree head got back 1
+srun: ------------- cond wait with thr_count: 1
+srun: in _destroy_tree_fwd
+srun: getting fwd_tree->tree_mutex
+srun: decrementing fwd_tree->p_thr_count: 1
+srun: updated (dec) fwd_tree->p_thr_count: 0; signal: fwd_tree->notify
+srun: releasing fwd_tree->tree_mutex
+srun: ------------- after cond wait with thr_count: 0
+srun: Tree head got back 1
+srun: nodeid: 146; this_node: launcher; num_children: 32611; kvs_seq: 1
+srun: mpi/pmi2: out _handle_kvs_fence, tasks_to_wait=0, children_to_wait=0, kvs_seq=2
+srun: out _destroy_tree_fwd
+srun: mpi/pmi2: got tree cmd: 4(TREE_CMD_NAME_PUBLISH)
+srun: mpi/pmi2: got tree cmd: 9(TREE_CMD_CHILDREN_READY)
+srun: mpi/pmi2: in _handle_children_ready
+srun: mpi/pmi2: kvs_seq: 2
+srun: notify_pre_existing_job_nodes
+srun: sending type: 0; step id: 0; job id: 3; node count: 1
+srun: sending node[0] status: 4;
+srun: sending tasks per node: 2 on 1 nodes
+srun: sending node[0] task[0] status: 4;
+srun: sending node[0] task[1] status: 4;
+srun: node id 0 ignored (-1)
+srun: node id 1 ignored (-1)
+srun: sending updated mapping to preexisting processes: (vector,(0,2,2))
+srun: sending complete nodelist to preexisting processes: 10.0.0.[1-2]
+srun: nodes involved:
+srun: host 0: 10.0.0.1
+srun: calling p_mpi_hook_client_reconfigure: new_node_allocation: 10.0.0.[1-2]
+srun: p_mpi_hook_client_reconfigure
+srun: job_info (pmi2_job_info_t) object current data:
+srun: jobid: 3
+srun: stepid: 0
+srun: nnodes: 1
+srun: nodeid: -1
+srun: ntasks: 2
+srun: ltasks: 0
+srun: adapt_status: 0
+srun: spawn_seq: 0
+srun: pmi_debugged: 0
+srun: step_nodelist: 10.0.0.2
+srun: proc_mapping: (vector,(0,1,2))
+srun: pmi_jobid: 3.0
+srun: spawner_jobid: (null)
+srun: data received to reconfigure the pmi:
+srun: status: 6
+srun: job_id: 3
+srun: step_id: 0
+srun: ----- allocation data
+srun: node_count: 2
+srun: node_list: 10.0.0.[1-2]
+srun: task_count: 4
+srun: process_mapping: (vector,(0,2,2))
+srun: updated: job_info.nnodes: 2; tree_info.num_children: 2
+srun: updated job_info.ntasks: 4
+srun: updated job_info.step_nodelist: 10.0.0.[1-2]
+srun: updated job_info.proc_mapping: (vector,(0,2,2))
+srun: NOT computed new nodeid
+srun: 	job_info (pmi2_job_info_t) object updated data:
+srun: 	jobid: 3
+srun: 	stepid: 0
+srun: 	nnodes: 2
+srun: 	nodeid: -1
+srun: 	ntasks: 4
+srun: 	ltasks: 0
+srun: 	adapt_status: 0
+srun: 	spawn_seq: 0
+srun: 	pmi_debugged: 0
+srun: 	step_nodelist: 10.0.0.[1-2]
+srun: 	proc_mapping: (vector,(0,2,2))
+srun: 	pmi_jobid: 3.0
+srun: 	spawner_jobid: (null)
+srun: tree width from slurm_get_tree_width.: 50
+srun: updated tree_info.children_kvs_seq size: 4
+srun: sending the children ready notification to parent PG nodes
+srun: start_msg_tree with host_count: 1; hostlist_count(hl): 1;
+srun: route_split_hostlist_treewidth
+srun: set_span: total: 1; tree_width = 50
+srun: hostset_count: 1; tree_width: 50
+srun: name: 10.0.0.1
+srun: ROUTE: ... sublist[0] 10.0.0.1
+srun: nhl incermented: 1
+srun: after route_g_split_hostlist: hostlist_count(hl): 0; hl_count: 1
+srun: _start_msg_tree_internal
+srun: j=0; hl_count: 1
+srun: sp_hl defined
+srun: incrementing fwd_tree->p_thr_count: 0
+srun: updated (inc) fwd_tree->p_thr_count: 1
+srun: out _start_msg_tree_internal
+srun: after _start_msg_tree_internal: hostlist_count(hl): 0; hl_count: 1
+srun: getting the mutex
+srun: GOT the mutex
+srun: Tree head got back 0 looking for 1; thr_count = 1
+srun: ------------- cond wait with thr_count: 1
+srun: _fwd_tree_thread: sending message to: 10.0.0.1
+srun: message type in _fwd_tree_thread: 6020
+srun: timeout set to: 100
+srun: send_msg.forward.nodelist = NULL
+srun: Tree sending to 10.0.0.1
+srun: before slurm_send_addr_recv_msgs
+srun: packing adapt children ready message
+srun: ------------- address: 10.0.0.1; type: 6020 (REQUEST_ADAPT_CHILDREN_READY)
+srun: ------------- unpacking: RESPONSE_SLURM_RC
+srun: AFTER slurm_send_addr_recv_msgs
+srun: ret_list set
+srun: ------------- after cond wait with thr_count: 1
+srun: Tree head got back 1
+srun: ------------- cond wait with thr_count: 1
+srun: in _destroy_tree_fwd
+srun: getting fwd_tree->tree_mutex
+srun: decrementing fwd_tree->p_thr_count: 1
+srun: updated (dec) fwd_tree->p_thr_count: 0; signal: fwd_tree->notify
+srun: releasing fwd_tree->tree_mutex
+srun: out _destroy_tree_fwd
+srun: ------------- after cond wait with thr_count: 0
+srun: Tree head got back 1
+srun: children ready notification returned msg_rc=0 err=0 type=8001
+srun: mpi/pmi2: out _handle_children_ready
+srun: mpi/pmi2: got tree cmd: 6(TREE_CMD_NAME_LOOKUP)
+srun: mpi/pmi2: got tree cmd: 5(TREE_CMD_NAME_UNPUBLISH)
+srun: mpi/pmi2: got tree cmd: 0(TREE_CMD_KVS_FENCE)
+srun: mpi/pmi2: in _handle_kvs_fence: seq: 2; kvs_seq: 2
+srun: mpi/pmi2: in _handle_kvs_fence, from node 0(10.0.0.1) representing 1 offspring, seq=2
+srun: replaced it with node id: 0
+srun: _handle_kvs_fence: at srun:
+srun: job_info (pmi2_job_info_t) object current data:
+srun: jobid: 3
+srun: stepid: 0
+srun: nnodes: 2
+srun: nodeid: -1
+srun: ntasks: 4
+srun: ltasks: 0
+srun: adapt_status: 0
+srun: spawn_seq: 0
+srun: pmi_debugged: 0
+srun: step_nodelist: 10.0.0.[1-2]
+srun: proc_mapping: (vector,(0,2,2))
+srun: pmi_jobid: 3.0
+srun: spawner_jobid: (null)
+srun: mpi/pmi2: out _handle_kvs_fence, tasks_to_wait=0, children_to_wait=1, kvs_seq=2
+srun: mpi/pmi2: got tree cmd: 0(TREE_CMD_KVS_FENCE)
+srun: mpi/pmi2: in _handle_kvs_fence: seq: 2; kvs_seq: 2
+srun: mpi/pmi2: in _handle_kvs_fence, from node 0(10.0.0.2) representing 1 offspring, seq=2
+srun: replaced it with node id: 1
+srun: _handle_kvs_fence: at srun:
+srun: job_info (pmi2_job_info_t) object current data:
+srun: jobid: 3
+srun: stepid: 0
+srun: nnodes: 2
+srun: nodeid: -1
+srun: ntasks: 4
+srun: ltasks: 0
+srun: adapt_status: 0
+srun: spawn_seq: 0
+srun: pmi_debugged: 0
+srun: step_nodelist: 10.0.0.[1-2]
+srun: proc_mapping: (vector,(0,2,2))
+srun: pmi_jobid: 3.0
+srun: spawner_jobid: (null)
+srun: srun: resetting kvs before temp_kvs_send: 0
+srun: temp_kvs_send in srun; step nodelist: 10.0.0.[1-2]; kvs_seq = 0
+srun: temp_kvs_send: kvs_seq incremented: 1
+srun: start_msg_tree with host_count: 2; hostlist_count(hl): 2;
+srun: route_split_hostlist_treewidth
+srun: set_span: total: 2; tree_width = 50
+srun: hostset_count: 2; tree_width: 50
+srun: name: 10.0.0.1
+srun: ROUTE: ... sublist[0] 10.0.0.1
+srun: nhl incermented: 1
+srun: name: 10.0.0.2
+srun: ROUTE: ... sublist[1] 10.0.0.2
+srun: nhl incermented: 2
+srun: after route_g_split_hostlist: hostlist_count(hl): 0; hl_count: 2
+srun: _start_msg_tree_internal
+srun: j=0; hl_count: 2
+srun: sp_hl defined
+srun: incrementing fwd_tree->p_thr_count: 0
+srun: updated (inc) fwd_tree->p_thr_count: 1
+srun: j=1; hl_count: 2
+srun: sp_hl defined
+srun: incrementing fwd_tree->p_thr_count: 1
+srun: updated (inc) fwd_tree->p_thr_count: 2
+srun: out _start_msg_tree_internal
+srun: after _start_msg_tree_internal: hostlist_count(hl): 0; hl_count: 2
+srun: getting the mutex
+srun: GOT the mutex
+srun: Tree head got back 0 looking for 2; thr_count = 2
+srun: ------------- cond wait with thr_count: 2
+srun: _fwd_tree_thread: sending message to: 10.0.0.2
+srun: message type in _fwd_tree_thread: 5029
+srun: timeout set to: 100000
+srun: send_msg.forward.nodelist = NULL
+srun: Tree sending to 10.0.0.2
+srun: before slurm_send_addr_recv_msgs
+srun: _fwd_tree_thread: sending message to: 10.0.0.1
+srun: message type in _fwd_tree_thread: 5029
+srun: timeout set to: 100000
+srun: send_msg.forward.nodelist = NULL
+srun: Tree sending to 10.0.0.1
+srun: before slurm_send_addr_recv_msgs
+srun: ------------- address: 10.0.0.2; type: 5029 (REQUEST_FORWARD_DATA)
+srun: ------------- address: 10.0.0.1; type: 5029 (REQUEST_FORWARD_DATA)
+srun: ------------- unpacking: RESPONSE_SLURM_RC
+srun: AFTER slurm_send_addr_recv_msgs
+srun: ret_list set
+srun: ------------- after cond wait with thr_count: 2
+srun: Tree head got back 1
+srun: ------------- cond wait with thr_count: 2
+srun: ------------- unpacking: RESPONSE_SLURM_RC
+srun: AFTER slurm_send_addr_recv_msgs
+srun: ret_list set
+srun: ------------- after cond wait with thr_count: 2
+srun: Tree head got back 2
+srun: ------------- cond wait with thr_count: 2
+srun: in _destroy_tree_fwd
+srun: getting fwd_tree->tree_mutex
+srun: decrementing fwd_tree->p_thr_count: 2
+srun: updated (dec) fwd_tree->p_thr_count: 1; signal: fwd_tree->notify
+srun: releasing fwd_tree->tree_mutex
+srun: out _destroy_tree_fwd
+srun: ------------- after cond wait with thr_count: 1
+srun: Tree head got back 2
+srun: ------------- cond wait with thr_count: 1
+srun: in _destroy_tree_fwd
+srun: getting fwd_tree->tree_mutex
+srun: decrementing fwd_tree->p_thr_count: 1
+srun: updated (dec) fwd_tree->p_thr_count: 0; signal: fwd_tree->notify
+srun: releasing fwd_tree->tree_mutex
+srun: out _destroy_tree_fwd
+srun: ------------- after cond wait with thr_count: 0
+srun: Tree head got back 2
+srun: nodeid: 286; this_node: 10.0.0.0; num_children: 32611; kvs_seq: 1
+srun: mpi/pmi2: out _handle_kvs_fence, tasks_to_wait=0, children_to_wait=0, kvs_seq=2
+srun: mpi/pmi2: got tree cmd: 11(TREE_CMD_ADAPT_COMMIT_DONE)
+srun: mpi/pmi2: in _handle_adapt_commit_done
+srun: received job_id: 3 from slurmd
+srun: --------- notify rtsched of adapt_commit_done 
+srun: packing REQUEST_ADAPT_COMMIT_DONE
+srun: ------------- address: 0.0.0.0; type: 5038 (REQUEST_ADAPT_COMMIT_DONE)
+srun: ------------- unpacking: RESPONSE_SLURM_RC
+srun: rc from rtsched: 0
+*** Error in `/home/emily/nfs/workspace/isamoa/bin/samoa_swe_noomp_gnu': free(): invalid pointer: 0x0000000000b69330 ***
+======= Backtrace: =========
+Assertion failed in file ../impi/src/mpid/ch3/channels/nemesis/src/ch3_progress.c at line 373: id >= 0 && id < MAX_PROGRESS_HOOKS && progress_hooks[id].active == FALSE && progress_hooks[id].func_ptr != NULL
+/lib/x86_64-linux-gnu/libc.so.6(+0x77725)[0x7fc107a8d725]
+/lib/x86_64-linux-gnu/libc.so.6(+0x7ff4a)[0x7fc107a95f4a]
+/lib/x86_64-linux-gnu/libc.so.6(cfree+0x4c)[0x7fc107a99abc]
+/home/emily/nfs/workspace/isamoa/bin/samoa_swe_noomp_gnu[0x4b17d4]
+/home/emily/nfs/workspace/isamoa/bin/samoa_swe_noomp_gnu[0x481f96]
+/home/emily/nfs/workspace/isamoa/bin/samoa_swe_noomp_gnu[0x40e04f]
+/home/emily/nfs/workspace/isamoa/bin/samoa_swe_noomp_gnu[0x408bb9]
+/home/emily/nfs/workspace/isamoa/bin/samoa_swe_noomp_gnu[0x402fda]
+/lib/x86_64-linux-gnu/libc.so.6(__libc_start_main+0xf0)[0x7fc107a36830]
+/home/emily/nfs/workspace/isamoa/bin/samoa_swe_noomp_gnu[0x403059]
+======= Memory map: ========
+00400000-0055d000 r-xp 00000000 00:2a 7340203                            /home/emily/nfs/workspace/isamoa/bin/samoa_swe_noomp_gnu
+0075c000-0075d000 r--p 0015c000 00:2a 7340203                            /home/emily/nfs/workspace/isamoa/bin/samoa_swe_noomp_gnu
+0075d000-0077d000 rw-p 0015d000 00:2a 7340203                            /home/emily/nfs/workspace/isamoa/bin/samoa_swe_noomp_gnu
+0077d000-00780000 rw-p 00000000 00:00 0 
+00b61000-00cf2000 rw-p 00000000 00:00 0                                  [heap]
+7fc0e8000000-7fc0e8021000 rw-p 00000000 00:00 0 
+7fc0e8021000-7fc0ec000000 ---p 00000000 00:00 0 
+7fc0ef37d000-7fc0fd8b8000 rw-p 00000000 00:00 0 
+7fc0fd8b8000-7fc0fe0d9000 rw-s 00000000 00:13 6                          /dev/shm/mpich_shar_tmpugaR0e (deleted)
+7fc0fe0d9000-7fc0fe0e2000 r-xp 00000000 fc:00 652038                     /lib/x86_64-linux-gnu/libcrypt-2.23.so
+7fc0fe0e2000-7fc0fe2e1000 ---p 00009000 fc:00 652038                     /lib/x86_64-linux-gnu/libcrypt-2.23.so
+7fc0fe2e1000-7fc0fe2e2000 r--p 00008000 fc:00 652038                     /lib/x86_64-linux-gnu/libcrypt-2.23.so
+7fc0fe2e2000-7fc0fe2e3000 rw-p 00009000 fc:00 652038                     /lib/x86_64-linux-gnu/libcrypt-2.23.so
+7fc0fe2e3000-7fc0fe311000 rw-p 00000000 00:00 0 
+7fc0fe311000-7fc0fe3e0000 r-xp 00000000 fc:00 784208                     /usr/lib/x86_64-linux-gnu/libsqlite3.so.0.8.6
+7fc0fe3e0000-7fc0fe5e0000 ---p 000cf000 fc:00 784208                     /usr/lib/x86_64-linux-gnu/libsqlite3.so.0.8.6
+7fc0fe5e0000-7fc0fe5e3000 r--p 000cf000 fc:00 784208                     /usr/lib/x86_64-linux-gnu/libsqlite3.so.0.8.6
+7fc0fe5e3000-7fc0fe5e5000 rw-p 000d2000 fc:00 784208                     /usr/lib/x86_64-linux-gnu/libsqlite3.so.0.8.6
+7fc0fe5e5000-7fc0fe5e6000 rw-p 00000000 00:00 0 
+7fc0fe5e6000-7fc0fe62c000 r-xp 00000000 fc:00 795660                     /usr/lib/x86_64-linux-gnu/libhx509.so.5.0.0
+7fc0fe62c000-7fc0fe82c000 ---p 00046000 fc:00 795660                     /usr/lib/x86_64-linux-gnu/libhx509.so.5.0.0
+7fc0fe82c000-7fc0fe82e000 r--p 00046000 fc:00 795660                     /usr/lib/x86_64-linux-gnu/libhx509.so.5.0.0
+7fc0fe82e000-7fc0fe830000 rw-p 00048000 fc:00 795660                     /usr/lib/x86_64-linux-gnu/libhx509.so.5.0.0
+7fc0fe830000-7fc0fe831000 rw-p 00000000 00:00 0 
+7fc0fe831000-7fc0fe83f000 r-xp 00000000 fc:00 795654                     /usr/lib/x86_64-linux-gnu/libheimbase.so.1.0.0
+7fc0fe83f000-7fc0fea3e000 ---p 0000e000 fc:00 795654                     /usr/lib/x86_64-linux-gnu/libheimbase.so.1.0.0
+7fc0fea3e000-7fc0fea3f000 r--p 0000d000 fc:00 795654                     /usr/lib/x86_64-linux-gnu/libheimbase.so.1.0.0
+7fc0fea3f000-7fc0fea40000 rw-p 0000e000 fc:00 795654                     /usr/lib/x86_64-linux-gnu/libheimbase.so.1.0.0
+7fc0fea40000-7fc0fea67000 r-xp 00000000 fc:00 795657                     /usr/lib/x86_64-linux-gnu/libwind.so.0.0.0
+7fc0fea67000-7fc0fec67000 ---p 00027000 fc:00 795657                     /usr/lib/x86_64-linux-gnu/libwind.so.0.0.0
+7fc0fec67000-7fc0fec68000 r--p 00027000 fc:00 795657                     /usr/lib/x86_64-linux-gnu/libwind.so.0.0.0
+7fc0fec68000-7fc0fec69000 rw-p 00028000 fc:00 795657                     /usr/lib/x86_64-linux-gnu/libwind.so.0.0.0
+7fc0fec69000-7fc0fec7e000 r-xp 00000000 fc:00 795645                     /usr/lib/x86_64-linux-gnu/libroken.so.18.1.0
+7fc0fec7e000-7fc0fee7d000 ---p 00015000 fc:00 795645                     /usr/lib/x86_64-linux-gnu/libroken.so.18.1.0
+7fc0fee7d000-7fc0fee7e000 r--p 00014000 fc:00 795645                     /usr/lib/x86_64-linux-gnu/libroken.so.18.1.0
+7fc0fee7e000-7fc0fee7f000 rw-p 00015000 fc:00 795645                     /usr/lib/x86_64-linux-gnu/libroken.so.18.1.0
+7fc0fee7f000-7fc0feeaf000 r-xp 00000000 fc:00 795651                     /usr/lib/x86_64-linux-gnu/libhcrypto.so.4.1.0
+7fc0feeaf000-7fc0ff0af000 ---p 00030000 fc:00 795651                     /usr/lib/x86_64-linux-gnu/libhcrypto.so.4.1.0
+7fc0ff0af000-7fc0ff0b0000 r--p 00030000 fc:00 795651                     /usr/lib/x86_64-linux-gnu/libhcrypto.so.4.1.0
+7fc0ff0b0000-7fc0ff0b1000 rw-p 00031000 fc:00 795651                     /usr/lib/x86_64-linux-gnu/libhcrypto.so.4.1.0
+7fc0ff0b1000-7fc0ff0b2000 rw-p 00000000 00:00 0 
+7fc0ff0b2000-7fc0ff151000 r-xp 00000000 fc:00 795648                     /usr/lib/x86_64-linux-gnu/libasn1.so.8.0.0
+7fc0ff151000-7fc0ff350000 ---p 0009f000 fc:00 795648                     /usr/lib/x86_64-linux-gnu/libasn1.so.8.0.0
+7fc0ff350000-7fc0ff351000 r--p 0009e000 fc:00 795648                     /usr/lib/x86_64-linux-gnu/libasn1.so.8.0.0
+7fc0ff351000-7fc0ff354000 rw-p 0009f000 fc:00 795648                     /usr/lib/x86_64-linux-gnu/libasn1.so.8.0.0
+7fc0ff354000-7fc0ff3d8000 r-xp 00000000 fc:00 795663                     /usr/lib/x86_64-linux-gnu/libkrb5.so.26.0.0
+7fc0ff3d8000-7fc0ff5d7000 ---p 00084000 fc:00 795663                     /usr/lib/x86_64-linux-gnu/libkrb5.so.26.0.0
+7fc0ff5d7000-7fc0ff5da000 r--p 00083000 fc:00 795663                     /usr/lib/x86_64-linux-gnu/libkrb5.so.26.0.0
+7fc0ff5da000-7fc0ff5dd000 rw-p 00086000 fc:00 795663                     /usr/lib/x86_64-linux-gnu/libkrb5.so.26.0.0
+7fc0ff5dd000-7fc0ff5de000 rw-p 00000000 00:00 0 
+7fc0ff5de000-7fc0ff5e6000 r-xp 00000000 fc:00 795666                     /usr/lib/x86_64-linux-gnu/libheimntlm.so.0.1.0
+7fc0ff5e6000-7fc0ff7e5000 ---p 00008000 fc:00 795666                     /usr/lib/x86_64-linux-gnu/libheimntlm.so.0.1.0
+7fc0ff7e5000-7fc0ff7e6000 r--p 00007000 fc:00 795666                     /usr/lib/x86_64-linux-gnu/libheimntlm.so.0.1.0
+7fc0ff7e6000-7fc0ff7e7000 rw-p 00008000 fc:00 795666                     /usr/lib/x86_64-linux-gnu/libheimntlm.so.0.1.0
+7fc0ff7e7000-7fc0ff7ea000 r-xp 00000000 fc:00 656654                     /lib/x86_64-linux-gnu/libkeyutils.so.1.5
+7fc0ff7ea000-7fc0ff9e9000 ---p 00003000 fc:00 656654                     /lib/x86_64-linux-gnu/libkeyutils.so.1.5
+7fc0ff9e9000-7fc0ff9ea000 r--p 00002000 fc:00 656654                     /lib/x86_64-linux-gnu/libkeyutils.so.1.5
+7fc0ff9ea000-7fc0ff9eb000 rw-p 00003000 fc:00 656654                     /lib/x86_64-linux-gnu/libkeyutils.so.1.5
+7fc0ff9eb000-7fc0ff9f2000 r-xp 00000000 fc:00 784168                     /usr/lib/x86_64-linux-gnu/libffi.so.6.0.4
+7fc0ff9f2000-7fc0ffbf1000 ---p 00007000 fc:00 784168                     /usr/lib/x86_64-linux-gnu/libffi.so.6.0.4
+7fc0ffbf1000-7fc0ffbf2000 r--p 00006000 fc:00 784168                     /usr/lib/x86_64-linux-gnu/libffi.so.6.0.4
+7fc0ffbf2000-7fc0ffbf3000 rw-p 00007000 fc:00 784168                     /usr/lib/x86_64-linux-gnu/libffi.so.6.0.4
+7fc0ffbf3000-7fc0ffc30000 r-xp 00000000 fc:00 795669                     /usr/lib/x86_64-linux-gnu/libgssapi.so.3.0.0
+7fc0ffc30000-7fc0ffe30000 ---p 0003d000 fc:00 795669                     /usr/lib/x86_64-linux-gnu/libgssapi.so.3.0.0
+7fc0ffe30000-7fc0ffe31000 r--p 0003d000 fc:00 795669                     /usr/lib/x86_64-linux-gnu/libgssapi.so.3.0.0
+7fc0ffe31000-7fc0ffe33000 rw-p 0003e000 fc:00 795669                     /usr/lib/x86_64-linux-gnu/libgssapi.so.3.0.0
+7fc0ffe33000-7fc0ffe34000 rw-p 00000000 00:00 0 
+7fc0ffe34000-7fc0ffe4d000 r-xp 00000000 fc:00 795676                     /usr/lib/x86_64-linux-gnu/libsasl2.so.2.0.25
+7fc0ffe4d000-7fc10004d000 ---p 00019000 fc:00 795676                     /usr/lib/x86_64-linux-gnu/libsasl2.so.2.0.25
+7fc10004d000-7fc10004e000 r--p 00019000 fc:00 795676                     /usr/lib/x86_64-linux-gnu/libsasl2.so.2.0.25
+7fc10004e000-7fc10004f000 rw-p 0001a000 fc:00 795676                     /usr/lib/x86_64-linux-gnu/libsasl2.so.2.0.25
+7fc10004f000-7fc100066000 r-xp 00000000 fc:00 652121                     /lib/x86_64-linux-gnu/libresolv-2.23.so
+7fc100066000-7fc100266000 ---p 00017000 fc:00 652121                     /lib/x86_64-linux-gnu/libresolv-2.23.so
+7fc100266000-7fc100267000 r--p 00017000 fc:00 652121                     /lib/x86_64-linux-gnu/libresolv-2.23.so
+7fc100267000-7fc100268000 rw-p 00018000 fc:00 652121                     /lib/x86_64-linux-gnu/libresolv-2.23.so
+7fc100268000-7fc10026a000 rw-p 00000000 00:00 0 
+7fc10026a000-7fc100274000 r-xp 00000000 fc:00 795632                     /usr/lib/x86_64-linux-gnu/libkrb5support.so.0.1
+7fc100274000-7fc100473000 ---p 0000a000 fc:00 795632                     /usr/lib/x86_64-linux-gnu/libkrb5support.so.0.1
+7fc100473000-7fc100474000 r--p 00009000 fc:00 795632                     /usr/lib/x86_64-linux-gnu/libkrb5support.so.0.1
+7fc100474000-7fc100475000 rw-p 0000a000 fc:00 795632                     /usr/lib/x86_64-linux-gnu/libkrb5support.so.0.1
+7fc100475000-7fc100478000 r-xp 00000000 fc:00 652037                     /lib/x86_64-linux-gnu/libcom_err.so.2.1
+7fc100478000-7fc100677000 ---p 00003000 fc:00 652037                     /lib/x86_64-linux-gnu/libcom_err.so.2.1
+7fc100677000-7fc100678000 r--p 00002000 fc:00 652037                     /lib/x86_64-linux-gnu/libcom_err.so.2.1
+7fc100678000-7fc100679000 rw-p 00003000 fc:00 652037                     /lib/x86_64-linux-gnu/libcom_err.so.2.1
+7fc100679000-7fc1006a5000 r-xp 00000000 fc:00 795634                     /usr/lib/x86_64-linux-gnu/libk5crypto.so.3.1
+7fc1006a5000-7fc1008a4000 ---p 0002c000 fc:00 795634                     /usr/lib/x86_64-linux-gnu/libk5crypto.so.3.1
+7fc1008a4000-7fc1008a6000 r--p 0002b000 fc:00 795634                     /usr/lib/x86_64-linux-gnu/libk5crypto.so.3.1
+7fc1008a6000-7fc1008a7000 rw-p 0002d000 fc:00 795634                     /usr/lib/x86_64-linux-gnu/libk5crypto.so.3.1
+7fc1008a7000-7fc1008a8000 rw-p 00000000 00:00 0 
+7fc1008a8000-7fc10096b000 r-xp 00000000 fc:00 795639                     /usr/lib/x86_64-linux-gnu/libkrb5.so.3.3
+7fc10096b000-7fc100b6b000 ---p 000c3000 fc:00 795639                     /usr/lib/x86_64-linux-gnu/libkrb5.so.3.3
+7fc100b6b000-7fc100b78000 r--p 000c3000 fc:00 795639                     /usr/lib/x86_64-linux-gnu/libkrb5.so.3.3
+7fc100b78000-7fc100b7a000 rw-p 000d0000 fc:00 795639                     /usr/lib/x86_64-linux-gnu/libkrb5.so.3.3
+7fc100b7a000-7fc100b8b000 r-xp 00000000 fc:00 784212                     /usr/lib/x86_64-linux-gnu/libtasn1.so.6.5.1
+7fc100b8b000-7fc100d8b000 ---p 00011000 fc:00 784212                     /usr/lib/x86_64-linux-gnu/libtasn1.so.6.5.1
+7fc100d8b000-7fc100d8c000 r--p 00011000 fc:00 784212                     /usr/lib/x86_64-linux-gnu/libtasn1.so.6.5.1
+7fc100d8c000-7fc100d8d000 rw-p 00012000 fc:00 784212                     /usr/lib/x86_64-linux-gnu/libtasn1.so.6.5.1
+7fc100d8d000-7fc100de7000 r-xp 00000000 fc:00 784198                     /usr/lib/x86_64-linux-gnu/libp11-kit.so.0.1.0
+7fc100de7000-7fc100fe6000 ---p 0005a000 fc:00 784198                     /usr/lib/x86_64-linux-gnu/libp11-kit.so.0.1.0
+7fc100fe6000-7fc100ff0000 r--p 00059000 fc:00 784198                     /usr/lib/x86_64-linux-gnu/libp11-kit.so.0.1.0
+7fc100ff0000-7fc100ff2000 rw-p 00063000 fc:00 784198                     /usr/lib/x86_64-linux-gnu/libp11-kit.so.0.1.0
+7fc100ff2000-7fc101071000 r-xp 00000000 fc:00 784176                     /usr/lib/x86_64-linux-gnu/libgmp.so.10.3.0
+7fc101071000-7fc101270000 ---p 0007f000 fc:00 784176                     /usr/lib/x86_64-linux-gnu/libgmp.so.10.3.0
+7fc101270000-7fc101271000 r--p 0007e000 fc:00 784176                     /usr/lib/x86_64-linux-gnu/libgmp.so.10.3.0
+7fc101271000-7fc101272000 rw-p 0007f000 fc:00 784176                     /usr/lib/x86_64-linux-gnu/libgmp.so.10.3.0
+7fc101272000-7fc1012a4000 r-xp 00000000 fc:00 784182                     /usr/lib/x86_64-linux-gnu/libhogweed.so.4.2
+7fc1012a4000-7fc1014a3000 ---p 00032000 fc:00 784182                     /usr/lib/x86_64-linux-gnu/libhogweed.so.4.2
+7fc1014a3000-7fc1014a4000 r--p 00031000 fc:00 784182                     /usr/lib/x86_64-linux-gnu/libhogweed.so.4.2
+7fc1014a4000-7fc1014a5000 rw-p 00032000 fc:00 784182                     /usr/lib/x86_64-linux-gnu/libhogweed.so.4.2
+7fc1014a5000-7fc1014ac000 r-xp 00000000 fc:00 787773                     /usr/lib/x86_64-linux-gnu/libaec.so.0.0.3
+7fc1014ac000-7fc1016ab000 ---p 00007000 fc:00 787773                     /usr/lib/x86_64-linux-gnu/libaec.so.0.0.3
+7fc1016ab000-7fc1016ac000 r--p 00006000 fc:00 787773                     /usr/lib/x86_64-linux-gnu/libaec.so.0.0.3
+7fc1016ac000-7fc1016ad000 rw-p 00007000 fc:00 787773                     /usr/lib/x86_64-linux-gnu/libaec.so.0.0.3
+7fc1016ad000-7fc1016fa000 r-xp 00000000 fc:00 795678                     /usr/lib/x86_64-linux-gnu/libldap_r-2.4.so.2.10.5
+7fc1016fa000-7fc1018f9000 ---p 0004d000 fc:00 795678                     /usr/lib/x86_64-linux-gnu/libldap_r-2.4.so.2.10.5
+7fc1018f9000-7fc1018fb000 r--p 0004c000 fc:00 795678                     /usr/lib/x86_64-linux-gnu/libldap_r-2.4.so.2.10.5
+7fc1018fb000-7fc1018fc000 rw-p 0004e000 fc:00 795678                     /usr/lib/x86_64-linux-gnu/libldap_r-2.4.so.2.10.5
+7fc1018fc000-7fc1018fe000 rw-p 00000000 00:00 0 
+7fc1018fe000-7fc10190b000 r-xp 00000000 fc:00 795679                     /usr/lib/x86_64-linux-gnu/liblber-2.4.so.2.10.5
+7fc10190b000-7fc101b0b000 ---p 0000d000 fc:00 795679                     /usr/lib/x86_64-linux-gnu/liblber-2.4.so.2.10.5
+7fc101b0b000-7fc101b0c000 r--p 0000d000 fc:00 795679                     /usr/lib/x86_64-linux-gnu/liblber-2.4.so.2.10.5
+7fc101b0c000-7fc101b0d000 rw-p 0000e000 fc:00 795679                     /usr/lib/x86_64-linux-gnu/liblber-2.4.so.2.10.5
+7fc101b0d000-7fc101b54000 r-xp 00000000 fc:00 795642                     /usr/lib/x86_64-linux-gnu/libgssapi_krb5.so.2.2
+7fc101b54000-7fc101d53000 ---p 00047000 fc:00 795642                     /usr/lib/x86_64-linux-gnu/libgssapi_krb5.so.2.2
+7fc101d53000-7fc101d55000 r--p 00046000 fc:00 795642                     /usr/lib/x86_64-linux-gnu/libgssapi_krb5.so.2.2
+7fc101d55000-7fc101d57000 rw-p 00048000 fc:00 795642                     /usr/lib/x86_64-linux-gnu/libgssapi_krb5.so.2.2
+7fc101d57000-7fc101e7a000 r-xp 00000000 fc:00 784180                     /usr/lib/x86_64-linux-gnu/libgnutls.so.30.6.2
+7fc101e7a000-7fc102079000 ---p 00123000 fc:00 784180                     /usr/lib/x86_64-linux-gnu/libgnutls.so.30.6.2
+7fc102079000-7fc102084000 r--p 00122000 fc:00 784180                     /usr/lib/x86_64-linux-gnu/libgnutls.so.30.6.2
+7fc102084000-7fc102086000 rw-p 0012d000 fc:00 784180                     /usr/lib/x86_64-linux-gnu/libgnutls.so.30.6.2
+7fc102086000-7fc102087000 rw-p 00000000 00:00 0 
+7fc102087000-7fc1020bb000 r-xp 00000000 fc:00 784196                     /usr/lib/x86_64-linux-gnu/libnettle.so.6.2
+7fc1020bb000-7fc1022ba000 ---p 00034000 fc:00 784196                     /usr/lib/x86_64-linux-gnu/libnettle.so.6.2
+7fc1022ba000-7fc1022bc000 r--p 00033000 fc:00 784196                     /usr/lib/x86_64-linux-gnu/libnettle.so.6.2
+7fc1022bc000-7fc1022bd000 rw-p 00035000 fc:00 784196                     /usr/lib/x86_64-linux-gnu/libnettle.so.6.2
+7fc1022bd000-7fc1022d8000 r-xp 00000000 fc:00 795684                     /usr/lib/x86_64-linux-gnu/librtmp.so.1
+7fc1022d8000-7fc1024d7000 ---p 0001b000 fc:00 795684                     /usr/lib/x86_64-linux-gnu/librtmp.so.1
+7fc1024d7000-7fc1024d8000 r--p 0001a000 fc:00 795684                     /usr/lib/x86_64-linux-gnu/librtmp.so.1
+7fc1024d8000-7fc1024d9000 rw-p 0001b000 fc:00 795684                     /usr/lib/x86_64-linux-gnu/librtmp.so.1
+7fc1024d9000-7fc10250a000 r-xp 00000000 fc:00 782192                     /usr/lib/x86_64-linux-gnu/libidn.so.11.6.15
+7fc10250a000-7fc10270a000 ---p 00031000 fc:00 782192                     /usr/lib/x86_64-linux-gnu/libidn.so.11.6.15
+7fc10270a000-7fc10270b000 r--p 00031000 fc:00 782192                     /usr/lib/x86_64-linux-gnu/libidn.so.11.6.15
+7fc10270b000-7fc10270c000 rw-p 00032000 fc:00 782192                     /usr/lib/x86_64-linux-gnu/libidn.so.11.6.15
+7fc10270c000-7fc10270f000 r-xp 00000000 fc:00 652044                     /lib/x86_64-linux-gnu/libdl-2.23.so
+7fc10270f000-7fc10290e000 ---p 00003000 fc:00 652044                     /lib/x86_64-linux-gnu/libdl-2.23.so
+7fc10290e000-7fc10290f000 r--p 00002000 fc:00 652044                     /lib/x86_64-linux-gnu/libdl-2.23.so
+7fc10290f000-7fc102910000 rw-p 00003000 fc:00 652044                     /lib/x86_64-linux-gnu/libdl-2.23.so
+7fc102910000-7fc102929000 r-xp 00000000 fc:00 652153                     /lib/x86_64-linux-gnu/libz.so.1.2.8
+7fc102929000-7fc102b28000 ---p 00019000 fc:00 652153                     /lib/x86_64-linux-gnu/libz.so.1.2.8
+7fc102b28000-7fc102b29000 r--p 00018000 fc:00 652153                     /lib/x86_64-linux-gnu/libz.so.1.2.8
+7fc102b29000-7fc102b2a000 rw-p 00019000 fc:00 652153                     /lib/x86_64-linux-gnu/libz.so.1.2.8
+7fc102b2a000-7fc102b2c000 r-xp 00000000 fc:00 796231                     /usr/lib/x86_64-linux-gnu/libsz.so.2.0.1
+7fc102b2c000-7fc102d2b000 ---p 00002000 fc:00 796231                     /usr/lib/x86_64-linux-gnu/libsz.so.2.0.1
+7fc102d2b000-7fc102d2c000 r--p 00001000 fc:00 796231                     /usr/lib/x86_64-linux-gnu/libsz.so.2.0.1
+7fc102d2c000-7fc102d2d000 rw-p 00002000 fc:00 796231                     /usr/lib/x86_64-linux-gnu/libsz.so.2.0.1
+7fc102d2d000-7fc102d37000 r-xp 00000000 00:2a 7482132                    /home/emily/nfs/install/lib/libpmi2.so.0.0.0
+7fc102d37000-7fc102f36000 ---p 0000a000 00:2a 7482132                    /home/emily/nfs/install/lib/libpmi2.so.0.0.0
+7fc102f36000-7fc102f37000 r--p 00009000 00:2a 7482132                    /home/emily/nfs/install/lib/libpmi2.so.0.0.0
+7fc102f37000-7fc102f38000 rw-p 0000a000 00:2a 7482132                    /home/emily/nfs/install/lib/libpmi2.so.0.0.0
+7fc102f38000-7fc102f48000 rw-p 00000000 00:00 0 
+7fc102f48000-7fc102f4f000 r-xp 00000000 fc:00 652123                     /lib/x86_64-linux-gnu/librt-2.23.so
+7fc102f4f000-7fc10314e000 ---p 00007000 fc:00 652123                     /lib/x86_64-linux-gnu/librt-2.23.so
+7fc10314e000-7fc10314f000 r--p 00006000 fc:00 652123                     /lib/x86_64-linux-gnu/librt-2.23.so
+7fc10314f000-7fc103150000 rw-p 00007000 fc:00 652123                     /lib/x86_64-linux-gnu/librt-2.23.so
+7fc103150000-7fc1031b9000 r-xp 00000000 fc:00 785981                     /usr/lib/x86_64-linux-gnu/libcurl-gnutls.so.4.4.0
+7fc1031b9000-7fc1033b9000 ---p 00069000 fc:00 785981                     /usr/lib/x86_64-linux-gnu/libcurl-gnutls.so.4.4.0
+7fc1033b9000-7fc1033bc000 r--p 00069000 fc:00 785981                     /usr/lib/x86_64-linux-gnu/libcurl-gnutls.so.4.4.0
+7fc1033bc000-7fc1033bd000 rw-p 0006c000 fc:00 785981                     /usr/lib/x86_64-linux-gnu/libcurl-gnutls.so.4.4.0
+7fc1033bd000-7fc103650000 r-xp 00000000 fc:00 796255                     /usr/lib/x86_64-linux-gnu/libhdf5_serial.so.10.1.0
+7fc103650000-7fc10384f000 ---p 00293000 fc:00 796255                     /usr/lib/x86_64-linux-gnu/libhdf5_serial.so.10.1.0
+7fc10384f000-7fc103854000 r--p 00292000 fc:00 796255                     /usr/lib/x86_64-linux-gnu/libhdf5_serial.so.10.1.0
+7fc103854000-7fc103859000 rw-p 00297000 fc:00 796255                     /usr/lib/x86_64-linux-gnu/libhdf5_serial.so.10.1.0
+7fc103859000-7fc10385a000 rw-p 00000000 00:00 0 
+7fc10385a000-7fc103878000 r-xp 00000000 fc:00 796257                     /usr/lib/x86_64-linux-gnu/libhdf5_serial_hl.so.10.0.2
+7fc103878000-7fc103a77000 ---p 0001e000 fc:00 796257                     /usr/lib/x86_64-linux-gnu/libhdf5_serial_hl.so.10.0.2
+7fc103a77000-7fc103a78000 r--p 0001d000 fc:00 796257                     /usr/lib/x86_64-linux-gnu/libhdf5_serial_hl.so.10.0.2
+7fc103a78000-7fc103a79000 rw-p 0001e000 fc:00 796257                     /usr/lib/x86_64-linux-gnu/libhdf5_serial_hl.so.10.0.2
+7fc103a79000-7fc103a7a000 rw-p 00000000 00:00 0 
+7fc103a7a000-7fc103bec000 r-xp 00000000 fc:00 785962                     /usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.21
+7fc103bec000-7fc103dec000 ---p 00172000 fc:00 785962                     /usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.21
+7fc103dec000-7fc103df6000 r--p 00172000 fc:00 785962                     /usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.21
+7fc103df6000-7fc103df8000 rw-p 0017c000 fc:00 785962                     /usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.21
+7fc103df8000-7fc103dfc000 rw-p 00000000 00:00 0 
+7fc103dfc000-7fc104051000 r-xp 00000000 00:2a 7486223                    /home/emily/nfs/install/lib/libmpi.so.12.1.0
+7fc104051000-7fc104250000 ---p 00255000 00:2a 7486223                    /home/emily/nfs/install/lib/libmpi.so.12.1.0
+7fc104250000-7fc10425e000 r--p 00254000 00:2a 7486223                    /home/emily/nfs/install/lib/libmpi.so.12.1.0
+7fc10425e000-7fc104262000 rw-p 00262000 00:2a 7486223                    /home/emily/nfs/install/lib/libmpi.so.12.1.0
+7fc104262000-7fc10428b000 rw-p 00000000 00:00 0 
+7fc10428b000-7fc104295000 r-xp 00000000 fc:00 795784                     /usr/lib/x86_64-linux-gnu/libnuma.so.1.0.0
+7fc104295000-7fc104494000 ---p 0000a000 fc:00 795784                     /usr/lib/x86_64-linux-gnu/libnuma.so.1.0.0
+7fc104494000-7fc104495000 r--p 00009000 fc:00 795784                     /usr/lib/x86_64-linux-gnu/libnuma.so.1.0.0
+7fc104495000-7fc104496000 rw-p 0000a000 fc:00 795784                     /usr/lib/x86_64-linux-gnu/libnuma.so.1.0.0
+7fc104496000-7fc1044ae000 r-xp 00000000 fc:00 652117                     /lib/x86_64-linux-gnu/libpthread-2.23.so
+7fc1044ae000-7fc1046ad000 ---p 00018000 fc:00 652117                     /lib/x86_64-linux-gnu/libpthread-2.23.so
+7fc1046ad000-7fc1046ae000 r--p 00017000 fc:00 652117                     /lib/x86_64-linux-gnu/libpthread-2.23.so
+7fc1046ae000-7fc1046af000 rw-p 00018000 fc:00 652117                     /lib/x86_64-linux-gnu/libpthread-2.23.so
+7fc1046af000-7fc1046b3000 rw-p 00000000 00:00 0 
+7fc1046b3000-7fc1047b7000 r-xp 00000000 fc:00 798059                     /usr/lib/x86_64-linux-gnu/libnetcdf.so.11.0.0
+7fc1047b7000-7fc1049b7000 ---p 00104000 fc:00 798059                     /usr/lib/x86_64-linux-gnu/libnetcdf.so.11.0.0
+7fc1049b7000-7fc104a05000 r--p 00104000 fc:00 798059                     /usr/lib/x86_64-linux-gnu/libnetcdf.so.11.0.0
+7fc104a05000-7fc104a07000 rw-p 00152000 fc:00 798059                     /usr/lib/x86_64-linux-gnu/libnetcdf.so.11.0.0
+7fc104a07000-7fc107a16000 rw-p 00000000 00:00 0 
+7fc107a16000-7fc107bd6000 r-xp 00000000 fc:00 652030                     /lib/x86_64-linux-gnu/libc-2.23.so
+7fc107bd6000-7fc107dd5000 ---p 001c0000 fc:00 652030                     /lib/x86_64-linux-gnu/libc-2.23.so
+7fc107dd5000-7fc107dd9000 r--p 001bf000 fc:00 652030                     /lib/x86_64-linux-gnu/libc-2.23.so
+7fc107dd9000-7fc107ddb000 rw-p 001c3000 fc:00 652030                     /lib/x86_64-linux-gnu/libc-2.23.so
+7fc107ddb000-7fc107ddf000 rw-p 00000000 00:00 0 
+7fc107ddf000-7fc107e1d000 r-xp 00000000 fc:00 796850                     /usr/lib/x86_64-linux-gnu/libquadmath.so.0.0.0
+7fc107e1d000-7fc10801c000 ---p 0003e000 fc:00 796850                     /usr/lib/x86_64-linux-gnu/libquadmath.so.0.0.0
+7fc10801c000-7fc10801d000 r--p 0003d000 fc:00 796850                     /usr/lib/x86_64-linux-gnu/libquadmath.so.0.0.0
+7fc10801d000-7fc10801e000 rw-p 0003e000 fc:00 796850                     /usr/lib/x86_64-linux-gnu/libquadmath.so.0.0.0
+7fc10801e000-7fc108034000 r-xp 00000000 fc:00 652056                     /lib/x86_64-linux-gnu/libgcc_s.so.1
+7fc108034000-7fc108233000 ---p 00016000 fc:00 652056                     /lib/x86_64-linux-gnu/libgcc_s.so.1
+7fc108233000-7fc108234000 rw-p 00015000 fc:00 652056                     /lib/x86_64-linux-gnu/libgcc_s.so.1
+7fc108234000-7fc10833c000 r-xp 00000000 fc:00 652071                     /lib/x86_64-linux-gnu/libm-2.23.so
+7fc10833c000-7fc10853b000 ---p 00108000 fc:00 652071                     /lib/x86_64-linux-gnu/libm-2.23.so
+7fc10853b000-7fc10853c000 r--p 00107000 fc:00 652071                     /lib/x86_64-linux-gnu/libm-2.23.so
+7fc10853c000-7fc10853d000 rw-p 00108000 fc:00 652071                     /lib/x86_64-linux-gnu/libm-2.23.so
+7fc10853d000-7fc108666000 r-xp 00000000 fc:00 784210                     /usr/lib/x86_64-linux-gnu/libgfortran.so.3.0.0
+7fc108666000-7fc108865000 ---p 00129000 fc:00 784210                     /usr/lib/x86_64-linux-gnu/libgfortran.so.3.0.0
+7fc108865000-7fc108866000 r--p 00128000 fc:00 784210                     /usr/lib/x86_64-linux-gnu/libgfortran.so.3.0.0
+7fc108866000-7fc108868000 rw-p 00129000 fc:00 784210                     /usr/lib/x86_64-linux-gnu/libgfortran.so.3.0.0
+7fc108868000-7fc10889f000 r-xp 00000000 00:2a 7486224                    /home/emily/nfs/install/lib/libmpifort.so.12.1.0
+7fc10889f000-7fc108a9e000 ---p 00037000 00:2a 7486224                    /home/emily/nfs/install/lib/libmpifort.so.12.1.0
+7fc108a9e000-7fc108a9f000 r--p 00036000 00:2a 7486224                    /home/emily/nfs/install/lib/libmpifort.so.12.1.0
+7fc108a9f000-7fc108aa0000 rw-p 00037000 00:2a 7486224                    /home/emily/nfs/install/lib/libmpifort.so.12.1.0
+7fc108aa0000-7fc108e39000 r-xp 00000000 00:2a 7079008                    /home/emily/nfs/workspace/libasagi/lib/libasagi.so.1.0
+7fc108e39000-7fc109038000 ---p 00399000 00:2a 7079008                    /home/emily/nfs/workspace/libasagi/lib/libasagi.so.1.0
+7fc109038000-7fc109046000 r--p 00398000 00:2a 7079008                    /home/emily/nfs/workspace/libasagi/lib/libasagi.so.1.0
+7fc109046000-7fc10904b000 rw-p 003a6000 00:2a 7079008                    /home/emily/nfs/workspace/libasagi/lib/libasagi.so.1.0
+7fc10904b000-7fc109071000 r-xp 00000000 fc:00 652006                     /lib/x86_64-linux-gnu/ld-2.23.so
+7fc109095000-7fc109098000 rw-s 00000000 00:05 131076                     /SYSV0000053c (deleted)
+7fc109098000-7fc10909b000 rw-s 00000000 00:05 131076                     /SYSV0000053c (deleted)
+7fc10909b000-7fc10909e000 rw-s 00000000 00:05 131076                     /SYSV0000053c (deleted)
+7fc10909e000-7fc109266000 rw-p 00000000 00:00 0 
+7fc109267000-7fc109268000 rw-p 00000000 00:00 0 
+7fc109268000-7fc109269000 rw-s 00000000 00:13 5                          /dev/shm/mpich_shar_tmpnA6w7p (deleted)
+7fc109269000-7fc10926a000 rw-s 00000000 00:13 4                          /dev/shm/mpich_shar_tmptaKquF (deleted)
+7fc10926a000-7fc10926d000 rw-s 00000000 00:05 131076                     /SYSV0000053c (deleted)
+7fc10926d000-7fc109270000 rw-p 00000000 00:00 0 
+7fc109270000-7fc109271000 r--p 00025000 fc:00 652006                     /lib/x86_64-linux-gnu/ld-2.23.so
+7fc109271000-7fc109272000 rw-p 00026000 fc:00 652006                     /lib/x86_64-linux-gnu/ld-2.23.so
+7fc109272000-7fc109273000 rw-p 00000000 00:00 0 
+7ffcaadb3000-7ffcaadd5000 rw-p 00000000 00:00 0                          [stack]
+7ffcaaddf000-7ffcaade1000 r--p 00000000 00:00 0                          [vvar]
+7ffcaade1000-7ffcaade3000 r-xp 00000000 00:00 0                          [vdso]
+ffffffffff600000-ffffffffff601000 r-xp 00000000 00:00 0                  [vsyscall]
+
+Program received signal SIGABRT: Process abort signal.
+
+Backtrace for this error:
+Assertion failed in file ../impi/src/mpid/ch3/channels/nemesis/src/ch3_progress.c at line 373: id >= 0 && id < MAX_PROGRESS_HOOKS && progress_hooks[id].active == FALSE && progress_hooks[id].func_ptr != NULL
+#0  0x7FC108558E08
+#1  0x7FC108557F90
+#2  0x7FC107A4B49F
+#3  0x7FC107A4B418
+#4  0x7FC107A4D019
+#5  0x7FC107A8D729
+#6  0x7FC107A95F49
+#7  0x7FC107A99ABB
+#8  0x4B17D3 in __grid_MOD_grid_destroy
+#9  0x481F95 in __swe_adapt_MOD_traverse_in_place
+#10  0x40E04E in __swe_MOD_swe_run
+#11  0x408BB8 in __sfc_traversal_MOD_sfc_generic
+0x7fcd6b7300ca ???
+	???:0
+0x7fcd6b7300e5 ???
+	???:0
+0x7f51ae5050ca ???
+	???:0
+0x7f51ae5050e5 ???
+	???:0
+0x7f51ae4799e3 ???
+	???:0
+0x7f51ae4d1ccf ???
+	???:0
+0x7fcd6b6a49e3 ???
+	???:0
+0x7f51ae4a0981 ???
+	???:0
+0x7f51ae4a6d63 ???
+	???:0
+0x7f51ae43bddb ???
+	???:0
+0x7f51b317fb81 ???
+	???:0
+0x7f51b31f2e3a ???
+	???:0
+0x7f51b3344cf7 ???
+	???:0
+0x42af81 ???
+	???:0
+0x42c29e ???
+	???:0
+0x42b889 ???
+	???:0
+0x42b889 ???
+	???:0
+0x42b889 ???
+	???:0
+0x42d638 ???
+	???:0
+0x476d64 ???
+	???:0
+0x47dad3 ???
+	???:0
+0x481f74 ???
+	???:0
+0x40e04e ???
+	???:0
+0x408bb8 ???
+	???:0
+0x402fd9 ???
+	???:0
+0x7f51b1fac82f ???
+	???:0
+0x403058 ???
+	???:0
+0xffffffffffffffff ???
+	???:0
+internal ABORT - process 0
+0x7fcd6b6fcccf ???
+	???:0
+0x7fcd6b6cb981 ???
+	???:0
+0x7fcd6b6d1d63 ???
+	???:0
+0x7fcd6b666ddb ???
+	???:0
+0x7fcd703aab81 ???
+	???:0
+0x7fcd7041de3a ???
+	???:0
+0x7fcd7056fcf7 ???
+	???:0
+0x42af81 ???
+	???:0
+0x42c29e ???
+	???:0
+0x42b8b5 ???
+	???:0
+0x42ca8f ???
+	???:0
+0x476d64 ???
+	???:0
+0x47dbe5 ???
+	???:0
+0x481f74 ???
+	???:0
+0x40e04e ???
+	???:0
+0x408bb8 ???
+	???:0
+0x402fd9 ???
+	???:0
+0x7fcd6f1d782f ???
+	???:0
+0x403058 ???
+	???:0
+0xffffffffffffffff ???
+	???:0
+internal ABORT - process 1
+srun: ------------- unpacking: SRUN_JOB_COMPLETE or SRUN_PING
+srun: _handle_msg in api/steplaunch.c
+srun: received job step complete message
+srun: _job_complete_handler
+srun: sls->abort set
+srun: sls->abort_action_taken not set
+srun: slurm_kill_job_step in cancel.c
+srun: ------------- address: 0.0.0.0; type: 5005 (REQUEST_CANCEL_JOB_STEP)
+srun: ------------- unpacking: SRUN_JOB_COMPLETE or SRUN_PING
+srun: _handle_msg in api/steplaunch.c
+srun: received job step complete message
+srun: _job_complete_handler
+srun: ------------- unpacking: RESPONSE_SLURM_RC
+srun: time_set not set
+srun: Job step aborted: Waiting up to 32 seconds for job step to finish.
+srun: sls->abort set
+srun: ------------- unpacking: SRUN_JOB_COMPLETE or SRUN_PING
+srun: _handle_msg in api/steplaunch.c
+srun: received job step complete message
+srun: _job_complete_handler
+srun: sls->abort set
+slurmstepd: *** STEP 3.0 ON 10.0.0.1 CANCELLED AT 2016-09-15T12:44:49 ***
+srun: ------------- unpacking: MESSAGE_TASK_EXIT
+srun: _handle_msg in api/steplaunch.c
+srun: received task exit
+srun: _exit_handler
+srun: task 0 done
+srun: task 1 done
+srun: error: 10.0.0.1: tasks 0-1: Exited with exit code 1
+srun: task_state_update(taskid=0, TS_ABNORMAL_EXIT)
+srun: task_state_update(taskid=1, TS_ABNORMAL_EXIT)
+srun: calling eio_signal_shutdown
+srun: joining the message threads
+srun: freeing the pmi key value store
+srun: calling eio_handle_destroy
+srun: waititng for the io thread to finish
+slurmstepd: *** STEP 3.0 ON 10.0.0.2 CANCELLED AT 2016-09-15T12:44:51 ***
+slurmstepd: Failed to send MESSAGE_TASK_EXIT: Connection refused
+srun: calling the mpi_hook_client_fini
+srun: slurm_step_launch_wait_finish exit
+srun: 	 (srun/srun.c) fini_srun
+srun: ------------- address: 0.0.0.0; type: 5017 (REQUEST_COMPLETE_JOB_ALLOCATION)
+srun: ------------- unpacking: RESPONSE_SLURM_RC
+srun: shepard reading done in srun_job.c
+srun: log_fini at common/log.c
+srun: normal return
+srun: 	 (srun/srun.c) returning: 1
+

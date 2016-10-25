@@ -270,8 +270,15 @@ subroutine _T_(reduce_mpi)(s, mpi_op)
 #       if defined(__GFORTRAN__)
             _T	        :: r
 
-            !HOTFIX: for some reason, MPI_IN_PLACE does not work with gfortran 4.8 and mpich
-            call mpi_allreduce(s, r, 1, _T_MPI_TYPE, mpi_op, MPI_COMM_WORLD, i_error); assert_eq(i_error, 0)
+            !HOTFIX: in iMPI mpi_allreduce has a problem, replace that with mpi_reduce + mpi_bcast
+# 			if defined(_IMPI)
+	            call mpi_reduce(s, r, 1, _T_MPI_TYPE, mpi_op, 0, MPI_COMM_WORLD, i_error); assert_eq(i_error, 0)
+	            call mpi_bcast(r, 1, _T_MPI_TYPE, 0, MPI_COMM_WORLD, i_error); assert_eq(i_error, 0)
+#			else
+            	!HOTFIX: for some reason, MPI_IN_PLACE does not work with gfortran 4.8 and mpich
+            	call mpi_allreduce(s, r, 1, _T_MPI_TYPE, mpi_op, MPI_COMM_WORLD, i_error); assert_eq(i_error, 0)
+#			endif
+            
             s = r
 #       else
             call mpi_allreduce(MPI_IN_PLACE, s, 1, _T_MPI_TYPE, mpi_op, MPI_COMM_WORLD, i_error); assert_eq(i_error, 0)
@@ -290,9 +297,16 @@ subroutine _T_(reduce_mpi_vector)(s, mpi_op)
 
 #       if defined(__GFORTRAN__)
             _T	        :: r(size(s))
+            
+            !HOTFIX: in iMPI mpi_allreduce has a problem, replace that with mpi_reduce + mpi_bcast
+#			if defined(_IMPI)
+	            call mpi_reduce(s, r, size(s), _T_MPI_TYPE, mpi_op, 0, MPI_COMM_WORLD, i_error); assert_eq(i_error, 0)
+	            call mpi_bcast(r, size(s), _T_MPI_TYPE, 0, MPI_COMM_WORLD, i_error); assert_eq(i_error, 0)
+#			else
+	            !HOTFIX: for some reason, MPI_IN_PLACE does not work with gfortran 4.8 and mpich
+	            call mpi_allreduce(s, r, size(s), _T_MPI_TYPE, mpi_op, MPI_COMM_WORLD, i_error); assert_eq(i_error, 0)
+#			endif
 
-            !HOTFIX: for some reason, MPI_IN_PLACE does not work with gfortran 4.8 and mpich
-            call mpi_allreduce(s, r, size(s), _T_MPI_TYPE, mpi_op, MPI_COMM_WORLD, i_error); assert_eq(i_error, 0)
             s = r
 #       else
             call mpi_allreduce(MPI_IN_PLACE, s, size(s), _T_MPI_TYPE, mpi_op, MPI_COMM_WORLD, i_error); assert_eq(i_error, 0)

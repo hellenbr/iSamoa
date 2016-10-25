@@ -424,8 +424,6 @@
                     print *,"THIS SHIT!"
                     call flush(6)
                     call swe%adaption%traverse(grid)
-
-
                 end if
 
 				!do a time step
@@ -551,6 +549,8 @@
             real (kind=GRID_SR) :: tic, toc, tic1, toc1
             type(t_impi_bcast) :: bcast_packet
 
+            integer :: tests, testr
+
             tic = mpi_wtime()
             call mpi_probe_adapt(adapt_flag, status, info, err)
             toc = mpi_wtime() - tic
@@ -619,6 +619,18 @@
                 toc1 = mpi_wtime() - tic1;
                 print *, "Rank ", rank_MPI, " [STATUS ", status_MPI, "]: ", &
                         "Total adaptation time = ", toc1, " seconds"
+
+                !!! Bug confirmed: after impi expansion, MPI_Allreduce doesn't work.
+                !!!                must replace it with MPI_Reduce + MPI_Bcast
+!                tests = 1
+!                testr = 0
+!
+!                call mpi_reduce(tests, testr, 1, MPI_INT, MPI_SUM, 0, MPI_COMM_WORLD, err); assert_eq(err, 0)
+!                call mpi_bcast(testr, 1, MPI_INT, 0, MPI_COMM_WORLD, err); assert_eq(err, 0)
+!
+!                print *,"Rank ",rank_MPI,": Allreduce sum = ", testr
+!                call flush(6)
+
             end if
 #           endif
         end subroutine impi_adapt

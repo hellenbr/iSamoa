@@ -253,7 +253,7 @@ subroutine traverse_in_place(traversal, grid)
 	type(t_grid), save							        :: grid_temp
 	type(t_adaptive_statistics)                         :: thread_stats
 
-    print *,"TAG 1"
+    print *,"Rank ",rank_MPI,": TAG 1"
     call flush(6)
 
     if (.not. associated(traversal%threads) .or. size(traversal%threads) .ne. cfg%i_threads) then
