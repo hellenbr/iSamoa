@@ -1419,10 +1419,17 @@ subroutine collect_minimum_distances(grid, rank_list, neighbor_min_distances, i_
         !  * therefore, the first few ranks might have fewer content, they are called
         !        num_small_ranks
 
+print *,"Rank ", rank_MPI, ": LALALA 1"
+call flush(6)
+
 #       if defined(_MPI)
         num_staying_ranks = num_total_ranks - num_leaving_ranks
         load = num_total_ranks / num_staying_ranks
         num_small_ranks = num_staying_ranks - mod(num_total_ranks, num_staying_ranks)
+
+
+print *,"Rank ", rank_MPI, ": LALALA 2"
+call flush(6)
 
         !Compute my NEW sections' source ranks (there can be 0 or multiple source ranks)
         if (my_rank < num_small_ranks) then
@@ -1437,6 +1444,9 @@ subroutine collect_minimum_distances(grid, rank_list, neighbor_min_distances, i_
         end if
         num_src_ranks = src_rank_max - src_rank_min + 1
 
+print *,"Rank ", rank_MPI, ": LALALA 3"
+call flush(6)
+
         !Compute my CURRENT sections' destination rank (there MUST be 1 destination rank)
         r = my_rank
         do i = 0, num_staying_ranks-1
@@ -1450,32 +1460,53 @@ subroutine collect_minimum_distances(grid, rank_list, neighbor_min_distances, i_
             end if
         end do
 
+print *,"Rank ", rank_MPI, ": LALALA 4"
+call flush(6)
+
         !***** MPI communications *****
         !allocate MPI requests: 1 dest_rank, N src_ranks
         num_reqs = num_src_ranks + 1
         req_cnt = 1
         allocate(reqs(num_reqs), stat=err); assert_eq(err, 0)
 
+print *,"Rank ", rank_MPI, ": LALALA 5"
+call flush(6)
+
         !stores # of NEW sections from each src_rank
         allocate(new_sections(num_src_ranks), stat=err); assert_eq(err, 0)
         allocate(index_offsets(num_src_ranks), stat=err); assert_eq(err, 0)
+
+print *,"Rank ", rank_MPI, ": LALALA 6"
+call flush(6)
 
         !allocate distribution arrays
         num_sections = grid%sections%get_size()
         allocate(i_rank_out(num_sections), stat=err); assert_eq(err, 0)
         allocate(i_section_index_out(num_sections), stat=err); assert_eq(err, 0)
 
+print *,"Rank ", rank_MPI, ": LALALA 7"
+call flush(6)
+
         ! 1) Send/recv my section size
         call mpi_isend(num_sections, 1, MPI_INTEGER, dest_rank, 1010, MPI_COMM_WORLD, reqs(req_cnt), err); assert_eq(err, 0)
         req_cnt = req_cnt + 1
+
+print *,"Rank ", rank_MPI, ": LALALA 8"
+call flush(6)
 
         do i = 1, num_src_ranks
             call mpi_irecv(new_sections(i), 1, MPI_INTEGER, src_rank_min+i-1, 1010, MPI_COMM_WORLD, reqs(req_cnt), err); assert_eq(err, 0)
             req_cnt = req_cnt + 1
         end do
 
+print *,"Rank ", rank_MPI, ": LALALA 9"
+call flush(6)
+
         call mpi_waitall(num_reqs, reqs, MPI_STATUS_IGNORE, err); assert_eq(err, 0)
         req_cnt = 1
+
+print *,"Rank ", rank_MPI, ": LALALA 10"
+call flush(6)
 
         ! 2) Send/recv section index offset
         num_new_sections = 0
@@ -1486,20 +1517,34 @@ subroutine collect_minimum_distances(grid, rank_list, neighbor_min_distances, i_
             req_cnt = req_cnt + 1
         end do
 
+print *,"Rank ", rank_MPI, ": LALALA 11"
+call flush(6)
+
         call mpi_irecv(i_section_index_out(1), 1, MPI_INTEGER, dest_rank, 1020, MPI_COMM_WORLD, reqs(req_cnt), err); assert_eq(err, 0)
         req_cnt = req_cnt + 1
 
+print *,"Rank ", rank_MPI, ": LALALA 12"
+call flush(6)
+
         call mpi_waitall(num_reqs, reqs, MPI_STATUS_IGNORE, err); assert_eq(err, 0)
         req_cnt = 1
+
+
 
         !***** MPI communication completed. Compute the 3 arrays. *****
         do i = 1, num_sections
             i_rank_out(i) = dest_rank
         end do
 
+print *,"Rank ", rank_MPI, ": LALALA 13"
+call flush(6)
+
         do i = 2, num_sections
             i_section_index_out(i) = i_section_index_out(i-1) + 1
         end do
+
+print *,"Rank ", rank_MPI, ": LALALA 14"
+call flush(6)
 
         allocate(i_rank_in(num_new_sections), stat=err); assert_eq(err, 0)
         do r = src_rank_min, src_rank_max
@@ -1508,6 +1553,9 @@ subroutine collect_minimum_distances(grid, rank_list, neighbor_min_distances, i_
                 req_cnt = req_cnt + 1
             end do
         end do
+
+print *,"Rank ", rank_MPI, ": LALALA 15"
+call flush(6)
 
 !        !DEBUG ONLY
 !        do r = 0, num_total_ranks-1
@@ -1523,6 +1571,9 @@ subroutine collect_minimum_distances(grid, rank_list, neighbor_min_distances, i_
 !        end do
 
         call distribute_sections(grid, i_rank_out, i_section_index_out, i_rank_in)
+
+print *,"Rank ", rank_MPI, ": LALALA 16 END"
+call flush(6)
 #       endif
     end subroutine distribute_load_for_resource_shrinkage
 

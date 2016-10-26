@@ -29,7 +29,7 @@ dmin+='-dmin 0'
 
 # Grid maximum depth
 dmax=''
-dmax+='-dmax 10'
+dmax+='-dmax 15'
 
 # Simulation time in seconds (normally 3 hrs)
 tmax=''

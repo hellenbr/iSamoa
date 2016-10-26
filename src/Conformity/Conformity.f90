@@ -311,6 +311,8 @@ module Conformity
         call thread_stats%start_time(barrier_time)
 
         !$omp single
+        print *,"Rank ", rank_MPI, ": ", associated(grid%sections%elements_alloc)
+
         call reduce(grid%l_conform, grid%sections%elements_alloc%l_conform, MPI_LAND, .true.)
         !$omp end single
 

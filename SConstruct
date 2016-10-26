@@ -223,7 +223,8 @@ if env['asagi']:
   env['F90FLAGS'] += ' -D_ASAGI'
   env['LINKFLAGS'] += ' -Wl,--rpath,' + os.path.abspath(env['asagi_dir']) + '/lib'
   env.Append(LIBPATH = env['asagi_dir'] + '/lib')
-  env.Append(LIBS = ['asagi', 'numa'])
+  #env.Append(LIBS = ['asagi', 'numa'])
+  env.Append(LIBS = ['asagi_nompi', 'numa'])
 
 #Enable or disable timing of ASAGI calls
 if env['asagi_timing']:
