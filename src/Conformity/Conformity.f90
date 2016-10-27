@@ -293,31 +293,25 @@ module Conformity
 
         !wait until all computation is done
         !$omp barrier
-
         call thread_stats%start_time(sync_time)
         call collect_boundary_data(grid, edge_merge_op_integrity, node_merge_op_integrity, mpi_node_type_optional=conformity%mpi_node_type)
         call thread_stats%stop_time(sync_time)
 
         !wait until all boundary data has been collected
         !$omp barrier
-
         call thread_stats%start_time(sync_time)
         call duplicate_boundary_data(grid, edge_write_op_integrity, node_write_op_integrity)
         call thread_stats%stop_time(sync_time)
 
         !wait until all boundary data has been copied
         !$omp barrier
-
         call thread_stats%start_time(barrier_time)
 
         !$omp single
-        print *,"Rank ", rank_MPI, ": ", associated(grid%sections%elements_alloc)
-
         call reduce(grid%l_conform, grid%sections%elements_alloc%l_conform, MPI_LAND, .true.)
         !$omp end single
 
         call thread_stats%stop_time(barrier_time)
-
         call thread_stats%stop_time(traversal_time)
 
         conformity%threads(i_thread)%stats = conformity%threads(i_thread)%stats + thread_stats

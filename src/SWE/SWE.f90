@@ -399,7 +399,8 @@
 #               endif
 
 #           if defined(_IMPI)
-            !Joining procs avoid any initialization, and jump in impi_adapt immediately
+            ! JOINING ranks call impi_adapt immediately,
+            ! avoiding initialization and earthquake phase
             else
                 call impi_adapt(grid, i_stats_phase, i_initial_step, i_time_step, r_time_next_output, IMPI_BCAST_TYPE)
             end if
@@ -410,6 +411,11 @@
             !regular tsunami time steps begin after the earthquake is over
 
 			do
+
+! -------DEBUG ONLY---------
+                print *,"Rank ",rank_MPI,": Tsunami phase..."
+! -------DEBUG ONLY---------
+
 			    !check for loop termination
 				if ((cfg%r_max_time >= 0.0 .and. grid%r_time >= cfg%r_max_time) .or. (cfg%i_max_time_steps >= 0 .and. i_time_step >= cfg%i_max_time_steps)) then
 					exit
@@ -420,9 +426,6 @@
 
 			    !refine grid
                 if (cfg%i_adapt_time_steps > 0 .and. mod(i_time_step, cfg%i_adapt_time_steps) == 0) then
-
-                    print *,"THIS SHIT!"
-                    call flush(6)
                     call swe%adaption%traverse(grid)
                 end if
 
@@ -466,12 +469,12 @@
                 end if
 
 #               if defined(_IMPI)
-                !Existing processes call impi_adapt
+                !Existing ranks call impi_adapt
                 toc = mpi_wtime() - tic
                 call mpi_bcast(toc, 1, MPI_DOUBLE_PRECISION, 0, MPI_COMM_WORLD, err); assert_eq(err, 0)
                 if (toc > 30) then
-                    tic = mpi_wtime()
                     call impi_adapt(grid, i_stats_phase, i_initial_step, i_time_step, r_time_next_output, IMPI_BCAST_TYPE)
+                    tic = mpi_wtime()
                 end if
 #               endif
 			end do
@@ -550,7 +553,9 @@
             real (kind=GRID_SR) :: tic, toc, tic1, toc1
             type(t_impi_bcast) :: bcast_packet
 
+! -------DEBUG ONLY---------
             integer :: tests, testr
+! -------DEBUG ONLY---------
 
             tic = mpi_wtime()
             call mpi_probe_adapt(adapt_flag, status_MPI, info, err)
@@ -560,46 +565,35 @@
                     "MPI_Probe_adapt ", toc, " seconds"
             call flush(6)
 
-
-
             if (adapt_flag == MPI_ADAPT_TRUE) then
                 tic1 = mpi_wtime()
 
                 tic = mpi_wtime()
                 call mpi_comm_adapt_begin(INTER_COMM, NEW_COMM, 0, 0, err); assert_eq(err, 0)
-
-                print *, "Rank ", rank_MPI, ": ", (INTER_COMM .eq. MPI_COMM_NULL)
-                call flush(6)
-
-                print *, "Rank ", rank_MPI, ": ", (NEW_COMM .eq. MPI_COMM_NULL)
-                call flush(6)
                 toc = MPI_Wtime() - tic
 
                 print *, "Rank ", rank_MPI, " [STATUS ", status_MPI, "]: ", &
-                        "MPI_Comm_adapt_begin ", toc, " seconds"
+                    "MPI_Comm_adapt_begin ", toc, " seconds"
+
+! -------DEBUG ONLY---------
+                print *, "Rank ", rank_MPI, ": INTER_COMM is NULL? ", (INTER_COMM .eq. MPI_COMM_NULL)
+                call flush(6)
+
+                print *, "Rank ", rank_MPI, ": NEW_COMM is NULL? ", (NEW_COMM .eq. MPI_COMM_NULL)
+                call flush(6)
+! -------DEBUG ONLY---------
 
                 !************************ ADAPT WINDOW ****************************
-                ! Broadcast a few values
-
+                ! Broadcast a few values between STAYING and JOINING ranks
+                ! The use of NEW_COMM must exclude RETREATING ranks, which have NEW_COMM == MPI_COMM_NULL
                 if (status_MPI .ne. MPI_ADAPT_STATUS_RETREATING) then
                     bcast_packet = t_impi_bcast(i_stats_phase, i_initial_step, i_time_step, r_time_next_output, &
                             grid%r_time, grid%r_dt, grid%r_dt_new, grid%sections%is_forward())
-
-                    print *, "Rank ", rank_MPI, ": before mpi_bcast"
-                    call flush(6)
-
-                    print *, "Rank ", rank_MPI, ": ", (NEW_COMM .eq. MPI_COMM_NULL)
-                    call flush(6)
-
-
                     call mpi_bcast(bcast_packet, 1, IMPI_BCAST_TYPE, 0, NEW_COMM, err); assert_eq(err, 0)
-
-                    print *, "Rank ", rank_MPI, ": after mpi_bcast"
-                    call flush(6)
-
                 end if
 
-                if (status_MPI == MPI_ADAPT_STATUS_JOINING) then
+                ! JOINING ranks must initialize grid objects properly
+                if (status_MPI .eq. MPI_ADAPT_STATUS_JOINING) then
                     call grid%destroy()
                     call grid%sections%resize(0)
                     call grid%threads%resize(omp_get_max_threads())
@@ -618,30 +612,21 @@
                     end if
                 end if
 
+                ! Only the STAYING and JOINING ranks has a valid NEW_COMM,
+                ! The correct new_comm_size must be broadcasted to the RETREATING ranks
+                if (status_MPI .ne. MPI_ADAPT_STATUS_RETREATING) then
+                    call mpi_comm_size(NEW_COMM, new_comm_size, err); assert_eq(err, 0)
+                end if
+                call mpi_bcast(new_comm_size, 1, MPI_INT, 0, MPI_COMM_WORLD, err); assert_eq(err, 0)
+
                 !NOTE:
                 !  If resource expansion, nothing more to be done (load balancign will be done during grid refinement).
                 !  If resource shrinkage, need to transfer data out from LEAVING procs.
                 !  TODO: currently does not support the case of have both JOINING and LEAVING ranks at the same time
-
-                if (status_MPI .ne. MPI_ADAPT_STATUS_RETREATING) then
-
-                    call mpi_comm_size(NEW_COMM, new_comm_size, err); assert_eq(err, 0)
-
-                else
-                    new_comm_size = 0
-                end if
-
-
                 if (new_comm_size < size_MPI) then
                     num_leaving_ranks = size_MPI - new_comm_size
                     ! Since it is shrinkage, use the current MPI_COMM_WORLD, size_MPI, rank_MPI
-
-                    print *, "Rank ", rank_MPI, ": right before distr load shrink"
-
                     call distribute_load_for_resource_shrinkage(grid, size_MPI, num_leaving_ranks, rank_MPI)
-
-
-                    print *, "Rank ", rank_MPI, ": right after distr load shrink"
                 end if
                 !************************ ADAPT WINDOW ****************************
 
@@ -659,7 +644,7 @@
                 toc1 = mpi_wtime() - tic1;
                 print *, "Rank ", rank_MPI, " [STATUS ", status_MPI, "]: ", &
                         "Total adaptation time = ", toc1, " seconds"
-
+! -------DEBUG ONLY---------
                 !!! Test for MPI collective calls after expansion:
                 !!!   Updated MPI_COMM_WORLD is working fine for allreduce and reduce+bcast
 
@@ -671,7 +656,7 @@
 
                 print *,"Rank ",rank_MPI,": Allreduce sum = ", testr
                 call flush(6)
-
+! -------DEBUG ONLY---------
             end if
 #           endif
         end subroutine impi_adapt

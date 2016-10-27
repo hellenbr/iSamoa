@@ -1400,9 +1400,9 @@ subroutine collect_minimum_distances(grid, rank_list, neighbor_min_distances, i_
     !   amongst the STAYING ranks.
     !This redistribution is rough estimate, not perfect, because load balancing will
     !   be done again during grid refinement
-    subroutine distribute_load_for_resource_shrinkage(grid, num_total_ranks, num_leaving_ranks, my_rank)
+    subroutine distribute_load_for_resource_shrinkage(grid, num_current_ranks, num_leaving_ranks, my_rank)
         type(t_grid), intent(inout) :: grid      ! Current local grid
-        integer, intent(in) :: num_total_ranks   ! The number of current ranks (size of MPI_COMM_WORLD)
+        integer, intent(in) :: num_current_ranks ! The number of current ranks (size of MPI_COMM_WORLD)
         integer, intent(in) :: num_leaving_ranks ! The number of ranks that will be leaving
         integer, intent(in) :: my_rank           ! The rank ID in the current MPI_COMM_WORLD
 
@@ -1423,9 +1423,9 @@ print *,"Rank ", rank_MPI, ": LALALA 1"
 call flush(6)
 
 #       if defined(_MPI)
-        num_staying_ranks = num_total_ranks - num_leaving_ranks
-        load = num_total_ranks / num_staying_ranks
-        num_small_ranks = num_staying_ranks - mod(num_total_ranks, num_staying_ranks)
+        num_staying_ranks = num_current_ranks - num_leaving_ranks
+        load = num_current_ranks / num_staying_ranks
+        num_small_ranks = num_staying_ranks - mod(num_current_ranks, num_staying_ranks)
 
 
 print *,"Rank ", rank_MPI, ": LALALA 2"

@@ -253,9 +253,6 @@ subroutine traverse_in_place(traversal, grid)
 	type(t_grid), save							        :: grid_temp
 	type(t_adaptive_statistics)                         :: thread_stats
 
-    print *,"Rank ",rank_MPI,": TAG 1"
-    call flush(6)
-
     if (.not. associated(traversal%threads) .or. size(traversal%threads) .ne. cfg%i_threads) then
         !$omp barrier
 
@@ -281,23 +278,13 @@ subroutine traverse_in_place(traversal, grid)
     assert_eq(size(traversal%threads), omp_get_max_threads())
 
     !$omp barrier
-
-    print *,"Rank ",rank_MPI,": TAG 2"
-    call flush(6)
-
     call thread_stats%start_time(integrity_time)
-    call traversal%conformity%check(grid)   ! First MPI call ever after impi_adapt: Allreduece might cause a problem!!
+    call traversal%conformity%check(grid)
     call thread_stats%stop_time(integrity_time)
-
-    print *,"Rank ",rank_MPI,": TAG 3"
-    call flush(6)
-
     !$omp barrier
 
     !Estimate the load of each section
-
     call grid%get_local_sections(i_first_src_section, i_last_src_section)
-
     do i_src_section = i_first_src_section, i_last_src_section
         call grid%sections%elements_alloc(i_src_section)%estimate_load()
     end do
@@ -320,9 +307,6 @@ subroutine traverse_in_place(traversal, grid)
 #	    endif
     end if
 
-    print *,"Rank ",rank_MPI,": TAG 4"
-    call flush(6)
-
     call thread_stats%start_time(allocation_time)
     call create_destination_grid(grid, grid_temp)
 
@@ -337,27 +321,15 @@ subroutine traverse_in_place(traversal, grid)
     assert_eqv(grid%sections%is_forward(), grid_temp%sections%is_forward())
     call thread_stats%stop_time(allocation_time)
 
-    print *,"Rank ",rank_MPI,": TAG 5"
-    call flush(6)
-
     !refine grid
     call traverse_out_of_place(traversal, grid, grid_temp)
-
-    print *,"Rank ",rank_MPI,": TAG 6"
-    call flush(6)
 
     !$omp barrier
     call grid%destroy()
 
-    print *,"Rank ",rank_MPI,": TAG 7"
-    call flush(6)
-
     !$omp single
     call grid_temp%move(grid)
     !$omp end single
-
-    print *,"Rank ",rank_MPI,": TAG 8"
-    call flush(6)
 
     !balance load AFTER refinement if splitting is ENABLED
     if (cfg%l_split_sections) then
@@ -376,9 +348,6 @@ subroutine traverse_in_place(traversal, grid)
             call thread_stats%stop_time(load_balancing_time)
 #	    endif
     end if
-
-    print *,"Rank ",rank_MPI,": TAG 9"
-    call flush(6)
 
     traversal%threads(i_thread)%stats = traversal%threads(i_thread)%stats + thread_stats
     grid%threads%elements(i_thread)%stats = grid%threads%elements(i_thread)%stats + thread_stats
