@@ -414,6 +414,7 @@
 
 ! -------DEBUG ONLY---------
                 print *,"Rank ",rank_MPI,": Tsunami phase..."
+                call flush(6)
 ! -------DEBUG ONLY---------
 
 			    !check for loop termination
@@ -584,8 +585,8 @@
 ! -------DEBUG ONLY---------
 
                 !************************ ADAPT WINDOW ****************************
-                ! Broadcast a few values between STAYING and JOINING ranks
-                ! The use of NEW_COMM must exclude RETREATING ranks, which have NEW_COMM == MPI_COMM_NULL
+                !Broadcast a few values between STAYING and JOINING ranks
+                !The use of NEW_COMM must exclude RETREATING ranks, which have NEW_COMM == MPI_COMM_NULL
                 if (status_MPI .ne. MPI_ADAPT_STATUS_RETREATING) then
                     bcast_packet = t_impi_bcast(i_stats_phase, i_initial_step, i_time_step, r_time_next_output, &
                             grid%r_time, grid%r_dt, grid%r_dt_new, grid%sections%is_forward())
@@ -606,25 +607,26 @@
                     grid%r_dt          = bcast_packet%r_dt
                     grid%r_dt_new      = bcast_packet%r_dt_new
 
-                    ! reverse grid if it is the case (for JOINING procs only)
+                    !reverse grid if it is the case (for JOINING procs only)
                     if (.not. bcast_packet%is_forward) then
-                        call grid%reverse()  ! this will set the grid%sections%forward flag properly
+                        call grid%reverse()  !this will set the grid%sections%forward flag properly
                     end if
                 end if
 
-                ! Only the STAYING and JOINING ranks has a valid NEW_COMM,
-                ! The correct new_comm_size must be broadcasted to the RETREATING ranks
-                if (status_MPI .ne. MPI_ADAPT_STATUS_RETREATING) then
-                    call mpi_comm_size(NEW_COMM, new_comm_size, err); assert_eq(err, 0)
-                end if
-                call mpi_bcast(new_comm_size, 1, MPI_INT, 0, MPI_COMM_WORLD, err); assert_eq(err, 0)
-
                 !NOTE:
-                !  If resource expansion, nothing more to be done (load balancign will be done during grid refinement).
-                !  If resource shrinkage, need to transfer data out from LEAVING procs.
-                !  TODO: currently does not support the case of have both JOINING and LEAVING ranks at the same time
+                !If resource expansion, nothing more to be done (load balancign will be done during grid refinement).
+                !If resource shrinkage, need to transfer data out from RETREATING procs.
+                !TODO: currently does not support the case of having both JOINING and RETREATING ranks at the same time
                 if (new_comm_size < size_MPI) then
+
+                    !Only the STAYING and JOINING ranks has a valid NEW_COMM,
+                    !The correct new_comm_size must be broadcasted to the RETREATING ranks
+                    if (status_MPI .ne. MPI_ADAPT_STATUS_RETREATING) then
+                        call mpi_comm_size(NEW_COMM, new_comm_size, err); assert_eq(err, 0)
+                    end if
+                    call mpi_bcast(new_comm_size, 1, MPI_INT, 0, MPI_COMM_WORLD, err); assert_eq(err, 0)
                     num_leaving_ranks = size_MPI - new_comm_size
+
                     ! Since it is shrinkage, use the current MPI_COMM_WORLD, size_MPI, rank_MPI
                     call distribute_load_for_resource_shrinkage(grid, size_MPI, num_leaving_ranks, rank_MPI)
                 end if
@@ -648,14 +650,14 @@
                 !!! Test for MPI collective calls after expansion:
                 !!!   Updated MPI_COMM_WORLD is working fine for allreduce and reduce+bcast
 
-                tests = 1
-                testr = 0
-                call mpi_allreduce(tests, testr, 1, MPI_INT, MPI_SUM, MPI_COMM_WORLD, err); assert_eq(err, 0)
+!                tests = 1
+!                testr = 0
+!                call mpi_allreduce(tests, testr, 1, MPI_INT, MPI_SUM, MPI_COMM_WORLD, err); assert_eq(err, 0)
 !                call mpi_reduce(tests, testr, 1, MPI_INT, MPI_SUM, 0, MPI_COMM_WORLD, err); assert_eq(err, 0)
 !                call mpi_bcast(testr, 1, MPI_INT, 0, MPI_COMM_WORLD, err); assert_eq(err, 0)
 
-                print *,"Rank ",rank_MPI,": Allreduce sum = ", testr
-                call flush(6)
+!                print *,"Rank ",rank_MPI,": Allreduce sum = ", testr
+!                call flush(6)
 ! -------DEBUG ONLY---------
             end if
 #           endif
