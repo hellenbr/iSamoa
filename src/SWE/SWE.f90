@@ -554,10 +554,6 @@
             real (kind=GRID_SR) :: tic, toc, tic1, toc1
             type(t_impi_bcast) :: bcast_packet
 
-! -------DEBUG ONLY---------
-            integer :: tests, testr
-! -------DEBUG ONLY---------
-
             tic = mpi_wtime()
             call mpi_probe_adapt(adapt_flag, status_MPI, info, err)
             toc = mpi_wtime() - tic
@@ -575,60 +571,57 @@
 
                 print *, "Rank ", rank_MPI, " [STATUS ", status_MPI, "]: ", &
                     "MPI_Comm_adapt_begin ", toc, " seconds"
-
-! -------DEBUG ONLY---------
-                print *, "Rank ", rank_MPI, ": INTER_COMM is NULL? ", (INTER_COMM .eq. MPI_COMM_NULL)
                 call flush(6)
-
-                print *, "Rank ", rank_MPI, ": NEW_COMM is NULL? ", (NEW_COMM .eq. MPI_COMM_NULL)
-                call flush(6)
-! -------DEBUG ONLY---------
 
                 !************************ ADAPT WINDOW ****************************
-                !Broadcast a few values between STAYING and JOINING ranks
-                !The use of NEW_COMM must exclude RETREATING ranks, which have NEW_COMM == MPI_COMM_NULL
+                !Determine the adaption type:
+                !    a) pure expansion (no RETREATING ranks),
+                !    b) pure reduction (no JOINING ranks),
+                !    c) hybrid (there are both RETREATING and JOINING ranks) <== Currently not supported
+
+                !Only the STAYING and JOINING ranks has a valid NEW_COMM,
+                !The correct new_comm_size must be broadcasted to the RETREATING ranks
                 if (status_MPI .ne. MPI_ADAPT_STATUS_RETREATING) then
-                    bcast_packet = t_impi_bcast(i_stats_phase, i_initial_step, i_time_step, r_time_next_output, &
-                            grid%r_time, grid%r_dt, grid%r_dt_new, grid%sections%is_forward())
-                    call mpi_bcast(bcast_packet, 1, IMPI_BCAST_TYPE, 0, NEW_COMM, err); assert_eq(err, 0)
+                    call mpi_comm_size(NEW_COMM, new_comm_size, err); assert_eq(err, 0)
                 end if
+                call mpi_bcast(new_comm_size, 1, MPI_INT, 0, MPI_COMM_WORLD, err); assert_eq(err, 0)
+                num_leaving_ranks = size_MPI - new_comm_size
 
-                ! JOINING ranks must initialize grid objects properly
-                if (status_MPI .eq. MPI_ADAPT_STATUS_JOINING) then
-                    call grid%destroy()
-                    call grid%sections%resize(0)
-                    call grid%threads%resize(omp_get_max_threads())
-
-                    i_stats_phase      = bcast_packet%i_stats_phase
-                    i_initial_step     = bcast_packet%i_initial_step
-                    i_time_step        = bcast_packet%i_time_step
-                    r_time_next_output = bcast_packet%r_time_next_output
-                    grid%r_time        = bcast_packet%r_time
-                    grid%r_dt          = bcast_packet%r_dt
-                    grid%r_dt_new      = bcast_packet%r_dt_new
-
-                    !reverse grid if it is the case (for JOINING procs only)
-                    if (.not. bcast_packet%is_forward) then
-                        call grid%reverse()  !this will set the grid%sections%forward flag properly
-                    end if
-                end if
-
-                !NOTE:
-                !If resource expansion, nothing more to be done (load balancign will be done during grid refinement).
-                !If resource shrinkage, need to transfer data out from RETREATING procs.
-                !TODO: currently does not support the case of having both JOINING and RETREATING ranks at the same time
+                !Case pure reduction:
+                !   1. Transfer data out from RETREATING ranks to STAYING ranks
+                !   2. RETREATING ranks must close all open files (if any)
                 if (new_comm_size < size_MPI) then
-
-                    !Only the STAYING and JOINING ranks has a valid NEW_COMM,
-                    !The correct new_comm_size must be broadcasted to the RETREATING ranks
-                    if (status_MPI .ne. MPI_ADAPT_STATUS_RETREATING) then
-                        call mpi_comm_size(NEW_COMM, new_comm_size, err); assert_eq(err, 0)
-                    end if
-                    call mpi_bcast(new_comm_size, 1, MPI_INT, 0, MPI_COMM_WORLD, err); assert_eq(err, 0)
-                    num_leaving_ranks = size_MPI - new_comm_size
-
-                    ! Since it is shrinkage, use the current MPI_COMM_WORLD, size_MPI, rank_MPI
                     call distribute_load_for_resource_shrinkage(grid, size_MPI, num_leaving_ranks, rank_MPI)
+
+                ! Case pure expansion:
+                !   1. Broadcast necessary objects from STAYING to JOINING ranks
+                !   2. JOINING ranks initialize
+                else
+                    !The use of NEW_COMM must exclude RETREATING ranks, which have NEW_COMM == MPI_COMM_NULL
+                    if (status_MPI .ne. MPI_ADAPT_STATUS_RETREATING) then
+                        bcast_packet = t_impi_bcast(i_stats_phase, i_initial_step, i_time_step, r_time_next_output, &
+                                grid%r_time, grid%r_dt, grid%r_dt_new, grid%sections%is_forward())
+                        call mpi_bcast(bcast_packet, 1, IMPI_BCAST_TYPE, 0, NEW_COMM, err); assert_eq(err, 0)
+                    end if
+
+                    ! JOINING ranks must initialize grid objects properly
+                    if (status_MPI .eq. MPI_ADAPT_STATUS_JOINING) then
+                        call grid%destroy()
+                        call grid%sections%resize(0)
+                        call grid%threads%resize(omp_get_max_threads())
+                        i_stats_phase      = bcast_packet%i_stats_phase
+                        i_initial_step     = bcast_packet%i_initial_step
+                        i_time_step        = bcast_packet%i_time_step
+                        r_time_next_output = bcast_packet%r_time_next_output
+                        grid%r_time        = bcast_packet%r_time
+                        grid%r_dt          = bcast_packet%r_dt
+                        grid%r_dt_new      = bcast_packet%r_dt_new
+                        !reverse grid if it is the case (for JOINING procs only)
+                        if (.not. bcast_packet%is_forward) then
+                            call grid%reverse()  !this will set the grid%sections%forward flag properly
+                        end if
+                    end if
+
                 end if
                 !************************ ADAPT WINDOW ****************************
 
@@ -638,6 +631,7 @@
 
                 print *, "Rank ", rank_MPI, " [STATUS ", status_MPI, "]: ", &
                         "MPI_Comm_adapt_commit ", toc, " seconds"
+                call flush(6)
 
                 call mpi_comm_size(MPI_COMM_WORLD, size_MPI, err); assert_eq(err, 0)
                 call mpi_comm_rank(MPI_COMM_WORLD, rank_MPI, err); assert_eq(err, 0)
@@ -646,19 +640,7 @@
                 toc1 = mpi_wtime() - tic1;
                 print *, "Rank ", rank_MPI, " [STATUS ", status_MPI, "]: ", &
                         "Total adaptation time = ", toc1, " seconds"
-! -------DEBUG ONLY---------
-                !!! Test for MPI collective calls after expansion:
-                !!!   Updated MPI_COMM_WORLD is working fine for allreduce and reduce+bcast
-
-!                tests = 1
-!                testr = 0
-!                call mpi_allreduce(tests, testr, 1, MPI_INT, MPI_SUM, MPI_COMM_WORLD, err); assert_eq(err, 0)
-!                call mpi_reduce(tests, testr, 1, MPI_INT, MPI_SUM, 0, MPI_COMM_WORLD, err); assert_eq(err, 0)
-!                call mpi_bcast(testr, 1, MPI_INT, 0, MPI_COMM_WORLD, err); assert_eq(err, 0)
-
-!                print *,"Rank ",rank_MPI,": Allreduce sum = ", testr
-!                call flush(6)
-! -------DEBUG ONLY---------
+                call flush(6)
             end if
 #           endif
         end subroutine impi_adapt
