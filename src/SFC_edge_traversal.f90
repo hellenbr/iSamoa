@@ -1394,12 +1394,12 @@ subroutine collect_minimum_distances(grid, rank_list, neighbor_min_distances, i_
 #       endif
     end subroutine
 
-    !In case of resource shrinkage, data must be transfered out from LEAVING processes.
-    ![Assumption]: The LEAVING processes are always the last ones (largest ranks)
-    !This function transfers the data out from the last few ranks, and re-distribute sections
-    !   amongst the STAYING ranks.
-    !This redistribution is rough estimate, not perfect, because load balancing will
-    !   be done again during grid refinement
+    !In case of resource reduction, data must be transfered out from RETREATING ranks.
+    ![Assumption]: The RETREATING ranks are always the last ones (largest ranks)
+    !This function transfers the data out from the last few RETREATING ranks,
+    !   and re-distribute sections among the STAYING ranks.
+    !This redistribution is rough estimate, not perfect, because load balancing
+    !   will be done again during grid refinement
     subroutine distribute_load_for_resource_shrinkage(grid, num_current_ranks, num_leaving_ranks, my_rank)
         type(t_grid), intent(inout) :: grid      ! Current local grid
         integer, intent(in) :: num_current_ranks ! The number of current ranks (size of MPI_COMM_WORLD)
@@ -1575,11 +1575,9 @@ subroutine collect_minimum_distances(grid, rank_list, neighbor_min_distances, i_
         call send_recv_comm_changes(grid, i_rank_out, i_section_index_out, i_rank_in)
 
         !$omp barrier
-
         _log_write(3, '(4X, "migrate sections:")')
 
         !exit early if nothing changes on this rank
-
         if (size(i_rank_out) == 0 .and. size(i_rank_in) == 0) then
             !if we have nothing and we get nothing from others we are done
             _log_write(2, '(4X, "load balancing: exit, we do not have nor get anything ")')
@@ -1592,7 +1590,6 @@ subroutine collect_minimum_distances(grid, rank_list, neighbor_min_distances, i_
             assert_vne(i_rank_in, rank_MPI)
         else if (i_rank_out(1) .eq. rank_MPI .and. i_rank_out(size(i_rank_out)) .eq. rank_MPI .and. &
                 i_rank_in(1) .eq. rank_MPI .and. i_rank_in(size(i_rank_in)) .eq. rank_MPI) then
-
             !if we give nothing to others and get nothing from others we are done
             _log_write(2, '(4X, "load balancing: exit, we have something, but do not give nor get anything")')
             return

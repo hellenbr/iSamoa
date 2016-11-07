@@ -303,6 +303,7 @@
                     !$omp end master
                 end if
 
+! Grid output 0
                 !output initial grid
                 if (cfg%i_output_time_steps > 0 .or. cfg%r_output_time_step >= 0.0_GRID_SR) then
                     if (cfg%l_ascii_output) then
