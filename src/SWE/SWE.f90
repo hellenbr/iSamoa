@@ -579,7 +579,8 @@
                 tic1 = mpi_wtime()
 
                 tic = mpi_wtime()
-                call mpi_comm_adapt_begin(INTER_COMM, NEW_COMM, staying_count, leaving_count, joining_count, err); assert_eq(err, 0)
+                call mpi_comm_adapt_begin( INTER_COMM, NEW_COMM, &
+                        staying_count, leaving_count, joining_count, err); assert_eq(err, 0)
                 toc = MPI_Wtime() - tic
 
                 print *, "Rank ", rank_MPI, " [STATUS ", status_MPI, "]: ", &
