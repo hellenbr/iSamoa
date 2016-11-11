@@ -51,6 +51,7 @@
             integer (kind=GRID_SI) :: i_stats_phase    ! MPI_INTEGER4
             integer (kind=GRID_SI) :: i_initial_step
             integer (kind=GRID_SI) :: i_time_step
+            integer (kind=GRID_SI) :: i_output_iteration
             real (kind=GRID_SR)    :: r_time_next_output  ! MPI_DOUBLE_PRECISION
             real (kind=GRID_SR)    :: r_time
             real (kind=GRID_SR)    :: r_dt
@@ -85,17 +86,17 @@
             swe%point_output%s_file_stamp = trim(cfg%output_dir) // "/swe_" // trim(s_date) // "_" // trim(s_time)
 			s_log_name = trim(swe%xml_output%s_file_stamp) // ".log"
 
-!# if defined(_IMPI)
-!            ! At this point, JOINING ranks do not have the right file name yet
-!            ! prevent them from creating a wrong file
-!            if (status_MPI .ne. MPI_ADAPT_STATUS_JOINING) then
-!# endif
+# if defined(_IMPI)
+            ! At this point, JOINING ranks do not have the right file name yet
+            ! prevent them from creating a wrong file
+            if (status_MPI .ne. MPI_ADAPT_STATUS_JOINING) then
+# endif
                 if (l_log) then
                     _log_open_file(s_log_name)
                 end if
-!# if defined(_IMPI)
-!            end if
-!# endif
+# if defined(_IMPI)
+            end if
+# endif
 
 			call load_scenario(grid)
 
@@ -565,6 +566,7 @@
             integer :: info, status, err
             real (kind=GRID_SR) :: tic, toc, tic1, toc1
             type(t_impi_bcast) :: bcast_packet
+            character(len=256) :: s_log_name
 
             tic = mpi_wtime()
             call mpi_probe_adapt(adapt_flag, status_MPI, info, err)
@@ -593,10 +595,11 @@
                 !(2) JOINING ranks get necessary data from MASTER
                 !    The use of NEW_COMM must exclude LEAVING ranks, because they have NEW_COMM == MPI_COMM_NULL
                 if ((joining_count > 0) .and. (status_MPI .ne. MPI_ADAPT_STATUS_LEAVING)) then
-                    bcast_packet = t_impi_bcast(i_stats_phase, i_initial_step, i_time_step, &
+                    bcast_packet = t_impi_bcast(i_stats_phase, i_initial_step, i_time_step, swe%output%i_output_iteration, &
                             r_time_next_output, grid%r_time, grid%r_dt, grid%r_dt_new, &
                             grid%sections%is_forward())
                     call mpi_bcast(bcast_packet, 1, IMPI_BCAST_TYPE, 0, NEW_COMM, err); assert_eq(err, 0)
+                    call mpi_bcast(swe%output%s_file_stamp, len(swe%output%s_file_stamp), MPI_CHARACTER, 0, NEW_COMM, err); assert_eq(err, 0)
                 end if
 
                 !(3) JOINING ranks initialize
@@ -612,6 +615,17 @@
                     grid%r_time        = bcast_packet%r_time
                     grid%r_dt          = bcast_packet%r_dt
                     grid%r_dt_new      = bcast_packet%r_dt_new
+
+                    swe%output%i_output_iteration = bcast_packet%i_output_iteration
+                    swe%xml_output%i_output_iteration = bcast_packet%i_output_iteration
+                    swe%point_output%i_output_iteration = bcast_packet%i_output_iteration
+
+                    swe%xml_output%s_file_stamp = swe%output%s_file_stamp
+                    swe%point_output%s_file_stamp = swe%output%s_file_stamp
+                    s_log_name = trim(swe%output%s_file_stamp) // ".log"
+                    if (cfg%l_log) then
+                        _log_open_file(s_log_name)
+                    end if
 
                     !reverse grid if it is the case (for JOINING procs only)
                     if (.not. bcast_packet%is_forward) then
@@ -633,6 +647,9 @@
                 _log_write(1, '("Rank ", I0, " (", I0, "): adapt_commit ", E10.2, " sec")') &
                         rank_MPI, status_MPI, toc
 
+                _log_write(1, '("Rank ", I0, " (", I0, "): s_file_stamp = ", A)') &
+                        rank_MPI, status_MPI, trim(swe%output%s_file_stamp)
+
                 ! Update status, size, rank after commit
                 status_MPI = MPI_ADAPT_STATUS_STAYING;
                 call mpi_comm_size(MPI_COMM_WORLD, size_MPI, err); assert_eq(err, 0)
@@ -651,9 +668,10 @@
             !Construct an MPI type for the following object
             !************************
             !type t_impi_bcast
-            !    integer (kind=GRID_SI) :: i_stats_phase    ! MPI_INTEGER4 x3
+            !    integer (kind=GRID_SI) :: i_stats_phase    ! MPI_INTEGER4 x4
             !    integer (kind=GRID_SI) :: i_initial_step
             !    integer (kind=GRID_SI) :: i_time_step
+            !    integer (kind=GRID_SI) :: i_output_iteration
             !    real (kind=GRID_SR)    :: r_time_next_output  ! MPI_DOUBLE_PRECISION x4
             !    real (kind=GRID_SR)    :: r_time
             !    real (kind=GRID_SR)    :: r_dt
@@ -665,9 +683,9 @@
 #           if defined(_IMPI)
             integer :: lens(3), types(3), disps(3), err
             integer (kind = GRID_SI)    :: i_sample
-            integer (kind = GRID_SR)    :: r_sample
+            real    (kind = GRID_SR)    :: r_sample
 
-            lens(1) = 3
+            lens(1) = 4
             lens(2) = 4
             lens(3) = 1
 

@@ -41,7 +41,7 @@ module config
         logical                                 :: l_split_sections                                 !< if true, MPI load balancing may split sections, if false sections are treated as atomic units
         logical                                 :: l_serial_lb                                      !< if true, MPI load balancing is serialized, if false a distributed algorithm is used
         double precision                        :: r_adapt_time_step					            !< grid output time step
-        integer			        	            :: i_adapt_time_steps			                            !< number of time steps between each linear solver solution
+        integer			        	            :: i_adapt_time_steps			                    !< number of time steps between each linear solver solution
 
 	    logical 				                :: l_gridoutput			                            !< grid output on/off
 	    character(256)				            :: output_dir			                            !< output directory
