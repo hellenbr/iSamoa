@@ -1394,9 +1394,9 @@ subroutine collect_minimum_distances(grid, rank_list, neighbor_min_distances, i_
 #       endif
     end subroutine
 
-    !In case of resource reduction, data must be transfered out from LEAVING ranks.
-    ![Assumption]: The LEAVING ranks are always the last ones (largest ranks)
-    !This function transfers the data out from the last few LEAVING ranks,
+    !In case of resource reduction, data must be transfered out from RETREATING ranks.
+    ![Assumption]: The RETREATING ranks are always the last ones (largest ranks)
+    !This function transfers the data out from the last few RETREATING ranks,
     !   and re-distribute sections among the STAYING ranks.
     !This redistribution is rough estimate, not perfect, because load balancing
     !   will be done again during grid refinement
