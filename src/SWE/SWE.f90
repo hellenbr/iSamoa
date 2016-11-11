@@ -69,14 +69,15 @@
 			integer, intent(in)											:: i_asagi_mode
 
 			!local variables
-			character(64)												:: s_log_name, s_date, s_time
+			character(len=64)											:: s_date, s_time
+			character(len=256)                                          :: s_log_name
 			integer                                                     :: i_error
 
 			call date_and_time(s_date, s_time)
 
 #           if defined(_MPI)
-                call mpi_bcast(s_date, len(s_date), MPI_CHARACTER, 0, MPI_COMM_WORLD, i_error); assert_eq(i_error, 0)
-                call mpi_bcast(s_time, len(s_time), MPI_CHARACTER, 0, MPI_COMM_WORLD, i_error); assert_eq(i_error, 0)
+            call mpi_bcast(s_date, len(s_date), MPI_CHARACTER, 0, MPI_COMM_WORLD, i_error); assert_eq(i_error, 0)
+            call mpi_bcast(s_time, len(s_time), MPI_CHARACTER, 0, MPI_COMM_WORLD, i_error); assert_eq(i_error, 0)
 #           endif
 
             swe%output%s_file_stamp = trim(cfg%output_dir) // "/swe_" // trim(s_date) // "_" // trim(s_time)
@@ -84,9 +85,17 @@
             swe%point_output%s_file_stamp = trim(cfg%output_dir) // "/swe_" // trim(s_date) // "_" // trim(s_time)
 			s_log_name = trim(swe%xml_output%s_file_stamp) // ".log"
 
-			if (l_log) then
-				_log_open_file(s_log_name)
-			end if
+!# if defined(_IMPI)
+!            ! At this point, JOINING ranks do not have the right file name yet
+!            ! prevent them from creating a wrong file
+!            if (status_MPI .ne. MPI_ADAPT_STATUS_JOINING) then
+!# endif
+                if (l_log) then
+                    _log_open_file(s_log_name)
+                end if
+!# if defined(_IMPI)
+!            end if
+!# endif
 
 			call load_scenario(grid)
 
@@ -584,8 +593,9 @@
                 !(2) JOINING ranks get necessary data from MASTER
                 !    The use of NEW_COMM must exclude LEAVING ranks, because they have NEW_COMM == MPI_COMM_NULL
                 if ((joining_count > 0) .and. (status_MPI .ne. MPI_ADAPT_STATUS_LEAVING)) then
-                    bcast_packet = t_impi_bcast(i_stats_phase, i_initial_step, i_time_step, r_time_next_output, &
-                            grid%r_time, grid%r_dt, grid%r_dt_new, grid%sections%is_forward())
+                    bcast_packet = t_impi_bcast(i_stats_phase, i_initial_step, i_time_step, &
+                            r_time_next_output, grid%r_time, grid%r_dt, grid%r_dt_new, &
+                            grid%sections%is_forward())
                     call mpi_bcast(bcast_packet, 1, IMPI_BCAST_TYPE, 0, NEW_COMM, err); assert_eq(err, 0)
                 end if
 
@@ -594,6 +604,7 @@
                     call grid%destroy()
                     call grid%sections%resize(0)
                     call grid%threads%resize(omp_get_max_threads())
+
                     i_stats_phase      = bcast_packet%i_stats_phase
                     i_initial_step     = bcast_packet%i_initial_step
                     i_time_step        = bcast_packet%i_time_step
@@ -601,6 +612,7 @@
                     grid%r_time        = bcast_packet%r_time
                     grid%r_dt          = bcast_packet%r_dt
                     grid%r_dt_new      = bcast_packet%r_dt_new
+
                     !reverse grid if it is the case (for JOINING procs only)
                     if (.not. bcast_packet%is_forward) then
                         call grid%reverse()  !this will set the grid%sections%forward flag properly
@@ -651,8 +663,7 @@
             !************************
 
 #           if defined(_IMPI)
-            integer :: lens(3), types(3), disps(3), type_size, err
-            integer (kind = MPI_ADDRESS_KIND)       :: lb, ub
+            integer :: lens(3), types(3), disps(3), err
             integer (kind = GRID_SI)    :: i_sample
             integer (kind = GRID_SR)    :: r_sample
 
@@ -661,8 +672,8 @@
             lens(3) = 1
 
             disps(1) = 0
-            disps(2) = sizeof(i_sample) * lens(1)
-            disps(3) = sizeof(r_sample) * lens(2) + disps(2)
+            disps(2) = disps(1) + lens(1) * sizeof(i_sample)
+            disps(3) = disps(2) + lens(2) * sizeof(r_sample)
 
             types(1) = MPI_INTEGER4
             types(2) = MPI_DOUBLE_PRECISION
@@ -670,9 +681,6 @@
 
             call MPI_Type_struct(3, lens, disps, types, impi_bcast_type, err); assert_eq(err, 0)
             call MPI_Type_commit(impi_bcast_type, err); assert_eq(err, 0)
-
-!                call MPI_Type_size(impi_bcast_type, type_size, err); assert_eq(err, 0)
-!                call MPI_Type_get_extent(impi_bcast_type, lb, ub, err); assert_eq(err, 0)
 #           endif
         end subroutine
 

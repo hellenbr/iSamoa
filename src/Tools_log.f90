@@ -172,11 +172,9 @@ MODULE Tools_log
 	!> if this is not called, the log is written to stdout instead
 	subroutine log_open_file(s_file_name)
 		character(*)				:: s_file_name
-
 		integer 					:: i_error
 
 		assert_eq(g_log_file_unit, 6)
-
 		g_log_file_unit = get_free_file_unit()
 
         open(unit=g_log_file_unit, file=s_file_name, status='replace', access='sequential', iostat=i_error); assert_eq(i_error, 0)
