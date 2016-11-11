@@ -551,6 +551,7 @@
 
 #           if defined(_IMPI)
             integer :: adapt_flag, NEW_COMM, INTER_COMM, new_comm_size, num_leaving_ranks
+            integer :: staying_count, leaving_count, joining_count
             integer :: info, status, err
             real (kind=GRID_SR) :: tic, toc, tic1, toc1
             type(t_impi_bcast) :: bcast_packet
@@ -567,7 +568,7 @@
                 tic1 = mpi_wtime()
 
                 tic = mpi_wtime()
-                call mpi_comm_adapt_begin(INTER_COMM, NEW_COMM, 0, 0, err); assert_eq(err, 0)
+                call mpi_comm_adapt_begin(INTER_COMM, NEW_COMM, staying_count, leaving_count, joining_count, err); assert_eq(err, 0)
                 toc = MPI_Wtime() - tic
 
                 print *, "Rank ", rank_MPI, " [STATUS ", status_MPI, "]: ", &
@@ -576,21 +577,21 @@
 
                 !************************ ADAPT WINDOW ****************************
                 !Determine the adaption type:
-                !    a) pure expansion (no RETREATING ranks),
+                !    a) pure expansion (no LEAVING ranks),
                 !    b) pure reduction (no JOINING ranks),
-                !    c) hybrid (there are both RETREATING and JOINING ranks) <== Currently not supported
+                !    c) hybrid (there are both LEAVING and JOINING ranks) <== Currently not supported
 
                 !Only the STAYING and JOINING ranks has a valid NEW_COMM,
-                !The correct new_comm_size must be broadcasted to the RETREATING ranks
-                if (status_MPI .ne. MPI_ADAPT_STATUS_RETREATING) then
+                !The correct new_comm_size must be broadcasted to the LEAVING ranks
+                if (status_MPI .ne. MPI_ADAPT_STATUS_LEAVING) then
                     call mpi_comm_size(NEW_COMM, new_comm_size, err); assert_eq(err, 0)
                 end if
                 call mpi_bcast(new_comm_size, 1, MPI_INT, 0, MPI_COMM_WORLD, err); assert_eq(err, 0)
                 num_leaving_ranks = size_MPI - new_comm_size
 
                 !Case pure reduction:
-                !   1. Transfer data out from RETREATING ranks to STAYING ranks
-                !   2. RETREATING ranks must close all open files (if any)
+                !   1. Transfer data out from LEAVING ranks to STAYING ranks
+                !   2. LEAVING ranks must close all open files (if any)
                 if (new_comm_size < size_MPI) then
                     call distribute_load_for_resource_shrinkage(grid, size_MPI, num_leaving_ranks, rank_MPI)
 
@@ -598,8 +599,8 @@
                 !   1. Broadcast necessary objects from STAYING to JOINING ranks
                 !   2. JOINING ranks initialize
                 else
-                    !The use of NEW_COMM must exclude RETREATING ranks, which have NEW_COMM == MPI_COMM_NULL
-                    if (status_MPI .ne. MPI_ADAPT_STATUS_RETREATING) then
+                    !The use of NEW_COMM must exclude LEAVING ranks, which have NEW_COMM == MPI_COMM_NULL
+                    if (status_MPI .ne. MPI_ADAPT_STATUS_LEAVING) then
                         bcast_packet = t_impi_bcast(i_stats_phase, i_initial_step, i_time_step, r_time_next_output, &
                                 grid%r_time, grid%r_dt, grid%r_dt_new, grid%sections%is_forward())
                         call mpi_bcast(bcast_packet, 1, IMPI_BCAST_TYPE, 0, NEW_COMM, err); assert_eq(err, 0)
@@ -627,7 +628,7 @@
                 !************************ ADAPT WINDOW ****************************
 
                 tic = mpi_wtime();
-                call mpi_comm_adapt_commit(adapt_flag, err); assert_eq(err, 0)
+                call mpi_comm_adapt_commit(err); assert_eq(err, 0)
                 toc = mpi_wtime() - tic;
 
                 print *, "Rank ", rank_MPI, " [STATUS ", status_MPI, "]: ", &
