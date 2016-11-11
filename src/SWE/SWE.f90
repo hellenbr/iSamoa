@@ -243,7 +243,7 @@
 
 #           if defined(_IMPI)
             !Only the NON-joining procs do initialization
-			if (status_MPI /= MPI_ADAPT_STATUS_JOINING) then
+			if (status_MPI .ne. MPI_ADAPT_STATUS_JOINING) then
 #           endif
 
                 !init parameters
@@ -314,7 +314,6 @@
                     !$omp end master
                 end if
 
-! Grid output 0
                 !output initial grid
                 if (cfg%i_output_time_steps > 0 .or. cfg%r_output_time_step >= 0.0_GRID_SR) then
                     if (cfg%l_ascii_output) then
@@ -500,7 +499,6 @@
                 _log_write(0, '()')
                 _log_write(0, '("  Cells: avg: ", I0, " max: ", I0)') grid_info%i_cells / (omp_get_max_threads() * size_MPI), grid_info_max%i_cells
                 _log_write(0, '()')
-
                 call grid_info%print()
             end if
             !$omp end master
@@ -561,7 +559,7 @@
             integer, intent(in)                   :: IMPI_BCAST_TYPE
 
 #           if defined(_IMPI)
-            integer :: adapt_flag, NEW_COMM, INTER_COMM, new_comm_size, num_leaving_ranks
+            integer :: adapt_flag, NEW_COMM, INTER_COMM
             integer :: staying_count, leaving_count, joining_count
             integer :: info, status, err
             real (kind=GRID_SR) :: tic, toc, tic1, toc1
@@ -571,9 +569,8 @@
             call mpi_probe_adapt(adapt_flag, status_MPI, info, err)
             toc = mpi_wtime() - tic
 
-            print *, "Rank ", rank_MPI, " [STATUS ", status_MPI , "]: ", &
-                    "MPI_Probe_adapt ", toc, " seconds"
-            call flush(6)
+            _log_write(1, '("Rank ", I0, ", Status ", I0, ": MPI_Probe_adapt ", E10.2, " sec")') &
+                    rank_MPI, status_MPI, toc
 
             if (adapt_flag == MPI_ADAPT_TRUE) then
                 tic1 = mpi_wtime()
@@ -583,40 +580,18 @@
                         staying_count, leaving_count, joining_count, err); assert_eq(err, 0)
                 toc = MPI_Wtime() - tic
 
-                print *, "Rank ", rank_MPI, " [STATUS ", status_MPI, "]: ", &
-                    "MPI_Comm_adapt_begin ", toc, " seconds"
-                call flush(6)
+                _log_write(0, '("Rank ", I0, ", Status ", I0, ": MPI_Comm_adapt_begin ", E10.2, " sec. Staying ", I0, ", leaving ", I0, ", joining ", I0)') &
+                        rank_MPI, status_MPI, toc, staying_count, leaving_count, joining_count
 
                 !************************ ADAPT WINDOW ****************************
-                !Determine the adaption type:
-                !    a) pure expansion (no LEAVING ranks),
-                !    b) pure reduction (no JOINING ranks),
-                !    c) hybrid (there are both LEAVING and JOINING ranks) <== Currently not supported
-
-                !Only the STAYING and JOINING ranks has a valid NEW_COMM,
-                !The correct new_comm_size must be broadcasted to the LEAVING ranks
-                if (status_MPI .ne. MPI_ADAPT_STATUS_LEAVING) then
-                    call mpi_comm_size(NEW_COMM, new_comm_size, err); assert_eq(err, 0)
+                !1) LEAVING ranks dump data to STAYING ranks
+                if (leaving_count > 0) then
+                    call distribute_load_for_resource_shrinkage(grid, size_MPI, leaving_count, rank_MPI)
                 end if
-                call mpi_bcast(new_comm_size, 1, MPI_INT, 0, MPI_COMM_WORLD, err); assert_eq(err, 0)
-                num_leaving_ranks = size_MPI - new_comm_size
 
-                !== Case pure reduction ==
-                if (new_comm_size < size_MPI) then
+                !2) JOINING ranks gets necessary data from MASTER, and do necessary initialization
+                if (joining_count > 0) then
 
-                    !1) Transfer data out from LEAVING ranks to STAYING ranks
-                    call distribute_load_for_resource_shrinkage(grid, size_MPI, num_leaving_ranks, rank_MPI)
-
-                    !2) LEAVING ranks clean up (deallocate, close files, etc.)
-                    if (status_MPI .eq. MPI_ADAPT_STATUS_LEAVING) then
-                        call grid%destroy()
-                        call swe%destroy(grid, cfg%l_log)
-                    end if
-
-                !== Case pure expansion ==
-                else
-                    !1) Broadcast necessary objects from STAYING to JOINING ranks
-                    !   The use of NEW_COMM must exclude LEAVING ranks, which have NEW_COMM == MPI_COMM_NULL
                     if (status_MPI .ne. MPI_ADAPT_STATUS_LEAVING) then
                         bcast_packet = t_impi_bcast( &
                                 i_stats_phase, i_initial_step, i_time_step, &
@@ -625,7 +600,6 @@
                         call mpi_bcast(bcast_packet, 1, IMPI_BCAST_TYPE, 0, NEW_COMM, err); assert_eq(err, 0)
                     end if
 
-                    !2) JOINING ranks initialize necessary data
                     if (status_MPI .eq. MPI_ADAPT_STATUS_JOINING) then
                         call grid%destroy()
                         call grid%sections%resize(0)
@@ -642,35 +616,39 @@
                         swe%output%s_file_stamp = bcast_packet%s_file_stamp
                         swe%xml_output%s_file_stamp = bcast_packet%s_file_stamp
                         swe%point_output%s_file_stamp = bcast_packet%s_file_stamp
+
                         if (cfg%l_log) then
                             _log_open_file(trim(swe%xml_output%s_file_stamp) // ".log")
                         end if
 
                         !reverse grid if it is the case (for JOINING procs only)
                         if (.not. bcast_packet%is_forward) then
-                            call grid%reverse()  !this will set the grid%sections%forward flag properly
+                            call grid%reverse()
                         end if
                     end if
+                end if
 
+                !3) LEAVING ranks clean up (deallocate, close files, etc.)
+                if (status_MPI .eq. MPI_ADAPT_STATUS_LEAVING) then
+                    call grid%destroy()
+                    call swe%destroy(grid, cfg%l_log)
                 end if
                 !************************ ADAPT WINDOW ****************************
 
                 tic = mpi_wtime();
                 call mpi_comm_adapt_commit(err); assert_eq(err, 0)
                 toc = mpi_wtime() - tic;
+                _log_write(0, '("Rank ", I0, ", Status ", I0, ": MPI_Comm_adapt_commit ", E10.2, " sec")') &
+                        rank_MPI, status_MPI, toc
 
-                print *, "Rank ", rank_MPI, " [STATUS ", status_MPI, "]: ", &
-                        "MPI_Comm_adapt_commit ", toc, " seconds"
-                call flush(6)
-
+                ! Update MPI_COMM_WORLD size ank rank
                 call mpi_comm_size(MPI_COMM_WORLD, size_MPI, err); assert_eq(err, 0)
                 call mpi_comm_rank(MPI_COMM_WORLD, rank_MPI, err); assert_eq(err, 0)
                 status_MPI = MPI_ADAPT_STATUS_STAYING;
 
                 toc1 = mpi_wtime() - tic1;
-                print *, "Rank ", rank_MPI, " [STATUS ", status_MPI, "]: ", &
-                        "Total adaptation time = ", toc1, " seconds"
-                call flush(6)
+                _log_write(0, '("Rank ", I0, ", Status ", I0, ": Total adaption time ", E10.2, " sec")') &
+                        rank_MPI, status_MPI, toc1
             end if
 #           endif
         end subroutine impi_adapt
