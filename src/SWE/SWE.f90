@@ -51,7 +51,7 @@
             integer (kind=GRID_SI) :: i_stats_phase    ! MPI_INTEGER4
             integer (kind=GRID_SI) :: i_initial_step
             integer (kind=GRID_SI) :: i_time_step
-            integer (kind=GRID_SI) :: i_output_iteration
+!            integer (kind=GRID_SI) :: i_output_iteration
             real (kind=GRID_SR)    :: r_time_next_output  ! MPI_DOUBLE_PRECISION
             real (kind=GRID_SR)    :: r_time
             real (kind=GRID_SR)    :: r_dt
@@ -595,11 +595,12 @@
                 !(2) JOINING ranks get necessary data from MASTER
                 !    The use of NEW_COMM must exclude LEAVING ranks, because they have NEW_COMM == MPI_COMM_NULL
                 if ((joining_count > 0) .and. (status_MPI .ne. MPI_ADAPT_STATUS_LEAVING)) then
-                    bcast_packet = t_impi_bcast(i_stats_phase, i_initial_step, i_time_step, swe%output%i_output_iteration, &
-                            r_time_next_output, grid%r_time, grid%r_dt, grid%r_dt_new, &
-                            grid%sections%is_forward())
+                    bcast_packet = t_impi_bcast(i_stats_phase, i_initial_step, i_time_step, &!swe%output%i_output_iteration, &
+                            r_time_next_output, grid%r_time, grid%r_dt, grid%r_dt_new, grid%sections%is_forward())
                     call mpi_bcast(bcast_packet, 1, IMPI_BCAST_TYPE, 0, NEW_COMM, err); assert_eq(err, 0)
                     call mpi_bcast(swe%output%s_file_stamp, len(swe%output%s_file_stamp), MPI_CHARACTER, 0, NEW_COMM, err); assert_eq(err, 0)
+                    ! TODO: combine it
+                    call mpi_bcast(swe%output%i_output_iteration, 1, MPI_INTEGER4, 0, NEW_COMM, err); assert_eq(err, 0)
                 end if
 
                 !(3) JOINING ranks initialize
@@ -616,9 +617,12 @@
                     grid%r_dt          = bcast_packet%r_dt
                     grid%r_dt_new      = bcast_packet%r_dt_new
 
-                    swe%output%i_output_iteration = bcast_packet%i_output_iteration
-                    swe%xml_output%i_output_iteration = bcast_packet%i_output_iteration
-                    swe%point_output%i_output_iteration = bcast_packet%i_output_iteration
+!                    swe%output%i_output_iteration = bcast_packet%i_output_iteration
+!                    swe%xml_output%i_output_iteration = bcast_packet%i_output_iteration
+!                    swe%point_output%i_output_iteration = bcast_packet%i_output_iteration
+
+                    swe%xml_output%i_output_iteration = swe%output%i_output_iteration
+                    swe%point_output%i_output_iteration = swe%output%i_output_iteration
 
                     swe%xml_output%s_file_stamp = swe%output%s_file_stamp
                     swe%point_output%s_file_stamp = swe%output%s_file_stamp
@@ -683,9 +687,9 @@
 #           if defined(_IMPI)
             integer :: lens(3), types(3), disps(3), err
             integer (kind = GRID_SI)    :: i_sample
-            real    (kind = GRID_SR)    :: r_sample
+            real (kind = GRID_SR)       :: r_sample
 
-            lens(1) = 4
+            lens(1) = 3
             lens(2) = 4
             lens(3) = 1
 
