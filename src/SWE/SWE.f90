@@ -9,7 +9,6 @@
 	MODULE SWE
 		use SFC_edge_traversal
 		use SWE_data_types
-
 		use SWE_adapt
 		use SWE_initialize_bathymetry
 		use SWE_initialize_dofs
@@ -19,7 +18,6 @@
 		use SWE_ascii_output
 		use SWE_point_output
 		use SWE_euler_timestep
-
 		use Samoa_swe
 
 		implicit none
@@ -35,7 +33,6 @@
             type(t_swe_xml_output_traversal)        :: xml_output
             type(t_swe_ascii_output_traversal)      :: ascii_output
 	        type(t_swe_point_output_traversal)	    :: point_output
-
             type(t_swe_euler_timestep_traversal)    :: euler
             type(t_swe_adaption_traversal)          :: adaption
 
@@ -51,7 +48,6 @@
             integer (kind=GRID_SI) :: i_stats_phase    ! MPI_INTEGER4
             integer (kind=GRID_SI) :: i_initial_step
             integer (kind=GRID_SI) :: i_time_step
-!            integer (kind=GRID_SI) :: i_output_iteration
             real (kind=GRID_SR)    :: r_time_next_output  ! MPI_DOUBLE_PRECISION
             real (kind=GRID_SR)    :: r_time
             real (kind=GRID_SR)    :: r_dt
@@ -99,7 +95,6 @@
 # endif
 
 			call load_scenario(grid)
-
 			call swe%init_b%create()
 			call swe%init_dofs%create()
             call swe%displace%create()
@@ -595,12 +590,19 @@
                 !(2) JOINING ranks get necessary data from MASTER
                 !    The use of NEW_COMM must exclude LEAVING ranks, because they have NEW_COMM == MPI_COMM_NULL
                 if ((joining_count > 0) .and. (status_MPI .ne. MPI_ADAPT_STATUS_LEAVING)) then
-                    bcast_packet = t_impi_bcast(i_stats_phase, i_initial_step, i_time_step, &!swe%output%i_output_iteration, &
-                            r_time_next_output, grid%r_time, grid%r_dt, grid%r_dt_new, grid%sections%is_forward())
+                    bcast_packet = t_impi_bcast( &
+                            i_stats_phase, &
+                            i_initial_step, &
+                            i_time_step, &
+                            r_time_next_output, &
+                            grid%r_time, &
+                            grid%r_dt, &
+                            grid%r_dt_new, &
+                            grid%sections%is_forward())
                     call mpi_bcast(bcast_packet, 1, IMPI_BCAST_TYPE, 0, NEW_COMM, err); assert_eq(err, 0)
                     call mpi_bcast(swe%output%s_file_stamp, len(swe%output%s_file_stamp), MPI_CHARACTER, 0, NEW_COMM, err); assert_eq(err, 0)
                     ! TODO: combine it
-                    call mpi_bcast(swe%output%i_output_iteration, 1, MPI_INTEGER4, 0, NEW_COMM, err); assert_eq(err, 0)
+                    call mpi_bcast(swe%xml_output%i_output_iteration, 1, MPI_INTEGER4, 0, NEW_COMM, err); assert_eq(err, 0)
                 end if
 
                 !(3) JOINING ranks initialize
@@ -617,12 +619,8 @@
                     grid%r_dt          = bcast_packet%r_dt
                     grid%r_dt_new      = bcast_packet%r_dt_new
 
-!                    swe%output%i_output_iteration = bcast_packet%i_output_iteration
-!                    swe%xml_output%i_output_iteration = bcast_packet%i_output_iteration
-!                    swe%point_output%i_output_iteration = bcast_packet%i_output_iteration
-
-                    swe%xml_output%i_output_iteration = swe%output%i_output_iteration
-                    swe%point_output%i_output_iteration = swe%output%i_output_iteration
+                    swe%output%i_output_iteration = swe%xml_output%i_output_iteration
+                    swe%point_output%i_output_iteration = swe%xml_output%i_output_iteration
 
                     swe%xml_output%s_file_stamp = swe%output%s_file_stamp
                     swe%point_output%s_file_stamp = swe%output%s_file_stamp
@@ -672,10 +670,9 @@
             !Construct an MPI type for the following object
             !************************
             !type t_impi_bcast
-            !    integer (kind=GRID_SI) :: i_stats_phase    ! MPI_INTEGER4 x4
+            !    integer (kind=GRID_SI) :: i_stats_phase    ! MPI_INTEGER4 x3
             !    integer (kind=GRID_SI) :: i_initial_step
             !    integer (kind=GRID_SI) :: i_time_step
-            !    integer (kind=GRID_SI) :: i_output_iteration
             !    real (kind=GRID_SR)    :: r_time_next_output  ! MPI_DOUBLE_PRECISION x4
             !    real (kind=GRID_SR)    :: r_time
             !    real (kind=GRID_SR)    :: r_dt
