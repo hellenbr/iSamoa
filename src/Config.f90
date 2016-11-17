@@ -31,6 +31,10 @@ module config
         integer (kind = selected_int_kind(8))   :: i_max_time_steps				                    !< number of simulation time steps
         double precision                        :: r_output_time_step					            !< grid output time step
         integer                                 :: i_output_time_steps					            !< grid output time step
+#       if defined(_IMPI)
+        double precision                        :: r_adapt_time_step                                !< impi adapt interval in seconds
+        integer                                 :: i_adapt_time_steps                               !< impi adapt interval in # of time steps
+#       endif
         integer                                 :: i_stats_phases					                !< number of times intermediate stats should be printed during time steps
         logical			                        :: l_log                                            !< if true, a log file is used
         integer (kind = selected_int_kind(1))   :: i_min_depth, i_max_depth, i_start_depth			!< minimum, maximum and start scenario depth
@@ -40,12 +44,8 @@ module config
         double precision                        :: r_boundary_weight                                !< boundary weight for the count-based load estimate
         logical                                 :: l_split_sections                                 !< if true, MPI load balancing may split sections, if false sections are treated as atomic units
         logical                                 :: l_serial_lb                                      !< if true, MPI load balancing is serialized, if false a distributed algorithm is used
-        double precision                        :: r_adapt_time_step					            !< grid output time step
-        integer			        	            :: i_adapt_time_steps			                    !< number of time steps between each linear solver solution
-
 	    logical 				                :: l_gridoutput			                            !< grid output on/off
 	    character(256)				            :: output_dir			                            !< output directory
-
         double precision                        :: courant_number                                   !< time step size relative to the CFL condition
 
 #    	if defined(_DARCY)
@@ -156,6 +156,9 @@ module config
         write(arguments, '(A, A)') trim(arguments),   " -lbtime .false. -lbsplit .false. -lbserial .false. -lbcellweight 1.0d0 -lbbndweight 0.0d0"
         write(arguments, '(A, A)') trim(arguments),  " -asagihints 2 -phases 1 -tadapt -1.0 -nadapt 1 -asciioutput_width 60 -output_dir output -asciioutput .false. -xmloutput .false. -stestpoints '' -noprint .false. -sections 4"
         write(arguments, '(A, A, I0)') trim(arguments), " -threads ", omp_get_max_threads()
+#       if defined(_IMPI)
+        write(arguments, '(A, A)') trim(arguments), " -tadapt 0.0d0 -nadapt 1"
+#       endif
 
         !define additional command arguments and default values depending on the choice of the scenario
 #    	if defined(_DARCY)
@@ -228,6 +231,10 @@ module config
         config%r_max_time = rget('samoa_tmax')
         config%i_output_time_steps = iget('samoa_nout')
         config%r_output_time_step = rget('samoa_tout')
+#       if defined(_IMPI)
+        config%i_adapt_time_steps = iget('samoa_nadapt')
+        config%r_adapt_time_step = rget('samoa_tadapt')
+#       endif
         config%i_stats_phases = iget('samoa_phases')
         config%l_log = lget('samoa_noprint')
         config%i_threads = iget('samoa_threads')
@@ -319,6 +326,10 @@ module config
                 PRINT '(A, ES8.1, A)',  "	-tmax <value>           maximum simulation time in seconds, less than 0: disabled (value: ", config%r_max_time, ")"
                 PRINT '(A, I0, A)',     "	-nout <value>           output time step interval, less than 1: disabled (value: ", config%i_output_time_steps, ")"
                 PRINT '(A, ES8.1, A)',  "	-tout <value>           output time step in seconds, less than 0: disabled (value: ", config%r_output_time_step, ")"
+#               if defined(_IMPI)
+                PRINT '(A, I0, A)',     "   -nadapt <value>         impi adapt interval in # time steps, less than 1: disabled (value: ", config%i_adapt_time_steps, ")"
+                PRINT '(A, ES8.1, A)',  "   -tadapt <value>         impi adapt interval in seconds, less than 0: disabled (value: ", config%r_adapt_time_step, ")"
+#               endif
                 PRINT '(A, I0, A)',     "	-phases <value>         number of times intermediate stats should be printed during time steps (value: ", config%i_stats_phases, ")"
                 PRINT '(A, I0, A)',     "	-threads <value>        number of OpenMP threads (value: ", config%i_threads, ")"
                 PRINT '(A, I0, A)',     "	-sections <value>       number of grid sections per OpenMP thread (value: ", config%i_sections_per_thread, ")"

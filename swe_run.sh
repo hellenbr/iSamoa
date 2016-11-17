@@ -19,9 +19,13 @@ courant+='-courant 0.95'
 threads=''
 threads+='-threads 1'
 
-# VTK output frequency (every N sections)
+# VTK output frequency (every N seconds)
 tout=''
 tout+='-tout 120'
+
+# iMPI adapt frequency (every N steps)
+nadapt=''
+nadapt+='-nadapt 50'
 
 # Grid minimum depth
 dmin=''
@@ -58,7 +62,7 @@ mkdir $outdir
 output_dir='-output_dir '$outdir
 
 # Put all options together
-all=$sections' '$split' '$courant' '$threads' '$tout' '$dmin' '$dmax' '$tmax' '$fdispl' '$fbash' '$xmlout' '$stestpoints' '$output_dir
+all=$sections' '$split' '$courant' '$threads' '$tout' '$nadapt' '$dmin' '$dmax' '$tmax' '$fdispl' '$fbash' '$xmlout' '$stestpoints' '$output_dir
 
 
 #mpiexec -n 4 $execname $all >> console.out

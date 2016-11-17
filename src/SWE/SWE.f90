@@ -230,7 +230,7 @@
 			integer  (kind = GRID_SI)   :: i_stats_phase, err
 
 #           if defined(_IMPI)
-            real (kind = GRID_SR)  :: tic, toc
+            real (kind = GRID_SR)  :: r_time_next_adapt
             integer                :: IMPI_BCAST_TYPE
             call create_impi_bcast_type(IMPI_BCAST_TYPE)
 #           endif
@@ -308,7 +308,6 @@
                     !$omp end master
                 end if
 
-! Grid output 0
                 !output initial grid
                 if (cfg%i_output_time_steps > 0 .or. cfg%r_output_time_step >= 0.0_GRID_SR) then
                     if (cfg%l_ascii_output) then
@@ -405,17 +404,13 @@
 #               endif
 
 #           if defined(_IMPI)
-            ! JOINING ranks call impi_adapt immediately,
-            ! avoiding initialization and earthquake phase
             else
+                ! JOINING ranks call impi_adapt immediately, avoiding initialization and earthquake phase
                 call impi_adapt(swe, grid, i_stats_phase, i_initial_step, i_time_step, r_time_next_output, IMPI_BCAST_TYPE)
             end if
-
-            tic = mpi_wtime()
 #           endif
 
             !regular tsunami time steps begin after the earthquake is over
-
 			do
 			    !check for loop termination
 				if ((cfg%r_max_time >= 0.0 .and. grid%r_time >= cfg%r_max_time) .or. &
@@ -477,11 +472,13 @@
 
 #               if defined(_IMPI)
                 !Existing ranks call impi_adapt
-                toc = mpi_wtime() - tic
-                call mpi_bcast(toc, 1, MPI_DOUBLE_PRECISION, 0, MPI_COMM_WORLD, err); assert_eq(err, 0)
-                if (toc > 30) then
+
+                if ((cfg%i_adapt_time_steps > 0 .and. mod(i_time_step, cfg%i_adapt_time_steps) == 0) .or. &
+                    (cfg%r_adapt_time_step >= 0.0_GRID_SR .and. grid%r_time >= r_time_next_adapt)) then
+
                     call impi_adapt(swe, grid, i_stats_phase, i_initial_step, i_time_step, r_time_next_output, IMPI_BCAST_TYPE)
-                    tic = mpi_wtime()
+
+                    r_time_next_adapt = r_time_next_adapt + cfg%r_adapt_time_step
                 end if
 #               endif
 			end do
@@ -648,9 +645,6 @@
 
                 _log_write(1, '("Rank ", I0, " (", I0, "): adapt_commit ", E10.2, " sec")') &
                         rank_MPI, status_MPI, toc
-
-                _log_write(1, '("Rank ", I0, " (", I0, "): s_file_stamp = ", A)') &
-                        rank_MPI, status_MPI, trim(swe%output%s_file_stamp)
 
                 ! Update status, size, rank after commit
                 status_MPI = MPI_ADAPT_STATUS_STAYING;
