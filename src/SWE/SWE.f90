@@ -58,6 +58,43 @@
 
 		contains
 
+        !> Construct an MPI type for t_impi_bcast
+        subroutine create_impi_bcast_type(impi_bcast_type)
+            integer, intent(out) :: impi_bcast_type
+#           if defined(_IMPI)
+            integer :: lens(3), types(3), disps(3), err, type_size
+            integer (kind = GRID_SI)    :: i_sample
+            real (kind = GRID_SR)       :: r_sample
+            logical                     :: l_sample
+            type(t_impi_bcast)          :: t_sample
+
+            lens(1) = 3
+            lens(2) = 4
+            lens(3) = 1
+
+            disps(1) = 0
+            disps(2) = disps(1) + lens(1) * sizeof(i_sample)
+            disps(3) = disps(2) + lens(2) * sizeof(r_sample)
+
+            types(1) = MPI_INTEGER4
+            types(2) = MPI_DOUBLE_PRECISION
+            types(3) = MPI_LOGICAL
+
+            call MPI_Type_struct(3, lens, disps, types, impi_bcast_type, err); assert_eq(err, 0)
+            call MPI_Type_commit(impi_bcast_type, err); assert_eq(err, 0)
+
+call MPI_Type_size(MPI_INTEGER4, type_size, err); assert_eq(err, 0)
+print *, "MPI_INTEGER4 ", type_size, " bytes. sizeof(i_sample) ", sizeof(i_sample), " bytes."
+call MPI_Type_size(MPI_DOUBLE_PRECISION, type_size, err); assert_eq(err, 0)
+print *, "MPI_DOUBLE_PRECISION ", type_size, " bytes. sizeof(r_sample) ", sizeof(r_sample), " bytes."
+call MPI_Type_size(MPI_LOGICAL, type_size, err); assert_eq(err, 0)
+print *, "MPI_LOGICAL ", type_size, " bytes. sizeof(l_sample) ", sizeof(l_sample), " bytes."
+
+            call MPI_Type_size(impi_bcast_type, type_size, err); assert_eq(err, 0)
+            assert_eq(type_size, sizeof(t_sample))
+#           endif
+        end subroutine
+
 		!> Creates all required runtime objects for the scenario
 		subroutine swe_create(swe, grid, l_log, i_asagi_mode)
             class(t_swe), intent(inout)                                 :: swe
@@ -93,7 +130,6 @@
 # if defined(_IMPI)
             end if
 # endif
-
 			call load_scenario(grid)
 			call swe%init_b%create()
 			call swe%init_dofs%create()
@@ -206,8 +242,8 @@
             call swe%adaption%destroy()
 
 #			if defined(_ASAGI)
-				call asagi_grid_close(cfg%afh_displacement)
-				call asagi_grid_close(cfg%afh_bathymetry)
+            call asagi_grid_close(cfg%afh_displacement)
+            call asagi_grid_close(cfg%afh_bathymetry)
 #			endif
 
 			if (l_log) then
@@ -232,7 +268,7 @@
 #           if defined(_IMPI)
             real (kind = GRID_SR)  :: r_time_next_adapt
             integer                :: IMPI_BCAST_TYPE
-            call create_impi_bcast_type(IMPI_BCAST_TYPE)
+!            call create_impi_bcast_type(IMPI_BCAST_TYPE)
 #           endif
 
 #           if defined(_IMPI)
@@ -557,6 +593,7 @@
             integer :: staying_count, leaving_count, joining_count
             integer :: info, status, err
             real (kind=GRID_SR) :: tic, toc, tic1, toc1
+            real (kind=GRID_SR) :: buff(9)      ! MPI_DOUBLE_PRECISION
             type(t_impi_bcast) :: bcast_packet
             character(len=256) :: s_log_name
 
@@ -587,19 +624,35 @@
                 !(2) JOINING ranks get necessary data from MASTER
                 !    The use of NEW_COMM must exclude LEAVING ranks, because they have NEW_COMM == MPI_COMM_NULL
                 if ((joining_count > 0) .and. (status_MPI .ne. MPI_ADAPT_STATUS_LEAVING)) then
-                    bcast_packet = t_impi_bcast( &
-                            i_stats_phase, &
-                            i_initial_step, &
-                            i_time_step, &
-                            r_time_next_output, &
-                            grid%r_time, &
-                            grid%r_dt, &
-                            grid%r_dt_new, &
-                            grid%sections%is_forward())
-                    call mpi_bcast(bcast_packet, 1, IMPI_BCAST_TYPE, 0, NEW_COMM, err); assert_eq(err, 0)
-                    call mpi_bcast(swe%output%s_file_stamp, len(swe%output%s_file_stamp), MPI_CHARACTER, 0, NEW_COMM, err); assert_eq(err, 0)
+!                    bcast_packet = t_impi_bcast( &
+!                            i_stats_phase, &
+!                            i_initial_step, &
+!                            i_time_step, &
+!                            r_time_next_output, &
+!                            grid%r_time, &
+!                            grid%r_dt, &
+!                            grid%r_dt_new, &
+!                            grid%sections%is_forward())
+
+                    buff(1) = real(i_stats_phase, GRID_SR)
+                    buff(2) = real(i_initial_step, GRID_SR)
+                    buff(3) = real(i_time_step, GRID_SR)
+                    buff(4) = real(swe%xml_output%i_output_iteration, GRID_SR)
+                    buff(5) = r_time_next_output
+                    buff(6) = grid%r_time
+                    buff(7) = grid%r_dt
+                    buff(8) = grid%r_dt_new
+                    buff(9) = 1.0_GRID_SR
+                    if (.not. grid%sections%is_forward()) then
+                        buff(9) = 0.0_GRID_SR
+                    end if
+
+                    call mpi_bcast(buff, 9, MPI_DOUBLE_PRECISION, 0, NEW_COMM, err); assert_eq(err, 0)
+
+!                    call mpi_bcast(bcast_packet, 1, IMPI_BCAST_TYPE, 0, NEW_COMM, err); assert_eq(err, 0)
+                    call mpi_bcast(swe%xml_output%s_file_stamp, len(swe%xml_output%s_file_stamp), MPI_CHARACTER, 0, NEW_COMM, err); assert_eq(err, 0)
                     ! TODO: combine it
-                    call mpi_bcast(swe%xml_output%i_output_iteration, 1, MPI_INTEGER4, 0, NEW_COMM, err); assert_eq(err, 0)
+!                    call mpi_bcast(swe%xml_output%i_output_iteration, 1, MPI_INTEGER4, 0, NEW_COMM, err); assert_eq(err, 0)
                 end if
 
                 !(3) JOINING ranks initialize
@@ -608,26 +661,36 @@
                     call grid%sections%resize(0)
                     call grid%threads%resize(omp_get_max_threads())
 
-                    i_stats_phase      = bcast_packet%i_stats_phase
-                    i_initial_step     = bcast_packet%i_initial_step
-                    i_time_step        = bcast_packet%i_time_step
-                    r_time_next_output = bcast_packet%r_time_next_output
-                    grid%r_time        = bcast_packet%r_time
-                    grid%r_dt          = bcast_packet%r_dt
-                    grid%r_dt_new      = bcast_packet%r_dt_new
+!                    i_stats_phase      = bcast_packet%i_stats_phase
+!                    i_initial_step     = bcast_packet%i_initial_step
+!                    i_time_step        = bcast_packet%i_time_step
+!                    r_time_next_output = bcast_packet%r_time_next_output
+!                    grid%r_time        = bcast_packet%r_time
+!                    grid%r_dt          = bcast_packet%r_dt
+!                    grid%r_dt_new      = bcast_packet%r_dt_new
+
+                    i_stats_phase      = int(buff(1), GRID_SI)
+                    i_initial_step     = int(buff(2), GRID_SI)
+                    i_time_step        = int(buff(3), GRID_SI)
+                    swe%xml_output%i_output_iteration = int(buff(4), GRID_SI)
+                    r_time_next_output = buff(5)
+                    grid%r_time        = buff(6)
+                    grid%r_dt          = buff(7)
+                    grid%r_dt_new      = buff(8)
 
                     swe%output%i_output_iteration = swe%xml_output%i_output_iteration
                     swe%point_output%i_output_iteration = swe%xml_output%i_output_iteration
 
-                    swe%xml_output%s_file_stamp = swe%output%s_file_stamp
-                    swe%point_output%s_file_stamp = swe%output%s_file_stamp
-                    s_log_name = trim(swe%output%s_file_stamp) // ".log"
+                    swe%output%s_file_stamp = swe%xml_output%s_file_stamp
+                    swe%point_output%s_file_stamp = swe%xml_output%s_file_stamp
+
+                    s_log_name = trim(swe%xml_output%s_file_stamp) // ".log"
                     if (cfg%l_log) then
                         _log_open_file(s_log_name)
                     end if
 
                     !reverse grid if it is the case (for JOINING procs only)
-                    if (.not. bcast_packet%is_forward) then
+                    if (buff(9) < 0.5) then
                         call grid%reverse()  !this will set the grid%sections%forward flag properly
                     end if
                 end if
@@ -646,6 +709,11 @@
                 _log_write(1, '("Rank ", I0, " (", I0, "): adapt_commit ", E10.2, " sec")') &
                         rank_MPI, status_MPI, toc
 
+                _log_write(1, '(A, I0, A, I0, A, I0, A, I0, A, I0, A, I0, A, F10.4, A, F10.4, A, F10.4, A, F10.4, A, F10.4)') &
+                        "Rank ", rank_MPI, " (", status_MPI, "): ", &
+                        i_stats_phase, ", ", i_initial_step, ", ", i_time_step, ", ", swe%xml_output%i_output_iteration, ", ", &
+                        r_time_next_output, ", ", grid%r_time, ", ", grid%r_dt, ", ", grid%r_dt_new, ", ", buff(9)
+
                 ! Update status, size, rank after commit
                 status_MPI = MPI_ADAPT_STATUS_STAYING;
                 call mpi_comm_size(MPI_COMM_WORLD, size_MPI, err); assert_eq(err, 0)
@@ -657,45 +725,6 @@
             end if
 #           endif
         end subroutine impi_adapt
-
-        subroutine create_impi_bcast_type(impi_bcast_type)
-            integer, intent(out) :: impi_bcast_type
-
-            !Construct an MPI type for the following object
-            !************************
-            !type t_impi_bcast
-            !    integer (kind=GRID_SI) :: i_stats_phase    ! MPI_INTEGER4 x3
-            !    integer (kind=GRID_SI) :: i_initial_step
-            !    integer (kind=GRID_SI) :: i_time_step
-            !    real (kind=GRID_SR)    :: r_time_next_output  ! MPI_DOUBLE_PRECISION x4
-            !    real (kind=GRID_SR)    :: r_time
-            !    real (kind=GRID_SR)    :: r_dt
-            !    real (kind=GRID_SR)    :: r_dt_new
-            !    logical                :: is_forward    ! MPI_LOGICAL x1
-            !end type t_impi_bcast
-            !************************
-
-#           if defined(_IMPI)
-            integer :: lens(3), types(3), disps(3), err
-            integer (kind = GRID_SI)    :: i_sample
-            real (kind = GRID_SR)       :: r_sample
-
-            lens(1) = 3
-            lens(2) = 4
-            lens(3) = 1
-
-            disps(1) = 0
-            disps(2) = disps(1) + lens(1) * sizeof(i_sample)
-            disps(3) = disps(2) + lens(2) * sizeof(r_sample)
-
-            types(1) = MPI_INTEGER4
-            types(2) = MPI_DOUBLE_PRECISION
-            types(3) = MPI_LOGICAL
-
-            call MPI_Type_struct(3, lens, disps, types, impi_bcast_type, err); assert_eq(err, 0)
-            call MPI_Type_commit(impi_bcast_type, err); assert_eq(err, 0)
-#           endif
-        end subroutine
 
 	END MODULE SWE
 #endif

@@ -2597,24 +2597,24 @@ subroutine collect_minimum_distances(grid, rank_list, neighbor_min_distances, i_
         call section%boundary_edges(GREEN)%trim()
 
 #	    if (_DEBUG_LEVEL > 3)
-            do i_color = RED, GREEN
-                _log_write(4, '(3X, A, A)') trim(color_to_char(i_color)), ":"
-                do i_pass = OLD, NEW
-                    _log_write(4, '(4X, A, A)') trim(edge_type_to_char(i_pass)), ":"
+        do i_color = RED, GREEN
+            _log_write(4, '(3X, A, A)') trim(color_to_char(i_color)), ":"
+            do i_pass = OLD, NEW
+                _log_write(4, '(4X, A, A)') trim(edge_type_to_char(i_pass)), ":"
 
-                    p_edges => section%boundary_type_edges(i_pass, i_color)%elements
-                    _log_write(4, '(5X, A, I0)') "boundary edges: ", size(p_edges)
-                    do i = 1, size(p_edges)
-                        _log_write(4, '(6X, F0.4, X, F0.4)') decode_distance(p_edges(i)%min_distance), decode_distance(p_edges(i)%min_distance + encode_edge_size(p_edges(i)%depth))
-                    end do
+                p_edges => section%boundary_type_edges(i_pass, i_color)%elements
+                _log_write(4, '(5X, A, I0)') "boundary edges: ", size(p_edges)
+                do i = 1, size(p_edges)
+                    _log_write(4, '(6X, F0.4, X, F0.4)') decode_distance(p_edges(i)%min_distance), decode_distance(p_edges(i)%min_distance + encode_edge_size(p_edges(i)%depth))
+                end do
 
-                    p_nodes => section%boundary_type_nodes(i_pass, i_color)%elements
-                    _log_write(4, '(5X, A, I0)') "boundary nodes: ", size(p_nodes)
-                    do i = 1, size(p_nodes)
-                        _log_write(4, '(6X, F0.4)') decode_distance(p_nodes(i)%distance)
-                    end do
+                p_nodes => section%boundary_type_nodes(i_pass, i_color)%elements
+                _log_write(4, '(5X, A, I0)') "boundary nodes: ", size(p_nodes)
+                do i = 1, size(p_nodes)
+                    _log_write(4, '(6X, F0.4)') decode_distance(p_nodes(i)%distance)
                 end do
             end do
+        end do
 #	    endif
 
 #	    if (_DEBUG_LEVEL > 4)
