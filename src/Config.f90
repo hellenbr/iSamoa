@@ -243,8 +243,6 @@ module config
         config%l_serial_lb = lget('samoa_lbserial')
         config%i_sections_per_thread = iget('samoa_sections')
         config%i_asagi_mode = iget('samoa_asagihints')
-        config%i_adapt_time_steps = iget('samoa_nadapt')
-        config%r_adapt_time_step = iget('samoa_tadapt')
         config%courant_number = rget('samoa_courant')
         config%l_gridoutput = lget('samoa_xmloutput')
         config%output_dir = sget('samoa_output_dir', 256)

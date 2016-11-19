@@ -45,12 +45,12 @@
 
 #       if defined(_IMPI)
         type t_impi_bcast
-            logical                :: is_forward    ! MPI_LOGICAL
-            integer (kind=GRID_SI) :: i_stats_phase    ! MPI_INTEGER4
+            logical                :: is_forward       ! MPI_LOGICAL x1
+            integer (kind=GRID_SI) :: i_stats_phase    ! MPI_INTEGER4 x4
             integer (kind=GRID_SI) :: i_initial_step
             integer (kind=GRID_SI) :: i_time_step
             integer (kind=GRID_SI) :: i_output_iteration
-            real (kind=GRID_SR)    :: r_time_next_output  ! MPI_DOUBLE_PRECISION
+            real (kind=GRID_SR)    :: r_time_next_output  ! MPI_DOUBLE_PRECISION x4
             real (kind=GRID_SR)    :: r_time
             real (kind=GRID_SR)    :: r_dt
             real (kind=GRID_SR)    :: r_dt_new
@@ -58,43 +58,6 @@
 #       endif
 
 		contains
-
-        !> Construct an MPI type for t_impi_bcast
-        subroutine create_impi_bcast_type(impi_bcast_type)
-            integer, intent(out) :: impi_bcast_type
-#           if defined(_IMPI)
-            integer :: lens(3), types(3), disps(3), err, type_size
-            integer (kind = GRID_SI)    :: i_sample
-            real (kind = GRID_SR)       :: r_sample
-            logical                     :: l_sample
-            type(t_impi_bcast)          :: t_sample
-
-            lens(1) = 3
-            lens(2) = 4
-            lens(3) = 1
-
-            disps(1) = 0
-            disps(2) = disps(1) + lens(1) * sizeof(i_sample)
-            disps(3) = disps(2) + lens(2) * sizeof(r_sample)
-
-            types(1) = MPI_INTEGER4
-            types(2) = MPI_DOUBLE_PRECISION
-            types(3) = MPI_LOGICAL
-
-            call MPI_Type_struct(3, lens, disps, types, impi_bcast_type, err); assert_eq(err, 0)
-            call MPI_Type_commit(impi_bcast_type, err); assert_eq(err, 0)
-
-call MPI_Type_size(MPI_INTEGER4, type_size, err); assert_eq(err, 0)
-print *, "MPI_INTEGER4 ", type_size, " bytes. sizeof(i_sample) ", sizeof(i_sample), " bytes."
-call MPI_Type_size(MPI_DOUBLE_PRECISION, type_size, err); assert_eq(err, 0)
-print *, "MPI_DOUBLE_PRECISION ", type_size, " bytes. sizeof(r_sample) ", sizeof(r_sample), " bytes."
-call MPI_Type_size(MPI_LOGICAL, type_size, err); assert_eq(err, 0)
-print *, "MPI_LOGICAL ", type_size, " bytes. sizeof(l_sample) ", sizeof(l_sample), " bytes."
-
-            call MPI_Type_size(impi_bcast_type, type_size, err); assert_eq(err, 0)
-            assert_eq(type_size, sizeof(t_sample))
-#           endif
-        end subroutine
 
 		!> Creates all required runtime objects for the scenario
 		subroutine swe_create(swe, grid, l_log, i_asagi_mode)
@@ -665,6 +628,7 @@ print *, "MPI_LOGICAL ", type_size, " bytes. sizeof(l_sample) ", sizeof(l_sample
                 _log_write(1, '("Rank ", I0, " (", I0, "): adapt_commit ", E10.2, " sec")') &
                         rank_MPI, status_MPI, toc
 
+                !Debug only
 !                _log_write(1, '(A, I0, A, I0, A, I0, A, I0, A, I0, A, I0, A, F10.4, A, F10.4, A, F10.4, A, F10.4, A, L, A, L)') &
 !                        "Rank ", rank_MPI, " (", status_MPI, "): ", &
 !                        i_stats_phase, ", ", i_initial_step, ", ", i_time_step, ", ", swe%xml_output%i_output_iteration, ", ", &
