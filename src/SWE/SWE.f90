@@ -457,6 +457,12 @@ print *, "MPI_LOGICAL ", type_size, " bytes. sizeof(l_sample) ", sizeof(l_sample
                 !increment time step
 				i_time_step = i_time_step + 1
 
+call mpi_barrier(MPI_COMM_WORLD, err);
+call flush(6)
+_log_write(1, '(I0, ", ", I0, ", ", L)') rank_MPI, i_time_step, grid%sections%is_forward()
+call flush(6)
+call mpi_barrier(MPI_COMM_WORLD, err);
+
 			    !refine grid
                 if (cfg%i_adapt_time_steps > 0 .and. mod(i_time_step, cfg%i_adapt_time_steps) == 0) then
                     call swe%adaption%traverse(grid)
@@ -690,7 +696,7 @@ print *, "MPI_LOGICAL ", type_size, " bytes. sizeof(l_sample) ", sizeof(l_sample
                     end if
 
                     !reverse grid if it is the case (for JOINING procs only)
-                    if (buff(9) < 0.5) then
+                    if (buff(9) < 0.5 .eqv. grid%sections%is_forward()) then
                         call grid%reverse()  !this will set the grid%sections%forward flag properly
                     end if
                 end if
@@ -709,10 +715,12 @@ print *, "MPI_LOGICAL ", type_size, " bytes. sizeof(l_sample) ", sizeof(l_sample
                 _log_write(1, '("Rank ", I0, " (", I0, "): adapt_commit ", E10.2, " sec")') &
                         rank_MPI, status_MPI, toc
 
-                _log_write(1, '(A, I0, A, I0, A, I0, A, I0, A, I0, A, I0, A, F10.4, A, F10.4, A, F10.4, A, F10.4, A, F10.4)') &
+                _log_write(1, '(A, I0, A, I0, A, I0, A, I0, A, I0, A, I0, A, F10.4, A, F10.4, A, F10.4, A, F10.4, A, F10.4, A, L)') &
                         "Rank ", rank_MPI, " (", status_MPI, "): ", &
                         i_stats_phase, ", ", i_initial_step, ", ", i_time_step, ", ", swe%xml_output%i_output_iteration, ", ", &
-                        r_time_next_output, ", ", grid%r_time, ", ", grid%r_dt, ", ", grid%r_dt_new, ", ", buff(9)
+                        r_time_next_output, ", ", grid%r_time, ", ", grid%r_dt, ", ", grid%r_dt_new, ", ", buff(9), ", ", grid%sections%is_forward()
+
+
 
                 ! Update status, size, rank after commit
                 status_MPI = MPI_ADAPT_STATUS_STAYING;
