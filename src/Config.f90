@@ -32,7 +32,6 @@ module config
         double precision                        :: r_output_time_step					            !< grid output time step
         integer                                 :: i_output_time_steps					            !< grid output time step
 #       if defined(_IMPI)
-        double precision                        :: r_adapt_time_step                                !< impi adapt interval in seconds
         integer                                 :: i_adapt_time_steps                               !< impi adapt interval in # of time steps
 #       endif
         integer                                 :: i_stats_phases					                !< number of times intermediate stats should be printed during time steps
@@ -157,7 +156,7 @@ module config
         write(arguments, '(A, A)') trim(arguments),  " -asagihints 2 -phases 1 -tadapt -1.0 -nadapt 1 -asciioutput_width 60 -output_dir output -asciioutput .false. -xmloutput .false. -stestpoints '' -noprint .false. -sections 4"
         write(arguments, '(A, A, I0)') trim(arguments), " -threads ", omp_get_max_threads()
 #       if defined(_IMPI)
-        write(arguments, '(A, A)') trim(arguments), " -tadapt 0.0d0 -nadapt 1"
+        write(arguments, '(A, A)') trim(arguments), " -nadapt 1"
 #       endif
 
         !define additional command arguments and default values depending on the choice of the scenario
@@ -233,7 +232,6 @@ module config
         config%r_output_time_step = rget('samoa_tout')
 #       if defined(_IMPI)
         config%i_adapt_time_steps = iget('samoa_nadapt')
-        config%r_adapt_time_step = rget('samoa_tadapt')
 #       endif
         config%i_stats_phases = iget('samoa_phases')
         config%l_log = lget('samoa_noprint')
@@ -328,7 +326,6 @@ module config
                 PRINT '(A, ES8.1, A)',  "	-tout <value>           output time step in seconds, less than 0: disabled (value: ", config%r_output_time_step, ")"
 #               if defined(_IMPI)
                 PRINT '(A, I0, A)',     "   -nadapt <value>         impi adapt interval in # time steps, less than 1: disabled (value: ", config%i_adapt_time_steps, ")"
-                PRINT '(A, ES8.1, A)',  "   -tadapt <value>         impi adapt interval in seconds, less than 0: disabled (value: ", config%r_adapt_time_step, ")"
 #               endif
                 PRINT '(A, I0, A)',     "	-phases <value>         number of times intermediate stats should be printed during time steps (value: ", config%i_stats_phases, ")"
                 PRINT '(A, I0, A)',     "	-threads <value>        number of OpenMP threads (value: ", config%i_threads, ")"

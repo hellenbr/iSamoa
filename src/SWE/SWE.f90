@@ -45,14 +45,15 @@
 
 #       if defined(_IMPI)
         type t_impi_bcast
+            logical                :: is_forward    ! MPI_LOGICAL
             integer (kind=GRID_SI) :: i_stats_phase    ! MPI_INTEGER4
             integer (kind=GRID_SI) :: i_initial_step
             integer (kind=GRID_SI) :: i_time_step
+            integer (kind=GRID_SI) :: i_output_iteration
             real (kind=GRID_SR)    :: r_time_next_output  ! MPI_DOUBLE_PRECISION
             real (kind=GRID_SR)    :: r_time
             real (kind=GRID_SR)    :: r_dt
             real (kind=GRID_SR)    :: r_dt_new
-            logical                :: is_forward    ! MPI_LOGICAL
         end type t_impi_bcast
 #       endif
 
@@ -266,12 +267,6 @@ print *, "MPI_LOGICAL ", type_size, " bytes. sizeof(l_sample) ", sizeof(l_sample
 			integer  (kind = GRID_SI)   :: i_stats_phase, err
 
 #           if defined(_IMPI)
-            real (kind = GRID_SR)  :: r_time_next_adapt
-            integer                :: IMPI_BCAST_TYPE
-!            call create_impi_bcast_type(IMPI_BCAST_TYPE)
-#           endif
-
-#           if defined(_IMPI)
             !Only the NON-joining procs do initialization
 			if (status_MPI /= MPI_ADAPT_STATUS_JOINING) then
 #           endif
@@ -442,7 +437,7 @@ print *, "MPI_LOGICAL ", type_size, " bytes. sizeof(l_sample) ", sizeof(l_sample
 #           if defined(_IMPI)
             else
                 ! JOINING ranks call impi_adapt immediately, avoiding initialization and earthquake phase
-                call impi_adapt(swe, grid, i_stats_phase, i_initial_step, i_time_step, r_time_next_output, IMPI_BCAST_TYPE)
+                call impi_adapt(swe, grid, i_stats_phase, i_initial_step, i_time_step, r_time_next_output)
             end if
 #           endif
 
@@ -456,12 +451,6 @@ print *, "MPI_LOGICAL ", type_size, " bytes. sizeof(l_sample) ", sizeof(l_sample
 
                 !increment time step
 				i_time_step = i_time_step + 1
-
-call mpi_barrier(MPI_COMM_WORLD, err);
-call flush(6)
-_log_write(1, '(I0, ", ", I0, ", ", L)') rank_MPI, i_time_step, grid%sections%is_forward()
-call flush(6)
-call mpi_barrier(MPI_COMM_WORLD, err);
 
 			    !refine grid
                 if (cfg%i_adapt_time_steps > 0 .and. mod(i_time_step, cfg%i_adapt_time_steps) == 0) then
@@ -514,13 +503,8 @@ call mpi_barrier(MPI_COMM_WORLD, err);
 
 #               if defined(_IMPI)
                 !Existing ranks call impi_adapt
-
-                if ((cfg%i_adapt_time_steps > 0 .and. mod(i_time_step, cfg%i_adapt_time_steps) == 0) .or. &
-                    (cfg%r_adapt_time_step >= 0.0_GRID_SR .and. grid%r_time >= r_time_next_adapt)) then
-
-                    call impi_adapt(swe, grid, i_stats_phase, i_initial_step, i_time_step, r_time_next_output, IMPI_BCAST_TYPE)
-
-                    r_time_next_adapt = r_time_next_adapt + cfg%r_adapt_time_step
+                if (cfg%i_adapt_time_steps > 0 .and. mod(i_time_step, cfg%i_adapt_time_steps) == 0) then
+                    call impi_adapt(swe, grid, i_stats_phase, i_initial_step, i_time_step, r_time_next_output)
                 end if
 #               endif
 			end do
@@ -587,20 +571,18 @@ call mpi_barrier(MPI_COMM_WORLD, err);
             !$omp end master
         end subroutine
 
-        subroutine impi_adapt(swe, grid, i_stats_phase, i_initial_step, i_time_step, r_time_next_output, IMPI_BCAST_TYPE)
+        subroutine impi_adapt(swe, grid, i_stats_phase, i_initial_step, i_time_step, r_time_next_output)
             class(t_swe), intent(inout)           :: swe
             type(t_grid), intent(inout)           :: grid
             integer (kind=GRID_SI), intent(inout) :: i_stats_phase, i_initial_step, i_time_step
             real (kind=GRID_SR), intent(inout)    :: r_time_next_output
-            integer, intent(in)                   :: IMPI_BCAST_TYPE
 
 #           if defined(_IMPI)
             integer :: adapt_flag, NEW_COMM, INTER_COMM
             integer :: staying_count, leaving_count, joining_count
             integer :: info, status, err
             real (kind=GRID_SR) :: tic, toc, tic1, toc1
-            real (kind=GRID_SR) :: buff(9)      ! MPI_DOUBLE_PRECISION
-            type(t_impi_bcast) :: bcast_packet
+            type(t_impi_bcast) :: bcast_buff
             character(len=256) :: s_log_name
 
             tic = mpi_wtime()
@@ -630,35 +612,11 @@ call mpi_barrier(MPI_COMM_WORLD, err);
                 !(2) JOINING ranks get necessary data from MASTER
                 !    The use of NEW_COMM must exclude LEAVING ranks, because they have NEW_COMM == MPI_COMM_NULL
                 if ((joining_count > 0) .and. (status_MPI .ne. MPI_ADAPT_STATUS_LEAVING)) then
-!                    bcast_packet = t_impi_bcast( &
-!                            i_stats_phase, &
-!                            i_initial_step, &
-!                            i_time_step, &
-!                            r_time_next_output, &
-!                            grid%r_time, &
-!                            grid%r_dt, &
-!                            grid%r_dt_new, &
-!                            grid%sections%is_forward())
-
-                    buff(1) = real(i_stats_phase, GRID_SR)
-                    buff(2) = real(i_initial_step, GRID_SR)
-                    buff(3) = real(i_time_step, GRID_SR)
-                    buff(4) = real(swe%xml_output%i_output_iteration, GRID_SR)
-                    buff(5) = r_time_next_output
-                    buff(6) = grid%r_time
-                    buff(7) = grid%r_dt
-                    buff(8) = grid%r_dt_new
-                    buff(9) = 1.0_GRID_SR
-                    if (.not. grid%sections%is_forward()) then
-                        buff(9) = 0.0_GRID_SR
-                    end if
-
-                    call mpi_bcast(buff, 9, MPI_DOUBLE_PRECISION, 0, NEW_COMM, err); assert_eq(err, 0)
-
-!                    call mpi_bcast(bcast_packet, 1, IMPI_BCAST_TYPE, 0, NEW_COMM, err); assert_eq(err, 0)
+                    bcast_buff = t_impi_bcast( grid%sections%is_forward(), &
+                            i_stats_phase, i_initial_step, i_time_step, swe%xml_output%i_output_iteration, &
+                            r_time_next_output, grid%r_time, grid%r_dt, grid%r_dt_new)
+                    call mpi_bcast(bcast_buff, sizeof(bcast_buff), MPI_BYTE, 0, NEW_COMM, err); assert_eq(err, 0)
                     call mpi_bcast(swe%xml_output%s_file_stamp, len(swe%xml_output%s_file_stamp), MPI_CHARACTER, 0, NEW_COMM, err); assert_eq(err, 0)
-                    ! TODO: combine it
-!                    call mpi_bcast(swe%xml_output%i_output_iteration, 1, MPI_INTEGER4, 0, NEW_COMM, err); assert_eq(err, 0)
                 end if
 
                 !(3) JOINING ranks initialize
@@ -667,37 +625,29 @@ call mpi_barrier(MPI_COMM_WORLD, err);
                     call grid%sections%resize(0)
                     call grid%threads%resize(omp_get_max_threads())
 
-!                    i_stats_phase      = bcast_packet%i_stats_phase
-!                    i_initial_step     = bcast_packet%i_initial_step
-!                    i_time_step        = bcast_packet%i_time_step
-!                    r_time_next_output = bcast_packet%r_time_next_output
-!                    grid%r_time        = bcast_packet%r_time
-!                    grid%r_dt          = bcast_packet%r_dt
-!                    grid%r_dt_new      = bcast_packet%r_dt_new
+                    !reverse grid if it is the case
+                    if (bcast_buff%is_forward .neqv. grid%sections%is_forward()) then
+                        call grid%reverse()  !this will set the grid%sections%forward flag properly
+                    end if
 
-                    i_stats_phase      = int(buff(1), GRID_SI)
-                    i_initial_step     = int(buff(2), GRID_SI)
-                    i_time_step        = int(buff(3), GRID_SI)
-                    swe%xml_output%i_output_iteration = int(buff(4), GRID_SI)
-                    r_time_next_output = buff(5)
-                    grid%r_time        = buff(6)
-                    grid%r_dt          = buff(7)
-                    grid%r_dt_new      = buff(8)
+                    i_stats_phase      = bcast_buff%i_stats_phase
+                    i_initial_step     = bcast_buff%i_initial_step
+                    i_time_step        = bcast_buff%i_time_step
+                    r_time_next_output = bcast_buff%r_time_next_output
+                    grid%r_time        = bcast_buff%r_time
+                    grid%r_dt          = bcast_buff%r_dt
+                    grid%r_dt_new      = bcast_buff%r_dt_new
 
-                    swe%output%i_output_iteration = swe%xml_output%i_output_iteration
-                    swe%point_output%i_output_iteration = swe%xml_output%i_output_iteration
+                    swe%xml_output%i_output_iteration   = bcast_buff%i_output_iteration
+                    swe%output%i_output_iteration       = bcast_buff%i_output_iteration
+                    swe%point_output%i_output_iteration = bcast_buff%i_output_iteration
 
-                    swe%output%s_file_stamp = swe%xml_output%s_file_stamp
+                    swe%output%s_file_stamp       = swe%xml_output%s_file_stamp
                     swe%point_output%s_file_stamp = swe%xml_output%s_file_stamp
 
                     s_log_name = trim(swe%xml_output%s_file_stamp) // ".log"
                     if (cfg%l_log) then
                         _log_open_file(s_log_name)
-                    end if
-
-                    !reverse grid if it is the case (for JOINING procs only)
-                    if (buff(9) < 0.5 .eqv. grid%sections%is_forward()) then
-                        call grid%reverse()  !this will set the grid%sections%forward flag properly
                     end if
                 end if
 
@@ -715,12 +665,10 @@ call mpi_barrier(MPI_COMM_WORLD, err);
                 _log_write(1, '("Rank ", I0, " (", I0, "): adapt_commit ", E10.2, " sec")') &
                         rank_MPI, status_MPI, toc
 
-                _log_write(1, '(A, I0, A, I0, A, I0, A, I0, A, I0, A, I0, A, F10.4, A, F10.4, A, F10.4, A, F10.4, A, F10.4, A, L)') &
-                        "Rank ", rank_MPI, " (", status_MPI, "): ", &
-                        i_stats_phase, ", ", i_initial_step, ", ", i_time_step, ", ", swe%xml_output%i_output_iteration, ", ", &
-                        r_time_next_output, ", ", grid%r_time, ", ", grid%r_dt, ", ", grid%r_dt_new, ", ", buff(9), ", ", grid%sections%is_forward()
-
-
+!                _log_write(1, '(A, I0, A, I0, A, I0, A, I0, A, I0, A, I0, A, F10.4, A, F10.4, A, F10.4, A, F10.4, A, L, A, L)') &
+!                        "Rank ", rank_MPI, " (", status_MPI, "): ", &
+!                        i_stats_phase, ", ", i_initial_step, ", ", i_time_step, ", ", swe%xml_output%i_output_iteration, ", ", &
+!                        r_time_next_output, ", ", grid%r_time, ", ", grid%r_dt, ", ", grid%r_dt_new, ", ", bcast_buff%is_forward, ", ", grid%sections%is_forward()
 
                 ! Update status, size, rank after commit
                 status_MPI = MPI_ADAPT_STATUS_STAYING;
