@@ -19,9 +19,13 @@ courant+='-courant 0.95'
 threads=''
 threads+='-threads 1'
 
-# VTK output frequency (every N sections)
+# VTK output frequency (every N seconds)
 tout=''
 tout+='-tout 120'
+
+# iMPI adapt frequency (every N steps)
+nadapt=''
+nadapt+='-nadapt 50'
 
 # Grid minimum depth
 dmin=''
@@ -29,19 +33,19 @@ dmin+='-dmin 0'
 
 # Grid maximum depth
 dmax=''
-dmax+='-dmax 15'
+dmax+='-dmax 20'
 
 # Simulation time in seconds (normally 3 hrs)
 tmax=''
-tmax+='-tmax -1'
+tmax+='-tmax 10800'
 
 # Data file for displacement
 fdispl=''
-fdispl+='-fdispl /home/emily/nfs/workspace/samoa-data/tohoku_static/displ.nc'
+fdispl+='-fdispl /home/hpc/h039w/di29zaf2/ihpc_workspace/samoa-data/tohoku_static/displ.nc'
 
 # Data file for bathymetry
 fbath=''
-fbath+='-fbath /home/emily/nfs/workspace/samoa-data/tohoku_static/bath_2014.nc'
+fbath+='-fbath /home/hpc/h039w/di29zaf2/ihpc_workspace/samoa-data/tohoku_static/bath_2014.nc'
 
 # Enable VTK output
 xmlout=''
@@ -52,13 +56,13 @@ stestpoints=''
 stestpoints+='-stestpoints "545735.266126 62716.4740303,935356.566012 -817289.628677,1058466.21575 765077.767857"' 
 
 # Ouput directory
-outdir='/home/emily/nfs/workspace/isamoa/output/swe_impi'
+outdir='/home/hpc/h039w/di29zaf2/ihpc_workspace/isamoa/output/swe_impi'
 rm -rf $outdir
 mkdir $outdir
 output_dir='-output_dir '$outdir
 
 # Put all options together
-all=$sections' '$split' '$courant' '$threads' '$tout' '$dmin' '$dmax' '$tmax' '$fdispl' '$fbash' '$xmlout' '$stestpoints' '$output_dir
+all=$sections' '$split' '$courant' '$threads' '$tout' '$nadapt' '$dmin' '$dmax' '$tmax' '$fdispl' '$fbash' '$xmlout' '$stestpoints' '$output_dir
 
 
 #mpiexec -n 4 $execname $all >> console.out
