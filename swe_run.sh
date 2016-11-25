@@ -1,7 +1,10 @@
 #!/bin/bash
 
+# Number of starting ranks (=num_procs_per_node)
+numranks="$1"
+
 # The name of the executable
-execname="$1"
+execname="$2"
 
 # Number of sections
 sections=''
@@ -66,5 +69,5 @@ all=$sections' '$split' '$courant' '$threads' '$tout' '$nadapt' '$dmin' '$dmax' 
 
 
 #mpiexec -n 4 $execname $all >> console.out
-srun -n 2 $execname $all > console.out
+srun -n $numranks $execname $all > console.out
 
