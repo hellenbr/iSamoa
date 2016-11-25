@@ -65,7 +65,7 @@ mkdir $outdir
 output_dir='-output_dir '$outdir
 
 # Put all options together
-all=$sections' '$split' '$courant' '$threads' '$tout' '$nadapt' '$dmin' '$dmax' '$tmax' '$fdispl' '$fbash' '$xmlout' '$stestpoints' '$output_dir
+all=$sections' '$split' '$courant' '$threads' '$tout' '$nadapt' '$dmin' '$dmax' '$tmax' '$fdispl' '$fbath' '$xmlout' '$stestpoints' '$output_dir
 
 
 #mpiexec -n 4 $execname $all >> console.out

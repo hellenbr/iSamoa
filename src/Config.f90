@@ -280,11 +280,8 @@ module config
             config%l_well_output = lget('samoa_welloutput')
 #    	elif defined(_SWE) || defined(_FLASH)
 #		    if defined(_ASAGI)
-!TODO: quick hack, to be removed
-                !config%s_bathymetry_file = sget('samoa_fbath', 256)
-                config%s_bathymetry_file = '/home/emily/nfs/workspace/samoa-data/tohoku_static/bath_2014.nc'
-                !config%s_displacement_file = sget('samoa_fdispl', 256)
-                config%s_displacement_file = '/home/emily/nfs/workspace/samoa-data/tohoku_static/displ.nc'
+                config%s_bathymetry_file = sget('samoa_fbath', 256)
+                config%s_displacement_file = sget('samoa_fdispl', 256)
 #           endif
 
             config%dry_tolerance = rget('samoa_drytolerance')
