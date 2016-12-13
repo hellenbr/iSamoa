@@ -7,56 +7,43 @@ numranks="$1"
 execname="$2"
 
 # Number of sections
-sections=''
-sections+='-sections 1'
+sections='-sections 1'
 
 # Allow splitting sections during load balancing
-split=''
-split+='-lbsplit'
+split='-lbsplit'
 
 # The Courant number (keep it 0.95)
-courant=''
-courant+='-courant 0.95'
+courant='-courant 0.95'
 
 # Number of threads
-threads=''
-threads+='-threads 1'
-
-# VTK output frequency (every N seconds)
-tout=''
-tout+='-tout 120'
-
-# iMPI adapt frequency (every N steps)
-nadapt=''
-nadapt+='-nadapt 50'
-
-# Grid minimum depth
-dmin=''
-dmin+='-dmin 0'
-
-# Grid maximum depth
-dmax=''
-dmax+='-dmax 20'
-
-# Simulation time in seconds (normally 3 hrs)
-tmax=''
-tmax+='-tmax 10800'
-
-# Data file for displacement
-fdispl=''
-fdispl+='-fdispl /home/hpc/h039w/di29zaf2/ihpc_workspace/samoa-data/tohoku_static/displ.nc'
-
-# Data file for bathymetry
-fbath=''
-fbath+='-fbath /home/hpc/h039w/di29zaf2/ihpc_workspace/samoa-data/tohoku_static/bath_2014.nc'
+threads='-threads 1'
 
 # Enable VTK output
-xmlout=''
-xmlout+='-xmloutput .true.'
+xmlout='-xmloutput .true.'
+
+# VTK output frequency (every N seconds)
+tout='-tout 120'
+
+# iMPI adapt frequency (every N steps)
+nadapt='-nadapt 50'
+
+# Grid minimum depth
+dmin='-dmin 0'
+
+# Grid maximum depth
+dmax='-dmax 20'
+
+# Simulation time in seconds (normally 3 hrs)
+tmax='-tmax 10800'
+
+# Data file for displacement
+fdispl='-fdispl /home/hpc/h039w/di29zaf2/ihpc_workspace/samoa-data/tohoku_static/displ.nc'
+
+# Data file for bathymetry
+fbath='-fbath /home/hpc/h039w/di29zaf2/ihpc_workspace/samoa-data/tohoku_static/bath_2014.nc'
 
 # What is stestpoints (for Tohoku only)??
-stestpoints=''
-stestpoints+='-stestpoints "545735.266126 62716.4740303,935356.566012 -817289.628677,1058466.21575 765077.767857"' 
+stestpoints='-stestpoints "545735.266126 62716.4740303,935356.566012 -817289.628677,1058466.21575 765077.767857"' 
 
 # Ouput directory
 outdir='/home/hpc/h039w/di29zaf2/ihpc_workspace/isamoa/output/swe_impi'

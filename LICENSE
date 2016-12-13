@@ -1,13 +1,15 @@
-Sam(oa)² - SFCs and Adaptive Meshes for Oceanic And Other Applications
-Copyright (C) 2010 Oliver Meister, Kaveh Rahnema
+iSam(oa)² - Invasive SFCs and Adaptive Meshes for Oceanic and Other Applications
+Copyright (c) 2015 Ao Mo-Hellenbrand
+
+Extended from Sam(oa)² developed by Oliver Meister and Kaveh Rahnema, iSam(oa)² 
+is a malleable implementation based on the elastic MPI infrastructure--iMPI.
+When the iMPI option is enbaled, iSam(oa)² is executed on a set of processes with
+varying number at runtime.
 
 Thanks to: 
-* Randall J. LeVeque for the geoclaw library
-* Alexander Breuer for the geoclaw fortran90 wrapper
-* Enrico Cavallini and Renato N. Elias for the LIB_VTK_IO library
-* John S. Urban for the Kracken library
-* David Dunavant for the Dunavant library
-* Sebastian Rettenberger for the ASAGI library
+* Oliver Meister
+* Kaveh Rahnema
+* Isaías Alberto Comprés
 
 All copyrights remain with the respective authors.
 
