@@ -1,4 +1,4 @@
-target='debug'
+target='release'
 assertions=True
 scenario='swe'
 flux_solver='aug_riemann'

@@ -1,4 +1,4 @@
-target='debug'
+target='release'
 assertions=True
 scenario='swe'
 flux_solver='aug_riemann'
@@ -11,5 +11,3 @@ impi='yes'
 asagi=True
 #use this asagi directory when using iMPI
 asagi_dir='/home/hpc/h039w/di29zaf2/ihpc_workspace/libasagi'
-#use this asagi directory when using normal MPI
-#asagi_dir='/media/DATA/install/libasagi'

@@ -377,17 +377,18 @@ Help(vars.GenerateHelpText(env))
 #
 
 if env['exe'] == 'samoa':
-    program_name = 'samoa'
-
     # add descriptors to the executable for any argument that is not default
-    program_name += '_' + env['scenario']
+    program_name = env['scenario']
 
     if env['openmp'] != 'tasks':
       program_name += '_' + env['openmp']
 
     if env['mpi'] != 'default':
-      program_name += '_' + env['mpi']
-
+        program_name += '_' + env['mpi']
+    else:
+        if env['impi'] == 'yes':
+            program_name += '_impi'           
+            
     if not env['asagi']:
       program_name += '_noasagi'
 
@@ -403,8 +404,7 @@ if env['exe'] == 'samoa':
     if env['layers'] > 0:
       program_name += '_l' + str(env['layers'])
 
-    if env['target'] != 'release':
-      program_name += '_' + env['target']
+    program_name += '_' + env['target']
 
     if env['machine'] == 'mic':
       program_name += '_mic'
