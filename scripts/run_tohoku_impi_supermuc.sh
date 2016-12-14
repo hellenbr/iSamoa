@@ -28,10 +28,10 @@ tout='-tout 120'
 nadapt='-nadapt 50'
 
 # Grid minimum depth
-dmin='-dmin 0'
+dmin='-dmin 8'
 
 # Grid maximum depth
-dmax='-dmax 20'
+dmax='-dmax 32'
 
 # Simulation time in seconds (normally 3 hrs)
 tmax='-tmax 10800'
