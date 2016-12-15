@@ -28,7 +28,7 @@ tout='-tout 120'
 nadapt='-nadapt 50'
 
 # Grid minimum depth
-dmin='-dmin 0'
+dmin='-dmin 8'
 
 # Grid maximum depth
 dmax='-dmax 22'
