@@ -1,10 +1,13 @@
 #!/bin/bash
 
-# Number of starting ranks (=num_cores_per_node)
-numranks="$1"
-
 # The name of the executable
-execname="$2"
+execname="$1"
+
+# Number of starting ranks (=num_cores_per_node)
+numranks="$2"
+
+# Batch job ID
+jobid="$3"
 
 # Number of sections
 sections='-sections 1'
@@ -46,7 +49,8 @@ fbath='-fbath /home/hpc/h039w/di29zaf2/ihpc_workspace/samoa-data/tohoku_static/b
 stestpoints='-stestpoints "545735.266126 62716.4740303,935356.566012 -817289.628677,1058466.21575 765077.767857"' 
 
 # Ouput directory
-outdir='/home/hpc/h039w/di29zaf2/ihpc_workspace/isamoa/output/swe_impi'
+outdir='/home/hpc/h039w/di29zaf2/ihpc_workspace/isamoa/output/swe_impi_'
+outdir+=$jobid
 rm -rf $outdir
 mkdir $outdir
 output_dir='-output_dir '$outdir
@@ -54,7 +58,5 @@ output_dir='-output_dir '$outdir
 # Put all options together
 all=$sections' '$split' '$courant' '$threads' '$tout' '$nadapt' '$dmin' '$dmax' '$tmax' '$fdispl' '$fbath' '$xmlout' '$stestpoints' '$output_dir
 
-
 #mpiexec -n 4 $execname $all >> console.out
-srun -n $numranks $execname $all > console.out
-
+srun -n $numranks $execname $all > console_$jobid.out
