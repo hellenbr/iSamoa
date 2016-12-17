@@ -49,7 +49,7 @@ fbath='-fbath /home/hpc/h039w/di29zaf2/ihpc_workspace/samoa-data/tohoku_static/b
 stestpoints='-stestpoints "545735.266126 62716.4740303,935356.566012 -817289.628677,1058466.21575 765077.767857"' 
 
 # Ouput directory
-outdir='/home/hpc/h039w/di29zaf2/ihpc_scripts/'$jobid'_swe_impi'
+outdir='/home/hpc/h039w/di29zaf2/ihpc_output/'$jobid'_swe_impi'
 rm -rf $outdir
 mkdir $outdir
 output_dir='-output_dir '$outdir
