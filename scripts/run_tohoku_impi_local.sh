@@ -1,10 +1,10 @@
 #!/bin/bash
 
-# Number of starting ranks (=num_procs_per_node)
-numranks="$1"
-
 # The name of the executable
-execname="$2"
+execname="$1"
+
+# Number of starting ranks (=num_procs_per_node)
+numranks="$2"
 
 # Number of sections
 sections='-sections 1'
