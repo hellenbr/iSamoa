@@ -63,5 +63,4 @@ output_dir='-output_dir '$outdir
 all=$sections' '$split' '$courant' '$threads' '$tout' '$nimpiadapt' '$dmin' '$dmax' '$tmax' '$fdispl' '$fbath' '$xmlout' '$stestpoints' '$output_dir
 
 #mpiexec -n 4 $execname $all >> console.out
-#srun -n $numranks $execname $all > ${jobid}_console.log
-echo $outdir
+srun -n $numranks $execname $all > ${jobid}_console.log

@@ -61,5 +61,4 @@ all=$sections' '$split' '$courant' '$threads' '$tout' '$nimpiadapt' '$dmin' '$dm
 
 
 #mpiexec -n 4 $execname $all >> console.out
-#srun -n $numranks $execname $all > console.log
-echo $outdir
+srun -n $numranks $execname $all > console.log
