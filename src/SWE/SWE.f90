@@ -229,6 +229,13 @@
 			integer (kind = GRID_SI)    :: i_initial_step, i_time_step
 			integer  (kind = GRID_SI)   :: i_stats_phase, err
 
+#           if defined(_MPI)
+            real (kind = GRID_SR)       :: r_wall_time_tic = 0
+            if (rank_MPI == 0) then
+                r_wall_time_tic = mpi_wtime()
+            end if
+#           endif
+
 #           if defined(_IMPI)
             !Only the NON-joining procs do initialization
 			if (status_MPI /= MPI_ADAPT_STATUS_JOINING) then
@@ -260,7 +267,11 @@
                         grid_info%i_cells = grid%get_cells(MPI_SUM, .false.)
 
                         !$omp master
+#                       if defined(_MPI)
+                        _log_write(1, "(A, I0, A, F16.8, A, I0, A)") " SWE: ", i_initial_step, " adaptions, ", mpi_wtime()-r_wall_time_tic, " sec elapsed, ", grid_info%i_cells, " cells"
+#                       else
                         _log_write(1, "(A, I0, A, I0, A)") " SWE: ", i_initial_step, " adaptions, ", grid_info%i_cells, " cells"
+#                       endif
                         !$omp end master
                     end if
 
@@ -427,9 +438,14 @@
                 if (rank_MPI == 0) then
                     grid_info%i_cells = grid%get_cells(MPI_SUM, .false.)
                     !$omp master
-#                   if defined(_IMPI)
-                    _log_write(1, '(" SWE: time step: ", I0, ", sim. time:", A, ", dt:", A, ", cells: ", I0, ", ranks: ", I0)') &
-                            i_time_step, trim(time_to_hrt(grid%r_time)), trim(time_to_hrt(grid%r_dt)), grid_info%i_cells, size_MPI
+#                   if defined(_MPI)
+#                      if defined(_IMPI)
+                        _log_write(1, '(" SWE: time step: ", I0, ", sim. time:", A, ", dt:", A, ", elapsed time (sec): ", F16.8, ", cells: ", I0, ", ranks: ", I0)') &
+                                i_time_step, trim(time_to_hrt(grid%r_time)), trim(time_to_hrt(grid%r_dt)), mpi_wtime()-r_wall_time_tic, grid_info%i_cells, size_MPI
+#                       else
+                        _log_write(1, '(" SWE: time step: ", I0, ", sim. time:", A, ", dt:", A, ", elapsed time (sec): ", F16.8, ", cells: ", I0)') &
+                                i_time_step, trim(time_to_hrt(grid%r_time)), trim(time_to_hrt(grid%r_dt)), mpi_wtime()-r_wall_time_tic, grid_info%i_cells
+#                       endif
 #                   else
                     _log_write(1, '(" SWE: time step: ", I0, ", sim. time:", A, ", dt:", A, ", cells: ", I0)') &
                             i_time_step, trim(time_to_hrt(grid%r_time)), trim(time_to_hrt(grid%r_dt)), grid_info%i_cells
