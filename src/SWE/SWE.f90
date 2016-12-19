@@ -460,13 +460,12 @@
                 if ((cfg%r_max_time >= 0.0d0 .and. grid%r_time * cfg%i_stats_phases >= i_stats_phase * cfg%r_max_time) .or. &
                     (cfg%i_max_time_steps >= 0 .and. i_time_step * cfg%i_stats_phases >= i_stats_phase * cfg%i_max_time_steps)) then
                     call update_stats(swe, grid)
-
                     i_stats_phase = i_stats_phase + 1
                 end if
 
 #               if defined(_IMPI)
                 !Existing ranks call impi_adapt
-                if (cfg%i_adapt_time_steps > 0 .and. mod(i_time_step, cfg%i_adapt_time_steps) == 0) then
+                if (cfg%i_impi_adapt_time_steps > 0 .and. mod(i_time_step, cfg%i_impi_adapt_time_steps) == 0) then
                     call impi_adapt(swe, grid, i_stats_phase, i_initial_step, i_time_step, r_time_next_output)
                 end if
 #               endif

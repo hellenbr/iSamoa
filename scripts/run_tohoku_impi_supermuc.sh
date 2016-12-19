@@ -28,7 +28,7 @@ xmlout='-xmloutput .true.'
 tout='-tout 120'
 
 # iMPI adapt frequency (every N steps)
-nadapt='-nadapt 50'
+nimpiadapt='-nimpiadapt 50'
 
 # Grid minimum depth
 dmin='-dmin 8'
@@ -55,7 +55,7 @@ mkdir $outdir
 output_dir='-output_dir '$outdir
 
 # Put all options together
-all=$sections' '$split' '$courant' '$threads' '$tout' '$nadapt' '$dmin' '$dmax' '$tmax' '$fdispl' '$fbath' '$xmlout' '$stestpoints' '$output_dir
+all=$sections' '$split' '$courant' '$threads' '$tout' '$nimpiadapt' '$dmin' '$dmax' '$tmax' '$fdispl' '$fbath' '$xmlout' '$stestpoints' '$output_dir
 
 #mpiexec -n 4 $execname $all >> console.out
-srun -n $numranks $execname $all > ${jobid}_console.out
+srun -n $numranks $execname $all > ${jobid}_console.log

@@ -1,10 +1,10 @@
 #!/bin/bash
 
-# Number of starting ranks (=num_procs_per_node)
-numranks="$1"
-
 # The name of the executable
-execname="$2"
+execname="$1"
+
+# Number of starting ranks (=num_procs_per_node)
+numranks="$2"
 
 # Number of sections
 sections='-sections 1'
@@ -22,7 +22,7 @@ threads='-threads 1'
 tout='-tout 120'
 
 # iMPI adapt frequency (every N steps)
-nadapt='-nadapt 50'
+nimpiadapt='-nimpiadapt 50'
 
 # Grid minimum depth
 dmin='-dmin 0'
@@ -52,9 +52,8 @@ mkdir $outdir
 output_dir='-output_dir '$outdir
 
 # Put all options together
-all=$sections' '$split' '$courant' '$threads' '$tout' '$nadapt' '$dmin' '$dmax' '$tmax' '$fdispl' '$fbath' '$xmlout' '$stestpoints' '$output_dir
+all=$sections' '$split' '$courant' '$threads' '$tout' '$nimpiadapt' '$dmin' '$dmax' '$tmax' '$fdispl' '$fbath' '$xmlout' '$stestpoints' '$output_dir
 
 
 #mpiexec -n 4 $execname $all >> console.out
-srun -n $numranks $execname $all > console.out
-
+srun -n $numranks $execname $all > console.log
