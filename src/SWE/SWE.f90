@@ -567,7 +567,7 @@
             call mpi_probe_adapt(adapt_flag, status_MPI, info, err)
             toc = mpi_wtime() - tic
 
-            _log_write(1, '("Rank ", I0, " (", I0, "): probe_adapt", E10.2, " sec")') &
+            _log_write(1, '("Rank ", I0, " (", I0, "): probe_adapt", F16.8, " sec")') &
                     rank_MPI, status_MPI, toc
 
             if (adapt_flag == MPI_ADAPT_TRUE) then
@@ -578,7 +578,7 @@
                         staying_count, leaving_count, joining_count, err); assert_eq(err, 0)
                 toc = MPI_Wtime() - tic
 
-                _log_write(1, '("Rank ", I0, " (", I0, "): adapt_begin ", E10.2, " sec, staying ", I0, ", leaving ", I0, ", joining ", I0)') &
+                _log_write(1, '("Rank ", I0, " (", I0, "): adapt_begin ", F16.8, " sec, staying ", I0, ", leaving ", I0, ", joining ", I0)') &
                         rank_MPI, status_MPI, toc, staying_count, leaving_count, joining_count
 
                 !************************ ADAPT WINDOW ****************************
@@ -640,7 +640,7 @@
                 call mpi_comm_adapt_commit(err); assert_eq(err, 0)
                 toc = mpi_wtime() - tic;
 
-                _log_write(1, '("Rank ", I0, " (", I0, "): adapt_commit ", E10.2, " sec")') &
+                _log_write(1, '("Rank ", I0, " (", I0, "): adapt_commit ", F16.8, " sec")') &
                         rank_MPI, status_MPI, toc
 
                 !Debug only
@@ -655,7 +655,7 @@
                 call mpi_comm_rank(MPI_COMM_WORLD, rank_MPI, err); assert_eq(err, 0)
 
                 toc1 = mpi_wtime() - tic1;
-                _log_write(1, '("Rank ", I0, " (", I0, "): Total adaption time = ", E10.2, " sec")') &
+                _log_write(1, '("Rank ", I0, " (", I0, "): Total adaption time = ", F16.8, " sec")') &
                         rank_MPI, status_MPI, toc1
             end if
 #           endif
