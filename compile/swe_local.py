@@ -6,7 +6,7 @@ compiler='gnu'
 #if enable iMPI, OpenMP must be disabled
 openmp='noomp'
 mpi='default'
-impi='no'
+impi='yes'
 #asagi on/off switch: accept True or False
 asagi=True
 #use this asagi directory when using iMPI

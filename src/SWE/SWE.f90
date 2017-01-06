@@ -268,7 +268,7 @@
 
                         !$omp master
 #                       if defined(_MPI)
-                        _log_write(1, "(A, I0, A, F16.8, A, I0, A)") " SWE: ", i_initial_step, " adaptions, ", &
+                        _log_write(1, "(A, I0, A, F16.8, A, I0, A, I0, A)") " SWE: ", i_initial_step, " adaptions, ", &
                                 mpi_wtime()-r_wall_time_tic, " sec elapsed, ", grid_info%i_cells, " cells, ", size_MPI, " ranks"
 #                       else
                         _log_write(1, "(A, I0, A, I0, A)") " SWE: ", i_initial_step, " adaptions, ", grid_info%i_cells, " cells"
