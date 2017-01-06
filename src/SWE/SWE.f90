@@ -237,8 +237,10 @@
 #           endif
 
 #           if defined(_IMPI)
-            !Only the NON-joining procs do initialization
-			if (status_MPI /= MPI_ADAPT_STATUS_JOINING) then
+            ! JOINING ranks must be routed to impi_adapt directly, avoiding initialization and earthquake phase
+			if (status_MPI .eq. MPI_ADAPT_STATUS_JOINING) then
+                call impi_adapt(swe, grid, i_stats_phase, i_initial_step, i_time_step, r_time_next_output)
+            else
 #           endif
 
                 !init parameters
@@ -253,25 +255,29 @@
 
                 call update_stats(swe, grid)
                 i_stats_phase = 0
-
                 i_initial_step = 0
 
                 !initialize the bathymetry
                 call swe%init_b%traverse(grid)
 
+                !===== START Initialization =====
                 do
                     !initialize dofs and set refinement conditions
                     call swe%init_dofs%traverse(grid)
 
                     if (rank_MPI == 0) then
                         grid_info%i_cells = grid%get_cells(MPI_SUM, .false.)
-
                         !$omp master
 #                       if defined(_MPI)
-                        _log_write(1, "(A, I0, A, F16.8, A, I0, A, I0, A)") " SWE: ", i_initial_step, " adaptions, ", &
-                                mpi_wtime()-r_wall_time_tic, " sec elapsed, ", grid_info%i_cells, " cells, ", size_MPI, " ranks"
+                        _log_write(1, '(" SWE Initialization >>> ", A, I0, A, F16.8, A, I0, A, I0)') &
+                                "adaption: ", i_initial_step, &
+                                ", elapsed time (sec): ", mpi_wtime()-r_wall_time_tic, &
+                                ", cells: ", grid_info%i_cells, &
+                                ", ranks: ", size_MPI
 #                       else
-                        _log_write(1, "(A, I0, A, I0, A)") " SWE: ", i_initial_step, " adaptions, ", grid_info%i_cells, " cells"
+                        _log_write(1, '(" SWE Initialization >>> ", A, I0, A, I0)') &
+                                "adaption: ", i_initial_step, &
+                                ", cells: ", grid_info%i_cells, &
 #                       endif
                         !$omp end master
                     end if
@@ -302,12 +308,13 @@
 
                     i_initial_step = i_initial_step + 1
                 end do
+                !===== END Initialization =====
 
                 grid_info = grid%get_info(MPI_SUM, .true.)
 
                 if (rank_MPI == 0) then
                     !$omp master
-                    _log_write(0, *) "SWE: done."
+                    _log_write(0, *) "SWE Initialization: done."
                     _log_write(0, *) ""
 
                     call grid_info%print()
@@ -334,7 +341,6 @@
                 !print initial stats
                 if (cfg%i_stats_phases >= 0) then
                     call update_stats(swe, grid)
-
                     i_stats_phase = i_stats_phase + 1
                 end if
 
@@ -352,7 +358,7 @@
                 i_time_step = 0
 
 #               if defined(_ASAGI)
-                ! during the earthquake, do small time steps that include a displacement
+                !===== START Earthquake =====
                 do
                     if ((cfg%r_max_time >= 0.0 .and. grid%r_time >= cfg%r_max_time) .or. (cfg%i_max_time_steps >= 0 .and. i_time_step >= cfg%i_max_time_steps)) then
                         exit
@@ -378,8 +384,21 @@
                     if (rank_MPI == 0) then
                         grid_info%i_cells = grid%get_cells(MPI_SUM, .false.)
                         !$omp master
-                        _log_write(1, '(" SWE: EQ time step: ", I0, ", sim. time:", A, ", dt:", A, ", cells: ", I0)') &
-                                i_time_step, trim(time_to_hrt(grid%r_time)), trim(time_to_hrt(grid%r_dt)), grid_info%i_cells
+#                       if defined(_MPI)
+                        _log_write(1, '(" SWE Earthquake >>> ", A, I0, A, A, A, A, A, F16.8, A, I0, A, I0)') &
+                                "time step: ", i_time_step, &
+                                ", sim. time:", trim(time_to_hrt(grid%r_time)), &
+                                ", dt:", trim(time_to_hrt(grid%r_dt)), &
+                                ", elapsed time (sec): ", mpi_wtime()-r_wall_time_tic, &
+                                ", cells: ", grid_info%i_cells, &
+                                ", ranks: ", size_MPI
+#                       else
+                        _log_write(1, '(" SWE Earthquake >>> ", A, I0, A, A, A, A, A, I0)') &
+                                "time step: ", i_time_step, &
+                                ", sim. time:", trim(time_to_hrt(grid%r_time)), &
+                                ", dt:", trim(time_to_hrt(grid%r_dt)), &
+                                ", cells: ", grid_info%i_cells
+#                       endif
                         !$omp end master
                     end if
 
@@ -402,21 +421,18 @@
                         r_time_next_output = r_time_next_output + cfg%r_output_time_step
                     end if
                 end do
+                !===== END Earthquake =====
 
-                !print EQ phase stats
+                !print Earthquake phase stats
                 if (cfg%i_stats_phases >= 0) then
                     call update_stats(swe, grid)
                 end if
 #               endif
-
 #           if defined(_IMPI)
-            else
-                ! JOINING ranks call impi_adapt immediately, avoiding initialization and earthquake phase
-                call impi_adapt(swe, grid, i_stats_phase, i_initial_step, i_time_step, r_time_next_output)
-            end if
+            end if !END JOINING ranks must be routed
 #           endif
 
-            !regular tsunami time steps begin after the earthquake is over
+            !===== START Tsunami =====
 			do
 			    !check for loop termination
 				if ((cfg%r_max_time >= 0.0 .and. grid%r_time >= cfg%r_max_time) .or. &
@@ -440,11 +456,19 @@
                     grid_info%i_cells = grid%get_cells(MPI_SUM, .false.)
                     !$omp master
 #                   if defined(_MPI)
-                    _log_write(1, '(" SWE: time step: ", I0, ", sim. time:", A, ", dt:", A, ", elapsed time (sec): ", F16.8, ", cells: ", I0, ", ranks: ", I0)') &
-                            i_time_step, trim(time_to_hrt(grid%r_time)), trim(time_to_hrt(grid%r_dt)), mpi_wtime()-r_wall_time_tic, grid_info%i_cells, size_MPI
+                    _log_write(1, '(" SWE Tsunami >>> ", A, I0, A, A, A, A, A, F16.8, A, I0, A, I0)') &
+                            "time step: ", i_time_step, &
+                            ", sim. time:", trim(time_to_hrt(grid%r_time)), &
+                            ", dt:", trim(time_to_hrt(grid%r_dt)), &
+                            ", elapsed time (sec): ", mpi_wtime()-r_wall_time_tic, &
+                            ", cells: ", grid_info%i_cells, &
+                            ", ranks: ", size_MPI
 #                   else
-                    _log_write(1, '(" SWE: time step: ", I0, ", sim. time:", A, ", dt:", A, ", cells: ", I0)') &
-                            i_time_step, trim(time_to_hrt(grid%r_time)), trim(time_to_hrt(grid%r_dt)), grid_info%i_cells
+                    _log_write(1, '(" SWE Tsunami >>> ", A, I0, A, A, A, A, A, I0)') &
+                            "time step: ", i_time_step, &
+                            ", sim. time:", trim(time_to_hrt(grid%r_time)), &
+                            ", dt:", trim(time_to_hrt(grid%r_dt)), &
+                            ", cells: ", grid_info%i_cells
 #                   endif
                     !$omp end master
                 end if
@@ -482,6 +506,14 @@
                 end if
 #               endif
 			end do
+			!===== END Tsunami =====
+
+#           if defined(_IMPI)
+            ! If there is joining ranks waiting at this point, they should return from this point!!
+            if (status_MPI .eq. MPI_ADAPT_STATUS_JOINING) then
+                return
+            endif
+#           endif
 
             grid_info = grid%get_info(MPI_SUM, .true.)
             grid_info_max = grid%get_info(MPI_MAX, .true.)
