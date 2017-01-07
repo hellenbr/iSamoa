@@ -509,7 +509,7 @@
 			!===== END Tsunami =====
 
 #           if defined(_IMPI)
-            ! If there is joining ranks waiting at this point, they should return from this point!!
+            ! If there are joining ranks waiting at this point, they should return!!
             if (status_MPI .eq. MPI_ADAPT_STATUS_JOINING) then
                 return
             endif
