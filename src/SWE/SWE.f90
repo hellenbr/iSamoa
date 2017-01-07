@@ -237,10 +237,8 @@
 #           endif
 
 #           if defined(_IMPI)
-            ! JOINING ranks must be routed to impi_adapt directly, avoiding initialization and earthquake phase
-			if (status_MPI .eq. MPI_ADAPT_STATUS_JOINING) then
-                call impi_adapt(swe, grid, i_stats_phase, i_initial_step, i_time_step, r_time_next_output)
-            else
+            !Only the NON-joining procs do initialization
+			if (status_MPI .ne. MPI_ADAPT_STATUS_JOINING) then
 #           endif
 
                 !init parameters
@@ -255,6 +253,7 @@
 
                 call update_stats(swe, grid)
                 i_stats_phase = 0
+
                 i_initial_step = 0
 
                 !initialize the bathymetry
@@ -314,7 +313,7 @@
 
                 if (rank_MPI == 0) then
                     !$omp master
-                    _log_write(0, *) "SWE Initialization: done."
+                    _log_write(0, *) "SWE: done."
                     _log_write(0, *) ""
 
                     call grid_info%print()
@@ -341,6 +340,7 @@
                 !print initial stats
                 if (cfg%i_stats_phases >= 0) then
                     call update_stats(swe, grid)
+
                     i_stats_phase = i_stats_phase + 1
                 end if
 
@@ -423,23 +423,21 @@
                 end do
                 !===== END Earthquake =====
 
-                !print Earthquake phase stats
+                !print EQ phase stats
                 if (cfg%i_stats_phases >= 0) then
                     call update_stats(swe, grid)
                 end if
 #               endif
+
 #           if defined(_IMPI)
-            end if !END JOINING ranks must be routed
+            else
+                ! JOINING ranks call impi_adapt immediately, avoiding initialization and earthquake phase
+                call impi_adapt(swe, grid, i_stats_phase, i_initial_step, i_time_step, r_time_next_output)
+            end if
 #           endif
 
             !===== START Tsunami =====
 			do
-			    !check for loop termination
-				if ((cfg%r_max_time >= 0.0 .and. grid%r_time >= cfg%r_max_time) .or. &
-				        (cfg%i_max_time_steps >= 0 .and. i_time_step >= cfg%i_max_time_steps)) then
-					exit
-				end if
-
                 !increment time step
 				i_time_step = i_time_step + 1
 
@@ -492,6 +490,34 @@
 					r_time_next_output = r_time_next_output + cfg%r_output_time_step
 				end if
 
+				!check for loop termination
+                if ((cfg%r_max_time >= 0.0 .and. grid%r_time >= cfg%r_max_time) .or. &
+                        (cfg%i_max_time_steps >= 0 .and. i_time_step >= cfg%i_max_time_steps)) then
+                    !$omp master
+                    if (rank_MPI == 0) then
+                        _log_write(0, '(" SWE: Tsunami completed. Finalizing...")')
+                    end if
+                    !$omp end master
+
+                    call mpi_barrier(MPI_COMM_WORLD, err); assert_eq(err, 0)
+
+                    grid_info = grid%get_info(MPI_SUM, .true.)
+                    grid_info_max = grid%get_info(MPI_MAX, .true.)
+
+                    !$omp master
+                    if (rank_MPI == 0) then
+                        _log_write(0, '(" SWE: done.")')
+                        _log_write(0, '()')
+                        _log_write(0, '("  Cells: avg: ", I0, " max: ", I0)') &
+                                grid_info%i_cells / (omp_get_max_threads() * size_MPI), grid_info_max%i_cells
+                        _log_write(0, '()')
+
+                        call grid_info%print()
+                    end if
+                    !$omp end master
+                    exit
+                end if
+
                 !print stats
                 if ((cfg%r_max_time >= 0.0d0 .and. grid%r_time * cfg%i_stats_phases >= i_stats_phase * cfg%r_max_time) .or. &
                     (cfg%i_max_time_steps >= 0 .and. i_time_step * cfg%i_stats_phases >= i_stats_phase * cfg%i_max_time_steps)) then
@@ -508,27 +534,32 @@
 			end do
 			!===== END Tsunami =====
 
-#           if defined(_IMPI)
-            ! If there are joining ranks waiting at this point, they should return!!
-            if (status_MPI .eq. MPI_ADAPT_STATUS_JOINING) then
-                return
-            endif
-#           endif
-
-            grid_info = grid%get_info(MPI_SUM, .true.)
-            grid_info_max = grid%get_info(MPI_MAX, .true.)
-
-            !$omp master
-            if (rank_MPI == 0) then
-                _log_write(0, '(" SWE: done.")')
-                _log_write(0, '()')
-                _log_write(0, '("  Cells: avg: ", I0, " max: ", I0)') &
-                        grid_info%i_cells / (omp_get_max_threads() * size_MPI), grid_info_max%i_cells
-                _log_write(0, '()')
-
-                call grid_info%print()
-            end if
-            !$omp end master
+!#           if defined(_IMPI)
+!            !Only the NON-joining procs do finalization
+!			if (status_MPI .ne. MPI_ADAPT_STATUS_JOINING) then
+!#           endif
+!_log_write(1, '("About to exit... Finalizing 1...")')
+!                call mpi_barrier(MPI_COMM_WORLD, err); assert_eq(err, 0)
+!
+!_log_write(1, '("About to exit... Finalizing 2...")')
+!                grid_info = grid%get_info(MPI_SUM, .true.)
+!                grid_info_max = grid%get_info(MPI_MAX, .true.)
+!
+!_log_write(1, '("About to exit... Finalizing 3...")')
+!                !$omp master
+!                if (rank_MPI == 0) then
+!                    _log_write(0, '(" SWE: done.")')
+!                    _log_write(0, '()')
+!                    _log_write(0, '("  Cells: avg: ", I0, " max: ", I0)') &
+!                            grid_info%i_cells / (omp_get_max_threads() * size_MPI), grid_info_max%i_cells
+!                    _log_write(0, '()')
+!
+!                    call grid_info%print()
+!                end if
+!                !$omp end master
+!#           if defined(_IMPI)
+!            end if
+!#           endif
 		end subroutine
 
         subroutine update_stats(swe, grid)
@@ -592,7 +623,7 @@
             character(len=256) :: s_log_name
 
             tic = mpi_wtime()
-            call mpi_probe_adapt(adapt_flag, status_MPI, info, err)
+            call mpi_probe_adapt(adapt_flag, status_MPI, info, err); assert_eq(err, 0)
             toc = mpi_wtime() - tic
 
             _log_write(1, '("Rank ", I0, " (", I0, "): probe_adapt", F16.8, " sec")') &
@@ -670,12 +701,6 @@
 
                 _log_write(1, '("Rank ", I0, " (", I0, "): adapt_commit ", F16.8, " sec")') &
                         rank_MPI, status_MPI, toc
-
-                !Debug only
-!                _log_write(1, '(A, I0, A, I0, A, I0, A, I0, A, I0, A, I0, A, F10.4, A, F10.4, A, F10.4, A, F10.4, A, L, A, L)') &
-!                        "Rank ", rank_MPI, " (", status_MPI, "): ", &
-!                        i_stats_phase, ", ", i_initial_step, ", ", i_time_step, ", ", swe%xml_output%i_output_iteration, ", ", &
-!                        r_time_next_output, ", ", grid%r_time, ", ", grid%r_dt, ", ", grid%r_dt_new, ", ", bcast_buff%is_forward, ", ", grid%sections%is_forward()
 
                 ! Update status, size, rank after commit
                 status_MPI = MPI_ADAPT_STATUS_STAYING;
