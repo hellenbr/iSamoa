@@ -13,7 +13,7 @@ split='-lbsplit'
 courant='-courant 0.95'
 # Number of threads
 threads='-threads 1'
-# Enable VTK output
+# Enable/disable VTK output
 xmlout='-xmloutput .false.'
 # VTK output frequency (every N seconds)
 tout='-tout 120'
@@ -22,9 +22,9 @@ nimpiadapt='-nimpiadapt 50'
 # Grid minimum depth
 dmin='-dmin 8'
 # Grid maximum depth
-dmax='-dmax 23'
+dmax='-dmax 22'
 # Simulation time in seconds (normally 3 hrs)
-tmax='-tmax 10800'
+tmax='-tmax 5400'
 # Data file for displacement
 fdispl='-fdispl /home/hpc/h039w/di29zaf2/ihpc_workspace/samoa-data/tohoku_static/displ.nc'
 # Data file for bathymetry

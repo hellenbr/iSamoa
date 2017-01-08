@@ -164,24 +164,32 @@
                         cfg%t_max_eq = 0.0_SR
                     end if
 
-                    if (rank_MPI == 0) then
-                        _log_write(1, '(" SWE: loaded ", A, ", domain: [", F0.2, ", ", F0.2, "] x [", F0.2, ", ", F0.2, "]")') &
-                            trim(cfg%s_bathymetry_file), asagi_grid_min(afh_b, 0), asagi_grid_max(afh_b, 0),  asagi_grid_min(afh_b, 1), asagi_grid_max(afh_b, 1)
-                        _log_write(1, '(" SWE:  dx: ", F0.2, " dy: ", F0.2)') asagi_grid_delta(afh_b, 0), asagi_grid_delta(afh_b, 1)
-
-                        !if the data file has more than two dimensions, we assume that it contains time-dependent displacements
-                        if (asagi_grid_dimensions(afh_d) > 2) then
-                            _log_write(1, '(" SWE: loaded ", A, ", domain: [", F0.2, ", ", F0.2, "] x [", F0.2, ", ", F0.2, "], time: [", F0.2, ", ", F0.2, "]")') &
-                            trim(cfg%s_displacement_file), asagi_grid_min(afh_d, 0), asagi_grid_max(afh_d, 0),  asagi_grid_min(afh_d, 1), asagi_grid_max(afh_d, 1), asagi_grid_min(afh_d, 2), asagi_grid_max(afh_d, 2)
-                            _log_write(1, '(" SWE:  dx: ", F0.2, " dy: ", F0.2, " dt: ", F0.2)') asagi_grid_delta(afh_d, 0), asagi_grid_delta(afh_d, 1), asagi_grid_delta(afh_d, 2)
-                        else
+#                   if defined(_IMPI)
+                    ! This info should only be printed once at the beginning of launch.
+                    ! Need to prevent JOINING ranks from polluting the output.
+                    if (status_MPI .eq. MPI_ADAPT_STATUS_NEW) then
+#                   endif
+                        if (rank_MPI == 0) then
                             _log_write(1, '(" SWE: loaded ", A, ", domain: [", F0.2, ", ", F0.2, "] x [", F0.2, ", ", F0.2, "]")') &
-                            trim(cfg%s_displacement_file), asagi_grid_min(afh_d, 0), asagi_grid_max(afh_d, 0),  asagi_grid_min(afh_d, 1), asagi_grid_max(afh_d, 1)
-                            _log_write(1, '(" SWE:  dx: ", F0.2, " dy: ", F0.2)') asagi_grid_delta(afh_d, 0), asagi_grid_delta(afh_d, 1)
-                        end if
+                                trim(cfg%s_bathymetry_file), asagi_grid_min(afh_b, 0), asagi_grid_max(afh_b, 0),  asagi_grid_min(afh_b, 1), asagi_grid_max(afh_b, 1)
+                            _log_write(1, '(" SWE:  dx: ", F0.2, " dy: ", F0.2)') asagi_grid_delta(afh_b, 0), asagi_grid_delta(afh_b, 1)
 
-                        _log_write(1, '(" SWE: computational domain: [", F0.2, ", ", F0.2, "] x [", F0.2, ", ", F0.2, "]")'), cfg%offset(1), cfg%offset(1) + cfg%scaling, cfg%offset(2), cfg%offset(2) + cfg%scaling
+                            !if the data file has more than two dimensions, we assume that it contains time-dependent displacements
+                            if (asagi_grid_dimensions(afh_d) > 2) then
+                                _log_write(1, '(" SWE: loaded ", A, ", domain: [", F0.2, ", ", F0.2, "] x [", F0.2, ", ", F0.2, "], time: [", F0.2, ", ", F0.2, "]")') &
+                                trim(cfg%s_displacement_file), asagi_grid_min(afh_d, 0), asagi_grid_max(afh_d, 0),  asagi_grid_min(afh_d, 1), asagi_grid_max(afh_d, 1), asagi_grid_min(afh_d, 2), asagi_grid_max(afh_d, 2)
+                                _log_write(1, '(" SWE:  dx: ", F0.2, " dy: ", F0.2, " dt: ", F0.2)') asagi_grid_delta(afh_d, 0), asagi_grid_delta(afh_d, 1), asagi_grid_delta(afh_d, 2)
+                            else
+                                _log_write(1, '(" SWE: loaded ", A, ", domain: [", F0.2, ", ", F0.2, "] x [", F0.2, ", ", F0.2, "]")') &
+                                trim(cfg%s_displacement_file), asagi_grid_min(afh_d, 0), asagi_grid_max(afh_d, 0),  asagi_grid_min(afh_d, 1), asagi_grid_max(afh_d, 1)
+                                _log_write(1, '(" SWE:  dx: ", F0.2, " dy: ", F0.2)') asagi_grid_delta(afh_d, 0), asagi_grid_delta(afh_d, 1)
+                            end if
+
+                            _log_write(1, '(" SWE: computational domain: [", F0.2, ", ", F0.2, "] x [", F0.2, ", ", F0.2, "]")'), cfg%offset(1), cfg%offset(1) + cfg%scaling, cfg%offset(2), cfg%offset(2) + cfg%scaling
+                        end if
+#                   if defined(_IMPI)
                     end if
+#                   endif
                end associate
 #           else
                 cfg%scaling = 10.0_GRID_SR
@@ -340,7 +348,6 @@
                 !print initial stats
                 if (cfg%i_stats_phases >= 0) then
                     call update_stats(swe, grid)
-
                     i_stats_phase = i_stats_phase + 1
                 end if
 
@@ -438,6 +445,31 @@
 
             !===== START Tsunami =====
 			do
+                !check for loop termination
+                if ((cfg%r_max_time >= 0.0 .and. grid%r_time >= cfg%r_max_time) .or. &
+                        (cfg%i_max_time_steps >= 0 .and. i_time_step >= cfg%i_max_time_steps)) then
+
+                    ! Print out stats one more time
+                    call update_stats(swe, grid)
+
+                    ! Finalize before exit
+                    grid_info = grid%get_info(MPI_SUM, .true.)
+                    grid_info_max = grid%get_info(MPI_MAX, .true.)
+                    !$omp master
+                    if (rank_MPI == 0) then
+                        _log_write(0, '(" SWE: done.")')
+                        _log_write(0, '()')
+                        _log_write(0, '("  Cells: avg: ", I0, " max: ", I0)') &
+                                grid_info%i_cells / (omp_get_max_threads() * size_MPI), grid_info_max%i_cells
+                        _log_write(0, '()')
+
+                        call grid_info%print()
+                    end if
+                    !$omp end master
+
+                    exit
+                end if
+
                 !increment time step
 				i_time_step = i_time_step + 1
 
@@ -490,40 +522,12 @@
 					r_time_next_output = r_time_next_output + cfg%r_output_time_step
 				end if
 
-				!check for loop termination
-                if ((cfg%r_max_time >= 0.0 .and. grid%r_time >= cfg%r_max_time) .or. &
-                        (cfg%i_max_time_steps >= 0 .and. i_time_step >= cfg%i_max_time_steps)) then
-                    !$omp master
-                    if (rank_MPI == 0) then
-                        _log_write(0, '(" SWE: Tsunami completed. Finalizing...")')
-                    end if
-                    !$omp end master
-
-                    call mpi_barrier(MPI_COMM_WORLD, err); assert_eq(err, 0)
-
-                    grid_info = grid%get_info(MPI_SUM, .true.)
-                    grid_info_max = grid%get_info(MPI_MAX, .true.)
-
-                    !$omp master
-                    if (rank_MPI == 0) then
-                        _log_write(0, '(" SWE: done.")')
-                        _log_write(0, '()')
-                        _log_write(0, '("  Cells: avg: ", I0, " max: ", I0)') &
-                                grid_info%i_cells / (omp_get_max_threads() * size_MPI), grid_info_max%i_cells
-                        _log_write(0, '()')
-
-                        call grid_info%print()
-                    end if
-                    !$omp end master
-                    exit
-                end if
-
-                !print stats
-                if ((cfg%r_max_time >= 0.0d0 .and. grid%r_time * cfg%i_stats_phases >= i_stats_phase * cfg%r_max_time) .or. &
-                    (cfg%i_max_time_steps >= 0 .and. i_time_step * cfg%i_stats_phases >= i_stats_phase * cfg%i_max_time_steps)) then
-                    call update_stats(swe, grid)
-                    i_stats_phase = i_stats_phase + 1
-                end if
+				!print stats
+!                if ((cfg%r_max_time >= 0.0d0 .and. grid%r_time * cfg%i_stats_phases >= i_stats_phase * cfg%r_max_time) .or. &
+!                    (cfg%i_max_time_steps >= 0 .and. i_time_step * cfg%i_stats_phases >= i_stats_phase * cfg%i_max_time_steps)) then
+!                    call update_stats(swe, grid)
+!                    i_stats_phase = i_stats_phase + 1
+!                end if
 
 #               if defined(_IMPI)
                 !Existing ranks call impi_adapt
@@ -533,33 +537,6 @@
 #               endif
 			end do
 			!===== END Tsunami =====
-
-!#           if defined(_IMPI)
-!            !Only the NON-joining procs do finalization
-!			if (status_MPI .ne. MPI_ADAPT_STATUS_JOINING) then
-!#           endif
-!_log_write(1, '("About to exit... Finalizing 1...")')
-!                call mpi_barrier(MPI_COMM_WORLD, err); assert_eq(err, 0)
-!
-!_log_write(1, '("About to exit... Finalizing 2...")')
-!                grid_info = grid%get_info(MPI_SUM, .true.)
-!                grid_info_max = grid%get_info(MPI_MAX, .true.)
-!
-!_log_write(1, '("About to exit... Finalizing 3...")')
-!                !$omp master
-!                if (rank_MPI == 0) then
-!                    _log_write(0, '(" SWE: done.")')
-!                    _log_write(0, '()')
-!                    _log_write(0, '("  Cells: avg: ", I0, " max: ", I0)') &
-!                            grid_info%i_cells / (omp_get_max_threads() * size_MPI), grid_info_max%i_cells
-!                    _log_write(0, '()')
-!
-!                    call grid_info%print()
-!                end if
-!                !$omp end master
-!#           if defined(_IMPI)
-!            end if
-!#           endif
 		end subroutine
 
         subroutine update_stats(swe, grid)
@@ -573,28 +550,51 @@
                 if (t_phase < huge(1.0d0)) then
                     t_phase = t_phase + get_wtime()
 
-                    call swe%init_dofs%reduce_stats(MPI_SUM, .true.)
-                    call swe%displace%reduce_stats(MPI_SUM, .true.)
-                    call swe%euler%reduce_stats(MPI_SUM, .true.)
-                    call swe%adaption%reduce_stats(MPI_SUM, .true.)
-                    call grid%reduce_stats(MPI_SUM, .true.)
+#                   if defined(_IMPI)
+                    ! JOINGING ranks will call this function to initialize their stats, but
+                    ! we don't them to do global MPI reduction
+                    if (status_MPI .ne. MPI_ADAPT_STATUS_JOINING) then
+#                   endif
+                        call swe%init_dofs%reduce_stats(MPI_SUM, .true.)
+                        call swe%displace%reduce_stats(MPI_SUM, .true.)
+                        call swe%euler%reduce_stats(MPI_SUM, .true.)
+                        call swe%adaption%reduce_stats(MPI_SUM, .true.)
+                        call grid%reduce_stats(MPI_SUM, .true.)
+#                   if defined(_IMPI)
+                    else
+                        call swe%init_dofs%reduce_stats(MPI_SUM, .false.)
+                        call swe%displace%reduce_stats(MPI_SUM, .false.)
+                        call swe%euler%reduce_stats(MPI_SUM, .false.)
+                        call swe%adaption%reduce_stats(MPI_SUM, .false.)
+                        call grid%reduce_stats(MPI_SUM, .false.)
+                    end if
+#                   endif
 
                     if (rank_MPI == 0) then
+#                   if defined(_IMPI)
+                    ! JOINGING ranks will call this function to initialize their stats, but
+                    ! we don't want them to pollute the output
+                    if (status_MPI .ne. MPI_ADAPT_STATUS_JOINING) then
+#                   endif
                         _log_write(0, *) ""
                         _log_write(0, *) "Phase statistics:"
                         _log_write(0, *) ""
-                        _log_write(0, '(A, T34, A)') " Init: ", trim(swe%init_dofs%stats%to_string())
-                        _log_write(0, '(A, T34, A)') " Displace: ", trim(swe%displace%stats%to_string())
-                        _log_write(0, '(A, T34, A)') " Time steps: ", trim(swe%euler%stats%to_string())
-                        _log_write(0, '(A, T34, A)') " Adaptions: ", trim(swe%adaption%stats%to_string())
-                        _log_write(0, '(A, T34, A)') " Grid: ", trim(grid%stats%to_string())
-                        _log_write(0, '(A, T34, F12.4, A)') " Element throughput: ", 1.0d-6 * dble(grid%stats%get_counter(traversed_cells)) / t_phase, " M/s"
-                        _log_write(0, '(A, T34, F12.4, A)') " Memory throughput: ", dble(grid%stats%get_counter(traversed_memory)) / ((1024 * 1024 * 1024) * t_phase), " GB/s"
-                        _log_write(0, '(A, T34, F12.4, A)') " Cell update throughput: ", 1.0d-6 * dble(swe%euler%stats%get_counter(traversed_cells)) / t_phase, " M/s"
-                        _log_write(0, '(A, T34, F12.4, A)') " Flux solver throughput: ", 1.0d-6 * dble(swe%euler%stats%get_counter(traversed_edges)) / t_phase, " M/s"
-                        _log_write(0, '(A, T34, F12.4, A)') " Asagi time:", grid%stats%get_time(asagi_time), " s"
-                        _log_write(0, '(A, T34, F12.4, A)') " Phase time:", t_phase, " s"
+                        _log_write(0, '(A, T30, I0)') " Num ranks: ", size_MPI
+                        _log_write(0, '(A, T30, A)') " Init: ", trim(swe%init_dofs%stats%to_string())
+                        _log_write(0, '(A, T30, A)') " Displace: ", trim(swe%displace%stats%to_string())
+                        _log_write(0, '(A, T30, A)') " Time steps: ", trim(swe%euler%stats%to_string())
+                        _log_write(0, '(A, T30, A)') " Adaptions: ", trim(swe%adaption%stats%to_string())
+                        _log_write(0, '(A, T30, A)') " Grid: ", trim(grid%stats%to_string())
+                        _log_write(0, '(A, T30, F12.4, A)') " Element throughput: ", 1.0d-6 * dble(grid%stats%get_counter(traversed_cells)) / t_phase, " M/s"
+                        _log_write(0, '(A, T30, F12.4, A)') " Memory throughput: ", dble(grid%stats%get_counter(traversed_memory)) / ((1024 * 1024 * 1024) * t_phase), " GB/s"
+                        _log_write(0, '(A, T30, F12.4, A)') " Cell update throughput: ", 1.0d-6 * dble(swe%euler%stats%get_counter(traversed_cells)) / t_phase, " M/s"
+                        _log_write(0, '(A, T30, F12.4, A)') " Flux solver throughput: ", 1.0d-6 * dble(swe%euler%stats%get_counter(traversed_edges)) / t_phase, " M/s"
+                        _log_write(0, '(A, T30, F12.4, A)') " Asagi time:", grid%stats%get_time(asagi_time), " s"
+                        _log_write(0, '(A, T30, F12.4, A)') " Phase time:", t_phase, " s"
                         _log_write(0, *) ""
+#                   if defined(_IMPI)
+                    end if
+#                   endif
                     end if
                 end if
 
@@ -630,6 +630,12 @@
                     rank_MPI, status_MPI, toc
 
             if (adapt_flag == MPI_ADAPT_TRUE) then
+                ! Print out statistics for the last period before applying resource change
+                ! this involved MPI reduce on all pre-existing ranks
+                if (status_MPI .ne. MPI_ADAPT_STATUS_JOINING) then
+                    call update_stats(swe, grid)
+                end if
+
                 tic1 = mpi_wtime()
 
                 tic = mpi_wtime()
@@ -641,7 +647,7 @@
                         rank_MPI, status_MPI, toc, staying_count, leaving_count, joining_count
 
                 !************************ ADAPT WINDOW ****************************
-                !(1) LEAVING ranks dump data to STAYING ranks
+                !(1) LEAVING ranks transfer data to STAYING ranks
                 if (leaving_count > 0) then
                     call distribute_load_for_resource_shrinkage(grid, size_MPI, leaving_count, rank_MPI)
                 end if
@@ -661,6 +667,8 @@
                     call grid%destroy()
                     call grid%sections%resize(0)
                     call grid%threads%resize(omp_get_max_threads())
+
+                    call update_stats(swe, grid) ! Initialize grid statistics
 
                     !reverse grid if it is the case
                     if (bcast_buff%is_forward .neqv. grid%sections%is_forward()) then

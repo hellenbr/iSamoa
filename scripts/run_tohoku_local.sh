@@ -22,25 +22,25 @@ dmin='-dmin 8'
 # Grid maximum depth
 dmax='-dmax 20'
 # Simulation time in seconds (normally 3 hrs)
-tmax='-tmax 10800'
+tmax='-tmax 3600'
 # Data file for displacement
 fdispl='-fdispl /home/emily/nfs/workspace/samoa-data/tohoku_static/displ.nc'
 # Data file for bathymetry
 fbath='-fbath /home/emily/nfs/workspace/samoa-data/tohoku_static/bath_2014.nc'
-# Enable VTK output
-xmlout='-xmloutput .true.'
+# Enable/disable VTK output
+xmlout='-xmloutput .false.'
 # What is stestpoints (for Tohoku only)??
 stestpoints='-stestpoints "545735.266126 62716.4740303,935356.566012 -817289.628677,1058466.21575 765077.767857"' 
 # Ouput directory
-vtkdir='/home/emily/nfs/workspace/isamoa/output'
+outdir='/home/emily/nfs/workspace/isamoa/output'
 if [[ $execname == *"impi"* ]]; then
-	vtkdir+='/swe_impi'
+	outdir+='/swe_impi'
 else
-	vtkdir+='/swe_mpi'
+	outdir+='/swe_mpi'
 fi
-rm -rf $vtkdir
-mkdir $vtkdir
-output_dir='-output_dir '$vtkdir
+rm -rf $outdir
+mkdir $outdir
+output_dir='-output_dir '$outdir
 # Put all options together
 all=$sections' '$split' '$courant' '$threads' '$tout' '$nimpiadapt' '$dmin' '$dmax' '$tmax' '$fdispl' '$fbath' '$xmlout' '$stestpoints' '$output_dir
 
