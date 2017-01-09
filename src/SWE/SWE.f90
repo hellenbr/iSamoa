@@ -626,8 +626,10 @@
             call mpi_probe_adapt(adapt_flag, status_MPI, info, err); assert_eq(err, 0)
             toc = mpi_wtime() - tic
 
+            if ((rank_MPI == 0) .and. (status_MPI == MPI_ADAPT_STATUS_STAYING)) then
             _log_write(1, '("Rank ", I0, " (", I0, "): probe_adapt", F16.8, " sec")') &
                     rank_MPI, status_MPI, toc
+            end if
 
             if (adapt_flag == MPI_ADAPT_TRUE) then
                 ! Print out statistics for the last period before applying resource change
@@ -643,8 +645,10 @@
                         staying_count, leaving_count, joining_count, err); assert_eq(err, 0)
                 toc = MPI_Wtime() - tic
 
+                if ((rank_MPI == 0) .and. (status_MPI == MPI_ADAPT_STATUS_STAYING)) then
                 _log_write(1, '("Rank ", I0, " (", I0, "): adapt_begin ", F16.8, " sec, staying ", I0, ", leaving ", I0, ", joining ", I0)') &
                         rank_MPI, status_MPI, toc, staying_count, leaving_count, joining_count
+                end if
 
                 !************************ ADAPT WINDOW ****************************
                 !(1) LEAVING ranks transfer data to STAYING ranks
@@ -707,8 +711,10 @@
                 call mpi_comm_adapt_commit(err); assert_eq(err, 0)
                 toc = mpi_wtime() - tic;
 
+                if ((rank_MPI == 0) .and. (status_MPI == MPI_ADAPT_STATUS_STAYING)) then
                 _log_write(1, '("Rank ", I0, " (", I0, "): adapt_commit ", F16.8, " sec")') &
                         rank_MPI, status_MPI, toc
+                end if
 
                 ! Update status, size, rank after commit
                 status_MPI = MPI_ADAPT_STATUS_STAYING;
@@ -716,8 +722,11 @@
                 call mpi_comm_rank(MPI_COMM_WORLD, rank_MPI, err); assert_eq(err, 0)
 
                 toc1 = mpi_wtime() - tic1;
+
+                if ((rank_MPI == 0) .and. (status_MPI == MPI_ADAPT_STATUS_STAYING)) then
                 _log_write(1, '("Rank ", I0, " (", I0, "): Total adaption time = ", F16.8, " sec")') &
                         rank_MPI, status_MPI, toc1
+                end if
             end if
 #           endif
         end subroutine impi_adapt
