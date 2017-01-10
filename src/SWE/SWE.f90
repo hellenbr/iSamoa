@@ -248,12 +248,15 @@
             !Only the NON-joining procs do initialization
 			if (status_MPI .ne. MPI_ADAPT_STATUS_JOINING) then
 #           endif
-
                 !init parameters
                 r_time_next_output = 0.0_GRID_SR
 
                 if (rank_MPI == 0) then
                     !$omp master
+                    _log_write(0, *) ""
+                    _log_write(1, '("Rank ", I0, " (", I0, "): init_adapt ", F16.8, " sec")') &
+                            rank_MPI, status_MPI, mpi_init_adapt_time
+                    _log_write(0, *) ""
                     _log_write(0, *) "SWE: setting initial values and a priori refinement.."
                     _log_write(0, *) ""
                     !$omp end master

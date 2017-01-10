@@ -303,7 +303,13 @@ module config
 #       endif
 
         if (rank_MPI == 0) then
+#           if defined(_IMPI)
+            if (status_MPI == MPI_ADAPT_STATUS_NEW) then
+#           endif
              _log_write(0, ' (" sam(oa)²: Space filling curves and Adaptive Meshes for Oceanic and Other Applications")')
+#           if defined(_IMPI)
+            end if
+#           endif
             !if the version option was set was called, display program version
             if (l_version) then
                 _log_write(0, '(" version ", I0, ".", I0, ".", I0)') 0, 8, 0

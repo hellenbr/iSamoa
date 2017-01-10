@@ -23,6 +23,8 @@ module Tools_mpi
     public
 #   if defined(_IMPI)
     integer             :: status_MPI = 0
+    ! This is ugly, but we need a place to store the measurement before the log file is created
+    real                :: mpi_init_adapt_time = 0.0
 #   endif
 	integer 		    :: rank_MPI = 0
 	integer 		    :: size_MPI = 1
@@ -35,6 +37,9 @@ module Tools_mpi
         integer                             :: i_error, mpi_prov_thread_support
         integer(kind = MPI_ADDRESS_KIND)    :: mpi_tag_upper_bound
         logical                             :: mpi_flag, mpi_is_initialized
+#       if defined(_IMPI)
+        integer     :: tic, toc, clock_rate, clock_max
+#       endif
 
 #       if defined(_MPI)
             if (ref_count_MPI == 0) then
@@ -47,7 +52,11 @@ module Tools_mpi
 						try(mpi_prov_thread_support >= MPI_THREAD_MULTIPLE, "MPI version does not support MPI_THREAD_MULTIPLE")
 #                   else
 #                       if defined(_IMPI)
+                            call system_clock(tic, clock_rate, clock_max)
                             call mpi_init_adapt(status_MPI, i_error); assert_eq(i_error, 0)
+                            call system_clock(toc, clock_rate, clock_max)
+
+                            mpi_init_adapt_time = real(toc-tic)/real(clock_rate)
 #                       else
                             call mpi_init(i_error); assert_eq(i_error, 0)
 #                       endif
