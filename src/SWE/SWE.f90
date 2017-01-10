@@ -253,9 +253,11 @@
 
                 if (rank_MPI == 0) then
                     !$omp master
+#                   if defined(_IMPI)
                     _log_write(0, *) ""
                     _log_write(1, '("Rank ", I0, " (", I0, "): init_adapt ", F16.8, " sec")') &
                             rank_MPI, status_MPI, mpi_init_adapt_time
+#                   endif
                     _log_write(0, *) ""
                     _log_write(0, *) "SWE: setting initial values and a priori refinement.."
                     _log_write(0, *) ""
