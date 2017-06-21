@@ -4,7 +4,7 @@ iSam(oa)²
 =========
 
 Invasive Space-Filling Curves and Adaptive Meshes for Oceanic And Other Applications. <br>
-Github repository: [https://github.com/hellenbr/iSamoa](https://github.com/hellenbr/iSamoa)
+Github repository: [https://github.com/mohellen/isamoa.git](https://github.com/mohellen/isamoa.git)
 
 ## Contents
 
@@ -26,8 +26,11 @@ The following prerequisites are necessary in order to install and run sam(oa)² 
 * (Optional) Netcdf data files for ASAGI: For porous media flow, download the SPE10 data files from [SPE10](http://www.spe.org/web/csp/datasets/set02.htm#download). A script is included in the data directory that converts them to netcdf files. For the tsunami scenario the netcdf files can be generated from our [Tsunami repository](https://github.com/TUM-I5/tsunami)
 
 The following prerequisites are necessary in order to install and run sam(oa)² in malleable mode:
-* iRM
-* iMPI
+* iRM: a SLURM based elastic resource manager
+* iMPI: MPICH v3.14 based MPI library with runtime elasticity extentions
+
+iRM and iMPI can be directly installed on SuperMUC or on a local machine with a simulated VM cluster (VirtualBox VMs with NFS setup).
+
 
 ## Installation
 
@@ -36,7 +39,7 @@ The following prerequisites are necessary in order to install and run sam(oa)² 
 Create a directory (named samoa_dir here) and execute the following steps:
 
     cd <samoa_dir>
-    git clone https://github.com/meistero/samoa .
+    git clone https://github.com/mohellen/isamoa.git .
 
 This will download the source files for samoa into samoa_dir. 
 
@@ -48,14 +51,14 @@ two methods to clone sam(oa)² from github on the SuperMUC:
 
         nohup sshfs <login>@supermuc.lrz.de:<samoa_dir> <local_dir>
         cd <local_dir>
-        git clone https://github.com/meistero/samoa .
+        git clone https://github.com/mohellen/isamoa.git .
 
 * By login with remote port forwarding. In this case an alternative URL must be used to clone the git repository:
 
 
         ssh -X <login>@supermuc.lrz.de -R <port>:github.com:9418
         cd <samoa_dir>
-        git clone git://localhost:<port>/meistero/Samoa .
+        git clone git://localhost:<port>/mohellen/isamoa .
 
 This will download the source files for samoa into samoa_dir. 
 Additionally, in order to compile and run ASAGI and sam(oa)² on the SuperMUC, we must add the netcdf library to the CMAKE prefix path and load the following modules:
@@ -106,7 +109,5 @@ Executables will be created in the directory samoa_dir/bin and should be run fro
 
 For execution parameters refer to the online help by calling the executable with '-h' or '--help'.
 
-## Build Status
 
-[![Build Status](https://travis-ci.org/meistero/Samoa.svg)](https://travis-ci.org/meistero/Samoa)
 
