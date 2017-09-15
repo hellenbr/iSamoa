@@ -1,10 +1,10 @@
 [![Logo](https://raw.githubusercontent.com/meistero/Samoa/master/logo_small.png)]( https://raw.githubusercontent.com/meistero/Samoa/master/logo.png)
 
-iSam(oa)² 
+eSam(oa)² 
 =========
 
-Invasive Space-Filling Curves and Adaptive Meshes for Oceanic And Other Applications. <br>
-Github repository: [https://github.com/mohellen/iSamoa.git](https://github.com/mohellen/iSamoa.git)
+Elastic Space-Filling Curves and Adaptive Meshes for Oceanic And Other Applications. <br>
+Github repository: [https://github.com/mohellen/eSamoa.git](https://github.com/mohellen/eSamoa.git)
 
 ## Contents
 
