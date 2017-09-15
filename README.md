@@ -4,7 +4,7 @@ iSam(oa)²
 =========
 
 Invasive Space-Filling Curves and Adaptive Meshes for Oceanic And Other Applications. <br>
-Github repository: [https://github.com/mohellen/isamoa.git](https://github.com/mohellen/isamoa.git)
+Github repository: [https://github.com/mohellen/iSamoa.git](https://github.com/mohellen/iSamoa.git)
 
 ## Contents
 
