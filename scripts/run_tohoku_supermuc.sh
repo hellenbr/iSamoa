@@ -26,13 +26,13 @@ dmax='-dmax 22'
 # Simulation time in seconds (normally 3 hrs)
 tmax='-tmax 10800'
 # Data file for displacement
-fdispl='-fdispl /home/hpc/h039w/di29zaf2/ihpc/workspace/samoa-data/tohoku_static/displ.nc'
+fdispl='-fdispl /home/hpc/h039w/di29zaf2/workspace/samoa-data/tohoku_static/displ.nc'
 # Data file for bathymetry
-fbath='-fbath /home/hpc/h039w/di29zaf2/ihpc/workspace/samoa-data/tohoku_static/bath_2014.nc'
+fbath='-fbath /home/hpc/h039w/di29zaf2/workspace/samoa-data/tohoku_static/bath_2014.nc'
 # What is stestpoints (for Tohoku only)??
 stestpoints='-stestpoints "545735.266126 62716.4740303,935356.566012 -817289.628677,1058466.21575 765077.767857"' 
 # Ouput directory
-outdir='/home/hpc/h039w/di29zaf2/ihpc/workspace/isamoa/output/'
+outdir='/home/hpc/h039w/di29zaf2/ihpc/workspace/output/'
 if [[ $execname == *"impi"* ]]; then
 	outdir+='swe_impi'
 else

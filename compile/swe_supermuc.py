@@ -11,4 +11,4 @@ impi='no'
 #asagi on/off switch: accept True or False
 asagi=True
 #use this asagi directory when using iMPI
-asagi_dir='/home/hpc/h039w/di29zaf2/ihpc/workspace/libasagi'
+asagi_dir='/home/hpc/h039w/di29zaf2/workspace/ihpc-install'
