@@ -72,9 +72,7 @@ vars.AddVariables(
                 allowed_values=('noomp', 'notasks', 'tasks', 'adaptive_tasks')
               ),
 
-  EnumVariable( 'impi', 'iMPI support', 'no',
-                allowed_values=('yes', 'no')
-              ),
+  BoolVariable( 'impi', 'iMPI support', True),
 
   EnumVariable( 'mpi', 'MPI support', 'default',
                 allowed_values=('nompi', 'default', 'intel', 'mpich2', 'openmpi', 'ibm')
@@ -144,7 +142,7 @@ elif  env['compiler'] == 'gnu':
   env.SetDefault(openmp = 'notasks')
 
 # If IMPI is active, MPI is forced to be active and use MPICH default
-if env['impi'] == 'yes':
+if env['impi']:
     if (env['scenario'] == 'swe'):
         env['mpi'] = 'default'
         env['F90FLAGS'] += ' -D_IMPI'
@@ -386,7 +384,7 @@ if env['exe'] == 'samoa':
     if env['mpi'] != 'default':
         program_name += '_' + env['mpi']
     else:
-        if env['impi'] == 'yes':
+        if env['impi']:
             program_name += '_impi'           
             
     if not env['asagi']:
