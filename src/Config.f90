@@ -281,6 +281,7 @@ module config
             config%S_refinement_threshold = rget('samoa_S_ref_th')
 
             config%l_lse_output = lget('samoa_lseoutput')
+
             config%l_well_output = lget('samoa_welloutput')
 #    	elif defined(_SWE) || defined(_FLASH)
 #		    if defined(_ASAGI)

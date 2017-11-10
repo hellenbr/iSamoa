@@ -10,6 +10,6 @@ impi='yes'
 #asagi on/off switch: accept True or False
 asagi=True
 #use this asagi directory when using iMPI
-asagi_dir='/home/emily/nfs/workspace/libasagi'
+asagi_dir='/media/data/emily/workspace/ihpc-install'
 #use this asagi directory when using normal MPI
 #asagi_dir='/media/DATA/install/libasagi'
