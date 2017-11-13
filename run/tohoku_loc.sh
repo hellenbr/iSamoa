@@ -32,7 +32,7 @@ fdispl='-fdispl '$NFSPATH'/samoa-data/tohoku_static/displ.nc'
 fbath='-fbath '$NFSPATH'/samoa-data/tohoku_static/bath_2014.nc'
 # Enable/disable VTK output
 xmlout='-xmloutput .false.'
-# What is stestpoints (for Tohoku only)??
+# What is stestpoints
 stestpoints='-stestpoints "545735.266126 62716.4740303,935356.566012 -817289.628677,1058466.21575 765077.767857"' 
 # Ouput directory
 outdir=$NFSPATH'/esamoa'
@@ -41,8 +41,8 @@ if [[ $execname == *"impi"* ]]; then
 else
 	outdir+='/out_swe_mpi'
 fi
-rm -rf $outdir
-mkdir $outdir
+mkdir -p $outdir
+rm -rf $outdir/*
 output_dir='-output_dir '$outdir
 # Put all options together
 all=$sections' '$split' '$courant' '$threads' '$tout' '$nimpiadapt' '$dmin' '$dmax' '$tmax' '$fdispl' '$fbath' '$xmlout' '$stestpoints' '$output_dir

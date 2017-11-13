@@ -83,17 +83,17 @@
             swe%point_output%s_file_stamp = trim(cfg%output_dir) // "/swe_" // trim(s_date) // "_" // trim(s_time)
 			s_log_name = trim(swe%xml_output%s_file_stamp) // ".log"
 
-# if defined(_IMPI)
+#           if defined(_IMPI)
             ! At this point, JOINING ranks do not have the right file name yet
             ! prevent them from creating a wrong file
             if (status_MPI .ne. MPI_ADAPT_STATUS_JOINING) then
-# endif
+#           endif
                 if (l_log) then
                     _log_open_file(s_log_name)
                 end if
-# if defined(_IMPI)
+#           if defined(_IMPI)
             end if
-# endif
+#           endif
 			call load_scenario(grid)
 			call swe%init_b%create()
 			call swe%init_dofs%create()
@@ -115,8 +115,8 @@
                 cfg%afh_displacement = asagi_grid_create(ASAGI_FLOAT)
 
 #               if defined(_MPI)
-                    call asagi_grid_set_comm(cfg%afh_bathymetry, MPI_COMM_WORLD)
-                    call asagi_grid_set_comm(cfg%afh_displacement, MPI_COMM_WORLD)
+                call asagi_grid_set_comm(cfg%afh_bathymetry, MPI_COMM_WORLD)
+                call asagi_grid_set_comm(cfg%afh_displacement, MPI_COMM_WORLD)
 #               endif
 
                 call asagi_grid_set_threads(cfg%afh_bathymetry, cfg%i_threads)
@@ -254,13 +254,13 @@
                 if (rank_MPI == 0) then
                     !$omp master
 #                   if defined(_IMPI)
-                    _log_write(0, *) ""
+                    _log_write(0, *) " "
                     _log_write(1, '("Rank ", I0, " (", I0, "): init_adapt ", F16.8, " sec")') &
                             rank_MPI, status_MPI, mpi_init_adapt_time
 #                   endif
-                    _log_write(0, *) ""
+                    _log_write(0, *) " "
                     _log_write(0, *) "SWE: setting initial values and a priori refinement.."
-                    _log_write(0, *) ""
+                    _log_write(0, *) " "
                     !$omp end master
                 end if
 
@@ -327,7 +327,7 @@
                 if (rank_MPI == 0) then
                     !$omp master
                     _log_write(0, *) "SWE: done."
-                    _log_write(0, *) ""
+                    _log_write(0, *) " "
 
                     call grid_info%print()
                     !$omp end master
@@ -363,14 +363,14 @@
 
                 if (rank_MPI == 0) then
                     _log_write(0, *) "SWE: running time steps.."
-                    _log_write(0, *) ""
+                    _log_write(0, *) " "
                 end if
                 !$omp end master
 
                 i_time_step = 0
 
 #               if defined(_ASAGI)
-                !===== START Earthquake =====
+                !===== Load Earthquake Displacement Data =====
                 do
                     if ((cfg%r_max_time >= 0.0 .and. grid%r_time >= cfg%r_max_time) .or. (cfg%i_max_time_steps >= 0 .and. i_time_step >= cfg%i_max_time_steps)) then
                         exit
@@ -433,7 +433,7 @@
                         r_time_next_output = r_time_next_output + cfg%r_output_time_step
                     end if
                 end do
-                !===== END Earthquake =====
+                !===== END Loading Earthquake Displacement Data =====
 
                 !print EQ phase stats
                 if (cfg%i_stats_phases >= 0) then
