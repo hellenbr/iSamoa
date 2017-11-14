@@ -1,0 +1,13 @@
+
+
+[Usage]:
+	Call run script from the target output dir.
+	Output files will be created in the current location.
+
+e.g.:
+
+$ cd /path/to/target/output/dir
+$ ..path/esamoa/run/tohoku.sh
+
+
+
