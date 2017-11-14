@@ -1400,7 +1400,7 @@ subroutine collect_minimum_distances(grid, rank_list, neighbor_min_distances, i_
     !   and re-distribute sections among the STAYING ranks.
     !This redistribution is rough estimate, not perfect, because load balancing
     !   will be done again during grid refinement
-    subroutine distribute_load_for_resource_shrinkage(grid, num_current_ranks, num_leaving_ranks, my_rank)
+    subroutine distribute_load_for_resource_reduction(grid, num_current_ranks, num_leaving_ranks, my_rank)
         type(t_grid), intent(inout) :: grid      ! Current local grid
         integer, intent(in) :: num_current_ranks ! The number of current ranks (size of MPI_COMM_WORLD)
         integer, intent(in) :: num_leaving_ranks ! The number of ranks that will be leaving
@@ -1524,7 +1524,7 @@ subroutine collect_minimum_distances(grid, rank_list, neighbor_min_distances, i_
 
         call distribute_sections(grid, i_rank_out, i_section_index_out, i_rank_in)
 #       endif
-    end subroutine distribute_load_for_resource_shrinkage
+    end subroutine distribute_load_for_resource_reduction
 
     !distribution only, given computed load
     subroutine distribute_sections(grid, i_rank_out, i_section_index_out, i_rank_in)

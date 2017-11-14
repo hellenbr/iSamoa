@@ -581,9 +581,9 @@
                     ! we don't want them to pollute the output
                     if (status_MPI .ne. MPI_ADAPT_STATUS_JOINING) then
 #                   endif
-                        _log_write(0, *) ""
+                        _log_write(0, *) " "
                         _log_write(0, *) "Phase statistics:"
-                        _log_write(0, *) ""
+                        _log_write(0, *) " "
                         _log_write(0, '(A, T30, I0)') " Num ranks: ", size_MPI
                         _log_write(0, '(A, T30, A)') " Init: ", trim(swe%init_dofs%stats%to_string())
                         _log_write(0, '(A, T30, A)') " Displace: ", trim(swe%displace%stats%to_string())
@@ -596,7 +596,7 @@
                         _log_write(0, '(A, T30, F12.4, A)') " Flux solver throughput: ", 1.0d-6 * dble(swe%euler%stats%get_counter(traversed_edges)) / t_phase, " M/s"
                         _log_write(0, '(A, T30, F12.4, A)') " Asagi time:", grid%stats%get_time(asagi_time), " s"
                         _log_write(0, '(A, T30, F12.4, A)') " Phase time:", t_phase, " s"
-                        _log_write(0, *) ""
+                        _log_write(0, *) " "
 #                   if defined(_IMPI)
                     end if
 #                   endif
@@ -658,7 +658,7 @@
                 !************************ ADAPT WINDOW ****************************
                 !(1) LEAVING ranks transfer data to STAYING ranks
                 if (leaving_count > 0) then
-                    call distribute_load_for_resource_shrinkage(grid, size_MPI, leaving_count, rank_MPI)
+                    call distribute_load_for_resource_reduction(grid, size_MPI, leaving_count, rank_MPI)
                 end if
 
                 !(2) JOINING ranks get necessary data from MASTER
