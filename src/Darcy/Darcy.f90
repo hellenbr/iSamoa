@@ -377,7 +377,7 @@
             if (rank_MPI == 0) then
                 !$omp master
                 _log_write(0, *) "Darcy: setting initial values and solving initial system.."
-                _log_write(0, *) ""
+                _log_write(0, *) " "
                 !$omp end master
             end if
 
@@ -437,7 +437,7 @@
             if (rank_MPI == 0) then
                 !$omp master
                 _log_write(0, *) "Darcy: done."
-                _log_write(0, *) ""
+                _log_write(0, *) " "
                 !$omp end master
             end if
 
