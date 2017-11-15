@@ -1,7 +1,7 @@
 #!/bin/bash
 
-BASEPATH=$NFSPATH/workspace/esamoa
-DATAPATH=$NFSPATH/workspace/samoa-data
+BASEPATH=$NFSPATH/esamoa
+DATAPATH=$NFSPATH/samoa-data
 
 # The name of the executable
 execname=$BASEPATH/bin/swe_impi_release
