@@ -1,9 +1,10 @@
 #!/bin/bash
 
-export NFSPATH=$HOME/workspace
+BASEPATH=$NFSPATH/workspace/esamoa
+DATAPATH=$NFSPATH/workspace/samoa-data
 
 # The name of the executable
-execname=$NFSPATH/esamoa/bin/swe_noomp_impi_gnu_release
+execname=$BASEPATH/bin/swe_impi_release
 # iMPI adapt frequency (every N steps)
 nimpiadapt='-nimpiadapt 50'
 # Grid minimum depth
@@ -25,15 +26,15 @@ threads='-threads 1'
 # The Courant number (keep it 0.95)
 courant='-courant 0.95'
 # Data file for displacement
-fdispl='-fdispl '$NFSPATH'/samoa-data/tohoku_static/displ.nc'
+fdispl='-fdispl '$DATAPATH'/tohoku_static/displ.nc'
 # Data file for bathymetry
-fbath='-fbath '$NFSPATH'/samoa-data/tohoku_static/bath_2014.nc'
+fbath='-fbath '$DATAPATH'/tohoku_static/bath_2014.nc'
 # What is stestpoints
 stestpoints='-stestpoints "545735.266126 62716.4740303,935356.566012 -817289.628677,1058466.21575 765077.767857"' 
 # Ouput directory
 output_dir='-output_dir '$PWD
 # Put all options together
-all=$execname' '$sections' '$split' '$courant' '$threads' '$tout' '$nimpiadapt' '$dmin' '$dmax' '$tmax' '$fdispl' '$fbath' '$xmlout' '$stestpoints' '$output_dir
+all=$execname' '$nimpiadapt' '$dmin' '$dmax' '$tmax' '$tout' '$xmlout' '$sections' '$split' '$threads' '$courant' '$fdispl' '$fbath' '$stestpoints' '$output_dir
 
 # Start iMPI application with minimum resources (1 node)
 cpus_per_node=2
