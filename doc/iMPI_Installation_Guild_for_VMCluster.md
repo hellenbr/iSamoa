@@ -108,13 +108,20 @@ sudo service networking restart
 	* choose a file location
 	* disk size limit: 10GB
 
-##### When VM created, do NOT start it right away. Right-click on it, choose "Settings":
+##### When VM created, do NOT start it right away. Adjust its settings via command line:
+```bash
+vboxmanage modifyvm node0 --memory 2048 --cpus 2 --cpuexecutioncap 70 --accelerate3d off --accelerate2dvideo off --audio none --usb off --clipboard hosttoguest --hostonlyadapter1 vboxnet0 --cableconnected1 on --nic1 nat
+```
+Alternatively, one can also change the setting via GUI:
+
 * In **System** tab, set
 	* <span style="color:red">Processors: 2 CPUs</span> -----Very important!
 	* Execution Cap: 70%
 * In **Display** tab, disable 3D and 2D acceleration
 * In **Audio** tab, disable audio
 * In **Network** tab, use **NAT** network adapter for now (because we need Internet access to install some packages).
+
+
 
 <a name="node_prep_2"/>
 #### 2.2 Install OS and Packages on VM
@@ -213,34 +220,158 @@ Insert this line to **/etc/fstab**
 10.0.0.100:/path/to/nfs  /path/to/nfs   nfs   auto    0   0
 ```
 
+#### 3.5 Switch VM to host-only network
+Shut down VM, and run the following command to switch to host-only network
+```bash
+vboxmanage modifyvm node0 --nic1 hostonly
+```
+
+#### 3.6 Setup SSH authorized keys and bashrc
+
+1. Start VM, now check if the NFS shared folder is working. 
+
+2. Setup root account password.
+```bash
+sudo passwd
+```
+After entering sudo password for currently user, you will be prompt to enter password for root.
+
+3. Add the host's pubic key to both the root account, and current user account.
+```bash
+mkdir -p ~/.ssh
+touch ~/.ssh/authorized_keys
+cat path/to/hosts/id_rsa.pub >> ~/.ssh/authorized_keys
+```
+
+4. Add paths to **.bashrc** in both accounts (root and current user)
+```bash
+export NFSPATH=/path/to/nfs
+export IMPIPATH=$NFSPATH/ihpcins
+
+export PATH=$IMPIPATH/sbin:$PATH
+export PATH=$IMPIPATH/bin:$PATH
+export LD_LIBRARY_PATH=/usr/local/lib:$LD_LIBRARY_PATH
+export LD_LIBRARY_PATH=$IMPIPATH/lib:$LD_LIBRARY_PATH
+export CPPPATH=$IMPIPATH/include:$CPPPAT
+export SLURM_MPI_TYPE=pmi2
+```
 
 <a name="impi_ins"/>
 ## 4. VM Node iMPI Installation
 
 <a name="impi_ins_1"/>
-#### 4.1 Add paths to *.bashrc*
+#### 4.1 Install dependencies & munge
+
+Install dependencies in order:
+1) autoconf	---> install to $IMPIPATH
+2) automake	---> install to $IMPIPATH
+3) libtool	---> install to $IMPIPATH
+4) m4		---> install to $IMPIPATH
+5) munge	---> install to /usr/local (munge must be one instance per VM)
+
+For **autoconf**, **automake**, **libtool** and **m4**, do this:
+```bash
+tar xvzf \<package tar.gz ball\>
+cd \<package_dir\>
+./configure --prefix=$IMPIPATH
+make install
+```
+For **munge**, do this
+```bash
+tar xvjf \<package tar.bz2 ball\>
+cd \<package_dir\>
+./configure --prefix=/usr/local
+sudo make install
+```
+Create a **munge.key** file
+```bash
+sudo mkdir -p /usr/local/etc/munge
+sudo touch /usr/local/etc/munge/munge.key
+echo 'somenumberalphabetonlytextnospecialcharacters' | sudo tee -a /usr/local/etc/munge/munge.key
+```
+Test **munged**
+```bash
+munged -Ff
+```
 
 <a name="impi_ins_2"/>
-#### 4.2 Install dependencies & munge
+#### 4.2 Install iRM
+
+```bash
+cd /path/to/irm
+./autogen.sh
+
+cd /path/to/irm_build
+../irm/configure --prefix=$IMPIPATH --with-munge=/usr/local
+make install
+
+cd ./contribs/pmi2
+make install
+```
+
+Now copy **slurm.conf** file into **$IMPIPATH/etc**
+```bash
+cp /path/to/sample/slurm.conf $IMPIPATH/etc
+```
+<span style="color:red">Note1: Add boths root and current user to **slurm.conf** (also remove unnecessary users)</span>
+```no-highlight
+SlurmUser=\<current user\>
+SlurmUser=root
+SlurmdUser=\<current user\>
+SlurmdUser=root
+```
+<span style="color:red">Note2: Check the end of file, node layout should be consistent!! </span>
+
+
+Test **slurmd**
+```bash
+slurmd -Dvvvv
+```
 
 <a name="impi_ins_3"/>
-#### 4.3 Install iRM
+#### 4.3 Install iMPI
+
+```bash
+cd /path/to/impi
+./autogen.sh
+
+cd /path/to/impi_build
+../impi/configure --prefix=$IMPIPATH --with-slurm=$IMPIPATH --with-pmi=pmi2 --with-pm=no
+make install
+```
 
 <a name="impi_ins_4"/>
-#### 4.4 Install iMPI
+#### 4.4 Install iMPI Tests
+
+```bash
+cd /path/to/impitests
+./autogen.sh
+
+cd /path/to/impitests_build
+../impitests/configure --prefix=$IMPIPATH/tests
+make install
+```
+Note: if run into make error, open **config.status** and add the correct -I/path to **CPPFLAG** and -L/path to **LDFLAG**.
+
 
 <a name="impi_ins_5"/>
-#### 4.5 Install iMPI Tests
+#### 4.5 Install ASAGI
+
+```bash
+cd /path/to/asagi_build
+cmake -DCMAKE_INSTALL_PREFIX=$IMPIPATH -DCMAKE_PREFIX_PATH=$IMPIPATH -DNOMPI=ON ../asagi
+make install
+```
+Note: For iMPI to work, ASAGI must be compiled with no MPI
 
 <a name="impi_ins_6"/>
-#### 4.6 Install ASAGI
-
-<a name="impi_ins_7"/>
-#### 4.7 Install eSamoa
+#### 4.6 Install eSamoa
 
 
 
 <a name="dup_node"/>
 ## 5. Duplicate VM Node
 
-
+```bash
+vboxmanage clonevm node0 --name node1 --basefolder /work_fast/hellenbr/vms --register
+```
