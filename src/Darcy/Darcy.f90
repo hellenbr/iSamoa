@@ -433,12 +433,12 @@
 						grid_info%i_cells = grid%get_cells(MPI_SUM, .false.)
 						!$omp master
 #						if defined(_MPI)
-						_log_write(1, '(" Darcy Initialzation >>>> ", A, I0, A, I0, A, I0, A, F16.8, A, I0, A, I0)') 
+						_log_write(1, '(" Darcy Initialzation >>>> ", A, I0, A, I0, A, I0, A, F16.8, A, I0, A, I0)') &
 							"adaptions: ", i_initial_step, &
 							", coupling iters: ", i_nle_iterations, &
 							", linear iters: ", i_lse_iterations, &
 							", elapsed time (sec): ", mpi_wtime()-r_wall_time_tic, &
-							", cells: ", grid_info%i_cells &
+							", cells: ", grid_info%i_cells, &
 							", ranks: ", size_MPI
 #						else
 						_log_write(1, '(" Darcy Initialzation >>>> ", A, I0, A, I0, A, I0, A, I0)') 
@@ -561,7 +561,7 @@
 							", sim. time:", trim(time_to_hrt(grid%r_time)), &
 							", dt:", trim(time_to_hrt(grid%r_dt)), &
 							", coupling iters: ", i_nle_iterations, &
-							", linear iters: ", i_lse_iterations &
+							", linear iters: ", i_lse_iterations, &
 							", elapsed time (sec): ", mpi_wtime()-r_wall_time_tic, &
 							", cells: ", grid_info%i_cells, &
 							", ranks: ", size_MPI
@@ -571,8 +571,8 @@
 							", sim. time:", trim(time_to_hrt(grid%r_time)), &
 							", dt:", trim(time_to_hrt(grid%r_dt)), &
 							", coupling iters: ", i_nle_iterations, &
-							", linear iters: ", i_lse_iterations
-							", cells: ", grid_info%i_cells, &
+							", linear iters: ", i_lse_iterations, &
+							", cells: ", grid_info%i_cells
 #					endif
                     !$omp end master
                 end if
