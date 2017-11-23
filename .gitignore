@@ -1,8 +1,6 @@
 bin
 data
 output
-tags
 .sconsign.dblite
 *console.log
 .ipynb_checkpoints
-scripts/data_cf17/.ipynb_checkpoints
