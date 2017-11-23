@@ -1,8 +1,10 @@
 #!/bin/bash
 
-BASEPATH=$NFSPATH/esamoa
-DATAPATH=$NFSPATH/samoa-data
+BASEPATH=$IMPIPATH/../esamoa
+DATAPATH=$IMPIPATH/../samoa-data
 
+# Number of processes to start
+startprocs=2
 # The name of the executable
 execname=$BASEPATH/bin/darcy_mpi_release
 # iMPI adapt frequency (every N steps)
@@ -36,8 +38,6 @@ output_dir='-output_dir '$PWD
 # Put all options together
 all=$execname' '$nimpiadapt' '$dmax' '$tmax' '$tout' '$xmlout' '$sections' '$threads' '$courant' '$epsilon' '$srefth' '$prefth' '$fperm' '$fpor' '$output_dir
 
-# Start iMPI application with minimum resources (1 node)
-cpus_per_node=2
 
-srun -n $cpus_per_node $all > console.out
+srun -n $startprocs $all > console.out
 

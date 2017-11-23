@@ -1,7 +1,15 @@
 
-[Usage]: In Samoa root dir run
+[Usage]: In Samoa root dir, run
 
-$ scons config=path/config_file.py
+$ scons config=path/to/config_file.py
+
+or to override the values specified in config file, run
+
+$ scons config=path/to/config_file.py [parameter1=value] [parameter2=value] [...]
 
 
+E.g.,
 
+scons config=cmp/swe.py
+
+scons config=cmp/swe.py impi=True asagi_dir=$IMPIPATH
