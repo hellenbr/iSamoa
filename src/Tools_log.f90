@@ -22,10 +22,10 @@ module Tools_mpi
 
     public
 #   if defined(_IMPI)
-    integer             :: status_MPI = 0
+    integer             :: status_MPI = 0 !> For iMPI only
     ! This is ugly, but we need a place to store the measurement before the log file is created
-    real                :: mpi_init_adapt_time = 0.0
-#   endif
+    real                :: mpi_init_adapt_time = 0.0 !> For iMPI only
+#	endif 
 	integer 		    :: rank_MPI = 0
 	integer 		    :: size_MPI = 1
 	integer             :: ref_count_MPI = 0
@@ -107,6 +107,17 @@ module Tools_mpi
             end if
 #	    endif
     end subroutine
+
+	!> Convenient function to identify root
+	!  When iMPI is enabled, rank==0 is no longer a sufficient condition for root
+	logical function is_root()
+#		if defined(_IMPI)
+		is_root = ( (rank_MPI == 0) .and. &
+			((status_MPI == MPI_ADAPT_STATUS_NEW) .or. (status_MPI == MPI_ADAPT_STATUS_STAYING)) )
+#		else
+		is_root = (rank_MPI == 0)
+#   	endif
+	end function
 end module
 
 module Tools_openmp

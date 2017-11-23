@@ -44,7 +44,7 @@ MODULE SFC_traversal
 #	    elif defined(_TESTS)
 
 #	    elif defined(_DARCY)
-            type(t_darcy)                                                   :: darcy
+           type(t_darcy)                                                    :: darcy
 #	    elif defined(_SWE)
            type(t_swe)          											:: swe
 #	    elif defined(_FLASH)
@@ -77,7 +77,8 @@ MODULE SFC_traversal
             call init_grid(grid, cfg%i_start_depth)
 			call heat_eq_create(grid, cfg%l_log, cfg%i_asagi_mode)
 
-			!$omp parallel copyin(cfg)
+			!$omp parallel copyin(cfg):q
+			!
 			call heat_eq_run(grid, cfg%i_start_depth)
             call grid%destroy()
 			!$omp end parallel

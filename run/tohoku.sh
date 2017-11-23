@@ -12,7 +12,7 @@ nimpiadapt='-nimpiadapt 50'
 # Grid minimum depth
 dmin='-dmin 8'
 # Grid maximum depth
-dmax='-dmax 23'
+dmax='-dmax 21'
 # Simulation time in seconds (normally 3 hrs)
 tmax='-tmax 10800'
 # VTK output frequency (every N seconds)
