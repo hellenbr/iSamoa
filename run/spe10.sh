@@ -8,9 +8,9 @@ startprocs=2
 # The name of the executable
 execname=$BASEPATH/bin/darcy_impi_release
 # iMPI adapt frequency (every N steps)
-nimpiadapt='-nimpiadapt 20'
+nimpiadapt='-nimpiadapt 10'
 # Grid maximum depth (14)
-dmax='-dmax 12'
+dmax='-dmax 11'
 # Simulation time in seconds (normally 3 hrs)
 tmax='-tmax 172.8e6'
 # VTK output frequency (every N seconds)

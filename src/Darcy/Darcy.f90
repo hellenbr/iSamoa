@@ -640,35 +640,35 @@
                     t_phase = t_phase + get_wtime()
 
                     do i = 1, size(reduction_ops)
-#                   if defined(_IMPI)
-                    ! JOINGING ranks will call this function to initialize their stats, but
-                    ! we don't them to do global MPI reduction
-                    if (status_MPI .ne. MPI_ADAPT_STATUS_JOINING) then
-#                   endif
-                        call darcy%init_saturation%reduce_stats(reduction_ops(i), .true.)
-                        call darcy%transport_eq%reduce_stats(reduction_ops(i), .true.)
-                        call darcy%grad_p%reduce_stats(reduction_ops(i), .true.)
-                        call darcy%permeability%reduce_stats(reduction_ops(i), .true.)
-                        call darcy%error_estimate%reduce_stats(reduction_ops(i), .true.)
-                        call darcy%adaption%reduce_stats(reduction_ops(i), .true.)
-                        call darcy%pressure_solver%reduce_stats(reduction_ops(i), .true.)
-                        call grid%reduce_stats(reduction_ops(i), .true.)
-                        call grid_info%reduce(grid%threads%elements(:)%info, reduction_ops(i), .true.)
-#                   if defined(_IMPI)
-                    else
-                        call darcy%init_saturation%reduce_stats(reduction_ops(i), .false.)
-                        call darcy%transport_eq%reduce_stats(reduction_ops(i), .false.)
-                        call darcy%grad_p%reduce_stats(reduction_ops(i), .false.)
-                        call darcy%permeability%reduce_stats(reduction_ops(i), .false.)
-                        call darcy%error_estimate%reduce_stats(reduction_ops(i), .false.)
-                        call darcy%adaption%reduce_stats(reduction_ops(i), .false.)
-                        call darcy%pressure_solver%reduce_stats(reduction_ops(i), .false.)
-                        call grid%reduce_stats(reduction_ops(i), .false.)
-                        call grid_info%reduce(grid%threads%elements(:)%info, reduction_ops(i), .false.)
-                    end if
-#                   endif
+#                   	if defined(_IMPI)
+						! JOINGING ranks will call this function to initialize their stats, but
+						! we don't them to do global MPI reduction
+						if (status_MPI .ne. MPI_ADAPT_STATUS_JOINING) then
+#                   	endif
+							call darcy%init_saturation%reduce_stats(reduction_ops(i), .true.)
+							call darcy%transport_eq%reduce_stats(reduction_ops(i), .true.)
+							call darcy%grad_p%reduce_stats(reduction_ops(i), .true.)
+							call darcy%permeability%reduce_stats(reduction_ops(i), .true.)
+							call darcy%error_estimate%reduce_stats(reduction_ops(i), .true.)
+							call darcy%adaption%reduce_stats(reduction_ops(i), .true.)
+							call darcy%pressure_solver%reduce_stats(reduction_ops(i), .true.)
+							call grid%reduce_stats(reduction_ops(i), .true.)
+							call grid_info%reduce(grid%threads%elements(:)%info, reduction_ops(i), .true.)
+#                   	if defined(_IMPI)
+						else
+							call darcy%init_saturation%reduce_stats(reduction_ops(i), .false.)
+							call darcy%transport_eq%reduce_stats(reduction_ops(i), .false.)
+							call darcy%grad_p%reduce_stats(reduction_ops(i), .false.)
+							call darcy%permeability%reduce_stats(reduction_ops(i), .false.)
+							call darcy%error_estimate%reduce_stats(reduction_ops(i), .false.)
+							call darcy%adaption%reduce_stats(reduction_ops(i), .false.)
+							call darcy%pressure_solver%reduce_stats(reduction_ops(i), .false.)
+							call grid%reduce_stats(reduction_ops(i), .false.)
+							call grid_info%reduce(grid%threads%elements(:)%info, reduction_ops(i), .false.)
+						end if
+#                   	endif
 
-                        if (rank_MPI == 0) then
+                        if (is_root()) then
                             _log_write(0, '()')
                             _log_write(0, '("Phase statistics: ")')
                             _log_write(0, '()')
@@ -719,20 +719,29 @@
             type(t_impi_bcast) :: bcast_buff
             character(len=256) :: s_log_name
 
+			if (is_root()) then; _log_write(1, '("##### TAG 0 #####")'); end if
+
             tic = mpi_wtime()
             call mpi_probe_adapt(adapt_flag, status_MPI, info, err); assert_eq(err, 0)
             toc = mpi_wtime() - tic
 
             if (is_root()) then
+            _log_write(1, '(" ")')
             _log_write(1, '("iMPI: probe_adapt", F16.8, " sec")') toc
+            _log_write(1, '(" ")')
             end if
 
             if (adapt_flag == MPI_ADAPT_TRUE) then
+
+				if (is_root()) then; _log_write(1, '("##### TAG 1 #####")'); end if
+
                 ! Print out statistics for the last period before applying resource change
                 ! this involved MPI reduce on all pre-existing ranks
                 if (status_MPI .ne. MPI_ADAPT_STATUS_JOINING) then
                     call update_stats(darcy, grid)
                 end if
+
+				if (is_root()) then; _log_write(1, '("##### TAG 2 #####")'); end if
 
                 ticall = mpi_wtime()
 
@@ -740,6 +749,8 @@
                 call mpi_comm_adapt_begin(INTER_COMM, NEW_COMM, &
                         staying_count, leaving_count, joining_count, err); assert_eq(err, 0)
                 toc = MPI_Wtime() - tic
+
+				if (is_root()) then; _log_write(1, '("##### TAG 3 #####")'); end if
 
                 if (is_root()) then
                 _log_write(1, '("iMPI: adapt_begin ", F16.8, " sec, staying ", I0, ", leaving ", I0, ", joining ", I0)') &
@@ -749,31 +760,59 @@
                 !************************ ADAPT WINDOW ****************************
                 !(1) LEAVING ranks transfer data to STAYING ranks
                 if (leaving_count > 0) then
+
+					if (is_root()) then; _log_write(1, '("##### TAG 4 #####")'); end if
+
                     call distribute_load_for_resource_reduction(grid, size_MPI, leaving_count, rank_MPI)
+
+					if (is_root()) then; _log_write(1, '("##### TAG 5 #####")'); end if
+
                 end if
 
                 !(2) JOINING ranks get necessary data from MASTER
                 !    The use of NEW_COMM must exclude LEAVING ranks, because they have NEW_COMM == MPI_COMM_NULL
                 if ((joining_count > 0) .and. (status_MPI .ne. MPI_ADAPT_STATUS_LEAVING)) then
+
+					if (is_root()) then; _log_write(1, '("##### TAG 6 #####")'); end if
+
                     bcast_buff = t_impi_bcast( grid%sections%is_forward(), &
                             i_stats_phase, i_initial_step, i_time_step, darcy%xml_output%i_output_iteration, &
                             r_time_next_output, grid%r_time, grid%r_dt, grid%u_max)
+
+					if (is_root()) then; _log_write(1, '("##### TAG 7 #####")'); end if
+
                     call mpi_bcast(bcast_buff, sizeof(bcast_buff), MPI_BYTE, 0, NEW_COMM, err); assert_eq(err, 0)
+
+					if (is_root()) then; _log_write(1, '("##### TAG 8 #####")'); end if
+
                     call mpi_bcast(darcy%xml_output%s_file_stamp, len(darcy%xml_output%s_file_stamp), MPI_CHARACTER, 0, NEW_COMM, err); assert_eq(err, 0)
+
+					if (is_root()) then; _log_write(1, '("##### TAG 9 #####")'); end if
+
                 end if
 
                 !(3) JOINING ranks initialize
                 if (status_MPI .eq. MPI_ADAPT_STATUS_JOINING) then
+
+					if (is_root()) then; _log_write(1, '("##### TAG 10 #####")'); end if
+
                     call grid%destroy()
                     call grid%sections%resize(0)
                     call grid%threads%resize(omp_get_max_threads())
 
                     call update_stats(darcy, grid) ! Initialize grid statistics
 
+					if (is_root()) then; _log_write(1, '("##### TAG 11 #####")'); end if
+
                     !reverse grid if it is the case
                     if (bcast_buff%is_forward .neqv. grid%sections%is_forward()) then
                         call grid%reverse()  !this will set the grid%sections%forward flag properly
+
+						if (is_root()) then; _log_write(1, '("##### TAG 12 #####")'); end if
+
                     end if
+
+					if (is_root()) then; _log_write(1, '("##### TAG 13 #####")'); end if
 
                     i_stats_phase      = bcast_buff%i_stats_phase
                     i_initial_step     = bcast_buff%i_initial_step
@@ -783,28 +822,45 @@
                     grid%r_dt          = bcast_buff%r_dt
                     grid%u_max         = bcast_buff%u_max
 
+					if (is_root()) then; _log_write(1, '("##### TAG 14 #####")'); end if
+
                     darcy%xml_output%i_output_iteration  = bcast_buff%i_output_iteration
                     darcy%well_output%i_output_iteration = bcast_buff%i_output_iteration
                     darcy%lse_output%i_output_iteration  = bcast_buff%i_output_iteration
 
                     darcy%well_output%s_file_stamp       = darcy%xml_output%s_file_stamp
 
+					if (is_root()) then; _log_write(1, '("##### TAG 15 #####")'); end if
+
                     s_log_name = trim(darcy%xml_output%s_file_stamp) // ".log"
                     if (cfg%l_log) then
                         _log_open_file(s_log_name)
+
+						if (is_root()) then; _log_write(1, '("##### TAG 16 #####")'); end if
+
                     end if
                 end if
 
                 !(4) LEAVING ranks clean up: deallocate, close files, etc.
                 if (status_MPI .eq. MPI_ADAPT_STATUS_LEAVING) then
+
+					if (is_root()) then; _log_write(1, '("##### TAG 17 #####")'); end if
+
                     call grid%destroy()
                     call darcy%destroy(grid, cfg%l_log)
+
+					if (is_root()) then; _log_write(1, '("##### TAG 18 #####")'); end if
+
                 end if
                 !************************ ADAPT WINDOW ****************************
+
+				if (is_root()) then; _log_write(1, '("##### TAG 19 #####")'); end if
 
                 tic = mpi_wtime();
                 call mpi_comm_adapt_commit(err); assert_eq(err, 0)
                 toc = mpi_wtime() - tic;
+
+				if (is_root()) then; _log_write(1, '("##### TAG 20 #####")'); end if
 
                 if (is_root()) then
                 _log_write(1, '("iMPI: adapt_commit ", F16.8, " sec")') toc
@@ -815,10 +871,13 @@
                 call mpi_comm_size(MPI_COMM_WORLD, size_MPI, err); assert_eq(err, 0)
                 call mpi_comm_rank(MPI_COMM_WORLD, rank_MPI, err); assert_eq(err, 0)
 
+				if (is_root()) then; _log_write(1, '("##### TAG 21 #####")'); end if
+
                 tocall = mpi_wtime() - ticall;
 
                 if (is_root()) then
                 _log_write(1, '("iMPI: Total adaptation time = ", F16.8, " sec")') tocall
+				_log_write(1, '(" ")')
                 end if
             end if
 #           endif
