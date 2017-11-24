@@ -6,11 +6,11 @@ DATAPATH=$IMPIPATH/../samoa-data
 # Number of processes to start
 startprocs=2
 # The name of the executable
-execname=$BASEPATH/bin/darcy_mpi_release
+execname=$BASEPATH/bin/darcy_impi_release
 # iMPI adapt frequency (every N steps)
-nimpiadapt='-nimpiadapt 50'
-# Grid maximum depth
-dmax='-dmax 14'
+nimpiadapt='-nimpiadapt 20'
+# Grid maximum depth (14)
+dmax='-dmax 12'
 # Simulation time in seconds (normally 3 hrs)
 tmax='-tmax 172.8e6'
 # VTK output frequency (every N seconds)

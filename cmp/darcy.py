@@ -1,5 +1,5 @@
 #Executable name
-exe='darcy_mpi_release'
+exe='darcy_impi_release'
 #Scenario settings
 scenario='darcy'
 target='release'
@@ -11,7 +11,7 @@ assertions=True
 compiler='gnu'
 openmp='noomp'
 mpi='default'
-impi=False
+impi=True
 #Asagi setting
 asagi=True
 asagi_dir='/media/data/emily/workspace/ihpcins'

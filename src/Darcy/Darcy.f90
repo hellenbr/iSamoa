@@ -52,7 +52,15 @@
 
 #		if defined(_IMPI)
 		type t_impi_bcast
-			!TODO
+			logical                :: is_forward       ! MPI_LOGICAL x1
+            integer (kind=GRID_SI) :: i_stats_phase    ! MPI_INTEGER4 x4
+            integer (kind=GRID_SI) :: i_initial_step
+            integer (kind=GRID_SI) :: i_time_step
+            integer (kind=GRID_SI) :: i_output_iteration
+            real (kind=GRID_SR)    :: r_time_next_output  ! MPI_DOUBLE_PRECISION x4
+            real (kind=GRID_SR)    :: r_time
+            real (kind=GRID_SR)    :: r_dt
+            real (kind=GRID_SR)    :: u_max
 		end type t_impi_bcast
 #		endif
 
@@ -401,7 +409,7 @@
 					!$omp master
 #                   if defined(_IMPI)
                     _log_write(0, *) " "
-                    _log_write(1, '("Rank ", I0, " (", I0, "): init_adapt ", F16.8, " sec")') &
+                    _log_write(1, '("Rank ", I0, " (", I0, "): init_adapt ", F12.4, " sec")') &
                             rank_MPI, status_MPI, mpi_init_adapt_time
 #                   endif
                     _log_write(0, *) " "
@@ -433,7 +441,7 @@
 						grid_info%i_cells = grid%get_cells(MPI_SUM, .false.)
 						!$omp master
 #						if defined(_MPI)
-						_log_write(1, '(" Darcy Initialzation >>>> ", A, I0, A, I0, A, I0, A, F16.8, A, I0, A, I0)') &
+						_log_write(1, '(" Darcy Initialzation >>>> ", A, I0, A, I0, A, I0, A, F12.4, A, I0, A, I0)') &
 							"adaptions: ", i_initial_step, &
 							", coupling iters: ", i_nle_iterations, &
 							", linear iters: ", i_lse_iterations, &
@@ -514,7 +522,7 @@
 #           if defined(_IMPI)
             else
                 ! JOINING ranks call impi_adapt immediately, avoiding initialization and earthquake phase
-                call impi_adapt(...) !TODO
+				call impi_adapt(darcy, grid, i_stats_phase, i_initial_step, i_time_step, r_time_next_output)
             end if
 #           endif
 
@@ -556,7 +564,7 @@
                     grid_info%i_cells = grid%get_cells(MPI_SUM, .false.)
                     !$omp master
 #					if defined(_MPI)
-                    _log_write(1, '(" Darcy Simulation >>>> ", A, I0, A, A, A, A, A, I0, A, I0, A, F16.8, A, I0, A, I0)') &
+                    _log_write(1, '(" Darcy Simulation >>>> ", A, I0, A, A, A, A, A, I0, A, I0, A, F12.4, A, I0, A, I0)') &
 							"time step: ", i_time_step, &
 							", sim. time:", trim(time_to_hrt(grid%r_time)), &
 							", dt:", trim(time_to_hrt(grid%r_dt)), &
@@ -603,7 +611,7 @@
 #               if defined(_IMPI)
                 !Existing ranks call impi_adapt
                 if (cfg%i_impi_adapt_time_steps > 0 .and. mod(i_time_step, cfg%i_impi_adapt_time_steps) == 0) then
-                    call impi_adapt(...) !TODO
+					call impi_adapt(darcy, grid, i_stats_phase, i_initial_step, i_time_step, r_time_next_output)
                 end if
 #               endif
 			end do
@@ -650,7 +658,7 @@
                     else
                         call darcy%init_saturation%reduce_stats(reduction_ops(i), .false.)
                         call darcy%transport_eq%reduce_stats(reduction_ops(i), .false.)
-                        call darcy%grad_p%reduce_stats(reduction_ops(i), ..)
+                        call darcy%grad_p%reduce_stats(reduction_ops(i), .false.)
                         call darcy%permeability%reduce_stats(reduction_ops(i), .false.)
                         call darcy%error_estimate%reduce_stats(reduction_ops(i), .false.)
                         call darcy%adaption%reduce_stats(reduction_ops(i), .false.)
@@ -707,7 +715,7 @@
             integer :: adapt_flag, NEW_COMM, INTER_COMM
             integer :: staying_count, leaving_count, joining_count
             integer :: info, status, err
-            real (kind=GRID_SR) :: tic, toc, tic1, toc1
+            real (kind=GRID_SR) :: tic, toc, ticall, tocall
             type(t_impi_bcast) :: bcast_buff
             character(len=256) :: s_log_name
 
@@ -716,8 +724,7 @@
             toc = mpi_wtime() - tic
 
             if (is_root()) then
-            _log_write(1, '("iMPI: probe_adapt", F16.8, " sec")') &
-                    rank_MPI, status_MPI, toc
+            _log_write(1, '("iMPI: probe_adapt", F16.8, " sec")') toc
             end if
 
             if (adapt_flag == MPI_ADAPT_TRUE) then
@@ -727,7 +734,7 @@
                     call update_stats(darcy, grid)
                 end if
 
-                tic1 = mpi_wtime()
+                ticall = mpi_wtime()
 
                 tic = mpi_wtime()
                 call mpi_comm_adapt_begin(INTER_COMM, NEW_COMM, &
@@ -736,7 +743,7 @@
 
                 if (is_root()) then
                 _log_write(1, '("iMPI: adapt_begin ", F16.8, " sec, staying ", I0, ", leaving ", I0, ", joining ", I0)') &
-                        rank_MPI, status_MPI, toc, staying_count, leaving_count, joining_count
+                        toc, staying_count, leaving_count, joining_count
                 end if
 
                 !************************ ADAPT WINDOW ****************************
@@ -750,7 +757,7 @@
                 if ((joining_count > 0) .and. (status_MPI .ne. MPI_ADAPT_STATUS_LEAVING)) then
                     bcast_buff = t_impi_bcast( grid%sections%is_forward(), &
                             i_stats_phase, i_initial_step, i_time_step, darcy%xml_output%i_output_iteration, &
-                            r_time_next_output, grid%r_time, grid%r_dt, grid%r_dt_new)
+                            r_time_next_output, grid%r_time, grid%r_dt, grid%u_max)
                     call mpi_bcast(bcast_buff, sizeof(bcast_buff), MPI_BYTE, 0, NEW_COMM, err); assert_eq(err, 0)
                     call mpi_bcast(darcy%xml_output%s_file_stamp, len(darcy%xml_output%s_file_stamp), MPI_CHARACTER, 0, NEW_COMM, err); assert_eq(err, 0)
                 end if
@@ -774,7 +781,7 @@
                     r_time_next_output = bcast_buff%r_time_next_output
                     grid%r_time        = bcast_buff%r_time
                     grid%r_dt          = bcast_buff%r_dt
-                    grid%r_dt_new      = bcast_buff%r_dt_new
+                    grid%u_max         = bcast_buff%u_max
 
                     darcy%xml_output%i_output_iteration  = bcast_buff%i_output_iteration
                     darcy%well_output%i_output_iteration = bcast_buff%i_output_iteration
@@ -800,8 +807,7 @@
                 toc = mpi_wtime() - tic;
 
                 if (is_root()) then
-                _log_write(1, '("iMPI: adapt_commit ", F16.8, " sec")') &
-                        rank_MPI, status_MPI, toc
+                _log_write(1, '("iMPI: adapt_commit ", F16.8, " sec")') toc
                 end if
 
                 ! Update status, size, rank after commit
@@ -809,11 +815,10 @@
                 call mpi_comm_size(MPI_COMM_WORLD, size_MPI, err); assert_eq(err, 0)
                 call mpi_comm_rank(MPI_COMM_WORLD, rank_MPI, err); assert_eq(err, 0)
 
-                toc1 = mpi_wtime() - tic1;
+                tocall = mpi_wtime() - ticall;
 
                 if (is_root()) then
-                _log_write(1, '("iMPI: Total adaptation time = ", F16.8, " sec")') &
-                        rank_MPI, status_MPI, toc1
+                _log_write(1, '("iMPI: Total adaptation time = ", F16.8, " sec")') tocall
                 end if
             end if
 #           endif

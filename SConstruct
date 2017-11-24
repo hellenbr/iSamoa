@@ -142,10 +142,13 @@ elif  env['compiler'] == 'gnu':
   env.SetDefault(openmp = 'notasks')
 
 # If IMPI is active, MPI is forced to be active and use MPICH default
+# iMPI available scenarios
+IMPI_SCENARIOS = ['swe', 'darcy']
 if env['impi']:
-    if (env['scenario'] == 'swe'):
+    if (env['scenario'] in IMPI_SCENARIOS):
         env['mpi'] = 'default'
         env['F90FLAGS'] += ' -D_IMPI'
+        print "iMPI activated for selected scenario " + env['scenario']
     else:
         print "Selected scenario has no iMPI supported. iMPI option deactivated."
 
