@@ -65,7 +65,7 @@
 			type(t_grid), intent(inout)							        :: grid
 
             if (rank_MPI == 0) then
-                _log_write(1, '(A, I0)') " SWE: output step: ", traversal%i_output_iteration
+                _log_write(1, '(A, I0)') "  SWE OUTPUT: ", traversal%i_output_iteration
             end if
 
             call scatter(traversal%s_file_stamp, traversal%sections%s_file_stamp)

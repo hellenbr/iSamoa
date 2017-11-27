@@ -1,6 +1,8 @@
 bin
 data
 output
+core
+tags
 .sconsign.dblite
 *console.log
 .ipynb_checkpoints

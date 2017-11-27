@@ -10,6 +10,7 @@ compiler='gnu'
 openmp='noomp'
 mpi='default'
 impi=True
+impinodes=True
 #Asagi setting
 asagi=True
 asagi_dir='/media/data/emily/workspace/ihpcins'

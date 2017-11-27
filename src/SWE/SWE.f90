@@ -44,7 +44,7 @@
         end type
 
 #       if defined(_IMPI)
-        type t_impi_bcast
+        type t_swe_impi_bcast
             logical                :: is_forward       ! MPI_LOGICAL x1
             integer (kind=GRID_SI) :: i_stats_phase    ! MPI_INTEGER4 x4
             integer (kind=GRID_SI) :: i_initial_step
@@ -54,7 +54,7 @@
             real (kind=GRID_SR)    :: r_time
             real (kind=GRID_SR)    :: r_dt
             real (kind=GRID_SR)    :: r_dt_new
-        end type t_impi_bcast
+        end type t_swe_impi_bcast
 #       endif
 
 		contains
@@ -255,13 +255,12 @@
                 if (is_root()) then
                     !$omp master
 #                   if defined(_IMPI)
-                    _log_write(0, *) " "
-                    _log_write(1, '("Rank ", I0, " (", I0, "): init_adapt ", F16.8, " sec")') &
-                            rank_MPI, status_MPI, mpi_init_adapt_time
+                    _log_write(0, '()')
+                    _log_write(0, '("iMPI: init_adapt ", F12.6, " sec")') mpi_init_adapt_time
 #                   endif
-                    _log_write(0, *) " "
-                    _log_write(0, *) "SWE: setting initial values and a priori refinement.."
-                    _log_write(0, *) " "
+                    _log_write(0, '()')
+                    _log_write(0, '(A)') "  SWE: setting initial values and a priori refinement.."
+                    _log_write(0, '()')
                     !$omp end master
                 end if
 
@@ -282,15 +281,15 @@
                         grid_info%i_cells = grid%get_cells(MPI_SUM, .false.)
                         !$omp master
 #                       if defined(_MPI)
-                        _log_write(1, '(" SWE Initialization >>> ", A, I0, A, F16.8, A, I0, A, I0)') &
-                                "adaption: ", i_initial_step, &
-                                ", elapsed time (sec): ", mpi_wtime()-r_wall_time_tic, &
-                                ", cells: ", grid_info%i_cells, &
-                                ", ranks: ", size_MPI
+                        _log_write(1, '("  SWE Init: ", A, I0, A, F10.2, A, I0, A, I0)') &
+                                "adaption ", i_initial_step, &
+                                " | elap.time (sec) ", mpi_wtime()-r_wall_time_tic, &
+                                " | cells ", grid_info%i_cells, &
+                                " | ranks ", size_MPI
 #                       else
-                        _log_write(1, '(" SWE Initialization >>> ", A, I0, A, I0)') &
-                                "adaption: ", i_initial_step, &
-                                ", cells: ", grid_info%i_cells, &
+                        _log_write(1, '("  SWE Init: ", A, I0, A, I0)') &
+                                "adaption ", i_initial_step, &
+                                " | cells ", grid_info%i_cells
 #                       endif
                         !$omp end master
                     end if
@@ -327,8 +326,8 @@
 
                 if (is_root()) then
                     !$omp master
-                    _log_write(0, *) "SWE: done."
-                    _log_write(0, *) " "
+					_log_write(0, '(A)') "  SWE Init: DONE."
+                    _log_write(0, '()')
 
                     call grid_info%print()
                     !$omp end master
@@ -363,8 +362,8 @@
                 call grid%reduce_stats(MPI_SUM, .true.)
 
                 if (is_root()) then
-                    _log_write(0, *) "SWE: running time steps.."
-                    _log_write(0, *) " "
+                    _log_write(0, '(A)') "  SWE: running time steps.."
+                    _log_write(0, '()')
                 end if
                 !$omp end master
 
@@ -373,7 +372,8 @@
 #               if defined(_ASAGI)
                 !===== Load Earthquake Displacement Data =====
                 do
-                    if ((cfg%r_max_time >= 0.0 .and. grid%r_time >= cfg%r_max_time) .or. (cfg%i_max_time_steps >= 0 .and. i_time_step >= cfg%i_max_time_steps)) then
+                    if ((cfg%r_max_time >= 0.0 .and. grid%r_time >= cfg%r_max_time) .or. &
+							(cfg%i_max_time_steps >= 0 .and. i_time_step >= cfg%i_max_time_steps)) then
                         exit
                     end if
 
@@ -398,19 +398,19 @@
                         grid_info%i_cells = grid%get_cells(MPI_SUM, .false.)
                         !$omp master
 #                       if defined(_MPI)
-                        _log_write(1, '(" SWE Earthquake >>> ", A, I0, A, A, A, A, A, F16.8, A, I0, A, I0)') &
-                                "time step: ", i_time_step, &
-                                ", sim. time:", trim(time_to_hrt(grid%r_time)), &
-                                ", dt:", trim(time_to_hrt(grid%r_dt)), &
-                                ", elapsed time (sec): ", mpi_wtime()-r_wall_time_tic, &
-                                ", cells: ", grid_info%i_cells, &
-                                ", ranks: ", size_MPI
+                        _log_write(1, '("  SWE Earthquake: ", A, A, A, A, A, F10.2, A, I0, A, I0, A, I0)') &
+                                "dt ", trim(time_to_hrt(grid%r_dt)), &
+                                " | sim.time ", trim(time_to_hrt(grid%r_time)), &
+                                " | elap.time(sec) ", mpi_wtime()-r_wall_time_tic, &
+                                " | time step ", i_time_step, &
+                                " | cells ", grid_info%i_cells, &
+                                " | ranks ", size_MPI
 #                       else
-                        _log_write(1, '(" SWE Earthquake >>> ", A, I0, A, A, A, A, A, I0)') &
-                                "time step: ", i_time_step, &
-                                ", sim. time:", trim(time_to_hrt(grid%r_time)), &
-                                ", dt:", trim(time_to_hrt(grid%r_dt)), &
-                                ", cells: ", grid_info%i_cells
+                        _log_write(1, '("  SWE Earthquake: ", A, A, A, A, A, I0, A, I0)') &
+                                "dt ", trim(time_to_hrt(grid%r_dt)), &
+                                " | sim.time ", trim(time_to_hrt(grid%r_time)), &
+                                " | time step ", i_time_step, &
+                                " | cells ", grid_info%i_cells
 #                       endif
                         !$omp end master
                     end if
@@ -463,9 +463,7 @@
                     grid_info_max = grid%get_info(MPI_MAX, .true.)
                     !$omp master
                     if (is_root()) then
-                        _log_write(0, '(" SWE: done.")')
-                        _log_write(0, '()')
-                        _log_write(0, '("  Cells: avg: ", I0, " max: ", I0)') &
+						_log_write(0, '("  SWE Tsunami DONE: cells avg ", I0, " | cells max ", I0)') &
                                 grid_info%i_cells / (omp_get_max_threads() * size_MPI), grid_info_max%i_cells
                         _log_write(0, '()')
 
@@ -492,19 +490,19 @@
                     grid_info%i_cells = grid%get_cells(MPI_SUM, .false.)
                     !$omp master
 #                   if defined(_MPI)
-                    _log_write(1, '(" SWE Tsunami >>> ", A, I0, A, A, A, A, A, F16.8, A, I0, A, I0)') &
-                            "time step: ", i_time_step, &
-                            ", sim. time:", trim(time_to_hrt(grid%r_time)), &
-                            ", dt:", trim(time_to_hrt(grid%r_dt)), &
-                            ", elapsed time (sec): ", mpi_wtime()-r_wall_time_tic, &
-                            ", cells: ", grid_info%i_cells, &
-                            ", ranks: ", size_MPI
+                    _log_write(1, '("  SWE Tsunami: ", A, A, A, A, A, F10.2, A, I0, A, I0, A, I0)') &
+                            "dt ", trim(time_to_hrt(grid%r_dt)), &
+                            " | sim.time ", trim(time_to_hrt(grid%r_time)), &
+                            " | elap.time(sec) ", mpi_wtime()-r_wall_time_tic, &
+                            " | time step ", i_time_step, &
+                            " | cells ", grid_info%i_cells, &
+                            " | ranks ", size_MPI
 #                   else
-                    _log_write(1, '(" SWE Tsunami >>> ", A, I0, A, A, A, A, A, I0)') &
-                            "time step: ", i_time_step, &
-                            ", sim. time:", trim(time_to_hrt(grid%r_time)), &
-                            ", dt:", trim(time_to_hrt(grid%r_dt)), &
-                            ", cells: ", grid_info%i_cells
+                    _log_write(1, '("  SWE Tsunami: ", A, A, A, A, A, I0, A, I0)') &
+                            "dt ", trim(time_to_hrt(grid%r_dt)), &
+                            " | sim.time ", trim(time_to_hrt(grid%r_time)), &
+                            " | time step ", i_time_step, &
+                            " | cells ", grid_info%i_cells
 #                   endif
                     !$omp end master
                 end if
@@ -524,7 +522,11 @@
                     if (cfg%l_pointoutput) then
                         call swe%point_output%traverse(grid)
                     end if
-
+#					if defined(_IMPI_PRINT_NODES)
+					! print nodes for every output step (this requires MPI_Gather)
+					call write_nodes()
+#					endif
+					! update output time
 					r_time_next_output = r_time_next_output + cfg%r_output_time_step
 				end if
 
@@ -577,22 +579,24 @@
 #                   endif
 
                     if (is_root()) then
-                        _log_write(0, *) " "
-                        _log_write(0, *) "Phase statistics:"
-                        _log_write(0, *) " "
-                        _log_write(0, '(A, T30, I0)') " Num ranks: ", size_MPI
-                        _log_write(0, '(A, T30, A)') " Init: ", trim(swe%init_dofs%stats%to_string())
-                        _log_write(0, '(A, T30, A)') " Displace: ", trim(swe%displace%stats%to_string())
-                        _log_write(0, '(A, T30, A)') " Time steps: ", trim(swe%euler%stats%to_string())
-                        _log_write(0, '(A, T30, A)') " Adaptions: ", trim(swe%adaption%stats%to_string())
-                        _log_write(0, '(A, T30, A)') " Grid: ", trim(grid%stats%to_string())
-                        _log_write(0, '(A, T30, F12.4, A)') " Element throughput: ", 1.0d-6 * dble(grid%stats%get_counter(traversed_cells)) / t_phase, " M/s"
-                        _log_write(0, '(A, T30, F12.4, A)') " Memory throughput: ", dble(grid%stats%get_counter(traversed_memory)) / ((1024 * 1024 * 1024) * t_phase), " GB/s"
-                        _log_write(0, '(A, T30, F12.4, A)') " Cell update throughput: ", 1.0d-6 * dble(swe%euler%stats%get_counter(traversed_cells)) / t_phase, " M/s"
-                        _log_write(0, '(A, T30, F12.4, A)') " Flux solver throughput: ", 1.0d-6 * dble(swe%euler%stats%get_counter(traversed_edges)) / t_phase, " M/s"
-                        _log_write(0, '(A, T30, F12.4, A)') " Asagi time:", grid%stats%get_time(asagi_time), " s"
-                        _log_write(0, '(A, T30, F12.4, A)') " Phase time:", t_phase, " s"
-                        _log_write(0, *) " "
+						_log_write(0, '()')
+                        _log_write(0, '(A)') "-------------------------"
+                        _log_write(0, '(A)') "Phase statistics:"
+                        _log_write(0, '(A)') "-------------------------"
+                        _log_write(0, '(A, T30, I0)') "Num ranks: ", size_MPI
+                        _log_write(0, '(A, T30, A)') "Init: ", trim(swe%init_dofs%stats%to_string())
+                        _log_write(0, '(A, T30, A)') "Displace: ", trim(swe%displace%stats%to_string())
+                        _log_write(0, '(A, T30, A)') "Time steps: ", trim(swe%euler%stats%to_string())
+                        _log_write(0, '(A, T30, A)') "Adaptions: ", trim(swe%adaption%stats%to_string())
+                        _log_write(0, '(A, T30, A)') "Grid: ", trim(grid%stats%to_string())
+                        _log_write(0, '(A, T30, F12.4, A)') "Element throughput: ", 1.0d-6 * dble(grid%stats%get_counter(traversed_cells)) / t_phase, " M/s"
+                        _log_write(0, '(A, T30, F12.4, A)') "Memory throughput: ", dble(grid%stats%get_counter(traversed_memory)) / ((1024 * 1024 * 1024) * t_phase), " GB/s"
+                        _log_write(0, '(A, T30, F12.4, A)') "Cell update throughput: ", 1.0d-6 * dble(swe%euler%stats%get_counter(traversed_cells)) / t_phase, " M/s"
+                        _log_write(0, '(A, T30, F12.4, A)') "Flux solver throughput: ", 1.0d-6 * dble(swe%euler%stats%get_counter(traversed_edges)) / t_phase, " M/s"
+                        _log_write(0, '(A, T30, F12.4, A)') "Asagi time:", grid%stats%get_time(asagi_time), " s"
+                        _log_write(0, '(A, T30, F12.4, A)') "Phase time:", t_phase, " s"
+                        _log_write(0, '(A)') "-------------------------"
+						_log_write(0, '()')
                     end if
                 end if
 
@@ -616,17 +620,16 @@
             integer :: adapt_flag, NEW_COMM, INTER_COMM
             integer :: staying_count, leaving_count, joining_count
             integer :: info, status, err
-            real (kind=GRID_SR) :: tic, toc, tic1, toc1
-            type(t_impi_bcast) :: bcast_buff
+            real (kind=GRID_SR) :: tic, ticall
+            type(t_swe_impi_bcast) :: bcast_buff
             character(len=256) :: s_log_name
 
             tic = mpi_wtime()
             call mpi_probe_adapt(adapt_flag, status_MPI, info, err); assert_eq(err, 0)
-            toc = mpi_wtime() - tic
-
             if (is_root()) then
-            _log_write(1, '("Rank ", I0, " (", I0, "): probe_adapt", F16.8, " sec")') &
-                    rank_MPI, status_MPI, toc
+				_log_write(0, '()')
+            	_log_write(0, '("iMPI: probe_adapt ", F12.6, " sec")') mpi_wtime()-tic
+				_log_write(0, '()')
             end if
 
             if (adapt_flag == MPI_ADAPT_TRUE) then
@@ -636,16 +639,14 @@
                     call update_stats(swe, grid)
                 end if
 
-                tic1 = mpi_wtime()
+                ticall = mpi_wtime()
 
                 tic = mpi_wtime()
                 call mpi_comm_adapt_begin(INTER_COMM, NEW_COMM, &
                         staying_count, leaving_count, joining_count, err); assert_eq(err, 0)
-                toc = MPI_Wtime() - tic
-
                 if (is_root()) then
-                _log_write(1, '("Rank ", I0, " (", I0, "): adapt_begin ", F16.8, " sec, staying ", I0, ", leaving ", I0, ", joining ", I0)') &
-                        rank_MPI, status_MPI, toc, staying_count, leaving_count, joining_count
+                	_log_write(0, '("iMPI: adapt_begin ", F12.6, " sec, staying ", I0, ", leaving ", I0, ", joining ", I0)') &
+                        	MPI_Wtime()-tic, staying_count, leaving_count, joining_count
                 end if
 
                 !************************ ADAPT WINDOW ****************************
@@ -657,7 +658,7 @@
                 !(2) JOINING ranks get necessary data from MASTER
                 !    The use of NEW_COMM must exclude LEAVING ranks, because they have NEW_COMM == MPI_COMM_NULL
                 if ((joining_count > 0) .and. (status_MPI .ne. MPI_ADAPT_STATUS_LEAVING)) then
-                    bcast_buff = t_impi_bcast( grid%sections%is_forward(), &
+                    bcast_buff = t_swe_impi_bcast( grid%sections%is_forward(), &
                             i_stats_phase, i_initial_step, i_time_step, swe%xml_output%i_output_iteration, &
                             r_time_next_output, grid%r_time, grid%r_dt, grid%r_dt_new)
                     call mpi_bcast(bcast_buff, sizeof(bcast_buff), MPI_BYTE, 0, NEW_COMM, err); assert_eq(err, 0)
@@ -707,11 +708,8 @@
 
                 tic = mpi_wtime();
                 call mpi_comm_adapt_commit(err); assert_eq(err, 0)
-                toc = mpi_wtime() - tic;
-
                 if (is_root()) then
-                _log_write(1, '("Rank ", I0, " (", I0, "): adapt_commit ", F16.8, " sec")') &
-                        rank_MPI, status_MPI, toc
+					_log_write(0, '("iMPI: adapt_commit ", F12.6, " sec")') mpi_wtime()-tic
                 end if
 
                 ! Update status, size, rank after commit
@@ -719,11 +717,9 @@
                 call mpi_comm_size(MPI_COMM_WORLD, size_MPI, err); assert_eq(err, 0)
                 call mpi_comm_rank(MPI_COMM_WORLD, rank_MPI, err); assert_eq(err, 0)
 
-                toc1 = mpi_wtime() - tic1;
-
                 if (is_root()) then
-                _log_write(1, '("Rank ", I0, " (", I0, "): Total adaption time = ", F16.8, " sec")') &
-                        rank_MPI, status_MPI, toc1
+					_log_write(0, '("iMPI: total adapt time ", F12.6, " sec")') mpi_wtime()-ticall
+					_log_write(0, '()')
                 end if
             end if
 #           endif

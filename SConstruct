@@ -73,6 +73,7 @@ vars.AddVariables(
               ),
 
   BoolVariable( 'impi', 'iMPI support', True),
+  BoolVariable( 'impinodes', 'iMPI print nodes', False),
 
   EnumVariable( 'mpi', 'MPI support', 'default',
                 allowed_values=('nompi', 'default', 'intel', 'mpich2', 'openmpi', 'ibm')
@@ -149,6 +150,8 @@ if env['impi']:
         env['mpi'] = 'default'
         env['F90FLAGS'] += ' -D_IMPI'
         print "iMPI activated for selected scenario " + env['scenario']
+        if env['impinodes']:
+            env['F90FLAGS'] += ' -D_IMPI_PRINT_NODES'
     else:
         print "Selected scenario has no iMPI supported. iMPI option deactivated."
 
