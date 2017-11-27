@@ -347,6 +347,10 @@
                         call swe%point_output%traverse(grid)
                     end if
 
+#					if defined(_IMPI_PRINT_NODES)
+					! print nodes for every output step (this requires MPI_Gather)
+					call write_nodes()
+#					endif
                     r_time_next_output = r_time_next_output + cfg%r_output_time_step
                 end if
 
@@ -431,6 +435,10 @@
                             call swe%point_output%traverse(grid)
                         end if
 
+#						if defined(_IMPI_PRINT_NODES)
+						! print nodes for every output step (this requires MPI_Gather)
+						call write_nodes()
+#						endif
                         r_time_next_output = r_time_next_output + cfg%r_output_time_step
                     end if
                 end do
