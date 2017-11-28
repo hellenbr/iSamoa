@@ -130,26 +130,21 @@ module Tools_mpi
 #   	endif
 	end function
 
-	subroutine write_nodes()
-		character (len = MPI_MAX_PROCESSOR_NAME)	:: node_name
-		character (len = 20)						:: node_name_short
-		character (len = 20*size_MPI)				:: all_nodes
-		integer										:: node_name_len
-		integer                             		:: i_error
-		! Get the node name
-		call mpi_get_processor_name(node_name, node_name_len, i_error); assert_eq(i_error, 0)
-		! node_name is too long, fit it into a len=20 string
-		! NOTE: Assume actual node name is less than 20, allowing <space> in between node names
-		node_name_short = node_name
-		! Root gether all node name
-		call mpi_gather(node_name_short, 20, MPI_CHARACTER, all_nodes, 20, MPI_CHARACTER, 0, MPI_COMM_WORLD, i_error)
-		assert_eq(i_error, 0)
-
+	subroutine print_nodes(output_step)
+		integer, intent(in)				:: output_step
+		integer, dimension(1:size_MPI)	:: nodes
+		integer                         :: i_error, i
+		! Root gether all node id
+		call mpi_gather(node_MPI, 1, MPI_INTEGER, nodes, 1, MPI_INTEGER, 0, MPI_COMM_WORLD, i_error); assert_eq(i_error, 0)
 		! Root print the node name
 		if (is_root()) then
 			!TODO: g_log_file_unit at this point is not available (Tools_log is not created yet)
 			!      therefore, hardcode log file unit as 6
-			write(6, '(A)') all_nodes
+			write(6, '(A, I0, A)',advance="no") "iMPI NODES OUTPUT ", output_step, " :"
+			do i=1, size_MPI
+				write(6, '(A, I0)', advance="no") " ", nodes(i)
+			end do
+			write(6, '(A)') " "
 		end if
 		! write(*,"(A)",advance="no") "One "
 	end subroutine

@@ -74,6 +74,7 @@ vars.AddVariables(
 
   BoolVariable( 'impi', 'iMPI support', True),
   BoolVariable( 'impinodes', 'iMPI enbale node information in output', True),
+  PathVariable( 'impi_host', 'ASAGI directory', '.'),
 
   EnumVariable( 'mpi', 'MPI support', 'default',
                 allowed_values=('nompi', 'default', 'intel', 'mpich2', 'openmpi', 'ibm')

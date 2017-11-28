@@ -54,8 +54,8 @@
 
 #		define _GT_PRE_TRAVERSAL_OP					pre_traversal_op
 #		define _GT_POST_TRAVERSAL_OP				post_traversal_op
-#		define _GT_PRE_TRAVERSAL_GRID_OP				pre_traversal_grid_op
-#		define _GT_POST_TRAVERSAL_GRID_OP				post_traversal_grid_op
+#		define _GT_PRE_TRAVERSAL_GRID_OP			pre_traversal_grid_op
+#		define _GT_POST_TRAVERSAL_GRID_OP			post_traversal_grid_op
 
 #		define _GT_ELEMENT_OP						element_op
 
