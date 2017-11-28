@@ -33,6 +33,9 @@ module config
         integer                                 :: i_output_time_steps					            !< grid output time step
 #       if defined(_IMPI)
         integer                                 :: i_impi_adapt_time_steps                          !< impi adapt interval in # of time steps
+#       if definede(_IMPI_NODES)
+        character(256)                  		:: s_impi_host_file                                 !< bathymetry file
+#       endif
 #       endif
         integer                                 :: i_stats_phases					                !< number of times intermediate stats should be printed during time steps
         logical			                        :: l_log                                            !< if true, a log file is used
@@ -234,6 +237,9 @@ module config
         config%r_output_time_step = rget('samoa_tout')
 #       if defined(_IMPI)
         config%i_impi_adapt_time_steps = iget('samoa_nimpiadapt')
+#       if defined(_IMPI_NODES)
+		config%s_impi_host_file = sget('samoa_fimpihosts', 256)
+#       endif
 #       endif
         config%i_stats_phases = iget('samoa_phases')
         config%l_log = lget('samoa_noprint')
@@ -332,6 +338,9 @@ module config
                 PRINT '(A, ES8.1, A)',  "	-tout <value>           output time step in seconds, less than 0: disabled (value: ", config%r_output_time_step, ")"
 #               if defined(_IMPI)
                 PRINT '(A, I0, A)',     "   -nimpiadapt <value>     impi adapt interval in # time steps, less than 1: disabled (value: ", config%i_adapt_time_steps, ")"
+#               if defined(_IMPI_NODES)
+				PRINT '(A, A, A)',  	"	-fimpihosts <value>      impi host file from which node ID is mapped (value: ", trim(config%s_impi_host_file), ")"
+#               endif
 #               endif
                 PRINT '(A, I0, A)',     "	-phases <value>         number of times intermediate stats should be printed during time steps (value: ", config%i_stats_phases, ")"
                 PRINT '(A, I0, A)',     "	-threads <value>        number of OpenMP threads (value: ", config%i_threads, ")"
@@ -461,6 +470,16 @@ module config
 
 #		if defined(_MPI)
             _log_write(0, '(" MPI: Yes, ranks: ", I0)') size_MPI
+#			if defined(_IMPI)
+            _log_write(0, '(" iMPI: Yes)')
+#				if defined(_IMPI_NODES)
+				! Check if host file exists
+                inquire(file=trim(config%s_impi_host_file), exist=b_valid)
+                try(b_valid, "iMPI host file " // trim(config%s_impi_host_file) // " could not be found")
+
+            	_log_write(0, '(" iMPI Nodes: yes, host file: ", A)') trim(config%s_impi_host_file)
+#				endif
+#			endif
 #		else
             _log_write(0, '(" MPI: No")')
 #		endif

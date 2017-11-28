@@ -9,6 +9,8 @@ startprocs=2
 execname=$BASEPATH/bin/swe_impi_release
 # iMPI adapt frequency (every N steps)
 nimpiadapt='-nimpiadapt 100'
+# iMPI host file (effective if impi nodes output is enabled)
+fimpihosts='-fimpihosts '$PWD/unique_hosts
 # Grid minimum depth
 dmin='-dmin 8'
 # Grid maximum depth
@@ -34,9 +36,10 @@ fbath='-fbath '$DATAPATH'/tohoku_static/bath_2014.nc'
 # What is stestpoints
 stestpoints='-stestpoints "545735.266126 62716.4740303,935356.566012 -817289.628677,1058466.21575 765077.767857"' 
 # Ouput directory
-output_dir='-output_dir '$PWD
+mkdir -p $PWD/vtk_output
+output_dir='-output_dir '$PWD/vtk_output
 # Put all options together
-all=$execname' '$nimpiadapt' '$dmin' '$dmax' '$tmax' '$tout' '$xmlout' '$sections' '$split' '$threads' '$courant' '$fdispl' '$fbath' '$stestpoints' '$output_dir
+all=$execname' '$nimpiadapt' '$fimpihosts' '$dmin' '$dmax' '$tmax' '$tout' '$xmlout' '$sections' '$split' '$threads' '$courant' '$fdispl' '$fbath' '$stestpoints' '$output_dir
 
 
 srun -n $startprocs $all > console.out

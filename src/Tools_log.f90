@@ -161,7 +161,7 @@ module Tools_mpi
 		call mpi_get_processor_name(node_name, node_name_len, i_error); assert_eq(i_error, 0)
 
 		! Open the host file
-		open(unit=read_unit, file='unique_hosts', iostat=i_error)
+		open(unit=read_unit, file=trim(cfg%s_impi_host_file), iostat=i_error)
 		if (i_error .ne. 0) then
 			write(6,'(A)') "iMPI Warning: error opening host file! Node ID is set to -1."
 			node_MPI = -1
@@ -179,7 +179,7 @@ module Tools_mpi
 				return
 			end if
 			! Compare node name
-			if (node_name .eq. read_buff) then
+			if (trim(node_name) .eq. trim(read_buff)) then
 				node_MPI = l
 				return
 			end if
