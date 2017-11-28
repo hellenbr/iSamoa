@@ -525,7 +525,7 @@ subroutine traverse_section(thread_traversal, section_traversal, thread, section
 		do i = lbound(section%cells%elements, 1), ubound(section%cells%elements, 1)
 			_log_write(6, '(3X, I0, X, A)') i, section%cells%elements(i)%to_string()
 		end do
-		_log_write(6, '(A)') ""
+		_log_write(6, '(A)') " "
 #	endif
 
 	select case (section%cells%get_size())
@@ -584,7 +584,7 @@ subroutine traverse_section(thread_traversal, section_traversal, thread, section
 		do i = lbound(section%cells%elements, 1), ubound(section%cells%elements, 1)
 			_log_write(6, '(3X, I0, X, A)') i, section%cells%elements(i)%to_string()
 		end do
-		_log_write(6, '(A)') ""
+		_log_write(6, '(A)') " "
 #	endif
 end subroutine
 

@@ -25,6 +25,9 @@
 		!> Output cell data
 		type t_output_cell_data
 			type(t_state)											:: Q
+#			if defined(_IMPI)
+			integer (kind = GRID_SI)								:: node
+#			endif
 			integer (kind = GRID_SI)								:: rank
 			integer (kind = GRID_SI)								:: section_index
 			integer (kind = BYTE)									:: depth
@@ -111,7 +114,9 @@
                             e_io = vtk%VTK_VAR_XML('bathymetry', 1.0_GRID_SR, 1)
                             e_io = vtk%VTK_VAR_XML('momentum', 1.0_GRID_SR, 3)
                         end if
-
+#						if defined(_MPI)
+                        e_io = vtk%VTK_VAR_XML('node', 1_GRID_SI, 1)
+#						endif
                         e_io = vtk%VTK_VAR_XML('rank', 1_GRID_SI, 1)
                         e_io = vtk%VTK_VAR_XML('section index', 1_GRID_SI, 1)
                         e_io = vtk%VTK_VAR_XML('depth', 1_1, 1)
@@ -240,7 +245,9 @@
                             e_io = vtk%VTK_VAR_XML(i_cells, 'bathymetry', traversal%cell_data%Q%b)
                             e_io = vtk%VTK_VAR_XML(i_cells, 'momentum', traversal%cell_data%Q%p(1), traversal%cell_data%Q%p(2), r_empty(1:i_cells))
                         end if
-
+#						if defined(_IMPI)
+                        e_io = vtk%VTK_VAR_XML(i_cells, 'node', traversal%cell_data%node)
+#						endif
                         e_io = vtk%VTK_VAR_XML(i_cells, 'rank', traversal%cell_data%rank)
                         e_io = vtk%VTK_VAR_XML(i_cells, 'section index', traversal%cell_data%section_index)
                         e_io = vtk%VTK_VAR_XML(i_cells, 'depth', traversal%cell_data%depth)
@@ -283,7 +290,9 @@
 			type(t_state), dimension(6)							:: Q_test
 
 			call gv_Q%read(element, Q)
-
+#			if defined(_IMPI)
+            traversal%cell_data(traversal%i_cell_data_index)%node = node_MPI
+#			endif
             traversal%cell_data(traversal%i_cell_data_index)%rank = rank_MPI
             traversal%cell_data(traversal%i_cell_data_index)%section_index = section%index
 			traversal%cell_data(traversal%i_cell_data_index)%depth = element%cell%geometry%i_depth

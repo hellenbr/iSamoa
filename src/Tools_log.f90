@@ -21,14 +21,22 @@ module Tools_mpi
 #   endif
 
     public
-#   if defined(_IMPI)
-    integer             :: status_MPI = 0 !> For iMPI only
-    ! This is ugly, but we need a place to store the measurement before the log file is created
-    real                :: mpi_init_adapt_time = 0.0 !> For iMPI only
-#	endif 
+
 	integer 		    :: rank_MPI = 0
 	integer 		    :: size_MPI = 1
 	integer             :: ref_count_MPI = 0
+#   if defined(_IMPI)
+    integer             :: status_MPI = 0 !> For iMPI only
+    integer             :: node_MPI = 0   !> For iMPI only
+    ! This is ugly, but we need a place to store the measurement before the log file is created
+    real                :: mpi_init_adapt_time = 0.0 !> For iMPI only
+
+	type t_host
+		character (len=20)	:: hostname
+		integer		 		:: hostid
+	end type
+#	endif
+
 
 	contains
 
@@ -143,6 +151,34 @@ module Tools_mpi
 		! write(*,"(A)",advance="no") "One "
 
 	end subroutine
+
+	function get_node_id() result(id)
+		character (len = MPI_MAX_PROCESSOR_NAME)	:: node_name
+		integer										:: node_name_len
+		integer										:: id
+		logical										:: is_equal
+		! Get the node name
+		call mpi_get_processor_name(node_name_long, node_name_len, i_error); assert_eq(i_error, 0)
+# if(1==0)
+		! TODO: lookup table in Tools_mpi module, called "hosts"
+		do i = 1, num_all_hosts
+			current_host_name = hosts[i]%name
+			is_equal = .true.
+			do j = 1, node_name_len
+				if (node_name[j] .ne. current_host_name[j]) then
+					is_equal = .false.
+					exit
+				end if
+			end do
+			if (is_equal) then
+				id = hosts[i]%id
+				return
+			end if
+		end do
+		id = -1
+		return
+# endif
+	end function
 
 end module
 
