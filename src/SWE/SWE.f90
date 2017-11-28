@@ -317,7 +317,8 @@
 
 #						if defined(_IMPI_NODES)
 						! This requires 1 MPI_Gather
-						call print_nodes(swe%xml_output%i_output_iteration)
+						! At this point i_output_iteration is already incremented, need to decrement by 1
+						call print_nodes(swe%point_output%i_output_iteration-1)
 #						endif
 
                         r_time_next_output = r_time_next_output + cfg%r_output_time_step
@@ -354,7 +355,8 @@
 
 #					if defined(_IMPI_NODES)
 					! This requires 1 MPI_Gather
-					call print_nodes(swe%xml_output%i_output_iteration)
+					! At this point i_output_iteration is already incremented, need to decrement by 1
+					call print_nodes(swe%point_output%i_output_iteration-1)
 #					endif
 
                     r_time_next_output = r_time_next_output + cfg%r_output_time_step
@@ -443,7 +445,8 @@
 
 #						if defined(_IMPI_NODES)
 						! This requires 1 MPI_Gather
-						call print_nodes(swe%xml_output%i_output_iteration)
+						! At this point i_output_iteration is already incremented, need to decrement by 1
+						call print_nodes(swe%point_output%i_output_iteration-1)
 #						endif
 
                         r_time_next_output = r_time_next_output + cfg%r_output_time_step
