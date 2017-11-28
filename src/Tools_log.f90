@@ -26,8 +26,8 @@ module Tools_mpi
 	integer 		    :: size_MPI = 1
 	integer             :: ref_count_MPI = 0
 #   if defined(_IMPI)
-    integer             :: status_MPI = 0 !> For iMPI only
-    integer             :: node_MPI = 0   !> For iMPI only
+    integer             :: status_MPI = 0
+    integer             :: node_MPI = 0
     ! This is ugly, but we need a place to store the measurement before the log file is created
     real                :: mpi_init_adapt_time = 0.0 !> For iMPI only
 
@@ -83,6 +83,9 @@ module Tools_mpi
 
                 call mpi_comm_size(MPI_COMM_WORLD, size_MPI, i_error); assert_eq(i_error, 0)
                 call mpi_comm_rank(MPI_COMM_WORLD, rank_MPI, i_error); assert_eq(i_error, 0)
+#				if defined(_IMPI_NODES)
+				call get_node_id()
+#				endif
 
                 call mpi_comm_get_attr(MPI_COMM_WORLD, MPI_TAG_UB, mpi_tag_upper_bound, mpi_flag, i_error); assert_eq(i_error, 0)
 				try(mpi_flag, "MPI tag support could not be determined")
@@ -149,36 +152,46 @@ module Tools_mpi
 			write(6, '(A)') all_nodes
 		end if
 		! write(*,"(A)",advance="no") "One "
-
 	end subroutine
 
-	function get_node_id() result(id)
+	subroutine get_node_id()
 		character (len = MPI_MAX_PROCESSOR_NAME)	:: node_name
 		integer										:: node_name_len
-		integer										:: id
-		logical										:: is_equal
-		! Get the node name
-		call mpi_get_processor_name(node_name_long, node_name_len, i_error); assert_eq(i_error, 0)
-# if(1==0)
-		! TODO: lookup table in Tools_mpi module, called "hosts"
-		do i = 1, num_all_hosts
-			current_host_name = hosts[i]%name
-			is_equal = .true.
-			do j = 1, node_name_len
-				if (node_name[j] .ne. current_host_name[j]) then
-					is_equal = .false.
-					exit
-				end if
-			end do
-			if (is_equal) then
-				id = hosts[i]%id
+		character (len = MPI_MAX_PROCESSOR_NAME)	:: read_buff
+		integer                             		:: read_unit = 39
+		integer                             		:: i_error
+		integer                             		:: l, i
+
+		! Get current node name
+		call mpi_get_processor_name(node_name, node_name_len, i_error); assert_eq(i_error, 0)
+
+		! Open the host file
+		open(unit=read_unit, file='unique_hosts', iostat=i_error)
+		if (i_error .ne. 0) then
+			write(6,'(A)') "iMPI Warning: error opening host file! Node ID is set to -1."
+			node_MPI = -1
+			return
+		end if
+
+		! Read and compare node name line by line
+		l=0
+		do 
+			read(read_unit, '(A)', iostat=i_error) read_buff
+			if (i_error .ne. 0) then
+				! Reach end of file, break the loop
+				write(6,'(A)') "iMPI Warning: current node not found in host file! Node ID is set to -1."
+				node_MPI = -1
 				return
 			end if
+			! Compare node name
+			if (node_name .eq. read_buff) then
+				node_MPI = l
+				return
+			end if
+			l = l + 1
 		end do
-		id = -1
-		return
-# endif
-	end function
+	end subroutine
+
 
 end module
 

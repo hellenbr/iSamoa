@@ -67,7 +67,7 @@
 			integer (kind = GRID_SI)									:: i_error, i_cells, i_points
 
             if (rank_MPI == 0) then
-                _log_write(1, '(A, I0)') " SWE: output step: ", traversal%i_output_iteration
+                _log_write(1, '(A, I0)') "  SWE OUTPUT: ", traversal%i_output_iteration
             end if
 
             grid_info = section%get_info()

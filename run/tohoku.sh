@@ -6,7 +6,7 @@ DATAPATH=$IMPIPATH/../samoa-data
 # Number of processes to start
 startprocs=2
 # The name of the executable
-execname=$BASEPATH/bin/swe_impi_noprint
+execname=$BASEPATH/bin/swe_impi_release
 # iMPI adapt frequency (every N steps)
 nimpiadapt='-nimpiadapt 100'
 # Grid minimum depth
@@ -18,7 +18,7 @@ tmax='-tmax 10800'
 # VTK output frequency (every N seconds)
 tout='-tout 120'
 # Enable/disable VTK output
-xmlout='-xmloutput .false.'
+xmlout='-xmloutput .true.'
 # Number of sections
 sections='-sections 1'
 # Allow splitting sections during load balancing

@@ -72,7 +72,7 @@
 		integer 						:: i, erro
 
         if (rank_MPI == 0) then
-            _log_write(1, '(A, I0)') "  SWE OUTPUT: ", traversal%i_output_iteration
+            _log_write(1, '(A, I0)') "  SWE POINT OUTPUT: ", traversal%i_output_iteration
         end if
 
         ! initialize test point array

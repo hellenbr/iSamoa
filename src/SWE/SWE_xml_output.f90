@@ -25,7 +25,7 @@
 		!> Output cell data
 		type t_output_cell_data
 			type(t_state)											:: Q
-#			if defined(_IMPI)
+#			if defined(_IMPI_NODES)
 			integer (kind = GRID_SI)								:: node
 #			endif
 			integer (kind = GRID_SI)								:: rank
@@ -67,8 +67,8 @@
 			type(t_swe_xml_output_traversal), intent(inout)				:: traversal
 			type(t_grid), intent(inout)							        :: grid
 
-            if (rank_MPI == 0) then
-                _log_write(1, '(A, I0)') "  SWE OUTPUT: ", traversal%i_output_iteration
+            if (is_root()) then
+                _log_write(1, '(A, I0)') "  SWE VTK OUTPUT: ", traversal%i_output_iteration
             end if
 
             call scatter(traversal%s_file_stamp, traversal%sections%s_file_stamp)
@@ -245,7 +245,7 @@
                             e_io = vtk%VTK_VAR_XML(i_cells, 'bathymetry', traversal%cell_data%Q%b)
                             e_io = vtk%VTK_VAR_XML(i_cells, 'momentum', traversal%cell_data%Q%p(1), traversal%cell_data%Q%p(2), r_empty(1:i_cells))
                         end if
-#						if defined(_IMPI)
+#						if defined(_IMPI_NODES)
                         e_io = vtk%VTK_VAR_XML(i_cells, 'node', traversal%cell_data%node)
 #						endif
                         e_io = vtk%VTK_VAR_XML(i_cells, 'rank', traversal%cell_data%rank)
@@ -290,7 +290,7 @@
 			type(t_state), dimension(6)							:: Q_test
 
 			call gv_Q%read(element, Q)
-#			if defined(_IMPI)
+#			if defined(_IMPI_NODES)
             traversal%cell_data(traversal%i_cell_data_index)%node = node_MPI
 #			endif
             traversal%cell_data(traversal%i_cell_data_index)%rank = rank_MPI
