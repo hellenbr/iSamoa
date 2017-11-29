@@ -30,11 +30,6 @@ module Tools_mpi
     integer             :: node_MPI = 0
     ! This is ugly, but we need a place to store the measurement before the log file is created
     real                :: mpi_init_adapt_time = 0.0 !> For iMPI only
-
-	type t_host
-		character (len=20)	:: hostname
-		integer		 		:: hostid
-	end type
 #	endif
 
 
@@ -83,9 +78,6 @@ module Tools_mpi
 
                 call mpi_comm_size(MPI_COMM_WORLD, size_MPI, i_error); assert_eq(i_error, 0)
                 call mpi_comm_rank(MPI_COMM_WORLD, rank_MPI, i_error); assert_eq(i_error, 0)
-#				if defined(_IMPI_NODES)
-				call get_node_id()
-#				endif
 
                 call mpi_comm_get_attr(MPI_COMM_WORLD, MPI_TAG_UB, mpi_tag_upper_bound, mpi_flag, i_error); assert_eq(i_error, 0)
 				try(mpi_flag, "MPI tag support could not be determined")
@@ -130,6 +122,7 @@ module Tools_mpi
 #   	endif
 	end function
 
+#	if defined(_IMPI_NODES)
 	subroutine print_nodes(output_step)
 		integer, intent(in)				:: output_step
 		integer, dimension(1:size_MPI)	:: nodes
@@ -149,7 +142,8 @@ module Tools_mpi
 		! write(*,"(A)",advance="no") "One "
 	end subroutine
 
-	subroutine get_node_id()
+	subroutine get_node_id(hostfile)
+		character (len=*), intent(in)				:: hostfile
 		character (len = MPI_MAX_PROCESSOR_NAME)	:: node_name
 		integer										:: node_name_len
 		character (len = MPI_MAX_PROCESSOR_NAME)	:: read_buff
@@ -161,7 +155,7 @@ module Tools_mpi
 		call mpi_get_processor_name(node_name, node_name_len, i_error); assert_eq(i_error, 0)
 
 		! Open the host file
-		open(unit=read_unit, file=trim(cfg%s_impi_host_file), iostat=i_error)
+		open(unit=read_unit, file=hostfile, iostat=i_error)
 		if (i_error .ne. 0) then
 			write(6,'(A)') "iMPI Warning: error opening host file! Node ID is set to -1."
 			node_MPI = -1
@@ -186,7 +180,7 @@ module Tools_mpi
 			l = l + 1
 		end do
 	end subroutine
-
+#	endif
 
 end module
 

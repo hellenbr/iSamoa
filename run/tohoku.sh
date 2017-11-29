@@ -9,7 +9,7 @@ startprocs=2
 execname=$BASEPATH/bin/swe_impi_release
 # iMPI adapt frequency (every N steps)
 nimpiadapt='-nimpiadapt 100'
-# iMPI host file (effective if impi nodes output is enabled)
+# iMPI host file (effective only if impi nodes output is enabled)
 fimpihosts='-fimpihosts '$PWD/unique_hosts
 # Grid minimum depth
 dmin='-dmin 8'

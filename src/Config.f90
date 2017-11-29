@@ -33,7 +33,7 @@ module config
         integer                                 :: i_output_time_steps					            !< grid output time step
 #       if defined(_IMPI)
         integer                                 :: i_impi_adapt_time_steps                          !< impi adapt interval in # of time steps
-#       if definede(_IMPI_NODES)
+#       if defined(_IMPI_NODES)
         character(256)                  		:: s_impi_host_file                                 !< bathymetry file
 #       endif
 #       endif
@@ -162,6 +162,9 @@ module config
         write(arguments, '(A, A, I0)') trim(arguments), " -threads ", omp_get_max_threads()
 #       if defined(_IMPI)
         write(arguments, '(A, A)') trim(arguments), " -nimpiadapt 1"
+#			if defined(_IMPI_NODES)
+			write(arguments, '(A, A)') trim(arguments), " -fimpihosts unique_hosts"
+#			endif
 #       endif
 
         !define additional command arguments and default values depending on the choice of the scenario
@@ -471,7 +474,7 @@ module config
 #		if defined(_MPI)
             _log_write(0, '(" MPI: Yes, ranks: ", I0)') size_MPI
 #			if defined(_IMPI)
-            _log_write(0, '(" iMPI: Yes)')
+            _log_write(0, '(" iMPI: Yes")')
 #				if defined(_IMPI_NODES)
 				! Check if host file exists
                 inquire(file=trim(config%s_impi_host_file), exist=b_valid)

@@ -22,6 +22,10 @@ PROGRAM samoa
 		call cfg%print()
     end if
 
+#	if defined(_IMPI_NODES)
+	call get_node_id(trim(cfg%s_impi_host_file))
+#	endif
+
     !init element transformation data
     call init_transform_data()
 
