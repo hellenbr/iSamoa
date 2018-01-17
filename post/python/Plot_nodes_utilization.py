@@ -13,11 +13,12 @@ import matplotlib.patches as patches
 ###################################
 ##### PROVIDE INPUTS HERE !!! #####
 ###################################
+
 # Specify the input file to read
-filename = "/media/emily/EMO-64G/yes_swe_irmperi_vm8n2t/console.out"
+filename = "/media/data/emily/Desktop/yes_swe25_irmfit_sb32n16t/console.out"
 
 # Specify the output figure path & name
-figname_prefix = '/media/data/emily/Desktop/vis_nodes/res_'
+figname_prefix = '/media/data/emily/Desktop/yes_swe25_irmfit_sb32n16t/vis2/vis_resources/res.'
 figname_suffix = '.png'
 
 # Specify application number (this determines the color used the application)
@@ -33,6 +34,7 @@ cx,cy = (4,4)
 ###########################
 ##### Data Processing #####
 ###########################
+
 # Function for removing duplicate nodes
 # Return a list containing only unique nodes
 def get_unique(node_list):
@@ -72,6 +74,7 @@ f.close()
 ################################
 ##### Plotting Definitions #####
 ################################
+
 # define color code
 # colorcode = [
 #         'grey',      # CPU is idle or in transition state
@@ -80,9 +83,39 @@ f.close()
 #         'khaki',     # CPU is assigned to App3
 #         'lightgreen' # CPU is assigned to App4
 # ]
-colorcode = [
-        'skyblue',   # CPU is assigned to App1
-        'lightpink', # CPU is assigned to App2
+colorcode32 = [
+        '#4747db', # CPU is assigned to node0
+        '#3737be', # CPU is assigned to node1
+        '#2727a2', # CPU is assigned to node2
+        '#171785', # CPU is assigned to node3
+        '#070768', # CPU is assigned to node4
+        '#002171', # CPU is assigned to node5
+        '#005b96', # CPU is assigned to node6
+        '#0095bb', # CPU is assigned to node7
+        '#00cfe0', # CPU is assigned to node8
+        '#00faf6', # CPU is assigned to node9
+        '#00debc', # CPU is assigned to node10
+        '#00d183', # CPU is assigned to node11
+        '#00a54a', # CPU is assigned to node12
+        '#008911', # CPU is assigned to node13
+        '#299400', # CPU is assigned to node14
+        '#63b100', # CPU is assigned to node15
+        '#9cce00', # CPU is assigned to node16
+        '#d6eb00', # CPU is assigned to node17
+        '#fff400', # CPU is assigned to node18
+        '#ffd100', # CPU is assigned to node19
+        '#ffad00', # CPU is assigned to node20
+        '#ff8900', # CPU is assigned to node21
+        '#ff6600', # CPU is assigned to node22
+        '#e24e00', # CPU is assigned to node23
+        '#c13800', # CPU is assigned to node24
+        '#9f2200', # CPU is assigned to node25
+        '#7e0c00', # CPU is assigned to node26
+        '#760808', # CPU is assigned to node27
+        '#911919', # CPU is assigned to node28
+        '#ab2a2a', # CPU is assigned to node29
+        '#c63c3c', # CPU is assigned to node30
+        '#e04d4d', # CPU is assigned to node31
 ]
 
 # Node patch config
@@ -103,20 +136,18 @@ cpu_patch_offset_y = (cpu_size_y - cpu_patch_size_y) * 0.5
 
 # Function to get node color
 def get_node_color(n, node_list):
-    return colorcode[appid] if (n in node_list) else colorcode[app2]
+    return colorcode32[n] if (n in node_list) else 'grey'
 
 # Get the node patch position (x,y)
 def getxy(node_id):
     y = ny - 1 - int(node_id / nx)
     x = int(node_id % nx)
-    return (x * node_size_x + node_patch_offset_x, \
-            y * node_size_y + node_patch_offset_y)
+    return (x * node_size_x + node_patch_offset_x, y * node_size_y + node_patch_offset_y)
 
 # Get the cpu patch position
 def getxy_cpu(node_id, cpu_x, cpu_y):
     (x,y) = getxy(node_id)
-    return (x + cpu_x*cpu_size_x + cpu_patch_offset_x, \
-            y + (cy-1-cpu_y)*cpu_size_y + cpu_patch_offset_y)
+    return (x + cpu_x*cpu_size_x + cpu_patch_offset_x, y + (cy-1-cpu_y)*cpu_size_y + cpu_patch_offset_y)
 
 
 # Function for drawing 1 frame (CPU-based)
@@ -131,7 +162,7 @@ def draw_frame(frame_id, node_list):
     ax.set_ylim([0,ny*node_size_y])
     ax.set_axis_off()
     fig.add_axes(ax)
-
+    
     # Create a list cpu patches (cx*cy patches per node) for drawing
     cpus = dict()
     for n in range(nx*ny):
@@ -151,14 +182,14 @@ def draw_frame(frame_id, node_list):
         x,y = cpus[c].get_xy()
         center_x = x + cpus[c].get_width()/2.0
         center_y = y + cpus[c].get_height()/2.0
-        ax.annotate(c, (center_x, center_y), \
-                color='black', weight='normal', fontsize=6, ha='center', va='center')
+        ax.annotate(c, (center_x, center_y), color='black', weight='normal', fontsize=6, ha='center', va='center')
     # Add legend
-    app_tsu = patches.Patch(color=colorcode[appid], label='Tsunami Simulation')
-    app_inv = patches.Patch(color=colorcode[app2], label='Inverse Problem')
-    leg = plt.legend(handles=[app_tsu, app_inv])
+#     app_tsu = patches.Patch(color=colorcode[appid], label='Tsunami Simulation')
+#     app_inv = patches.Patch(color=colorcode[app2], label='Inverse Problem')     
+#     leg = plt.legend(handles=[app_tsu, app_inv])
+    leg = plt.legend(handles=[patches.Patch(color='grey', label='Unutilized')])
     leg.get_frame().set_alpha(0.65)  # set legend opacity
-
+        
     # Save and close figure
     filename = figname_prefix + str(frame_id).zfill(3) + figname_suffix
     plt.savefig(filename, dpi=200)
@@ -166,10 +197,10 @@ def draw_frame(frame_id, node_list):
 
 
 # Test plotting for 1 frame
-#frame_id = 0
-#l = node_lists[frame_id]
-#print(l)
-#draw_frame(frame_id, l)
+frame_id = 0
+l = node_lists[frame_id]
+print(l)
+draw_frame(frame_id, l)
 
 
 # Draw all frames
