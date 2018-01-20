@@ -61,7 +61,7 @@ vboxmanage list hostonlyifs
 vboxmanage hostonlyif ipconfig vboxnet0 --ip 10.0.0.100 --netmask 255.255.255.0
 ```
 ```bash
-vboxmanage hostonlyif ipconfig vboxnet1 --ipv6 '' --netmasklengthv6 0
+vboxmanage hostonlyif ipconfig vboxnet0 --ipv6 '' --netmasklengthv6 0
 ```
 ```bash
 vboxmanage list hostonlyifs
@@ -93,12 +93,12 @@ In "DHCP Server" tab, uncheck "Enable server" option.
 
 Insert the following line into **/etc/exports**.
 
-On Linux OS
+On **Linux OS**:
 ```
 /path/to/nfs 10.0.0.0/24(rw,fsid=0,insecure,no_subtree_check,async,no_root_squash)
 ```
 
-On OSX
+On **OSX**:
 ```
 /path/to/nfs -maproot=root:wheel -network 10.0.0.0 -mask 255.255.255.0
 ```
@@ -220,9 +220,9 @@ On the VM node, modify the following 4 files
 * /etc/fstab
 
 <a name="network_1"/>
-#### 3.1 /etc/hosts specify VM cluster node layout
+#### 3.1 Modify /etc/hosts
 
-**Note: Node layout must be consistent on Host and all VMs.**
+**<span style="color:red">Note: Node layout must be consistent on Host and all VMs.</span>**
 
 Comment out line "127.0.1.1 node0" if it exists.
 ```no-highlight
@@ -245,18 +245,18 @@ Append these lines
 ```
 
 <a name="network_2"/>
-#### 3.2 /etc/hostname specify node name, e.g.,
+#### 3.2 Modify /etc/hostname, e.g.
 ```no-highlight
 node0
 ```
 
 
 <a name="network_3"/>
-#### 3.3 /etc/network/interfaces specify node IP
+#### 3.3 Modify /etc/network/interfaces
 
 <span style="color:red">**Note**: host name and IP address must match according to node layout, e.g. _node0_ address must be 10.0.0.1 ; _node1_ address must be 10.0.0.2 ; etc.</span>
 
-Insert these lines to **/etc/network/interfaces**
+Insert these lines
 ```bash
 # Adapter 1 (enp0s3) for NAT Internet access, use dhcp
 # gateway will be set by dhcp (do not manually set gateway)
@@ -274,9 +274,9 @@ iface enp0s8 inet static
 
 
 <a name="network_4"/>
-#### 3.4 /etc/fstab specify NFS shared dir location
+#### 3.4 Modify /etc/fstab
 
-<span style="color:red">**Note**: the NFS path on VM must be EXACTLY the same as on host! It won't work otherwise.</span>
+<span style="color:red">**Note**: the NFS path on VM must be **EXACTLY the same** as it is on host, it won't work otherwise!</span>
 
 - Create the exact same path on VM if it doesn't exist.
 ```bash
@@ -308,7 +308,7 @@ touch ~/.ssh/authorized_keys
 cat path/to/hosts/id_rsa.pub >> ~/.ssh/authorized_keys
 ```
 
-- Add paths to **.bashrc** for both **current user** and **root**.
+- Add the following to **.bashrc**
 
 ```bash
 ##############################
@@ -317,10 +317,8 @@ cat path/to/hosts/id_rsa.pub >> ~/.ssh/authorized_keys
 
 #enable 256-color support
 export TERM="xterm-256color"
-
 # set ls color
 alias ls='ls --color=auto'
-
 # convenient stuff
 alias lss='ls -1'
 alias ll='ls -alhF'
@@ -350,7 +348,6 @@ function vm_irm_ctrl {
         pkill -f irtsched -9
         irtsched -Dc
 }
-
 # define NFSPATH (for iMPI VM cluster)
 export NFSPATH=/work_fast/hellenbr/workspace
 export IMPIPATH=$NFSPATH/ihpcins
@@ -365,6 +362,9 @@ export SLURM_MPI_TYPE=pmi2
 # start from work dir
 cdesa
 ```
+
+- Log out and log back in, or source ~/.bashrc
+
 
 <a name="impi_ins"/>
 ## 4. VM Node iMPI Installation
@@ -547,8 +547,7 @@ cd asagi
 git submodule update --init --recursive
 ```
 
-- Build and install **ASAGI**
-<span style="color:red">Note:For iMPI to work, ASAGI must be compiled with no MPI </span>
+- Build and install
 ```bash
 cd /path/to/asagi_build
 ```
@@ -558,10 +557,13 @@ cmake -DCMAKE_INSTALL_PREFIX=$IMPIPATH -DCMAKE_PREFIX_PATH=$IMPIPATH -DNOMPI=ON 
 ```bash
 make install
 ```
+<span style="color:red">**Note**: For iMPI to work, ASAGI must be compiled with no MPI</span>
 
 
 <a name="impi_ins_6"/>
-#### 4.6 Install eSamoa
+#### 4.6 Compile eSamoa
+
+- See eSamoa compile instruction.
 
 
 
