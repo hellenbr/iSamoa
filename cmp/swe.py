@@ -1,5 +1,3 @@
-#Executable name
-exe='swe_impi_release'
 #Scenario settings
 scenario='swe'
 target='release'
@@ -14,3 +12,10 @@ impinodes=True
 #Asagi setting
 asagi=True
 asagi_dir='/media/data/emily/workspace/ihpcins'
+#Executable name
+exe=scenario
+if (impi):
+    exe+='_impi'
+else:
+    exe+='_mpi'
+exe+='_target'
