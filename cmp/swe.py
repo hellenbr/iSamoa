@@ -15,7 +15,7 @@ asagi_dir='/media/data/emily/workspace/ihpcins'
 #Executable name
 exe=scenario
 if (impi):
-    exe+='_impi'
+    exe+='_impi_'
 else:
-    exe+='_mpi'
-exe+='_target'
+    exe+='_mpi_'
+exe+=target
