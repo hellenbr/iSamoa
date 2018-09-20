@@ -645,15 +645,19 @@
             type(t_swe_impi_bcast) :: bcast_buff
             character(len=256) :: s_log_name
 
-            tic = mpi_wtime()
-            call mpi_probe_adapt(adapt_flag, status_MPI, info, err); assert_eq(err, 0)
-            if (is_root()) then
-				_log_write(0, '()')
-            	_log_write(0, '("iMPI: probe_adapt ", F12.6, " sec")') mpi_wtime()-tic
-				_log_write(0, '()')
-            end if
+			! Joining ranks do not call MPI_Probe_adapt
+			! They go to adapt block directly
+			if (status_MPI .ne. MPI_ADAPT_STATUS_JOINING) then
+				tic = mpi_wtime()
+				call mpi_probe_adapt(adapt_flag, status_MPI, info, err); assert_eq(err, 0)
+				if (is_root()) then
+					_log_write(0, '()')
+					_log_write(0, '("iMPI: probe_adapt ", F12.6, " sec")') mpi_wtime()-tic
+					_log_write(0, '()')
+				end if
+			end if
 
-            if (adapt_flag == MPI_ADAPT_TRUE) then
+            if ((adapt_flag == MPI_ADAPT_TRUE) .or. (status_MPI .eq. MPI_ADAPT_STATUS_JOINING)) then
                 ! Print out statistics for the last period before applying resource change
                 ! this involved MPI reduce on all pre-existing ranks
                 if (status_MPI .ne. MPI_ADAPT_STATUS_JOINING) then
