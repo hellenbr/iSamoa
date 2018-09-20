@@ -73,8 +73,10 @@ vars.AddVariables(
               ),
 
   BoolVariable( 'impi', 'iMPI support', True),
+
+  PathVariable( 'impi_dir', 'iMPI installation path', '.'),
+
   BoolVariable( 'impinodes', 'iMPI enbale node information in output', True),
-  PathVariable( 'impi_host', 'ASAGI directory', '.'),
 
   EnumVariable( 'mpi', 'MPI support', 'default',
                 allowed_values=('nompi', 'default', 'intel', 'mpich2', 'openmpi', 'ibm')
@@ -147,7 +149,18 @@ elif  env['compiler'] == 'gnu':
 # iMPI available scenarios
 IMPI_SCENARIOS = ['swe', 'darcy']
 if env['impi']:
+    # check for iMPI installation
+    if (os.path.isfile(env['impi_dir'] + '/bin/mpicc') and
+                    os.path.isfile(env['impi_dir'] + '/lib/libmpi.so')):
+        impipath = env['impi_dir']
+    elif (os.path.isfile(os.environ['IMPIPATH'] + '/bin/mpicc') and 
+            os.path.isfile(os.environ['IMPIPATH'] + '/lib/libmpi.so')):
+        impipath = os.environ['IMPIPATH']
+    else:
+        sys.exit("Error: iMPI installation not found. Check impi_dir. Operation aborted.")
+    # Check for available iMPI scenario
     if (env['scenario'] in IMPI_SCENARIOS):
+        fc = impipath+'/bin/gfortran'
         env['mpi'] = 'default'
         env['F90FLAGS'] += ' -D_IMPI'
         print "iMPI activated for selected scenario " + env['scenario']
@@ -224,12 +237,21 @@ if env['openmp'] != 'noomp':
 
 #set compilation flags and preprocessor macros for the ASAGI library
 if env['asagi']:
-  env.Append(F90PATH = os.path.abspath(env['asagi_dir'] + '/include'))
-  env['F90FLAGS'] += ' -D_ASAGI'
-  env['LINKFLAGS'] += ' -Wl,--rpath,' + os.path.abspath(env['asagi_dir']) + '/lib'
-  env.Append(LIBPATH = env['asagi_dir'] + '/lib')
-  #env.Append(LIBS = ['asagi', 'numa'])
-  env.Append(LIBS = ['asagi_nompi', 'numa'])
+    asagi_dir = env['asagi_dir']
+    if env['impi']:
+        # if the provided asagi path NOT valid, check for the impi path
+        if not (os.path.isfile(asagi_dir+'/lib/libasagi_nompi.so')):
+            if (os.path.isfile(impipath + '/lib/libasagi_nompi.so')):
+                asagi_dir = impipath
+    env.Append(F90PATH = os.path.abspath(asagi_dir + '/include'))
+    env['F90FLAGS'] += ' -D_ASAGI'
+    env['LINKFLAGS'] += ' -Wl,--rpath,' + os.path.abspath(asagi_dir) + '/lib'
+    env.Append(LIBPATH = asagi_dir + '/lib')
+    if env['impi']:
+        # with iMPI enable, asagi lib must be compiled with no MPI, thus the name change
+        env.Append(LIBS = ['asagi_nompi', 'numa'])
+    else:
+        env.Append(LIBS = ['asagi', 'numa'])
 
 #Enable or disable timing of ASAGI calls
 if env['asagi_timing']:
