@@ -10,10 +10,11 @@ compiler='gnu'
 openmp='noomp'
 mpi='default'
 impi=True
+impi_dir='.' # will read from $IMPIPATH
 impinodes=True
 #Asagi setting
 asagi=True
-asagi_dir='/media/data/emily/workspace/ihpcins'
+asagi_dir='.' # will check for $IMPIPATH
 #Executable name
 exe=scenario
 if (impi):

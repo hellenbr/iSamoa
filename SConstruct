@@ -36,7 +36,7 @@ else:
 vars.AddVariables(
   PathVariable( 'config', 'build configuration file', None, PathVariable.PathIsFile),
 
-  PathVariable( 'build_dir', 'build directory', 'bin/', PathVariable.PathIsDirCreate),
+  PathVariable( 'build_dir', 'build directory', './bin', PathVariable.PathIsDirCreate),
 
   EnumVariable( 'scenario', 'target scenario', 'darcy',
                 allowed_values=('darcy', 'swe', 'generic', 'flash') #, 'heat_eq', 'tests')
@@ -443,7 +443,7 @@ if env['library']:
 
 # set build directory
 build_dir = env['build_dir']
-object_dir = build_dir + 'build_'+ program_name + '/'
+object_dir = build_dir + '/build_'+ program_name + '/'
 
 #set module directory (same as build directory)
 if env['compiler'] == 'intel':
@@ -464,4 +464,4 @@ SConscript('src/SConscript', variant_dir=object_dir, duplicate=0)
 Import('env')
 
 # build the program
-env.Program(build_dir + program_name, env.obj_files)
+env.Program(build_dir + "/" + program_name, env.obj_files)
