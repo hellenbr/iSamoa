@@ -5,19 +5,19 @@ flux_solver='upwind'
 layers=85
 perm_averaging='geometric'
 assertions=True
-#For iMPI: use GNU, no OpenMP, and MPI must set to default (MPICH)
+#For iMPI: use GNU, no OpenMP
 compiler='gnu'
 openmp='noomp'
-mpi='default'
-impi=True
+mpi='impi' # to use the iMPI library
+impi_on=True
 impi_dir='.' # will read from $IMPIPATH
-impinodes=True
+impi_nodeinfo=True
 #Asagi setting
 asagi=True
 asagi_dir='.' # will check for $IMPIPATH
 #Executable name
 exe=scenario
-if (impi):
+if (impi_on):
     exe+='_impi_'
 else:
     exe+='_mpi_'

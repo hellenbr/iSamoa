@@ -72,14 +72,14 @@ vars.AddVariables(
                 allowed_values=('noomp', 'notasks', 'tasks', 'adaptive_tasks')
               ),
 
-  BoolVariable( 'impi', 'iMPI support', True),
+  BoolVariable( 'impi_on', 'Enable iMPI (iMPI library can still be used regardless iMPI is enabled or disabled)', True),
 
   PathVariable( 'impi_dir', 'iMPI installation path', '.'),
 
-  BoolVariable( 'impinodes', 'iMPI enbale node information in output', True),
+  BoolVariable( 'impi_nodeinfo', 'iMPI enbale node information in output', True),
 
-  EnumVariable( 'mpi', 'MPI support', 'default',
-                allowed_values=('nompi', 'default', 'intel', 'mpich2', 'openmpi', 'ibm')
+  EnumVariable( 'mpi', 'MPI support (which MPI library to use)', 'impi',
+                allowed_values=('nompi', 'impi', 'default', 'intel', 'mpich2', 'openmpi', 'ibm')
               ),
 
   BoolVariable( 'standard', 'check for Fortran 2008 standard compatibility', False),
@@ -145,32 +145,35 @@ elif  env['compiler'] == 'gnu':
   env['F90FLAGS'] = '-fimplicit-none -cpp -ffree-line-length-none'
   env.SetDefault(openmp = 'notasks')
 
-# If IMPI is active, MPI is forced to be active and use MPICH default
-# iMPI available scenarios
+# Scenarios available for iMPI
 IMPI_SCENARIOS = ['swe', 'darcy']
-if env['impi']:
-    # check for iMPI installation
+if env['impi_on']:
+    # Check for available iMPI scenario
+    if (env['scenario'] in IMPI_SCENARIOS):
+        # If iMPI is force, force to use iMPI library
+        env['mpi'] = 'impi'
+        env['F90FLAGS'] += ' -D_IMPI'
+        print "iMPI activated for selected scenario " + env['scenario']
+        if env['impi_nodeinfo']:
+            env['F90FLAGS'] += ' -D_IMPI_NODES'
+    else:
+        print "Selected scenario has no iMPI supported. iMPI option deactivated."
+
+# If use iMPI library, check for iMPI installation
+# Note: iMPI library can be used regardless iMPI is enabled or disabled
+if env['mpi'] == 'impi':
     if (os.path.isfile(env['impi_dir'] + '/bin/mpicc') and
-                    os.path.isfile(env['impi_dir'] + '/lib/libmpi.so')):
+                os.path.isfile(env['impi_dir'] + '/lib/libmpi.so')):
         impipath = env['impi_dir']
     elif (os.path.isfile(os.environ['IMPIPATH'] + '/bin/mpicc') and 
             os.path.isfile(os.environ['IMPIPATH'] + '/lib/libmpi.so')):
         impipath = os.environ['IMPIPATH']
     else:
-        sys.exit("Error: iMPI installation not found. Check impi_dir. Operation aborted.")
-    # Check for available iMPI scenario
-    if (env['scenario'] in IMPI_SCENARIOS):
-        fc = impipath+'/bin/gfortran'
-        env['mpi'] = 'default'
-        env['F90FLAGS'] += ' -D_IMPI'
-        print "iMPI activated for selected scenario " + env['scenario']
-        if env['impinodes']:
-            env['F90FLAGS'] += ' -D_IMPI_NODES'
-    else:
-        print "Selected scenario has no iMPI supported. iMPI option deactivated."
+        sys.exit("Error: iMPI installation not found. Check impi_dir. Compilation abort.")
+    fc = impipath+'/bin/gfortran'
 
 # If MPI is active, use the mpif90 wrapper for compilation
-if env['mpi'] == 'default':
+if (env['mpi'] == 'default' or env['mpi'] == 'impi'):
   env['F90'] = 'MPICH_F90=' + fc + ' OMPI_FC=' + fc + ' I_MPI_F90=' + fc + ' mpif90'
   env['LINK'] = 'MPICH_F90=' + fc + ' OMPI_FC=' + fc + ' I_MPI_F90=' + fc + ' mpif90'
   env['F90FLAGS'] += ' -D_MPI'
@@ -193,7 +196,6 @@ elif env['mpi'] == 'intel':
 elif env['mpi'] == 'nompi':
   env['F90'] = fc
   env['LINK'] = fc
-
 
 # set scenario with preprocessor macros
 if env['scenario'] == 'darcy':
@@ -238,17 +240,17 @@ if env['openmp'] != 'noomp':
 #set compilation flags and preprocessor macros for the ASAGI library
 if env['asagi']:
     asagi_dir = env['asagi_dir']
-    if env['impi']:
-        # if the provided asagi path NOT valid, check for the impi path
-        if not (os.path.isfile(asagi_dir+'/lib/libasagi_nompi.so')):
+    # if the provided asagi path NOT valid, check for the impi path (if useing iMPI library)
+    if not (os.path.isfile(asagi_dir+'/lib/libasagi_nompi.so')):
+        if env['mpi'] == 'impi':
             if (os.path.isfile(impipath + '/lib/libasagi_nompi.so')):
                 asagi_dir = impipath
     env.Append(F90PATH = os.path.abspath(asagi_dir + '/include'))
     env['F90FLAGS'] += ' -D_ASAGI'
     env['LINKFLAGS'] += ' -Wl,--rpath,' + os.path.abspath(asagi_dir) + '/lib'
     env.Append(LIBPATH = asagi_dir + '/lib')
-    if env['impi']:
-        # with iMPI enable, asagi lib must be compiled with no MPI, thus the name change
+    if env['mpi'] == 'impi':
+        # with iMPI library, asagi lib must be compiled with no MPI, thus the name change
         env.Append(LIBS = ['asagi_nompi', 'numa'])
     else:
         env.Append(LIBS = ['asagi', 'numa'])

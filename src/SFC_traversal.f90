@@ -77,7 +77,7 @@ MODULE SFC_traversal
             call init_grid(grid, cfg%i_start_depth)
 			call heat_eq_create(grid, cfg%l_log, cfg%i_asagi_mode)
 
-			!$omp parallel copyin(cfg):q
+			!$omp parallel copyin(cfg)
 			!
 			call heat_eq_run(grid, cfg%i_start_depth)
             call grid%destroy()
