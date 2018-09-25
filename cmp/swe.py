@@ -7,7 +7,7 @@ assertions=True
 compiler='gnu'
 openmp='noomp'
 mpi='impi' # to use the iMPI library
-impi_on=False
+impi_on=True
 impi_dir='.' # will read from $IMPIPATH
 impi_nodeinfo=True
 #Asagi setting

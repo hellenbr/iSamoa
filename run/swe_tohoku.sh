@@ -1,11 +1,10 @@
 #!/bin/bash
 
-DATAPATH=$(dirname $IMPIPATH)/samoa-data
+DATAPATH=$SAMOADATADIR
+execname=$IMPIPATH/swe/swe_impi_release
 
 # Number of processes to start
 startprocs=2
-# The name of the executable
-execname=$(dirname $IMPIPATH)/gh_esamoa/bin/swe_impi_release
 # iMPI adapt frequency (every N steps)
 nimpiadapt='-nimpiadapt 100'
 # iMPI host file (effective only if impi nodes output is enabled)
