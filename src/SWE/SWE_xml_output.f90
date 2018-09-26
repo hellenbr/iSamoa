@@ -92,7 +92,7 @@
 #           if defined(_QUAD_PRECISION)
 #               warning VTK output does not work for quad precision
 #           else
-                if (rank_MPI == 0) then
+                if (is_root()) then
                     write (s_file_name, "(A, A, I0, A)") TRIM(traversal%s_file_stamp), "_", traversal%i_output_iteration, ".pvtu"
                     e_io = vtk%VTK_INI_XML('ascii', s_file_name, 'PUnstructuredGrid')
 

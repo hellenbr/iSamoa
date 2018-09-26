@@ -32,6 +32,9 @@
 			real (kind = GRID_SR), allocatable			        :: permeability(:, :)
 			real (kind = GRID_SR), allocatable			        :: porosity(:)
 			real (kind = GRID_SR), allocatable					:: u(:, :)
+#			if defined(_IMPI_NODES)
+			integer (kind = GRID_SI), allocatable				:: node(:)
+#			endif
             integer (kind = GRID_SI), allocatable			    :: rank(:)
             integer (kind = GRID_SI), allocatable			    :: section_index(:)
 			integer (BYTE), allocatable					        :: depth(:)
@@ -115,6 +118,9 @@
 			allocate(cell_data%permeability(i_cells, 3), stat = i_error); assert_eq(i_error, 0)
 			allocate(cell_data%porosity(i_cells), stat = i_error); assert_eq(i_error, 0)
 			allocate(cell_data%u(i_cells, 3), stat = i_error); assert_eq(i_error, 0)
+#			if defined(_IMPI_NODES)
+			allocate(cell_data%node(i_cells), stat = i_error); assert_eq(i_error, 0)
+#			endif
 			allocate(cell_data%rank(i_cells), stat = i_error); assert_eq(i_error, 0)
 			allocate(cell_data%section_index(i_cells), stat = i_error); assert_eq(i_error, 0)
 			allocate(cell_data%depth(i_cells), stat = i_error); assert_eq(i_error, 0)
@@ -137,6 +143,9 @@
 			deallocate(cell_data%permeability, stat = i_error); assert_eq(i_error, 0)
 			deallocate(cell_data%porosity, stat = i_error); assert_eq(i_error, 0)
 			deallocate(cell_data%u, stat = i_error); assert_eq(i_error, 0)
+#			if defined(_IMPI_NODES)
+			deallocate(cell_data%node, stat = i_error); assert_eq(i_error, 0)
+#			endif
 			deallocate(cell_data%rank, stat = i_error); assert_eq(i_error, 0)
 			deallocate(cell_data%section_index, stat = i_error); assert_eq(i_error, 0)
 			deallocate(cell_data%depth, stat = i_error); assert_eq(i_error, 0)
@@ -166,8 +175,8 @@
             type(t_section_info)         	                        :: section_info
 			integer (kind = GRID_SI)								:: i_section, i_cells, i_points, i_error, i
 
-            if (rank_MPI == 0) then
-                _log_write(1, '(A, I0, A, I0)') " Darcy: output step: ", traversal%i_output_iteration
+            if (is_root()) then
+                _log_write(1, '(A, I0)') "  Darcy VTK OUTPUT: ", traversal%i_output_iteration
             end if
 
             !we can not use grid%get_info in a sequential OpenMP environment, hence reduce the grid info manually
@@ -204,7 +213,7 @@
             integer (kind = GRID_SI)								:: i_error
             call write_vtu_file(traversal, grid)
 
-            if (rank_MPI == 0) then
+            if (is_root()) then
                 call write_pvtu_file(traversal, grid)
             end if
 
@@ -274,6 +283,9 @@
                         e_io = vtk%VTK_VAR_XML(i_cells, 'permeability', traversal%cell_data%permeability(:, 1), traversal%cell_data%permeability(:, 2), traversal%cell_data%permeability(:, 3))
                         e_io = vtk%VTK_VAR_XML(i_cells, 'porosity', traversal%cell_data%porosity)
                         e_io = vtk%VTK_VAR_XML(i_cells, 'flux', traversal%cell_data%u(:, 1), traversal%cell_data%u(:, 2), traversal%cell_data%u(:, 3))
+#						if defined(_IMPI_NODES)
+                        e_io = vtk%VTK_VAR_XML(i_cells, 'node', traversal%cell_data%node)
+#						endif
                         e_io = vtk%VTK_VAR_XML(i_cells, 'rank', traversal%cell_data%rank)
                         e_io = vtk%VTK_VAR_XML(i_cells, 'section index', traversal%cell_data%section_index)
                         e_io = vtk%VTK_VAR_XML(i_cells, 'depth', traversal%cell_data%depth)
@@ -318,6 +330,9 @@
                         e_io = vtk%VTK_VAR_XML('permeability', 1.0_GRID_SR, 3)
                         e_io = vtk%VTK_VAR_XML('porosity', 1.0_GRID_SR, 1)
                         e_io = vtk%VTK_VAR_XML('flux', 1.0_GRID_SR, 3)
+#						if defined(_IMPI_NODES)
+                        e_io = vtk%VTK_VAR_XML('node', 1_GRID_SI, 1)
+#						endif
                         e_io = vtk%VTK_VAR_XML('rank', 1_GRID_SI, 1)
                         e_io = vtk%VTK_VAR_XML('section index', 1_GRID_SI, 1)
                         e_io = vtk%VTK_VAR_XML('depth', 1_1, 1)
@@ -328,7 +343,6 @@
 
                     do i_rank = 0, size_MPI - 1
                         write(s_file_name, '(A, "_", I0, "_r", I0, ".vtu")') trim(remove_dir_from_path(traversal%s_file_stamp)), traversal%i_output_iteration, i_rank
-
                         e_io = vtk%VTK_GEO_XML(s_file_name)
                     end do
 
@@ -444,6 +458,9 @@
                 call compute_flux_vector_3D(saturation, u_w, u_n, flux_w, flux_n)
 
                 do layer = 1, _DARCY_LAYERS
+#					if defined(_IMPI_NODES)
+                    cell_data%node(i_cell_data_index) = node_MPI
+#					endif
                     cell_data%rank(i_cell_data_index) = rank_MPI
                     cell_data%section_index(i_cell_data_index) = section_index
                     !convert the permeability back to millidarcy
@@ -495,6 +512,9 @@
 #           else
                 edge_length = element%cell%geometry%get_leg_size()
 
+#				if defined(_IMPI_NODES)
+                cell_data%node(i_cell_data_index) = node_MPI
+#				endif
                 cell_data%rank(i_cell_data_index) = rank_MPI
                 cell_data%section_index(i_cell_data_index) = section_index
 

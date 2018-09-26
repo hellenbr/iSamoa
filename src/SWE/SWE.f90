@@ -73,15 +73,16 @@
 
 			call date_and_time(s_date, s_time)
 
+			! TODO: joining ranks do not need to call this
 #           if defined(_MPI)
             call mpi_bcast(s_date, len(s_date), MPI_CHARACTER, 0, MPI_COMM_WORLD, i_error); assert_eq(i_error, 0)
             call mpi_bcast(s_time, len(s_time), MPI_CHARACTER, 0, MPI_COMM_WORLD, i_error); assert_eq(i_error, 0)
 #           endif
 
             swe%output%s_file_stamp = trim(cfg%output_dir) // "/swe_" // trim(s_date) // "_" // trim(s_time)
-			swe%xml_output%s_file_stamp = trim(cfg%output_dir) // "/swe_" // trim(s_date) // "_" // trim(s_time)
-            swe%point_output%s_file_stamp = trim(cfg%output_dir) // "/swe_" // trim(s_date) // "_" // trim(s_time)
-			s_log_name = trim(swe%xml_output%s_file_stamp) // ".log"
+			swe%xml_output%s_file_stamp = trim(swe%output%s_file_stamp)
+			swe%point_output%s_file_stamp = trim(swe%output%s_file_stamp)
+			s_log_name = trim(swe%output%s_file_stamp) // ".log"
 
 #           if defined(_IMPI)
             ! At this point, JOINING ranks do not have the right file name yet
@@ -329,12 +330,10 @@
                 !===== END Initialization =====
 
                 grid_info = grid%get_info(MPI_SUM, .true.)
-
                 if (is_root()) then
                     !$omp master
 					_log_write(0, '(A)') "  SWE Init: DONE."
                     _log_write(0, '()')
-
                     call grid_info%print()
                     !$omp end master
                 end if
@@ -581,7 +580,7 @@
 
 #                   if defined(_IMPI)
                     ! JOINGING ranks will call this function to initialize their stats, but
-                    ! we don't them to do global MPI reduction
+                    ! we don't want them to do global MPI reduction
                     if (status_MPI .ne. MPI_ADAPT_STATUS_JOINING) then
 #                   endif
                         call swe%init_dofs%reduce_stats(MPI_SUM, .true.)
@@ -683,9 +682,16 @@
                 !(2) JOINING ranks get necessary data from MASTER
                 !    The use of NEW_COMM must exclude LEAVING ranks, because they have NEW_COMM == MPI_COMM_NULL
                 if ((joining_count > 0) .and. (status_MPI .ne. MPI_ADAPT_STATUS_LEAVING)) then
-                    bcast_buff = t_swe_impi_bcast( grid%sections%is_forward(), &
-                            i_stats_phase, i_initial_step, i_time_step, swe%xml_output%i_output_iteration, &
-                            r_time_next_output, grid%r_time, grid%r_dt, grid%r_dt_new)
+                    bcast_buff = t_swe_impi_bcast( &
+							grid%sections%is_forward(), &
+                            i_stats_phase, &
+							i_initial_step, &
+							i_time_step, &
+							swe%xml_output%i_output_iteration, &
+                            r_time_next_output, &
+							grid%r_time, &
+							grid%r_dt, &
+							grid%r_dt_new)
                     call mpi_bcast(bcast_buff, sizeof(bcast_buff), MPI_BYTE, 0, NEW_COMM, err); assert_eq(err, 0)
                     call mpi_bcast(swe%xml_output%s_file_stamp, len(swe%xml_output%s_file_stamp), MPI_CHARACTER, 0, NEW_COMM, err); assert_eq(err, 0)
                 end if
