@@ -3,7 +3,7 @@ scenario='darcy'
 target='release'
 flux_solver='upwind'
 #layers=85
-layers=36
+layers=16
 perm_averaging='geometric'
 assertions=True
 #For iMPI: use GNU, no OpenMP

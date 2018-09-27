@@ -350,22 +350,18 @@ module Section_info_list
 		!Divide by ideal circumference of a square partition
 		quality = quality * 0.25_SR / sqrt(real(grid_info%i_cells, SR) / (2.0_SR * real(size_MPI, SR)))
 
-		_log_write(0, "(A)")			"  Info:"
+		_log_write(0, "(A)")			"  Grid Info:"
 		_log_write(0, '(A)')			""
 		_log_write(0, "(A, I14)")		"  Cells                         :", grid_info%i_cells
 		_log_write(0, "(A, I14)")		"  Crossed edges                 :", grid_info%i_crossed_edges
-
 		_log_write(0, "(A, I14)")		"  Inner color edges             :", grid_info%i_color_edges
 		_log_write(0, "(A, 2(I14))")	"  Boundary edges (red/green)    :", grid_info%i_boundary_edges
 		_log_write(0, "(A, 2(I14))")	"  Stack edges (red/green)       :", grid_info%i_stack_edges
 		_log_write(0, "(A, I14)")		"  Inner nodes                   :", grid_info%i_nodes
 		_log_write(0, "(A, 2(I14))")	"  Boundary nodes (red/green)    :", grid_info%i_boundary_nodes
 		_log_write(0, "(A, 2(I14))")	"  Stack nodes (red/green)       :", grid_info%i_stack_nodes
-
 		_log_write(0, "(A, 2(I14))")	"  Comms (red/green)             :", grid_info%i_comms
-
-		_log_write(0, "(A, F0.4)")	    "  Partition quality (1.0: perfect, infinity: worst): ", quality
-
+		_log_write(0, "(A, F0.4)")	    "  Partition quality (1.0: perfect, 0.0: worst): ", quality
 		_log_write(0, *) ""
 	end subroutine
 

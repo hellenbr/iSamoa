@@ -45,15 +45,13 @@
 
 #       if defined(_IMPI)
         type t_swe_impi_bcast
-            logical                :: is_forward       ! MPI_LOGICAL x1
-            integer (kind=GRID_SI) :: i_stats_phase    ! MPI_INTEGER4 x4
-            integer (kind=GRID_SI) :: i_initial_step
-            integer (kind=GRID_SI) :: i_time_step
-            integer (kind=GRID_SI) :: i_output_iteration
-            real (kind=GRID_SR)    :: r_time_next_output  ! MPI_DOUBLE_PRECISION x4
-            real (kind=GRID_SR)    :: r_time
-            real (kind=GRID_SR)    :: r_dt
-            real (kind=GRID_SR)    :: r_dt_new
+            logical                :: is_forward         ! MPI_LOGICAL
+            integer (kind=GRID_SI) :: i_time_step        ! MPI_INTEGER4
+            integer (kind=GRID_SI) :: i_output_iteration ! MPI_INTEGER4
+            real (kind=GRID_SR)    :: r_time_next_output ! MPI_DOUBLE_PRECISION
+            real (kind=GRID_SR)    :: grid_r_time        ! MPI_DOUBLE_PRECISION
+            real (kind=GRID_SR)    :: grid_r_dt          ! MPI_DOUBLE_PRECISION
+            real (kind=GRID_SR)    :: grid_r_dt_new      ! MPI_DOUBLE_PRECISION
         end type t_swe_impi_bcast
 #       endif
 
@@ -73,10 +71,16 @@
 
 			call date_and_time(s_date, s_time)
 
-			! TODO: joining ranks do not need to call this
 #           if defined(_MPI)
+				! Joining ranks do not need to call this
+#           	if defined(_IMPI)
+            	if (status_MPI .ne. MPI_ADAPT_STATUS_JOINING) then
+#           	endif
             call mpi_bcast(s_date, len(s_date), MPI_CHARACTER, 0, MPI_COMM_WORLD, i_error); assert_eq(i_error, 0)
             call mpi_bcast(s_time, len(s_time), MPI_CHARACTER, 0, MPI_COMM_WORLD, i_error); assert_eq(i_error, 0)
+#           	if defined(_IMPI)
+            	end if
+#           	endif
 #           endif
 
             swe%output%s_file_stamp = trim(cfg%output_dir) // "/swe_" // trim(s_date) // "_" // trim(s_time)
@@ -240,10 +244,10 @@
 			integer  (kind = GRID_SI)   :: i_stats_phase, err
 
 #           if defined(_MPI)
+            real (kind = GRID_SR)       :: tic = 0
             real (kind = GRID_SR)       :: r_wall_time_tic = 0
-            if (is_root()) then
-                r_wall_time_tic = mpi_wtime()
-            end if
+
+            r_wall_time_tic = mpi_wtime()
 #           endif
 
 #           if defined(_IMPI)
@@ -319,7 +323,7 @@
 #						if defined(_IMPI_NODES)
 						! This requires 1 MPI_Gather
 						! At this point i_output_iteration is already incremented, need to decrement by 1
-						call print_nodes(swe%point_output%i_output_iteration-1)
+						call print_nodes(swe%point_output%i_output_iteration)
 #						endif
 
                         r_time_next_output = r_time_next_output + cfg%r_output_time_step
@@ -409,18 +413,18 @@
                         grid_info%i_cells = grid%get_cells(MPI_SUM, .false.)
                         !$omp master
 #                       if defined(_MPI)
-                        _log_write(1, '("  SWE Earthquake: ", A, A, A, A, A, F10.2, A, I0, A, I0, A, I0)') &
-                                "dt ", trim(time_to_hrt(grid%r_dt)), &
+                        _log_write(1, '("  SWE Earthquake: ", A, I0, A, A, A, A, A, F14.2, A, I0, A, I0)') &
+                                "time step ", i_time_step, &
+                                " | dt ", trim(time_to_hrt(grid%r_dt)), &
                                 " | sim.time ", trim(time_to_hrt(grid%r_time)), &
                                 " | elap.time(sec) ", mpi_wtime()-r_wall_time_tic, &
-                                " | time step ", i_time_step, &
                                 " | cells ", grid_info%i_cells, &
                                 " | ranks ", size_MPI
 #                       else
-                        _log_write(1, '("  SWE Earthquake: ", A, A, A, A, A, I0, A, I0)') &
-                                "dt ", trim(time_to_hrt(grid%r_dt)), &
+                        _log_write(1, '("  SWE Earthquake: ", A, I0, A, A, A, A, A, I0)') &
+                                "time step ", i_time_step, &
+                                " | dt ", trim(time_to_hrt(grid%r_dt)), &
                                 " | sim.time ", trim(time_to_hrt(grid%r_time)), &
-                                " | time step ", i_time_step, &
                                 " | cells ", grid_info%i_cells
 #                       endif
                         !$omp end master
@@ -462,12 +466,14 @@
 #           if defined(_IMPI)
             else
                 ! JOINING ranks call impi_adapt immediately, avoiding initialization and earthquake phase
-                call impi_adapt(swe, grid, i_stats_phase, i_initial_step, i_time_step, r_time_next_output)
+                call impi_adapt(swe, grid, i_time_step, r_time_next_output)
             end if
 #           endif
 
             !===== START Tsunami =====
 			do
+				tic = mpi_wtime()
+
                 !check for loop termination
                 if ((cfg%r_max_time >= 0.0 .and. grid%r_time >= cfg%r_max_time) .or. &
                         (cfg%i_max_time_steps >= 0 .and. i_time_step >= cfg%i_max_time_steps)) then
@@ -480,8 +486,7 @@
                     grid_info_max = grid%get_info(MPI_MAX, .true.)
                     !$omp master
                     if (is_root()) then
-						_log_write(0, '("  SWE Tsunami DONE: cells avg ", I0, " | cells max ", I0)') &
-                                grid_info%i_cells / (omp_get_max_threads() * size_MPI), grid_info_max%i_cells
+						_log_write(0, '("  SWE Tsunami DONE.")')
                         _log_write(0, '()')
 
                         call grid_info%print()
@@ -502,23 +507,24 @@
 				!do a time step
 				call swe%euler%traverse(grid)
 
-                !master print screen
+                !master print progress
                 if (is_root()) then
                     grid_info%i_cells = grid%get_cells(MPI_SUM, .false.)
                     !$omp master
 #                   if defined(_MPI)
-                    _log_write(1, '("  SWE Tsunami: ", A, A, A, A, A, F10.2, A, I0, A, I0, A, I0)') &
-                            "dt ", trim(time_to_hrt(grid%r_dt)), &
+                    _log_write(1, '("  SWE Tsunami: ", A, I0, A, A, A, A, A, F14.2, A, F8.2, A, I0, A, I0)') &
+                            "time step ", i_time_step, &
+                            " | dt ", trim(time_to_hrt(grid%r_dt)), &
                             " | sim.time ", trim(time_to_hrt(grid%r_time)), &
                             " | elap.time(sec) ", mpi_wtime()-r_wall_time_tic, &
-                            " | time step ", i_time_step, &
+                            " | step time(sec) ", mpi_wtime()-tic, &
                             " | cells ", grid_info%i_cells, &
                             " | ranks ", size_MPI
 #                   else
-                    _log_write(1, '("  SWE Tsunami: ", A, A, A, A, A, I0, A, I0)') &
-                            "dt ", trim(time_to_hrt(grid%r_dt)), &
+                    _log_write(1, '("  SWE Tsunami: ", A, I0, A, A, A, A, A, I0)') &
+                            "time step ", i_time_step, &
+                            " | dt ", trim(time_to_hrt(grid%r_dt)), &
                             " | sim.time ", trim(time_to_hrt(grid%r_time)), &
-                            " | time step ", i_time_step, &
                             " | cells ", grid_info%i_cells
 #                   endif
                     !$omp end master
@@ -560,7 +566,7 @@
 #               if defined(_IMPI)
                 !Existing ranks call impi_adapt
                 if (cfg%i_impi_adapt_time_steps > 0 .and. mod(i_time_step, cfg%i_impi_adapt_time_steps) == 0) then
-                    call impi_adapt(swe, grid, i_stats_phase, i_initial_step, i_time_step, r_time_next_output)
+                    call impi_adapt(swe, grid, i_time_step, r_time_next_output)
                 end if
 #               endif
 			end do
@@ -568,10 +574,16 @@
 		end subroutine
 
         subroutine update_stats(swe, grid)
-            class(t_swe), intent(inout)   :: swe
- 			type(t_grid), intent(inout)     :: grid
+            class(t_swe), intent(inout) :: swe
+ 			type(t_grid), intent(inout) :: grid
 
- 			double precision, save          :: t_phase = huge(1.0d0)
+ 			double precision, save :: t_phase = huge(1.0d0)
+            type(t_grid_info)      :: grid_info
+
+            !The call to grid%get_info() must be threaded, so this is a workaround to reduce
+            !the section info into thread info. The data in grid_info will be discarded.
+            grid_info = grid%get_info(MPI_SUM, .false.)
+            !$omp barrier
 
 			!$omp master
                 !Initially, just start the timer and don't print anything
@@ -617,6 +629,8 @@
                         _log_write(0, '(A, T30, F12.4, A)') "Phase time:", t_phase, " s"
                         _log_write(0, '(A)') "-------------------------"
 						_log_write(0, '()')
+                        call grid_info%print()
+						_log_write(0, '()')
                     end if
                 end if
 
@@ -630,10 +644,10 @@
             !$omp end master
         end subroutine
 
-        subroutine impi_adapt(swe, grid, i_stats_phase, i_initial_step, i_time_step, r_time_next_output)
+        subroutine impi_adapt(swe, grid, i_time_step, r_time_next_output)
             class(t_swe), intent(inout)           :: swe
             type(t_grid), intent(inout)           :: grid
-            integer (kind=GRID_SI), intent(inout) :: i_stats_phase, i_initial_step, i_time_step
+            integer (kind=GRID_SI), intent(inout) :: i_time_step
             real (kind=GRID_SR), intent(inout)    :: r_time_next_output
 
 #           if defined(_IMPI)
@@ -682,18 +696,18 @@
                 !(2) JOINING ranks get necessary data from MASTER
                 !    The use of NEW_COMM must exclude LEAVING ranks, because they have NEW_COMM == MPI_COMM_NULL
                 if ((joining_count > 0) .and. (status_MPI .ne. MPI_ADAPT_STATUS_LEAVING)) then
+
                     bcast_buff = t_swe_impi_bcast( &
 							grid%sections%is_forward(), &
-                            i_stats_phase, &
-							i_initial_step, &
 							i_time_step, &
-							swe%xml_output%i_output_iteration, &
+							swe%point_output%i_output_iteration, &
                             r_time_next_output, &
 							grid%r_time, &
 							grid%r_dt, &
 							grid%r_dt_new)
+
                     call mpi_bcast(bcast_buff, sizeof(bcast_buff), MPI_BYTE, 0, NEW_COMM, err); assert_eq(err, 0)
-                    call mpi_bcast(swe%xml_output%s_file_stamp, len(swe%xml_output%s_file_stamp), MPI_CHARACTER, 0, NEW_COMM, err); assert_eq(err, 0)
+                    call mpi_bcast(swe%point_output%s_file_stamp, len(swe%point_output%s_file_stamp), MPI_CHARACTER, 0, NEW_COMM, err); assert_eq(err, 0)
                 end if
 
                 !(3) JOINING ranks initialize
@@ -709,22 +723,20 @@
                         call grid%reverse()  !this will set the grid%sections%forward flag properly
                     end if
 
-                    i_stats_phase      = bcast_buff%i_stats_phase
-                    i_initial_step     = bcast_buff%i_initial_step
                     i_time_step        = bcast_buff%i_time_step
                     r_time_next_output = bcast_buff%r_time_next_output
-                    grid%r_time        = bcast_buff%r_time
-                    grid%r_dt          = bcast_buff%r_dt
-                    grid%r_dt_new      = bcast_buff%r_dt_new
+                    grid%r_time        = bcast_buff%grid_r_time
+                    grid%r_dt          = bcast_buff%grid_r_dt
+                    grid%r_dt_new      = bcast_buff%grid_r_dt_new
 
-                    swe%xml_output%i_output_iteration   = bcast_buff%i_output_iteration
                     swe%output%i_output_iteration       = bcast_buff%i_output_iteration
                     swe%point_output%i_output_iteration = bcast_buff%i_output_iteration
+                    swe%xml_output%i_output_iteration   = bcast_buff%i_output_iteration
 
-                    swe%output%s_file_stamp       = swe%xml_output%s_file_stamp
-                    swe%point_output%s_file_stamp = swe%xml_output%s_file_stamp
+                    swe%output%s_file_stamp     = swe%point_output%s_file_stamp
+                    swe%xml_output%s_file_stamp = swe%point_output%s_file_stamp
 
-                    s_log_name = trim(swe%xml_output%s_file_stamp) // ".log"
+                    s_log_name = trim(swe%point_output%s_file_stamp) // ".log"
                     if (cfg%l_log) then
                         _log_open_file(s_log_name)
                     end if
