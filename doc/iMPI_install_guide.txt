@@ -1,0 +1,157 @@
+
+# Set iMPI installation path
+export IMPIPATH=/path/to/install/impi
+
+
+################
+#  VM Cluster
+################
+
+#----------------------------
+# 1. Install dependencies:
+#----------------------------
+# (1) m4 (2) autoconf (3) automake (4) libtool
+# In the above order, for each package, do the following:
+
+tar xvzf <tar ball>
+cd <extracted tar ball dir>
+./configure --prefix=$IMPIPATH
+make install
+
+#----------------------------
+# 2. Install Munge (VM local install)
+#----------------------------
+
+tar xvjf <munge tar ball>
+cd <extracted tar ball dir>
+./configure --prefix=/usr/local
+make install
+
+### 2.1 Create Munge key
+
+mkdir -p $IMPIPATH/etc/munge
+touch $IMPIPATH/etc/munge/munge.key
+echo 'somenumberalphabetonlytextnospecialcharacters' > $IMPIPATH/etc/munge/munge.key
+chmod 600 $IMPIPATH/etc/munge/munge.key
+
+### 2.2 Test Munge
+
+munged -Ff
+
+#----------------------------
+# 3. Install iRM
+#----------------------------
+
+cd irm  #irm source dir
+./autogen.sh
+
+cd irm_build # a irm build dir next to irm source dir
+../irm/configure --prefix=$IMPIPATH --with-munge=/usr/local
+make install
+
+cd contrib/pmi2 # IMPORTANT: install pmi2
+make install
+
+### 3.1 Slurm config file
+
+cp /path/to/slurm.conf $IMPIPATH/etc/slurm.conf
+
+### open slurm.conf.in, check the following fields (make sure they have correct values)
+###		SlurmUser=root
+###		SlurmdUser=root
+###		TreeWidth=30
+###		SchedulerParameters=sched_min_interval=30  #or any number >30 sec
+
+### 3.2 Test slurm
+slurmd -Dvvvv
+
+#----------------------------
+# 4. Install iMPI
+#----------------------------
+
+cd impi  #impi source dir
+./autogen.sh
+
+cd impi_build # a impi build dir next to impi source dir
+../impi/configure --prefix=$IMPIPATH --with-slurm=$IMPIPATH --with-pmi=pmi2 --with-pm=no
+make install
+
+
+
+
+
+################
+#  SuperMUC
+################
+
+#----------------------------
+# 1. Install dependencies:
+#----------------------------
+# (1) m4 (2) autoconf (3) automake (4) libtool
+# In the above order, for each package, do the following:
+
+tar xvzf <tar ball>
+cd <extracted tar ball dir>
+./configure --prefix=$IMPIPATH
+make install
+
+#----------------------------
+# 2. Install Munge
+#----------------------------
+
+tar xvjf <munge patched tar ball>
+cd <extracted tar ball dir>
+./configure --prefix=$IMPIPATH
+make install
+
+### 2.1 Create Munge key
+
+mkdir -p $IMPIPATH/etc/munge
+touch $IMPIPATH/etc/munge/munge.key
+echo 'somenumberalphabetonlytextnospecialcharacters' > $IMPIPATH/etc/munge/munge.key
+chmod 600 $IMPIPATH/etc/munge/munge.key
+
+### 2.2 Test Munge
+
+munged -Ff
+
+#----------------------------
+# 3. Install iRM
+#----------------------------
+
+cd irm  #irm source dir
+./autogen.sh
+
+cd irm_build # a irm build dir next to irm source dir
+../irm/configure --prefix=$IMPIPATH --with-munge=$IMPIPATH
+make install
+
+cd contrib/pmi2 # IMPORTANT: install pmi2
+make install
+
+### 3.1 Slurm config file
+
+cp /path/to/slurm.conf.in $IMPIPATH/etc/slurm.conf.in  
+
+### open slurm.conf.in, check the following fields (make sure they have correct values)
+###		SlurmUser=<SuperMUC user name>
+###		SlurmdUser=<SuperMUC user name>
+###		TreeWidth=1000
+###		SchedulerParameters=sched_min_interval=60   #or any number >60 sec
+
+### 3.2 Test slurm
+slurmd -Dvvvv
+
+#----------------------------
+# 4. Install iMPI
+#----------------------------
+
+cd impi  #impi source dir
+./autogen.sh
+
+cd impi_build # a impi build dir next to impi source dir
+../impi/configure --prefix=$IMPIPATH --with-slurm=$IMPIPATH --with-pmi=pmi2 --with-pm=no --with-device=ch3:nemesis:tcp
+make install
+
+
+
