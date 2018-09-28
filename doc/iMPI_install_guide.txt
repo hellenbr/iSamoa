@@ -46,7 +46,7 @@ cd irm  #irm source dir
 ./autogen.sh
 
 cd irm_build # a irm build dir next to irm source dir
-../irm/configure --prefix=$IMPIPATH --with-munge=/usr/local
+../irm/configure --prefix=$IMPIPATH --with-munge=/usr/local LIBS=-lm
 make install
 
 cd contrib/pmi2 # IMPORTANT: install pmi2
