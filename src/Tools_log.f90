@@ -170,11 +170,13 @@ module Tools_mpi
 				! Reach end of file, break the loop
 				write(6,'(A)') "iMPI Warning: current node not found in host file! Node ID is set to -1."
 				node_MPI = -1
+				close(read_unit)
 				return
 			end if
 			! Compare node name
 			if (trim(node_name) .eq. trim(read_buff)) then
 				node_MPI = l
+				close(read_unit)
 				return
 			end if
 			l = l + 1
