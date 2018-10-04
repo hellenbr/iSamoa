@@ -17,9 +17,55 @@
 #@ notify_user = hellenbr@in.tum.de
 #@ queue
 
-. /etc/profile
-. /etc/profile.d/modules.sh
-. $HOME/.bashrc  #This loads all iMPI related paths
+source /etc/profile
+source /etc/profile.d/modules.sh
+### BUG: bashrc NOT loaded!!
+source ~/.bashrc
+
+#########################
+# BUG: bashrc not loaded
+# FIX: need to load modules and paths here!!!
+#########################
+### Remove defaults
+module unload mpi.ibm
+module unload mkl
+### Needed by applications
+module load scons
+module load python/2.7.6
+### Needed by ASAGI (intel libraries)
+module load cmake
+module load netcdf
+module load intel
+### Use GCC
+module unload gcc
+module load gcc/5
+### Set iMPI path
+export NFSPATH=$HOME/workspace
+#export BASEPATH=$NFSPATH/sbihpcmaster
+#export BASEPATH=$NFSPATH/sbihpccurrentnocfg
+#export BASEPATH=$NFSPATH/sbihpc2016stable
+#export BASEPATH=$NFSPATH/sbihpcno
+#export BASEPATH=$NFSPATH/hwihpcmaster
+#export BASEPATH=$NFSPATH/hwihpccurrentnocfg
+export BASEPATH=$NFSPATH/hwihpc2016stable
+#export BASEPATH=$NFSPATH/hwihpcno
+export IMPIPATH=$BASEPATH/install
+### Load the iMPI paths
+export PATH=$IMPIPATH/sbin:$PATH
+export PATH=$IMPIPATH/bin:$PATH
+export LD_LIBRARY_PATH=/usr/local/lib:$LD_LIBRARY_PATH
+export LD_LIBRARY_PATH=$IMPIPATH/lib:$LD_LIBRARY_PATH
+export CPATH=$IMPIPATH/include:$CPATH
+export CPPPATH=$IMPIPATH/include:$CPPPATH
+export SLURM_MPI_TYPE=pmi2
+### iMPI source paths
+export IRMDIR=$BASEPATH/source/irm
+export IMPIDIR=$BASEPATH/source/impi
+### Application paths
+export EBAYESDIR=$NFSPATH/ebayes
+export ESAMOADIR=$NFSPATH/esamoa
+export SAMOADATADIR=$NFSPATH/samoa-data
+
 
 #########################
 # SET THIS CORRECTLY
@@ -39,7 +85,7 @@ all=$execname
 # iMPI adapt frequency (every N steps)
 all=$all' -nimpiadapt 100'
 # iMPI host file (effective only if impi nodes output is enabled)
-all=$all' -fimpihosts '$PWD/unique_hosts
+all=$all' -fimpihosts '$PWD/trimmed_unique_hosts
 # Grid maximum depth (14)
 all=$all' -dmin 8'
 # Grid maximum depth (14)
