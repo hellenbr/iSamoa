@@ -19,104 +19,104 @@ import os
 vars = Variables()
 
 vars.AddVariables(
-  PathVariable( 'config', 'build configuration file', None, PathVariable.PathIsFile),
+    PathVariable( 'config', 'build configuration file', None, PathVariable.PathIsFile),
 )
 
 env = Environment(variables=vars)
 
 #Set config variables from config file if it exists
-
 if 'config' in env:
-  vars = Variables(env['config'])
+    vars = Variables(env['config'])
 else:
-  vars = Variables()
+    vars = Variables()
 
 #Add config variables
-
 vars.AddVariables(
-  PathVariable( 'config', 'build configuration file', None, PathVariable.PathIsFile),
+    PathVariable( 'config', 'build configuration file', None, PathVariable.PathIsFile),
 
-  PathVariable( 'build_dir', 'build directory', './bin', PathVariable.PathIsDirCreate),
+    PathVariable( 'build_dir', 'build directory', './bin', PathVariable.PathIsDirCreate),
 
-  EnumVariable( 'scenario', 'target scenario', 'darcy',
-                allowed_values=('darcy', 'swe', 'generic', 'flash') #, 'heat_eq', 'tests')
-              ),
+    EnumVariable( 'scenario', 'target scenario', 'darcy',
+            allowed_values=('darcy', 'swe', 'generic', 'flash') #, 'heat_eq', 'tests')
+    ),
 
-  EnumVariable( 'flux_solver', 'flux solver for FV problems', 'upwind',
-                allowed_values=('upwind', 'lf', 'lfbath', 'llf', 'llfbath', 'fwave', 'aug_riemann')
-              ),
+    EnumVariable( 'flux_solver', 'flux solver for FV problems', 'upwind',
+            allowed_values=('upwind', 'lf', 'lfbath', 'llf', 'llfbath', 'fwave', 'aug_riemann')
+    ),
 
-  EnumVariable( 'data_refinement', 'input data refinement method', 'integrate',
-                allowed_values=('integrate', 'sample')
-              ),
+    EnumVariable( 'data_refinement', 'input data refinement method', 'integrate',
+            allowed_values=('integrate', 'sample')
+    ),
 
-  EnumVariable( 'perm_averaging', 'permeability averaging', 'geometric',
-                allowed_values=('arithmetic', 'geometric', 'harmonic')
-              ),
+    EnumVariable( 'perm_averaging', 'permeability averaging', 'geometric',
+            allowed_values=('arithmetic', 'geometric', 'harmonic')
+    ),
 
-  EnumVariable( 'mobility', 'mobility term for porous media flow', 'quadratic',
-                allowed_values=('linear', 'quadratic', 'brooks-corey')
-              ),
+    EnumVariable( 'mobility', 'mobility term for porous media flow', 'quadratic',
+            allowed_values=('linear', 'quadratic', 'brooks-corey')
+    ),
 
-  EnumVariable( 'compiler', 'choice of compiler', 'intel',
-                allowed_values=('intel', 'gnu')
-              ),
+    EnumVariable( 'compiler', 'choice of compiler', 'intel',
+            allowed_values=('intel', 'gnu')
+    ),
 
-  EnumVariable( 'target', 'build target, sets debug flag and optimization level', 'release',
-                allowed_values=('debug', 'profile', 'release')
-              ),
+    EnumVariable( 'target', 'build target, sets debug flag and optimization level', 'release',
+            allowed_values=('debug', 'profile', 'release')
+    ),
 
-  BoolVariable( 'assertions', 'enable run-time assertions', False),
+    BoolVariable( 'assertions', 'enable run-time assertions', False),
 
-  EnumVariable( 'openmp', 'OpenMP mode', 'tasks',
-                allowed_values=('noomp', 'notasks', 'tasks', 'adaptive_tasks')
-              ),
+    EnumVariable( 'openmp', 'OpenMP mode', 'tasks',
+            allowed_values=('noomp', 'notasks', 'tasks', 'adaptive_tasks')
+    ),
 
-  BoolVariable( 'impi_on', 'Enable iMPI (iMPI library can still be used regardless iMPI is enabled or disabled)', True),
+    BoolVariable( 'impi_on', 'Enable iMPI (iMPI library can still be used regardless iMPI is enabled or disabled)', True),
 
-  PathVariable( 'impi_dir', 'iMPI installation path', '.'),
+    PathVariable( 'impi_dir', 'iMPI installation path', '.'),
 
-  BoolVariable( 'impi_nodeinfo', 'iMPI enbale node information in output', True),
+    BoolVariable( 'impi_nodeinfo', 'iMPI enbale node information in output', True),
 
-  EnumVariable( 'mpi', 'MPI support (which MPI library to use)', 'impi',
-                allowed_values=('nompi', 'impi', 'default', 'intel', 'mpich2', 'openmpi', 'ibm')
-              ),
+    EnumVariable( 'mpi', 'MPI support (which MPI library to use). Setting to impi will use installation at $IMPIPATH', 'impi',
+            allowed_values=('nompi', 'impi', 'default', 'intel', 'mpich2', 'openmpi', 'ibm')
+    ),
 
-  BoolVariable( 'standard', 'check for Fortran 2008 standard compatibility', False),
+    BoolVariable( 'standard', 'check for Fortran 2008 standard compatibility', False),
 
-  BoolVariable( 'asagi', 'ASAGI support', True),
+    BoolVariable( 'asagi', 'ASAGI support', True),
 
-  BoolVariable( 'asagi_timing', 'switch on timing of all ASAGI calls', False),
+    BoolVariable( 'asagi_timing', 'switch on timing of all ASAGI calls', False),
 
-  PathVariable( 'asagi_dir', 'ASAGI directory', '.'),
+    PathVariable( 'asagi_dir', 'ASAGI directory', '.'),
 
-  EnumVariable( 'precision', 'floating point precision', 'double',
-                allowed_values=('single', 'double', 'quad')
-              ),
+    EnumVariable( 'precision', 'floating point precision', 'double',
+            allowed_values=('single', 'double', 'quad')
+    ),
 
-  EnumVariable( 'vec_report', 'vectorization report', '0',
-                allowed_values=('0', '1', '2', '3', '4', '5')
-              ),
-  EnumVariable( 'vec_phase', 'vectorization phase, multiple phases possible: cg,ipo,loop,offload,openmp,par,pgo,tcollect,vec, all', 'all',
-                allowed_values=('cg', 'ipo', 'loop', 'offload', 'openmp', 'par', 'pgo', 'tcollect', 'vec', 'vec,loop', 'all')
-              ),
+    EnumVariable( 'vec_report', 'vectorization report', '0',
+            allowed_values=('0', '1', '2', '3', '4', '5')
+    ),
 
-  EnumVariable( 'debug_level', 'debug output level', '1',
-                allowed_values=('0', '1', '2', '3', '4', '5', '6', '7')
-              ),
+    EnumVariable( 'vec_phase', 'vectorization phase, multiple phases possible: cg,ipo,loop,offload,openmp,par,pgo,tcollect,vec, all', 'all',
+            allowed_values=('cg', 'ipo', 'loop', 'offload', 'openmp', 'par', 'pgo', 'tcollect', 'vec', 'vec,loop', 'all')
+    ),
 
-  EnumVariable( 'machine', 'target machine', 'host',
-                allowed_values=('SSE4.2', 'AVX', 'host', 'mic')
-              ),
+    EnumVariable( 'debug_level', 'debug output level', '1',
+            allowed_values=('0', '1', '2', '3', '4', '5', '6', '7')
+    ),
 
-  BoolVariable( 'library', 'build samoa as a library', False),
+    EnumVariable( 'machine', 'target machine', 'host',
+            allowed_values=('SSE4.2', 'AVX', 'host', 'mic')
+    ),
+
+    BoolVariable( 'library', 'build samoa as a library', False),
 )
 
 vars.Add('layers', 'number of vertical layers (0: 2D, >0: 3D)', 0)
-vars.Add('exe', 'name of the executable. Per default, some compilation options will be added as suffixes.', 'samoa')
+
+vars.Add('exename', 'name of the executable. Per default, some compilation options will be added as suffixes.', 'samoa')
 
 # set environment
-env = Environment(ENV = os.environ, variables=vars)
+env = Environment(ENV=os.environ, variables=vars)
 
 # handle unknown, maybe misspelled variables
 unknownVariables = vars.UnknownVariables()
@@ -405,7 +405,7 @@ Help(vars.GenerateHelpText(env))
 # setup the program name and the build directory
 #
 
-if env['exe'] == 'samoa':
+if env['exename'] == 'samoa':
     # add descriptors to the executable for any argument that is not default
     program_name = env['scenario']
 
@@ -416,8 +416,8 @@ if env['exe'] == 'samoa':
         program_name += '_' + env['mpi']
     else:
         if env['impi']:
-            program_name += '_impi'           
-            
+            program_name += '_impi'
+
     if not env['asagi']:
       program_name += '_noasagi'
 
@@ -438,7 +438,7 @@ if env['exe'] == 'samoa':
     if env['machine'] == 'mic':
       program_name += '_mic'
 else:
-    program_name = env['exe']
+    program_name = env['exename']
 
 if env['library']:
   program_name = 'lib' + program_name + '.so'
