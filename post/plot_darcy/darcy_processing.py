@@ -2,7 +2,7 @@
 This function returns data (simulation time, wall time, number of cells) in 3 equal-sized arrays
 This is for plotting grid cell growth profile during the simulation
 '''
-def get_data(filename):
+def getdata_sim(filename):
 	# Define output arrays
 	simtime = []
 	walltime = []
@@ -56,7 +56,7 @@ def get_data(filename):
 This function samples data (simulation time, wall time, number of cells) at the beginning of each simulation day.
 It will produce less much less data points.
 '''
-def get_data_by_day(filename):
+def getdata_sim_by_day(filename):
 	# Define output arrays
 	simtime = []
 	walltime = []
@@ -117,6 +117,128 @@ def get_data_by_day(filename):
 	f.close()
 	return (simtime, walltime, numcells, numranks)
 
+
+'''
+This function returns "Phase Statistics" in 8 equal-sized arrays
+This is for plotting component exec. times
+'''
+def getdata_stat(filename):
+	##########
+	# t_phase = (t_compute + t_refine + t_conformity + t_lb + t_others) / ranks + t_impi
+	##########
+	
+	# Define outputs
+	numranks = []
+	t_phase = []
+	t_compute = []
+	t_refine = [] 
+	t_conformity = []
+	t_lb = []
+	t_others = []
+	t_impi = []
+	
+	f = open(filename, 'r')
+	for i, line in enumerate(f,1):
+		if "Phase statistics:" in line:
+			# Number of ranks
+			line = linecache.getline(filename, i+2) #Line starts with "Num ranks:"
+			if "Num ranks:" in line:
+				larr = line.split()
+				nranks = int(larr[-1])
+				numranks += [nranks]
+			else:
+				sys.exit("Line Num ranks not found. Program abort!")
+			
+			# t_phase (Total phase time)
+			line = linecache.getline(filename, i+14) #Line starts with "Phase time:"
+			if "Phase time:" in line:
+				larr = line.split()
+				idx = larr.index("time:")
+				phase_time = float(larr[idx+1]) #wall time, not summed
+				t_phase += [phase_time]
+			else:
+				sys.exit("Line Num ranks not found. Program abort!")
+			
+			# t_refine (grid refinement time)
+			line = linecache.getline(filename, i+8) #Line starts with "Adaptions:"
+			if "Adaptions:" in line:
+				larr = line.split()
+				idx = larr.index("time:")
+				refine_time = float(larr[idx+1])/float(nranks)
+				t_refine += [refine_time]
+				
+				# t_conformity (conformity check time)
+				idx = larr.index("integrity:")
+				conformity_time = float(larr[idx+1])/float(nranks)
+				t_conformity += [conformity_time]
+				
+				# t_lb (load balancing time)
+				idx = larr.index("balancing:")
+				lb_time = float(larr[idx+1])/float(nranks)
+				t_lb += [lb_time]
+			else:
+				sys.exit("Line Adaptions not found. Program abort!")
+			
+			# t_compute (computation time) := t_transport + t_gradient + t_perm + t_err + t_pressure
+			compute_time = 0.0
+			# t_transport
+			line = linecache.getline(filename, i+4) #Line starts with "Transport:"
+			if "Transport:" in line:
+				larr = line.split()
+				idx = larr.index("time:")
+				compute_time += float(larr[idx+1])/float(nranks)
+			else:
+				sys.exit("Line Transport not found. Program abort!")
+			# t_gradient
+			line = linecache.getline(filename, i+5) #Line starts with "Gradient:"
+			if "Gradient:" in line:
+				larr = line.split()
+				idx = larr.index("time:")
+				compute_time += float(larr[idx+1])/float(nranks)
+			else:
+				sys.exit("Line Gradient not found. Program abort!")
+			# t_perm
+			line = linecache.getline(filename, i+6) #Line starts with "Permeability:"
+			if "Permeability:" in line:
+				larr = line.split()
+				idx = larr.index("time:")
+				compute_time += float(larr[idx+1])/float(nranks)
+			else:
+				sys.exit("Line Permeability not found. Program abort!")
+			# t_err
+			line = linecache.getline(filename, i+7) #Line starts with "Error Estimate:"
+			if "Error Estimate:" in line:
+				larr = line.split()
+				idx = larr.index("time:")
+				compute_time += float(larr[idx+1])/float(nranks)
+			else:
+				sys.exit("Line Error Estimate not found. Program abort!")
+			# t_pressure
+			line = linecache.getline(filename, i+9) #Line starts with "Pressure Solver:"
+			if "Pressure Solver:" in line:
+				larr = line.split()
+				idx = larr.index("time:")
+				compute_time += float(larr[idx+1])/float(nranks)
+			else:
+				sys.exit("Line Pressure Solver not found. Program abort!")
+			t_compute += [compute_time]
+			
+			# t_impi
+			line = linecache.getline(filename, i+33) #Line starts with "iMPI: total adapt time"
+			if "iMPI: total adapt time" in line:
+				larr = line.split()
+				idx = larr.index("time")
+				impi_time = float(larr[idx+1])  #wall time, not summed
+			else: #iMPI line may not exist (for init and the last phase)
+				impi_time = 0.0
+			t_impi += [impi_time]
+			
+			# t_others
+			time_others = phase_time - compute_time - refine_time - conformity_time - lb_time - impi_time
+			t_others += [time_others]
+	
+	f.close()
+	return (numranks, t_phase, t_compute, t_refine, t_conformity, t_lb, t_others, t_impi)
 
 
 '''
