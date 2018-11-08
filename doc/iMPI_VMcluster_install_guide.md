@@ -43,7 +43,7 @@ On host machine, do the following...
 
 <a name="host_prep_1"/>
 
-#### 1.1 apt-install packages
+### 1.1 apt-install packages
 * virtualbox
 * nfs-common
 * nfs-kernel-server
@@ -51,7 +51,7 @@ On host machine, do the following...
 
 <a name="host_prep_2"/>
 
-#### 1.2 Setup a host-only network in VirtualBox
+### 1.2 Setup a host-only network in VirtualBox
 
 * **Command line version**
 ```bash
@@ -69,7 +69,7 @@ vboxmanage hostonlyif ipconfig vboxnet0 --ipv6 '' --netmasklengthv6 0
 ```bash
 vboxmanage list hostonlyifs
 ```
-<span style="color:red">Note: make sure **DHCP** is disabled.</span>
+** <span style="color:red">Note: make sure **DHCP** is disabled.</span>
 
 
 * **GUI version**
@@ -92,7 +92,8 @@ In "DHCP Server" tab, uncheck "Enable server" option.
 ```
 
 <a name="host_prep_3"/>
-#### 1.3 /etc/exports specify NFS shared directory
+
+### 1.3 /etc/exports specify NFS shared directory
 
 Insert the following line into **/etc/exports**.
 
@@ -112,6 +113,7 @@ sudo exportfs -ra
 ```
 
 <a name="host_prep_4"/>
+
 #### 1.4 /etc/hosts specify VM cluster node layout
 
 Insert following lines to **/etc/hosts**
@@ -134,10 +136,12 @@ sudo service networking restart
 ```
 
 <a name="node_prep"/>
+
 ## 2. VM Node Creation & Preparation
 
 <a name="node_prep_1"/>
-#### 2.1 Create a new VM
+
+### 2.1 Create a new VM
 
 ##### Download an Ubuntu desktop ISO image. We use 16.04 LTS.
 
@@ -171,10 +175,11 @@ Right click VM, choose "Settings..."
 ```
 
 <a name="node_prep_2"/>
-#### 2.2 Install OS and Packages on VM
+
+### 2.2 Install OS and Packages on VM
 
 ##### 1. Start the VM, finish the OS installation with the Ubuntu ISO image. Reboot.
-<span style="color:red">Note: Create the same user name as the one on host machine from which you will be launching the iMPI applications.</span>
+* <span style="color:red">Note: Create the same user name as the one on host machine from which you will be launching the iMPI applications.</span>
 
 ##### 2. Install necessary packages and update/upgrade system
 ```bash
@@ -202,18 +207,19 @@ Package explanation:
 * build-essential
 * openssh-server		<--needed for ssh login
 * nfs-common			<--needed for NFS shared dir
-* htop					<--monitoring utility
+* htop				<--monitoring utility
 * vim
 * libssl-dev			<--needed by **munge**
-* scons					<--needed by **samoa**
-* gfortran				<--needed by **samoa**
-* cmake 				<--needed by **asagi**
+* scons				<--needed by **samoa**
+* gfortran			<--needed by **samoa**
+* cmake 			<--needed by **asagi**
 * libnetcdf-dev			<--needed by **asagi**
-* libpthread-stubs0-dev	<--needed by **asagi**
+* libpthread-stubs0-dev	        <--needed by **asagi**
 * libnuma-dev			<--needed by **asagi**
 
 
 <a name="network"/>
+
 ## 3. VM Node Network and NFS Setup
 
 On the VM node, modify the following 4 files
@@ -223,7 +229,8 @@ On the VM node, modify the following 4 files
 * /etc/fstab
 
 <a name="network_1"/>
-#### 3.1 Modify /etc/hosts
+
+### 3.1 Modify /etc/hosts
 
 **<span style="color:red">Note: Node layout must be consistent on Host and all VMs.</span>**
 
@@ -248,16 +255,18 @@ Append these lines
 ```
 
 <a name="network_2"/>
-#### 3.2 Modify /etc/hostname, e.g.
+
+### 3.2 Modify /etc/hostname, e.g.
 ```no-highlight
 node0
 ```
 
 
 <a name="network_3"/>
-#### 3.3 Modify /etc/network/interfaces
 
-<span style="color:red">**Note**: host name and IP address must match according to node layout, e.g. _node0_ address must be 10.0.0.1 ; _node1_ address must be 10.0.0.2 ; etc.</span>
+### 3.3 Modify /etc/network/interfaces
+
+* <span style="color:red">**Note**: host name and IP address must match according to node layout, e.g. _node0_ address must be 10.0.0.1 ; _node1_ address must be 10.0.0.2 ; etc.</span>
 
 Insert these lines
 ```bash
@@ -277,30 +286,31 @@ iface enp0s8 inet static
 
 
 <a name="network_4"/>
-#### 3.4 Modify /etc/fstab
 
-<span style="color:red">**Note**: the NFS path on VM must be **EXACTLY the same** as it is on host, it won't work otherwise!</span>
+### 3.4 Modify /etc/fstab
 
-- Create the exact same path on VM if it doesn't exist.
+* <span style="color:red">**Note**: the NFS path on VM must be **EXACTLY the same** as it is on host, it won't work otherwise!</span>
+
+* Create the exact same path on VM if it doesn't exist.
 ```bash
 sudo mkdir -p /path/to/nfs
 ```
-- Insert this line to **/etc/fstab**
+* Insert this line to **/etc/fstab**
 ```bash
 10.0.0.100:/path/to/nfs  /path/to/nfs   nfs   auto    0   0
 ```
 
 
-#### 3.5 Setup SSH authorized keys and bashrc
+### 3.5 Setup SSH authorized keys and bashrc
 
-- Restart VM, now check if the NFS shared folder is working.
+* Restart VM, now check if the NFS shared folder is working.
 
-- Setup root account password.
+* Setup root account password.
 ```bash
 sudo passwd
 ```
 
-- Add the host's pubic key to both the root account, and current user account.
+* Add the host's pubic key to both the root account, and current user account.
 ```bash
 mkdir -p ~/.ssh
 ```
@@ -311,7 +321,7 @@ touch ~/.ssh/authorized_keys
 cat path/to/hosts/id_rsa.pub >> ~/.ssh/authorized_keys
 ```
 
-- Add the following to **.bashrc**
+* Add the following to **.bashrc**
 
 ```bash
 ##############################
@@ -366,14 +376,16 @@ export SLURM_MPI_TYPE=pmi2
 cdesa
 ```
 
-- Log out and log back in, or source ~/.bashrc
+* Log out and log back in, or source ~/.bashrc
 
 
 <a name="impi_ins"/>
+
 ## 4. VM Node iMPI Installation
 
 <a name="impi_ins_1"/>
-#### 4.1 Install dependencies & munge
+
+### 4.1 Install dependencies & munge
 ```
 Install dependencies in order:
 1) m4		---> install to $IMPIPATH
@@ -383,7 +395,7 @@ Install dependencies in order:
 5) munge	---> install to /usr/local (munge must be one instance per VM)
 ```
 
-- For **m4**, **autoconf**, **automake**, **libtool** do this:
+* For **m4**, **autoconf**, **automake**, **libtool** do this:
 ```bash
 tar xvzf <package_tar.gz_ball>
 ```
@@ -397,7 +409,7 @@ cd <package_dir>
 make install
 ```
 
-- For **munge**, do this
+* For **munge**, do this
 ```bash
 tar xvjf <package_tar.bz2_ball>
 ```
@@ -411,7 +423,7 @@ cd <package_dir>
 sudo make install
 ```
 
-- Create a **munge.key** file
+* Create a **munge.key** file
 ```bash
 sudo mkdir -p /usr/local/etc/munge
 ```
@@ -422,16 +434,17 @@ sudo touch /usr/local/etc/munge/munge.key
 echo 'somenumberalphabetonlytextnospecialcharacters' | sudo tee -a /usr/local/etc/munge/munge.key
 ```
 
-- Test **munged**
+* Test **munged**
 ```bash
 munged -Ff
 ```
 
 
 <a name="impi_ins_2"/>
-#### 4.2 Install iRM
 
-- Run autogen
+### 4.2 Install iRM
+
+* Run autogen
 ```bash
 cd /path/to/irm
 ```
@@ -439,7 +452,7 @@ cd /path/to/irm
 ./autogen.sh
 ```
 
-- Build and install **iRM**
+* Build and install **iRM**
 ```bash
 cd /path/to/irm_build
 ```
@@ -450,7 +463,7 @@ cd /path/to/irm_build
 make install
 ```
 
-- Install **PMI**
+* Install **PMI**
 ```bash
 cd ./contribs/pmi2
 ```
@@ -458,16 +471,16 @@ cd ./contribs/pmi2
 make install
 ```
 
-- Copy **slurm.conf** file into **$IMPIPATH/etc**
+* Copy **slurm.conf** file into **$IMPIPATH/etc**
 ```bash
 cp /path/to/sample/slurm.conf $IMPIPATH/etc
 ```
-<span style="color:red">Note 1: Add **root** as slurm user in **slurm.conf** (also remove unnecessary users)</span>
+** <span style="color:red">Note 1: Add **root** as slurm user in **slurm.conf** (also remove unnecessary users)</span>
 ```no-highlight
 SlurmUser=root
 SlurmdUser=root
 ```
-<span style="color:red">Note 2: Check the end of file, node layout should be consistent!! </span>
+** <span style="color:red">Note 2: Check the end of file, node layout should be consistent!! </span>
 ```no-hightlight
 # COMPUTE NODES
 #PartitionName=local Nodes=NODES Default=YES MaxTime=INFINITE State=UP
@@ -485,16 +498,16 @@ ControlAddr=10.0.0.9
 ControlMachine=controller
 ```
 
-- Test **slurmd**
+* Test **slurmd**
 ```bash
 slurmd -Dvvvv
 ```
 
-
 <a name="impi_ins_3"/>
-#### 4.3 Install iMPI
 
-- Run autogen
+### 4.3 Install iMPI
+
+* Run autogen
 ```bash
 cd /path/to/impi
 ```
@@ -502,7 +515,7 @@ cd /path/to/impi
 ./autogen.sh
 ```
 
-- Build and install **iMPI**
+* Build and install **iMPI**
 ```bash
 cd /path/to/impi_build
 ```
@@ -515,9 +528,10 @@ make install
 
 
 <a name="impi_ins_4"/>
-#### 4.4 Install iMPI Tests
 
-- Run autogen
+### 4.4 Install iMPI Tests
+
+* Run autogen
 ```bash
 cd /path/to/impitests
 ```
@@ -525,7 +539,7 @@ cd /path/to/impitests
 ./autogen.sh
 ```
 
-- Build and install **iMPI tests**
+* Build and install **iMPI tests**
 ```bash
 cd /path/to/impitests_build
 ```
@@ -537,9 +551,10 @@ make install
 ```
 
 <a name="impi_ins_5"/>
-#### 4.5 Install ASAGI
 
-- Get **ASAGI** repo and its submodules
+### 4.5 Install ASAGI
+
+* Get **ASAGI** repo and its submodules
 ```bash
 git clone https://github.com/TUM-I5/ASAGI.git asagi
 ```
@@ -550,7 +565,7 @@ cd asagi
 git submodule update --init --recursive
 ```
 
-- Build and install
+* Build and install
 ```bash
 cd /path/to/asagi_build
 ```
@@ -564,13 +579,15 @@ make install
 
 
 <a name="impi_ins_6"/>
-#### 4.6 Compile eSamoa
 
-- See eSamoa compile instruction.
+### 4.6 Compile eSamoa
+
+* See eSamoa compile instruction.
 
 
 
 <a name="dup_node"/>
+
 ## 5. Duplicate VM Node
 
 ```bash
