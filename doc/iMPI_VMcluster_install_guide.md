@@ -36,11 +36,13 @@ In this guide, we use the following node configuration -- [Host name] : [IP Assi
 5. [Duplicate VM Node](#dup_node)
 
 <a name="host_prep"/>
+
 ## 1. Host Preparation (admin rights required)
 
 On host machine, do the following...
 
 <a name="host_prep_1"/>
+
 #### 1.1 apt-install packages
 * virtualbox
 * nfs-common
@@ -48,6 +50,7 @@ On host machine, do the following...
 * tmux
 
 <a name="host_prep_2"/>
+
 #### 1.2 Setup a host-only network in VirtualBox
 
 * **Command line version**
