@@ -141,9 +141,21 @@ def getdata_stat(filename):
 	t_lb = []
 	t_others = []
 	t_impi = []
+	sum_impi_init = 0.0
+	sum_impi_probe = 0.0
 
 	f = open(filename, 'r')
 	for i, line in enumerate(f,1):
+		if "init_adapt" in line:
+			arr = line.split()
+			idx = arr.index("init_adapt")
+			sum_impi_init += float(arr[idx+1])
+
+		if "probe_adapt" in line:
+			arr = line.split()
+			idx = arr.index("probe_adapt")
+			sum_impi_probe += float(arr[idx+1])
+
 		if "Phase statistics:" in line:
 			# Number of ranks
 			line = linecache.getline(filename, i+2) #Line starts with "Num ranks:"
@@ -241,9 +253,63 @@ def getdata_stat(filename):
 			# t_others
 			time_others = phase_time - compute_time - refine_time - conformity_time - lb_time - impi_time
 			t_others += [time_others]
-		
+
 	f.close()
-	return (numranks, t_phase, t_compute, t_refine, t_conformity, t_lb, t_others, t_impi)
+	return (numranks, t_phase, t_compute, t_refine, t_conformity, t_lb, t_others, t_impi, sum_impi_init, sum_impi_probe)
+
+
+'''
+This function returns "#ranks and T_timestep" in 2 equal-sized arrays
+This is for plotting T_timestep vs. # ranks
+'''
+def getdata_tstep(filename, maxranks, rankspernode):
+	# Define output arrays
+	numranks = []
+	numcellsperrank = []
+	tstep = []
+
+	# Get data from file
+	f = open(filename, 'r')
+	for i, line in enumerate(f,1):
+		if "Darcy Simulation:" in line:
+			arr = line.split()
+			
+			# Parse timestep time
+			idx = arr.index("time(sec)")
+			tstep += [float(arr[idx+1])]
+
+			# Parse cells and ranks
+			idx = arr.index("cells")
+			numcellsperrank += [int(arr[idx+1])]
+			idx = arr.index("ranks")
+			numranks += [int(arr[idx+1])]
+	f.close()
+
+	# Process data
+	# Find the average time spent on each time step for each #ranks
+	nranks = [x for x in range(rankspernode,maxranks+1,rankspernode)]
+	freq = [0.0] * len(nranks)
+	tavg = [0.0] * len(nranks)
+
+	for i in range(0,len(tstep)):
+		k = nranks.index(numranks[i])
+		freq[k] = freq[k] + 1
+		tavg[k] = tavg[k] + tstep[i]
+		
+	for i in range(0, len(tavg)):
+		if (freq[i] > 0.0):
+			tavg[i] = tavg[i] / freq[i]
+			
+	# Remove entries with 0 frequency
+	out_ranks = []
+	out_tavg = []
+	for i in range(0, len(freq)):
+		if (freq[i] > 0.0):
+			out_ranks += [nranks[i]]
+			out_tavg += [tavg[i]]
+			
+	return (out_ranks, out_tavg)
+
 
 '''
 Compute CPU-hour of the run
@@ -252,23 +318,36 @@ def compute_cpuhours(time_in_sec, num_cpus):
 	import numpy
 	return numpy.trapz(num_cpus, time_in_sec) / 3600
 
+
 '''
-A generic 1D plot interface
+Create fixed-sized figure/axis objects
 '''
-def plot_1d(xvec, yvec, xrange, yrange, xtitle, ytitle, outfig):
+def create_figure():
 	# Figure setup
 	fig = plt.figure(frameon = True)
 	# 9.6 inch x 200 dpi = 1920
 	# 5.4 inch x 200 dpi = 1080
 	fig.set_size_inches(9.6, 5.4) 
-	host = fig.add_subplot(1,1,1)
-	host.plot(xvec, yvec, color='k')
+	ax = fig.add_subplot(1,1,1)
+	return (fig, ax)
+
+
+'''
+A generic 1D plot interface
+'''
+def plot_1d(xvec, yvec, xrange, yrange, xtitle, ytitle, outfig, printdots=False):
+	(fig, ax) = create_figure()
+	if printdots:
+		ax.plot(xvec, yvec, '-ok')
+	else:
+		ax.plot(xvec, yvec, color='k')
 	if (xrange != [0,0]):
-		host.set_xlim(xrange)
+		ax.set_xlim(xrange)
 	if (yrange != [0,0]):
-		host.set_ylim(yrange)
-	host.set_xlabel(xtitle)
-	host.set_ylabel(ytitle)
+		ax.set_ylim(yrange)
+	ax.set_xlabel(xtitle, fontsize=18)
+	ax.set_ylabel(ytitle, fontsize=18)
+	plt.grid(True)
 	plt.savefig(outfig, bbox_inches="tight")
 	plt.show()
 	plt.close(fig)
@@ -277,18 +356,12 @@ def plot_1d(xvec, yvec, xrange, yrange, xtitle, ytitle, outfig):
 A generic 1D plot interface for 2 datasets (2 y-axes)
 '''
 def plot_1d_2scales(xvec, yvec1, yvec2, xrange, yrange1, yrange2, xtitle, ytitle1, ytitle2, outfig):
-	# Figure setup
-	fig = plt.figure(frameon = True)
-	#fig, ax1 = plt.subplots()
-	# 9.6 inch x 200 dpi = 1920
-	# 5.4 inch x 200 dpi = 1080
-	fig.set_size_inches(9.6, 5.4)
+	(fig, ax1) = create_figure()
 
 	# First plot ax1
-	ax1 = fig.add_subplot(1,1,1)
 	ax1.plot(xvec, yvec1, 'b-')
-	ax1.set_xlabel(xtitle, color='k')
-	ax1.set_ylabel(ytitle1, color='b')
+	ax1.set_xlabel(xtitle, color='k', fontsize=18)
+	ax1.set_ylabel(ytitle1, color='b', fontsize=18)
 	ax1.tick_params('y', colors='b')
 	if (xrange != [0,0]):
 		ax1.set_xlim(xrange)    
@@ -298,7 +371,7 @@ def plot_1d_2scales(xvec, yvec1, yvec2, xrange, yrange1, yrange2, xtitle, ytitle
 	# Second plot ax2
 	ax2 = ax1.twinx()
 	ax2.plot(xvec, yvec2, 'r-')
-	ax2.set_ylabel(ytitle2, color='r')
+	ax2.set_ylabel(ytitle2, color='r', fontsize=18)
 	ax2.tick_params('y', colors='r')
 	if (xrange != [0,0]):
 		ax2.set_xlim(xrange)   
@@ -313,7 +386,7 @@ def plot_1d_2scales(xvec, yvec1, yvec2, xrange, yrange1, yrange2, xtitle, ytitle
 Generate component % table
 '''
 def generate_component_table(filename):
-	(numranks, t_phase, t_compute, t_refine, t_conformity, t_lb, t_others, t_impi) = getdata_stat(filename)
+	(numranks, t_phase, t_compute, t_refine, t_conformity, t_lb, t_others, t_impi, sum_impi_init, sum_impi_probe) = getdata_stat(filename)
 
 	total_sim_time = sum(t_phase)
 	compute_time = sum(t_compute)
@@ -321,7 +394,7 @@ def generate_component_table(filename):
 	comform_time = sum(t_conformity)
 	lb_time = sum(t_lb)
 	others_time = sum(t_others)
-	impi_time = sum(t_impi)
+	impi_time = sum(t_impi) + sum_impi_init + sum_impi_probe
 
 	print("")
 	print("{0:22s} {1:20s} {2:10s}".format("Component", "Exec. time (sec)", "Percent (%)"))
@@ -340,42 +413,84 @@ Generate iMPI function call table
 '''
 def generate_impi_table(filename):
 	# Define output arrays
-	total_time = 0.0
-	init_adapt = 0.0
-	probe_adapt = 0.0
-	adapt_begin = 0.0
-	adapt_commit = 0.0
+	total_time = []
+	init_adapt = []
+	probe_adapt = []
+	adapt_begin = []
+	adapt_commit = []
 
 	f = open(filename, 'r')
 	for i, line in enumerate(f,1):
 		if "init_adapt" in line:
 			arr = line.split()
 			idx = arr.index("init_adapt")
-			init_adapt += float(arr[idx+1])
+			init_adapt += [float(arr[idx+1])]
 		elif "probe_adapt" in line:
 			arr = line.split()
 			idx = arr.index("probe_adapt")
-			probe_adapt += float(arr[idx+1])
+			probe_adapt += [float(arr[idx+1])]
 		elif "adapt_begin" in line:
 			arr = line.split()
 			idx = arr.index("adapt_begin")
-			adapt_begin += float(arr[idx+1])
+			adapt_begin += [float(arr[idx+1])]
 		elif "adapt_commit" in line:
 			arr = line.split()
 			idx = arr.index("adapt_commit")
-			adapt_commit += float(arr[idx+1])
+			adapt_commit += [float(arr[idx+1])]
 		elif "total adapt time" in line:
 			arr = line.split()
 			idx = arr.index("time")
-			total_time += float(arr[idx+1])
+			total_time += [float(arr[idx+1])]
 	f.close()
 
-	print("")
-	print("{0:22s} {1:18s} {2:10s}".format("Function", "Acc. time (sec)", "Percent (%)"))
-	print("{0:22s} {1:18s} {2:10s}".format("----------------", "----------------", "-----------"))
-	print("{0:22s} {1:14.4f} {2:10.2f}".format("Total adaptation", total_time, 100.0))
-	print("{0:22s} {1:14.4f} {2:10.2f}".format("MPI_init_adapt", init_adapt, init_adapt/total_time*100))
-	print("{0:22s} {1:14.4f} {2:10.2f}".format("MPI_Comm_probe_adapt", probe_adapt, probe_adapt/total_time*100))
-	print("{0:22s} {1:14.4f} {2:10.2f}".format("MPI_Comm_adapt_begin", adapt_begin, adapt_begin/total_time*100))
-	print("{0:22s} {1:14.4f} {2:10.2f}".format("MPI_Comm_adapt_commit", init_adapt, adapt_commit/total_time*100))
-	print("")
+	sum_init = sum(init_adapt)
+	sum_probe = sum(probe_adapt)
+	sum_begin = sum(adapt_begin)
+	sum_commit = sum(adapt_commit)
+	# the total time array did not include init time and most of the probe time
+	# So the true total time must include these two items
+	sum_total = sum(total_time) + sum_init + sum_probe
+	sum_data_migration = sum_total - sum_begin - sum_commit - sum_init - sum_probe
+
+	if (sum_total > 0.0):
+		print("")
+		print("{0:22s} {1:18s} {2:18s} {3:10s}".format("Function", "Avg. time (sec)", "Acc. time (sec)", "Percent (%)"))
+		print("{0:22s} {1:18s} {2:18s} {3:10s}".format("----------------", "----------------", "----------------", "-----------"))
+		if len(total_time) == 0:
+			avg = 0.0
+		else:
+			avg = sum_total/len(total_time)
+		print("{0:22s} {1:14.4f} {2:16.4f} {3:14.2f}".format("Total adaptation",      avg,  sum_total,  100.0))
+
+		if len(init_adapt) == 0:
+			avg = 0.0
+		else:
+			avg = sum_init/len(init_adapt)
+		print("{0:22s} {1:14.4f} {2:16.4f} {3:14.2f}".format("MPI_init_adapt",        avg,  sum_init,   sum_init/sum_total*100))
+
+		if len(probe_adapt) == 0:
+			avg = 0.0
+		else:
+			avg = sum_probe/len(probe_adapt)
+		print("{0:22s} {1:14.4f} {2:16.4f} {3:14.2f}".format("MPI_Comm_probe_adapt",  avg,  sum_probe,  sum_probe/sum_total*100))
+
+		if len(adapt_begin) == 0:
+			avg = 0.0
+		else:
+			avg = sum_begin/len(adapt_begin)
+		print("{0:22s} {1:14.4f} {2:16.4f} {3:14.2f}".format("MPI_Comm_adapt_begin",  avg,  sum_begin,  sum_begin/sum_total*100))
+
+		if len(adapt_commit) == 0:
+			avg = 0.0
+		else:
+			avg = sum_commit/len(adapt_commit)
+		print("{0:22s} {1:14.4f} {2:16.4f} {3:14.2f}".format("MPI_Comm_adapt_commit", avg,  sum_commit, sum_commit/sum_total*100))
+
+		if len(adapt_commit) == 0:
+			avg = 0.0
+		else:
+			avg = sum_data_migration/len(adapt_commit)
+		print("{0:22s} {1:14.4f} {2:16.4f} {3:14.2f}".format("Data migration",        avg,  sum_data_migration, sum_data_migration/sum_total*100))
+		print("")
+	else:
+		print("No iMPI calls. This is probably a normal MPI run.")
