@@ -16,7 +16,7 @@ def getdata_sim(filename):
 
 	f = open(filename, 'r')
 	for i, line in enumerate(f,1):
-		if "Darcy Simulation:" in line:
+		if "SWE Tsunami:" in line:
 			arr = line.split()
 			
 			# Parse simulation time
@@ -34,7 +34,9 @@ def getdata_sim(filename):
 				elif 'ms' in tmp:
 					tsim += int(tmp.replace('ms','')) * 1e-3
 				elif 'µs' in tmp:
-					continue #igore microsec 
+					continue #igore microsec
+				elif 'ns' in tmp:
+					continue #igore nanosec
 				elif 's' in tmp:
 					tsim += int(tmp.replace('s',''))
 
@@ -72,7 +74,7 @@ def getdata_sim_by_day(filename):
 	sampleline = False
 	iday = 0
 	for i, line in enumerate(f,1):
-		if "Darcy Simulation:" in line:
+		if "SWE Tsunami:" in line:
 			arr = line.split()
 			# Determine if this line will be sample or not
 			if (arr[6] == '1,'):
@@ -163,63 +165,62 @@ def getdata_stat(filename):
 				j = j+1
 				
 				# Loop breaker
-				if 
+				if "SWE Tsunami:" in line:
+					break
+				
+				#fast skip CFG output lines
+				if "cfg" in line:
+					continue
+					
+				# Number of ranks
+				if "Num ranks:" in line: #Line starts with "Num ranks:"
+					larr = line.split()
+					nranks = int(larr[-1])
+					numranks += [nranks]
+					continue
+				
+				# t_compute (computation time)
+				if "Time steps:" in line: #Line starts with "Time steps:"
+					larr = line.split()
+					idx = larr.index("time:")
+					compute_time = float(larr[idx+1])/float(nranks)
+					t_compute += [compute_time]
+					continue	
 
-			# Number of ranks
-			if "Num ranks:" in line: #Line starts with "Num ranks:"
-				larr = line.split()
-				nranks = int(larr[-1])
-				numranks += [nranks]
-			
-			# t_phase (Total phase time)
-			line = linecache.getline(filename, i+13) #Line starts with "Phase time:"
-			if "Phase time:" in line:
-				larr = line.split()
-				idx = larr.index("time:")
-				phase_time = float(larr[idx+1]) #wall time, not summed
-				t_phase += [phase_time]
-			else:
-				sys.exit("Line Phase time not found. Program abort!")
-			
-			# t_refine (grid refinement time)
-			# t_conformity (conformity check time)
-			# t_lb (load balancing time)
-			line = linecache.getline(filename, i+6) #Line starts with "Adaptions:"
-			if "Adaptions:" in line:
-				larr = line.split()
-				idx = larr.index("time:")
-				refine_time = float(larr[idx+1])/float(nranks)
-				t_refine += [refine_time]
+				# t_refine (grid refinement time)
+				# t_conformity (conformity check time)
+				# t_lb (load balancing time)
+				if "Adaptions:" in line: #Line starts with "Adaptions:"
+					larr = line.split()
+					idx = larr.index("time:")
+					refine_time = float(larr[idx+1])/float(nranks)
+					t_refine += [refine_time]
+					
+					idx = larr.index("integrity:")
+					conformity_time = float(larr[idx+1])/float(nranks)
+					t_conformity += [conformity_time]
+					
+					idx = larr.index("balancing:")
+					lb_time = float(larr[idx+1])/float(nranks)
+					t_lb += [lb_time]
+					continue
+
+				# t_phase (Total phase time)
+				if "Phase time:" in line: #Line starts with "Phase time:"
+					larr = line.split()
+					idx = larr.index("time:")
+					phase_time = float(larr[idx+1]) #wall time, not summed
+					t_phase += [phase_time]
+					continue
 				
-				idx = larr.index("integrity:")
-				conformity_time = float(larr[idx+1])/float(nranks)
-				t_conformity += [conformity_time]
-				
-				idx = larr.index("balancing:")
-				lb_time = float(larr[idx+1])/float(nranks)
-				t_lb += [lb_time]
-			else:
-				sys.exit("Line Adaptions not found. Program abort!")
-		 
-			# t_compute (computation time)
-			line = linecache.getline(filename, i+5) #Line starts with "Time steps:"
-			if "Time steps:" in line:
-				larr = line.split()
-				idx = larr.index("time:")
-				compute_time += float(larr[idx+1])/float(nranks)
-				t_compute += [compute_time]
-			else:
-				sys.exit("Line Time steps not found. Program abort!")
-			
-			# t_impi
-			line = linecache.getline(filename, i+33) #Line starts with "iMPI: total adapt time"
-			if "iMPI: total adapt time" in line:
-				larr = line.split()
-				idx = larr.index("time")
-				impi_time = float(larr[idx+1])  #wall time, not summed
-			else: #iMPI line may not exist (for init and the last phase)
-				impi_time = 0.0
-			t_impi += [impi_time]
+				# t_impi
+				if "iMPI: total adapt time" in line: #Line starts with "iMPI: total adapt time"
+					larr = line.split()
+					idx = larr.index("time")
+					impi_time = float(larr[idx+1])  #wall time, not summed
+				else: #iMPI line may not exist (for init and the last phase)
+					impi_time = 0.0
+				t_impi += [impi_time]
 			
 			# t_others
 			time_others = phase_time - compute_time - refine_time - conformity_time - lb_time - impi_time
@@ -242,7 +243,7 @@ def getdata_tstep(filename, maxranks, rankspernode):
 	# Get data from file
 	f = open(filename, 'r')
 	for i, line in enumerate(f,1):
-		if "Darcy Simulation:" in line:
+		if "SWE Tsunami:" in line:
 			arr = line.split()
 			
 			# Parse timestep time
