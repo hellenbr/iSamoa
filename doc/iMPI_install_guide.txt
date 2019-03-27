@@ -123,9 +123,9 @@ cd irm  #irm source dir
 ./autogen.sh
 
 cd irm_build # a irm build dir next to irm source dir
-../irm/configure --prefix=$IMPIPATH --with-munge=$IMPIPATH
+$IRMDIR/configure --prefix=$IMPIPATH --with-munge=$IMPIPATH
 #or
-env CPPFLAGS=-I<python3.6 path/include> LDFLAGS=-L<python3.6 path/lib> ../irm/configure --prefix=$IMPIPATH --with-munge=$IMPIPATH
+env CPPFLAGS=-I<python3.6 path/include> LDFLAGS=-L<python3.6 path/lib> $IRMDIR/configure --prefix=$IMPIPATH --with-munge=$IMPIPATH
 make install
 
 cd contrib/pmi2 # IMPORTANT: install pmi2
