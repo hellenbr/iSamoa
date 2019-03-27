@@ -152,7 +152,7 @@ cd impi  #impi source dir
 ./autogen.sh
 
 cd impi_build # a impi build dir next to impi source dir
-../impi/configure --prefix=$IMPIPATH --with-slurm=$IMPIPATH --with-pmi=pmi2 --with-pm=no --with-device=ch3:nemesis:tcp
+$IMPIDIR/configure --prefix=$IMPIPATH --with-slurm=$IMPIPATH --with-pmi=pmi2 --with-pm=no --with-device=ch3:nemesis:tcp
 make install
 
 
